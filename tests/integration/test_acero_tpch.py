@@ -37,7 +37,7 @@ class TestAceroConsumer(BaseTest):
 
         self.logger.info("Teardown method for test_substrait_query")
 
-    @custom_parametrization(QUERIES)
+    @custom_parametrization(QUERIES + query_1.TESTCASE)
     def test_substrait_query(self, test_name: str, file_names: list,
                              sql_query: str, substrait_query: str,
                              sort_results: bool = False) -> None:

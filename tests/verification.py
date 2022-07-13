@@ -41,8 +41,7 @@ class Verifier(object):
             AssertionError: An error occurred.
 
         """
-        self.logger.error(f"TEST FAILURE: {message}")
-        raise AssertionError()
+        raise AssertionError(f"TEST FAILURE: {message}")
 
     def verify_equals(self, actual: object, expected: object,
                       message: str = "") -> bool:

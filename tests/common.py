@@ -21,7 +21,7 @@ LOG_HANDLER.setFormatter(FORMATTER)
 logging.getLogger('').addHandler(LOG_HANDLER)
 
 
-def get_full_path(file_names: list) -> list:
+def get_full_path(file_names: list[str]) -> list[str]:
     realpath_directory = os.path.realpath(
         os.path.join(os.getcwd(), os.path.dirname(__file__)))
     data_dir = os.path.join(realpath_directory, 'data/tpch_parquet')
@@ -64,7 +64,7 @@ class SubstraitUtils(object):
         return table_sorted
 
     @staticmethod
-    def format_sql_query(sql_query: str, file_names: list) -> str:
+    def format_sql_query(sql_query: str, file_names: list[str]) -> str:
         """
         Replace the 'Table' Parameters from the SQL query with the relative
         file paths of the parquet data.
@@ -86,8 +86,8 @@ class SubstraitUtils(object):
         return sql_query.format(*parquet_file_paths)
 
     @staticmethod
-    def format_substrait_query(substrait_query: str, file_names: list) -> \
-            bytes:
+    def format_substrait_query(substrait_query: str,
+                               file_names: list[str]) -> bytes:
         """
         Replace the 'local_files' path in the substrait query plan with
         the full path of the parquet data.

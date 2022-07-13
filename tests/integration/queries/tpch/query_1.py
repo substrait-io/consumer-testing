@@ -1,5 +1,8 @@
+import pytest
+
 TESTCASE = [
     {
+        "pytest_mark": pytest.mark.skip(reason="ARROW-17061"),
         "test_name": "test_tpch_sql_1",
         "file_names": ["lineitem_1.parquet"],
         "sql_query":
