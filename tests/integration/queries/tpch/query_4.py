@@ -168,7 +168,7 @@ TESTCASE = [
                                              "items": [
                                              {
                                                  "uri_file": "file://FILENAME_PLACEHOLDER_0",
-                                                 "format": "FILE_FORMAT_PARQUET"
+                                                 "parquet": {}
                                              }
                                              ]
                                          }
@@ -396,7 +396,7 @@ TESTCASE = [
                                                          "items": [
                                                          {
                                                              "uri_file": "file://FILENAME_PLACEHOLDER_1",
-                                                             "format": "FILE_FORMAT_PARQUET"
+                                                             "parquet": {}
                                                          }
                                                          ]
                                                      }

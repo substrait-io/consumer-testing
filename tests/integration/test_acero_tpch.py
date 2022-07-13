@@ -2,7 +2,7 @@ import duckdb
 import pytest
 
 from .queries.test_queries import QUERIES
-from .queries.tpch import query_1, query_2, query_3, query_4, query_5
+from .queries.tpch.all_tpch_queries import TPCH_QUERY_TESTS
 from ..basetest import BaseTest
 from ..common import SubstraitUtils
 from ..consumers.acero_consumer import AceroConsumer
@@ -37,7 +37,7 @@ class TestAceroConsumer(BaseTest):
 
         self.logger.info("Teardown method for test_substrait_query")
 
-    @custom_parametrization(QUERIES + query_1.TESTCASE)
+    @custom_parametrization(TPCH_QUERY_TESTS)
     def test_substrait_query(self, test_name: str, file_names: list,
                              sql_query: str, substrait_query: str,
                              sort_results: bool = False) -> None:

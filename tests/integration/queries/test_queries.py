@@ -131,7 +131,7 @@ QUERIES = [
                                  "items": [
                                  {
                                      "uri_file": "file://FILENAME_PLACEHOLDER_0",
-                                     "format": "FILE_FORMAT_PARQUET"
+                                     "arrow": {}
                                  }
                                  ]
                              }

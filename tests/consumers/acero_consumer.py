@@ -1,8 +1,12 @@
 import pyarrow as pa
-import pyarrow.substrait as substrait
 from pyarrow.lib import Table
 
 from .consumer import AbstractConsumer
+
+try:
+    import pyarrow.substrait as substrait
+except ImportError:
+    substrait = None
 
 
 class AceroConsumer(AbstractConsumer):

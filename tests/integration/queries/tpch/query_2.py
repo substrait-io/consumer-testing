@@ -208,7 +208,7 @@ TESTCASE = [
                                                          "items": [
                                                          {
                                                              "uri_file": "file://FILENAME_PLACEHOLDER_0",
-                                                             "format": "FILE_FORMAT_PARQUET"
+                                                             "parquet": {}
                                                          }
                                                          ]
                                                      }
@@ -273,7 +273,7 @@ TESTCASE = [
                                                          "items": [
                                                          {
                                                              "uri_file": "file://FILENAME_PLACEHOLDER_1",
-                                                             "format": "FILE_FORMAT_PARQUET"
+                                                             "parquet": {}
                                                          }
                                                          ]
                                                      }
@@ -335,7 +335,7 @@ TESTCASE = [
                                                          "items": [
                                                          {
                                                              "uri_file": "file://FILENAME_PLACEHOLDER_2",
-                                                             "format": "FILE_FORMAT_PARQUET"
+                                                             "parquet": {}
                                                          }
                                                          ]
                                                      }
@@ -391,7 +391,7 @@ TESTCASE = [
                                                      "items": [
                                                      {
                                                          "uri_file": "file://FILENAME_PLACEHOLDER_3",
-                                                         "format": "FILE_FORMAT_PARQUET"
+                                                         "parquet": {}
                                                      }
                                                      ]
                                                  }
@@ -442,7 +442,7 @@ TESTCASE = [
                                                  "items": [
                                                  {
                                                      "uri_file": "file://FILENAME_PLACEHOLDER_4",
-                                                     "format": "FILE_FORMAT_PARQUET"
+                                                     "parquet": {}
                                                  }
                                                  ]
                                              }
@@ -856,7 +856,7 @@ TESTCASE = [
                                                                                      "items": [
                                                                                      {
                                                                                          "uri_file": "file://FILENAME_PLACEHOLDER_5",
-                                                                                         "format": "FILE_FORMAT_PARQUET"
+                                                                                         "parquet": {}
                                                                                      }
                                                                                      ]
                                                                                  }
@@ -921,7 +921,7 @@ TESTCASE = [
                                                                                      "items": [
                                                                                      {
                                                                                          "uri_file": "file://FILENAME_PLACEHOLDER_6",
-                                                                                         "format": "FILE_FORMAT_PARQUET"
+                                                                                         "parquet": {}
                                                                                      }
                                                                                      ]
                                                                                  }
@@ -977,7 +977,7 @@ TESTCASE = [
                                                                                  "items": [
                                                                                  {
                                                                                      "uri_file": "file://FILENAME_PLACEHOLDER_7",
-                                                                                     "format": "FILE_FORMAT_PARQUET"
+                                                                                     "parquet": {}
                                                                                  }
                                                                                  ]
                                                                              }
@@ -1028,7 +1028,7 @@ TESTCASE = [
                                                                              "items": [
                                                                              {
                                                                                  "uri_file": "file://FILENAME_PLACEHOLDER_8",
-                                                                                 "format": "FILE_FORMAT_PARQUET"
+                                                                                 "parquet": {}
                                                                              }
                                                                              ]
                                                                          }
