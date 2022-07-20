@@ -1,4 +1,5 @@
 import logging
+import json
 import os
 
 import pyarrow as pa
@@ -30,6 +31,18 @@ def get_full_path(file_names: list[str]) -> list[str]:
     )
 
     return full_paths_list
+
+
+def get_substrait_plan(filename: str) -> str:
+    realpath_directory = os.path.realpath(
+        os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    plan_dir = os.path.join(realpath_directory, 'integration/queries/tpch_substrait_plans')
+    plan_path = os.path.join(plan_dir, filename)
+
+    f = open(plan_path, 'r')
+    plan = json.loads(f.read())
+
+    return json.dumps(plan)
 
 
 class SubstraitUtils(object):
