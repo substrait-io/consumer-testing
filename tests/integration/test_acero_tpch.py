@@ -1,5 +1,6 @@
 import duckdb
 import pytest
+import substrait_validator as sv
 
 from .queries.test_queries import QUERIES
 from .queries.tpch.all_tpch_queries import TPCH_QUERY_TESTS
@@ -63,6 +64,7 @@ class TestAceroConsumer(BaseTest):
         """
 
         self.logger.info(f"Start to run test: {test_name}")
+        # sv.check_plan_valid(substrait_query)
 
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
