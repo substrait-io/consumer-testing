@@ -20,11 +20,11 @@ LOG_HANDLER.setFormatter(FORMATTER)
 # add the handler to the logger
 logging.getLogger('').addHandler(LOG_HANDLER)
 
+REALPATH_DIRECTORY = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-def get_full_path(file_names: list[str]) -> list[str]:
-    realpath_directory = os.path.realpath(
-        os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    data_dir = os.path.join(realpath_directory, 'data/tpch_parquet')
+
+def get_full_path(file_names: Iterable[str]) -> list[str]:
+    data_dir = os.path.join(REALPATH_DIRECTORY, 'data/tpch_parquet')
     full_paths_list = (
         [os.path.join(data_dir, dataset) for dataset in file_names]
     )
@@ -33,15 +33,11 @@ def get_full_path(file_names: list[str]) -> list[str]:
 
 
 def get_substrait_plan(filename: str) -> str:
-    realpath_directory = os.path.realpath(
-        os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    plan_dir = os.path.join(realpath_directory, 'integration/queries/tpch_substrait_plans')
-    plan_path = os.path.join(plan_dir, filename)
+    plan_path = os.path.join(
+        REALPATH_DIRECTORY, 'integration/queries/tpch_substrait_plans', filename)
 
-    f = open(plan_path, 'r')
-    plan = json.loads(f.read())
-
-    return json.dumps(plan)
+    with open(plan_path, "r") as f:
+        return f.read()
 
 
 class SubstraitUtils:

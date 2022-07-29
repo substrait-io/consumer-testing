@@ -1,8 +1,8 @@
-import pyarrow as pa
 from __future__ import annotations
+
 from pathlib import Path
 
-from .consumer import AbstractConsumer
+import pyarrow as pa
 
 try:
     import pyarrow.substrait as substrait
@@ -10,7 +10,7 @@ except ImportError:
     substrait = None
 
 
-class AceroConsumer(AbstractConsumer):
+class AceroConsumer:
     """
     Implementation of the acero substrait consumer Class for testing
     """
