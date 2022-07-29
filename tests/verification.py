@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 # create and configure main logger
 LOGGER = logging.getLogger(__name__)
@@ -16,14 +17,11 @@ LOG_HANDLER.setFormatter(FORMATTER)
 logging.getLogger('').addHandler(LOG_HANDLER)
 
 
-class Verifier(object):
+class Verifier:
     """
 
     """
-    def __init__(self, name="Verifier"):
-        """
-
-        """
+    def __init__(self, name: str = "Verifier") -> None:
         self.logger = LOGGER
         self.logger.info(name)
 
@@ -31,19 +29,18 @@ class Verifier(object):
         """
         Fail the test by raising an assertion error
 
-        Args:
-            message: Message to be logged.
-
-        Returns:
-            None
+        Parameters:
+            message:
+                Message to be logged.
 
         Raises:
-            AssertionError: An error occurred.
+            AssertionError:
+                An error occurred.
 
         """
         raise AssertionError(f"TEST FAILURE: {message}")
 
-    def verify_equals(self, actual: object, expected: object,
+    def verify_equals(self, actual: Any, expected: Any,
                       message: str = "") -> bool:
         """
         Verify that 2 objects are equal.  First check to see that object
@@ -52,13 +49,17 @@ class Verifier(object):
         If object types are the same but values are not equal, an error is
         raised and the message is shown.
 
-        Args:
-            actual: Object to evaluate against the expected object.
-            expected: Object to be evaluated against.
-            message: Message to be displayed if objects are not equal.
+        Parameters:
+            actual:
+                Object to evaluate against the expected object.
+            expected:
+                Object to be evaluated against.
+            message:
+                Message to be displayed if objects are not equal.
 
         Returns:
-            bool: True if successful, otherwise raise an error.
+            bool:
+                True if successful, otherwise raise an error.
         """
         msg = [f"Verifying equals: {actual} == {expected}."]
         msg = [message] if message else msg

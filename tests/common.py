@@ -3,8 +3,7 @@ import json
 import os
 
 import pyarrow as pa
-from pyarrow.lib import tobytes
-from pyarrow.lib import Table
+from collections.abc import Iterable
 
 # create and configure main logger
 LOGGER = logging.getLogger(__name__)
@@ -45,7 +44,7 @@ def get_substrait_plan(filename: str) -> str:
     return json.dumps(plan)
 
 
-class SubstraitUtils(object):
+class SubstraitUtils:
     """
     Common utility for substrait integration tests.
     """
@@ -57,14 +56,16 @@ class SubstraitUtils(object):
         self.logger.info(name)
 
     @staticmethod
-    def arrow_sort_tb_values(table: type[Table],
-                             sortby: list[str]) -> type[Table]:
+    def arrow_sort_tb_values(table: pa.Table,
+                             sortby: Iterable[str]) -> pa.Table:
         """
         Sort the pyarrow table by the given list of columns.
 
-        Args:
-            table: Original pyarrow Table
-            sortby: Columns to sort the results by
+        Parameters:
+            table:
+                Original pyarrow Table
+            sortby:
+                Columns to sort the results by
 
         Returns:
             Pyarrow Table sorted by given columns
@@ -121,4 +122,4 @@ class SubstraitUtils(object):
             substrait_query = substrait_query.replace(
                 f"FILENAME_PLACEHOLDER_{count}", file_path)
 
-        return tobytes(substrait_query)
+        return pa.lib.tobytes(substrait_query)

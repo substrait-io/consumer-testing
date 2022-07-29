@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 from .verification import Verifier
 
@@ -18,7 +19,7 @@ LOG_HANDLER.setFormatter(FORMATTER)
 logging.getLogger('').addHandler(LOG_HANDLER)
 
 
-class BaseTest(object):
+class BaseTest:
     """
     Base class for substrait consumer tests
     """
@@ -31,27 +32,25 @@ class BaseTest(object):
         """
         Log the message and raise an AssertionError
 
-        Args:
-            message: message to be logged.
-
-        Returns:
-            None
+        Parameters:
+            message:
+                message to be logged.
         """
         cls.verifier.fail(message)
 
     @classmethod
-    def verify_equals(cls, actual: object, expected: object,
+    def verify_equals(cls, actual: Any, expected: Any,
                       message: str = "") -> None:
         """
         Verify 2 objects are equal.
 
-        Args:
-            actual: Challenge value.
-            expected: Expected value to be verified against.
-            message: Error message logged if objects aren't equal.
-
-        Returns:
-            None
+        Parameters:
+            actual: 
+                Challenge value.
+            expected: 
+                Expected value to be verified against.
+            message: 
+                Error message logged if objects aren't equal.
         """
         cls.verifier.verify_equals(actual, expected, message)
 

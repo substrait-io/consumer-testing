@@ -52,15 +52,17 @@ class TestAceroConsumer(BaseTest):
         5.  Compare substrait query plan results against the results of
             running the SQL on DuckDB
 
-        Args:
-            test_name: Name of test
-            file_names: List of parquet files
-            sql_query: SQL query
-            substrait_query: Substrait query
-            sort_results: Whether to sort the results before comparison.
-
-        Returns:
-            None
+        Parameters:
+            test_name:
+                Name of test
+            file_names:
+                List of parquet files
+            sql_query:
+                SQL query
+            substrait_query:
+                Substrait query
+            sort_results:
+                Whether to sort the results before comparison.
         """
 
         self.logger.info(f"Start to run test: {test_name}")

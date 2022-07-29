@@ -1,5 +1,6 @@
 import pyarrow as pa
-from pyarrow.lib import Table
+from __future__ import annotations
+from pathlib import Path
 
 from .consumer import AbstractConsumer
 
@@ -17,11 +18,11 @@ class AceroConsumer(AbstractConsumer):
         pass
 
     @staticmethod
-    def run_substrait_query(substrait_query: str) -> type[Table]:
+    def run_substrait_query(substrait_query: str) -> pa.Table:
         """
         Run the given substrait query and return the result
 
-        Args:
+        Parameters:
             substrait_query: A json formatted string representing the
             substrait query plan
 
@@ -35,17 +36,16 @@ class AceroConsumer(AbstractConsumer):
         return result
 
     @staticmethod
-    def write_to_arrow_binary_file(table: type[Table], filepath: str) -> None:
+    def write_to_arrow_binary_file(table: pa.Table, filepath: Path | str) -> None:
         """
         Given a pyarrow table and filepath, write the table into the file using
         arrow IPC file format.
 
-        Args:
-            table: A pyarrow Table instance
-            filepath: Path
-
-        Returns:
-            None
+        Parameters:
+            table:
+                A pyarrow Table instance
+            filepath:
+                Path
         """
         with pa.ipc.RecordBatchFileWriter(
                 filepath, schema=table.schema) as writer:
