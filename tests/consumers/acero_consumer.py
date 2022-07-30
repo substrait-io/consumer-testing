@@ -3,20 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 
 import pyarrow as pa
-
-try:
-    import pyarrow.substrait as substrait
-except ImportError:
-    substrait = None
+import pyarrow.substrait as substrait
 
 
 class AceroConsumer:
     """
     Implementation of the acero substrait consumer Class for testing
     """
-    def __init__(self):
-        pass
-
     @staticmethod
     def run_substrait_query(substrait_query: str) -> pa.Table:
         """

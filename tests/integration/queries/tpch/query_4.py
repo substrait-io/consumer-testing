@@ -4,7 +4,7 @@ from ....common import get_substrait_plan
 TESTCASE = [
     {
         "test_name": "test_tpch_sql_4",
-        "file_names": ["orders_1.parquet", "lineitem_1.parquet"],
+        "file_names": ["orders_0.1.parquet", "lineitem_0.1.parquet"],
         "sql_query":
             """
             SELECT

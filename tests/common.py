@@ -25,9 +25,7 @@ REALPATH_DIRECTORY = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(
 
 def get_full_path(file_names: Iterable[str]) -> list[str]:
     data_dir = os.path.join(REALPATH_DIRECTORY, 'data/tpch_parquet')
-    full_paths_list = (
-        [os.path.join(data_dir, dataset) for dataset in file_names]
-    )
+    full_paths_list = ([os.path.join(data_dir, dataset) for dataset in file_names])
 
     return full_paths_list
 
