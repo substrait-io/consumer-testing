@@ -35,5 +35,5 @@ def pytest_terminal_summary(
     terminalreporter: TerminalReporter, exitstatus: int, config: Config
 ):
     yield
-    print(f"Failures outputted to: {FAILURES_FILE}")
+    print(f"Failures logged to: {FAILURES_FILE}")
     print(f"to see run\ncat {FAILURES_FILE}")

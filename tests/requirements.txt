@@ -1,0 +1,5 @@
+duckdb
+--extra-index-url https://pypi.fury.io/arrow-nightlies --prefer-binary --pre
+pyarrow
+pytest
+substrait-validator
