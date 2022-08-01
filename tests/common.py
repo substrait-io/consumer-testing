@@ -38,6 +38,14 @@ def get_substrait_plan(filename: str) -> str:
         return f.read()
 
 
+def get_sql(filename: str) -> str:
+    plan_path = os.path.join(
+        REALPATH_DIRECTORY, 'integration/queries/tpch_sql', filename)
+
+    with open(plan_path, "r") as f:
+        return f.read()
+
+
 class SubstraitUtils:
     """
     Common utility for substrait integration tests.

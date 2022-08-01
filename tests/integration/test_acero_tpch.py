@@ -3,7 +3,7 @@ import pytest
 import substrait_validator as sv
 
 from .queries.test_queries import QUERIES
-from .queries.tpch.all_tpch_queries import TPCH_QUERY_TESTS
+from .queries.tpch_test_cases.all_tpch_queries import TPCH_QUERY_TESTS
 from ..basetest import BaseTest
 from ..common import SubstraitUtils
 from ..consumers.acero_consumer import AceroConsumer

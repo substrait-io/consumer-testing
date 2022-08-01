@@ -1,7 +1,7 @@
 QUERIES = [
     {
         "test_name": "test_query",
-        "file_names": ["lineitem_1.parquet"],
+        "file_names": ["lineitem_0.1.parquet"],
         "sql_query":
             """
             SELECT 
