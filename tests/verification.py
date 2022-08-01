@@ -18,7 +18,9 @@ logging.getLogger("").addHandler(LOG_HANDLER)
 
 
 class Verifier:
-    """ """
+    """
+    Class for handling verification.
+    """
 
     def __init__(self, name: str = "Verifier") -> None:
         self.logger = LOGGER

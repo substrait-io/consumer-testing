@@ -58,7 +58,6 @@ class SubstraitUtils:
     def __init__(self, name="SubstraitUtils"):
         """ """
         self.logger = LOGGER
-        self.logger.info(name)
 
     @staticmethod
     def arrow_sort_tb_values(table: pa.Table, sortby: Iterable[str]) -> pa.Table:
@@ -67,12 +66,12 @@ class SubstraitUtils:
 
         Parameters:
             table:
-                Original pyarrow Table
+                Original pyarrow Table.
             sortby:
-                Columns to sort the results by
+                Columns to sort the results by.
 
         Returns:
-            Pyarrow Table sorted by given columns
+            Pyarrow Table sorted by given columns.
 
         """
         table_sorted_indexes = pa.compute.bottom_k_unstable(
@@ -87,12 +86,14 @@ class SubstraitUtils:
         Replace the 'Table' Parameters from the SQL query with the relative
         file paths of the parquet data.
 
-        Args:
-            sql_query: SQL Query
-            file_names: List of file names
+        Parameters:
+            sql_query:
+                SQL query.
+            file_names:
+                List of file names.
 
         Returns:
-            SQL Query with file paths
+            SQL Query with file paths.
         """
         sql_commands_list = [line.strip() for line in sql_query.strip().split("\n")]
         sql_query = " ".join(sql_commands_list)
@@ -107,12 +108,14 @@ class SubstraitUtils:
         Replace the 'local_files' path in the substrait query plan with
         the full path of the parquet data.
 
-        Args:
-            substrait_query: Substrait Query
-            file_names: List of file names
+        Parameters:
+            substrait_query:
+                Substrait query.
+            file_names:
+                List of file names.
 
         Returns:
-            Substrait query plan in byte format
+            Substrait query plan in byte format.
         """
         # Get full path for all datasets used in the query
         parquet_file_paths = get_full_path(file_names)

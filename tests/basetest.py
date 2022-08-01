@@ -21,7 +21,7 @@ logging.getLogger("").addHandler(LOG_HANDLER)
 
 class BaseTest:
     """
-    Base class for substrait consumer tests
+    Base class for substrait consumer tests.
     """
 
     logger = LOGGER
@@ -30,7 +30,7 @@ class BaseTest:
     @classmethod
     def fail(cls, message: str = "") -> None:
         """
-        Log the message and raise an AssertionError
+        Log the message and raise an AssertionError.
 
         Parameters:
             message:

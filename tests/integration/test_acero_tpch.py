@@ -2,12 +2,12 @@ import duckdb
 import pytest
 import substrait_validator as sv
 
-from .queries.test_queries import QUERIES
-from .queries.tpch_test_cases.all_tpch_queries import TPCH_QUERY_TESTS
 from ..basetest import BaseTest
 from ..common import SubstraitUtils
 from ..consumers.acero_consumer import AceroConsumer
 from ..parametrization import custom_parametrization
+from .queries.test_queries import QUERIES
+from .queries.tpch_test_cases.all_tpch_queries import TPCH_QUERY_TESTS
 
 
 class TestAceroConsumer(BaseTest):
@@ -19,24 +19,13 @@ class TestAceroConsumer(BaseTest):
     @pytest.fixture(scope="class", autouse=True)
     def setup_teardown_class(request):
         cls = request.cls
-        cls.logger.info("Setup class for TestAceroConsumer")
         cls.db_connection = duckdb.connect()
         cls.consumer = AceroConsumer()
         cls.utils = SubstraitUtils()
 
         yield
 
-        cls.logger.info("Teardown class for TestAceroConsumer")
-        cls.logger.info("Closing DB Connection")
         cls.db_connection.close()
-
-    @pytest.fixture(scope="function", autouse=True)
-    def setup_teardown_method(self):
-        self.logger.info("Setup method for test_substrait_query")
-
-        yield
-
-        self.logger.info("Teardown method for test_substrait_query")
 
     @custom_parametrization(TPCH_QUERY_TESTS)
     def test_substrait_query(
@@ -55,22 +44,22 @@ class TestAceroConsumer(BaseTest):
         3.  Run the substrait query plan.
         4.  Execute the SQL on DuckDB.
         5.  Compare substrait query plan results against the results of
-            running the SQL on DuckDB
+            running the SQL on DuckDB.
 
         Parameters:
             test_name:
-                Name of test
+                Name of test.
             file_names:
-                List of parquet files
+                List of parquet files.
             sql_query:
-                SQL query
+                SQL query.
             substrait_query:
-                Substrait query
+                Substrait query.
             sort_results:
                 Whether to sort the results before comparison.
         """
 
-        self.logger.info(f"Start to run test: {test_name}")
+        # self.logger.info(f"Start to run test: {test_name}")
         # sv.check_plan_valid(substrait_query)
 
         # Format the substrait query to include the parquet file paths.

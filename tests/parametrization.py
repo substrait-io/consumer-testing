@@ -1,5 +1,4 @@
 import pytest
-
 from _pytest.mark.structures import MarkDecorator
 
 
@@ -33,6 +32,7 @@ def custom_parametrization(test_cases: list[dict]) -> MarkDecorator:
         [key for key in test_cases[0].keys() if not key == "pytest_mark"]
     )
     argument_values = []
+    ids = []
     for test_case in test_cases:
         if "pytest_mark" in test_case.keys():
             has_mark = True
@@ -58,5 +58,8 @@ def custom_parametrization(test_cases: list[dict]) -> MarkDecorator:
         has_mark = False
 
         argument_values.append(case_tuple)
+        ids.append(case_tuple[0])
 
-    return pytest.mark.parametrize(argnames=argument_names, argvalues=argument_values)
+    return pytest.mark.parametrize(
+        argnames=argument_names, argvalues=argument_values, ids=ids
+    )
