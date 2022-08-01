@@ -5,12 +5,12 @@ Table of Contents
 =================
 * [Overview](#Overview)
 * [Setup](#Setup)
-* [How to Run Tests](#How to Run Tests)
-* [Test Files](#Test Files)
-  * [Test Case Args](#Test Case Args)
-  * [Substrait Plans](#Substrait Plans)
-  * [SQL Queries](#SQL Queries)
-* [How to Add New Consumers](#How to Add New Consumers)
+* [How to Run Tests](#How-to-Run-Tests)
+* [Test Files](#Test-Files)
+  * [Test Case Args](#Test-Case-Args)
+  * [Substrait Plans](#Substrait-Plans)
+  * [SQL Queries](#SQL-Queries)
+* [How to Add New Consumers](#How-to-Add-New-Consumers)
 
 # Overview
 This testing repository provides instructions on how to add and run substrait consumer 
