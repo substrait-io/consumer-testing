@@ -16,7 +16,7 @@ class TestAceroConsumer(BaseTest):
     """
 
     @staticmethod
-    @pytest.fixture(scope='class', autouse=True)
+    @pytest.fixture(scope="class", autouse=True)
     def setup_teardown_class(request):
         cls = request.cls
         cls.logger.info("Setup class for TestAceroConsumer")
@@ -30,7 +30,7 @@ class TestAceroConsumer(BaseTest):
         cls.logger.info("Closing DB Connection")
         cls.db_connection.close()
 
-    @pytest.fixture(scope='function', autouse=True)
+    @pytest.fixture(scope="function", autouse=True)
     def setup_teardown_method(self):
         self.logger.info("Setup method for test_substrait_query")
 
@@ -39,9 +39,14 @@ class TestAceroConsumer(BaseTest):
         self.logger.info("Teardown method for test_substrait_query")
 
     @custom_parametrization(TPCH_QUERY_TESTS)
-    def test_substrait_query(self, test_name: str, file_names: list,
-                             sql_query: str, substrait_query: str,
-                             sort_results: bool = False) -> None:
+    def test_substrait_query(
+        self,
+        test_name: str,
+        file_names: list,
+        sql_query: str,
+        substrait_query: str,
+        sort_results: bool = False,
+    ) -> None:
         """
         1.  Format the substrait_query by replacing the 'local_files' 'uri_file'
             path with the full path to the parquet data.
@@ -70,10 +75,8 @@ class TestAceroConsumer(BaseTest):
 
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
-        substrait_query = self.utils.format_substrait_query(
-            substrait_query, file_names)
-        subtrait_query_result_tb = self.consumer.run_substrait_query(
-            substrait_query)
+        substrait_query = self.utils.format_substrait_query(substrait_query, file_names)
+        subtrait_query_result_tb = self.consumer.run_substrait_query(substrait_query)
 
         # Reformat the sql query to be used by duck db by inserting all the
         # parquet filepaths where the table names should be.
@@ -88,12 +91,12 @@ class TestAceroConsumer(BaseTest):
         if sort_results:
             subtrait_sort_col = subtrait_query_result_tb.column_names[0]
             subtrait_query_result_tb = self.utils.arrow_sort_tb_values(
-                subtrait_query_result_tb,
-                sortby=[subtrait_sort_col])
+                subtrait_query_result_tb, sortby=[subtrait_sort_col]
+            )
             duckdb_sort_col = duckdb_query_result_tb.column_names[0]
             duckdb_query_result_tb = self.utils.arrow_sort_tb_values(
-                duckdb_query_result_tb,
-                sortby=[duckdb_sort_col])
+                duckdb_query_result_tb, sortby=[duckdb_sort_col]
+            )
 
         # Verify results between substrait plan query and sql running against
         # duckdb are equal.
@@ -101,11 +104,13 @@ class TestAceroConsumer(BaseTest):
             col_names,
             exp_col_names,
             message=f"Actual column names: \n{col_names} \n"
-                    f"are not equal to the expected"
-                    f"column names: \n{exp_col_names}")
+            f"are not equal to the expected"
+            f"column names: \n{exp_col_names}",
+        )
         self.verify_equals(
             subtrait_query_result_tb,
             duckdb_query_result_tb,
             message=f"Result table: \n{subtrait_query_result_tb} \n"
-                    f"is not equal to the expected "
-                    f"table: \n{duckdb_query_result_tb}")
+            f"is not equal to the expected "
+            f"table: \n{duckdb_query_result_tb}",
+        )

@@ -10,6 +10,7 @@ class AceroConsumer:
     """
     Implementation of the acero substrait consumer Class for testing
     """
+
     @staticmethod
     def run_substrait_query(substrait_query: str) -> pa.Table:
         """
@@ -40,6 +41,5 @@ class AceroConsumer:
             filepath:
                 Path
         """
-        with pa.ipc.RecordBatchFileWriter(
-                filepath, schema=table.schema) as writer:
+        with pa.ipc.RecordBatchFileWriter(filepath, schema=table.schema) as writer:
             writer.write_table(table)

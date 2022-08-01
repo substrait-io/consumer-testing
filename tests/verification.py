@@ -10,17 +10,16 @@ LOG_HANDLER = logging.StreamHandler()
 LOG_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter and add it to the handler
-FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+FORMATTER = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 LOG_HANDLER.setFormatter(FORMATTER)
 
 # add the handler to the logger
-logging.getLogger('').addHandler(LOG_HANDLER)
+logging.getLogger("").addHandler(LOG_HANDLER)
 
 
 class Verifier:
-    """
+    """ """
 
-    """
     def __init__(self, name: str = "Verifier") -> None:
         self.logger = LOGGER
         self.logger.info(name)
@@ -40,8 +39,7 @@ class Verifier:
         """
         raise AssertionError(f"TEST FAILURE: {message}")
 
-    def verify_equals(self, actual: Any, expected: Any,
-                      message: str = "") -> bool:
+    def verify_equals(self, actual: Any, expected: Any, message: str = "") -> bool:
         """
         Verify that 2 objects are equal.  First check to see that object
         types are the same. If they differ, log the objects types and raise

@@ -59,5 +59,4 @@ def custom_parametrization(test_cases: list[dict]) -> MarkDecorator:
 
         argument_values.append(case_tuple)
 
-    return pytest.mark.parametrize(argnames=argument_names,
-                                   argvalues=argument_values)
+    return pytest.mark.parametrize(argnames=argument_names, argvalues=argument_values)
