@@ -10,6 +10,7 @@ from .queries.test_queries import QUERIES
 from .queries.tpch_test_cases.all_tpch_queries import TPCH_QUERY_TESTS
 
 
+@pytest.mark.usefixtures("prepare_tpch_parquet_data")
 class TestAceroConsumer(BaseTest):
     """
     Test Class for testing Substrait using Acero as a consumer.

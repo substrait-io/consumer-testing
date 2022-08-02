@@ -1,16 +1,13 @@
 from pathlib import Path
 
+import duckdb
 import pytest
-from _pytest.main import Config, Session
-from _pytest.nodes import Item
-from _pytest.runner import CallInfo
-from _pytest.terminal import TerminalReporter
 
 FAILURES_FILE = Path() / "failures.log"
 
 
 @pytest.hookimpl()
-def pytest_sessionstart(session: Session):
+def pytest_sessionstart():
     if FAILURES_FILE.exists():
         # Delete the file if it already exists so old failures aren't carried over.
         FAILURES_FILE.unlink()
@@ -18,7 +15,7 @@ def pytest_sessionstart(session: Session):
 
 
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item: Item, call: CallInfo):
+def pytest_runtest_makereport():
     outcome = yield  # Run all other pytest_runtest_makereport non wrapped hooks
     result = outcome.get_result()
     if result.when == "call" and result.failed:
@@ -31,9 +28,21 @@ def pytest_runtest_makereport(item: Item, call: CallInfo):
 
 
 @pytest.hookimpl(hookwrapper=True)
-def pytest_terminal_summary(
-    terminalreporter: TerminalReporter, exitstatus: int, config: Config
-):
+def pytest_terminal_summary():
     yield
     print(f"Failures logged to: {FAILURES_FILE}")
     print(f"to see run\ncat {FAILURES_FILE}")
+
+
+@pytest.fixture(scope="class")
+def prepare_tpch_parquet_data(scale_factor=0.1):
+    """
+    Generate TPCH data to be used for testing. Data is generated in tests/data/tpch_parquet
+
+    Parameters:
+        scale_factor:
+            Scale factor for TPCH data generation.
+    """
+    con = duckdb.connect()
+    con.execute(f"CALL dbgen(sf={scale_factor})")
+    con.execute("EXPORT DATABASE 'tests/data/tpch_parquet' (FORMAT PARQUET);")

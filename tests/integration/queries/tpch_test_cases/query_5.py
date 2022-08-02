@@ -6,12 +6,12 @@ TESTCASE = [
     {
         "test_name": "test_tpch_sql_5",
         "file_names": [
-            "customer_0.1.parquet",
-            "orders_0.1.parquet",
-            "lineitem_0.1.parquet",
-            "supplier_0.1.parquet",
-            "nation_0.1.parquet",
-            "region_0.1.parquet",
+            "customer.parquet",
+            "orders.parquet",
+            "lineitem.parquet",
+            "supplier.parquet",
+            "nation.parquet",
+            "region.parquet",
         ],
         "sql_query": get_sql("q5.sql"),
         "substrait_query": get_substrait_plan("query_5_plan.json"),
