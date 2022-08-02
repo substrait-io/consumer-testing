@@ -55,8 +55,8 @@ class SubstraitUtils:
     Common utility for substrait integration tests.
     """
 
-    def __init__(self, name="SubstraitUtils"):
-        """ """
+    def __init__(self):
+        """Initializes SubstraitUtils class with a logger"""
         self.logger = LOGGER
 
     @staticmethod

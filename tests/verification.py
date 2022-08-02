@@ -1,4 +1,5 @@
 import logging
+import operator
 from typing import Any
 
 # create and configure main logger
@@ -23,6 +24,7 @@ class Verifier:
     """
 
     def __init__(self, name: str = "Verifier") -> None:
+        """Initializes Verifier class with a logger"""
         self.logger = LOGGER
         self.logger.info(name)
 
@@ -64,13 +66,13 @@ class Verifier:
         msg = [f"Verifying equals: {actual} == {expected}."]
         msg = [message] if message else msg
 
-        if type(actual) != type(expected):
+        if operator.ne(type(actual), type(expected)):
             msg = (
                 f"Object types are not the same. \nActual type: "
                 f"{type(actual)}\nExpected type: {type(expected)}"
             )
             self.fail(msg)
-        elif actual != expected:
+        elif operator.ne(actual, expected):
             self.fail("\n".join(msg))
 
         return True
