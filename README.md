@@ -16,7 +16,9 @@ Table of Contents
 This testing repository provides instructions on how to add and run substrait consumer 
 integration tests.  These tests take in parquet files, a SQL query, and a json-formatted substrait 
 query plan as input.  The tests will run the SQL query on DuckDB, and the substrait plan on the 
-specified consumer, and then compare the two results. 
+specified consumer, and then compare the two results. The test data is created using DuckDB at the 
+start of the test class using the `prepare_tpch_parquet_data` fixture, which is located in 
+`tests/confttest.py`.
 
 # Setup
 
