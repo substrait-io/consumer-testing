@@ -1,4 +1,3 @@
-import json
 import logging
 import os
 from collections.abc import Iterable
@@ -26,6 +25,16 @@ REALPATH_DIRECTORY = os.path.realpath(
 
 
 def get_full_path(file_names: Iterable[str]) -> list[str]:
+    """
+    Get full paths for the TPCH parquet data.
+
+    Parameters:
+        file_names:
+            List of TPCH parquet data file names provided by the test case.
+
+    Returns:
+        List of full paths.
+    """
     data_dir = os.path.join(REALPATH_DIRECTORY, "data/tpch_parquet")
     full_paths_list = [os.path.join(data_dir, dataset) for dataset in file_names]
 
@@ -33,6 +42,16 @@ def get_full_path(file_names: Iterable[str]) -> list[str]:
 
 
 def get_substrait_plan(filename: str) -> str:
+    """
+    Get the substrait plan.
+
+    Parameters:
+        filename:
+            The file to retrieve the substrait plan from.
+
+    Returns:
+        String representation of the json formatted substrait plan.
+    """
     plan_path = os.path.join(
         REALPATH_DIRECTORY, "integration/queries/tpch_substrait_plans", filename
     )
@@ -42,6 +61,16 @@ def get_substrait_plan(filename: str) -> str:
 
 
 def get_sql(filename: str) -> str:
+    """
+    Get the SQL query
+
+    Parameters:
+        filename:
+            The file to retrieve the SQL from.
+
+    Returns:
+        String representation of the SQL query.
+    """
     plan_path = os.path.join(
         REALPATH_DIRECTORY, "integration/queries/tpch_sql", filename
     )
