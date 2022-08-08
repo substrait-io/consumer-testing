@@ -53,7 +53,7 @@ def get_substrait_plan(filename: str) -> str:
         String representation of the json formatted substrait plan.
     """
     plan_path = os.path.join(
-        REALPATH_DIRECTORY, "integration/queries/tpch_substrait_plans", filename
+        REALPATH_DIRECTORY, "integration", "queries", "tpch_substrait_plans", filename
     )
 
     with open(plan_path, "r") as f:
@@ -72,7 +72,7 @@ def get_sql(filename: str) -> str:
         String representation of the SQL query.
     """
     plan_path = os.path.join(
-        REALPATH_DIRECTORY, "integration/queries/tpch_sql", filename
+        REALPATH_DIRECTORY, "integration", "queries", "tpch_sql", filename
     )
 
     with open(plan_path, "r") as f:

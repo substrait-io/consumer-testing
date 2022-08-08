@@ -18,7 +18,7 @@ integration tests.  These tests take in parquet files, a SQL query, and a json-f
 query plan as input.  The tests will run the SQL query on DuckDB, and the substrait plan on the 
 specified consumer, and then compare the two results. The test data is created using DuckDB at the 
 start of the test class using the `prepare_tpch_parquet_data` fixture, which is located in 
-`tests/confttest.py`.
+`tests/conftest.py`.
 
 # Setup
 
@@ -59,7 +59,7 @@ Testing methods are located in the `tests/integration` folder and prefixed with 
 
 
 ## Test Case Args
-Test case arguments located in `tests/integratin/queries/tpch_test_cases`.  They specify 
+Test case arguments located in `tests/integration/queries/tpch_test_cases`.  They specify 
 the parquet files, the SQL query, and substrait query plan that will be used for the test cases.
 
 query_1.py
