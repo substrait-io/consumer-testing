@@ -1,11 +1,9 @@
-import os
 from collections.abc import Iterable
+from pathlib import Path
 
 import pyarrow as pa
 
-REALPATH_DIRECTORY = os.path.realpath(
-    os.path.join(os.getcwd(), os.path.dirname(__file__))
-)
+CUR_DIR = Path(__file__).parent
 
 
 def get_substrait_plan(filename: str) -> str:
@@ -19,9 +17,7 @@ def get_substrait_plan(filename: str) -> str:
     Returns:
         String representation of the json formatted substrait plan.
     """
-    plan_path = os.path.join(
-        REALPATH_DIRECTORY, "integration", "queries", "tpch_substrait_plans", filename
-    )
+    plan_path = CUR_DIR / "integration" / "queries" / "tpch_substrait_plans" / filename
 
     with open(plan_path, "r") as f:
         return f.read()
@@ -38,9 +34,7 @@ def get_sql(filename: str) -> str:
     Returns:
         String representation of the SQL query.
     """
-    plan_path = os.path.join(
-        REALPATH_DIRECTORY, "integration", "queries", "tpch_sql", filename
-    )
+    plan_path = CUR_DIR / "integration" / "queries" / "tpch_sql" / filename
 
     with open(plan_path, "r") as f:
         return f.read()
@@ -63,8 +57,8 @@ class SubstraitUtils:
         Returns:
             List of full paths.
         """
-        data_dir = os.path.join(REALPATH_DIRECTORY, "data/tpch_parquet")
-        full_paths_list = [os.path.join(data_dir, dataset) for dataset in file_names]
+        data_dir = CUR_DIR / "data" / "tpch_parquet"
+        full_paths_list = [f"{data_dir}/{dataset}" for dataset in file_names]
 
         return full_paths_list
 
