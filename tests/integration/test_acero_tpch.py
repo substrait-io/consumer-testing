@@ -2,16 +2,15 @@ import duckdb
 import pytest
 import substrait_validator as sv
 
-from ..basetest import BaseTest
 from ..common import SubstraitUtils
 from ..consumers.acero_consumer import AceroConsumer
 from ..parametrization import custom_parametrization
-from .queries.test_queries import QUERIES
-from .queries.tpch_test_cases.all_tpch_queries import TPCH_QUERY_TESTS
+from ..verification import Verifier
+from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestAceroConsumer(BaseTest):
+class TestAceroConsumer:
     """
     Test Class for testing Substrait using Acero as a consumer.
     """
@@ -23,6 +22,7 @@ class TestAceroConsumer(BaseTest):
         cls.db_connection = duckdb.connect()
         cls.consumer = AceroConsumer()
         cls.utils = SubstraitUtils()
+        cls.verifier = Verifier()
 
         yield
 
@@ -90,14 +90,14 @@ class TestAceroConsumer(BaseTest):
 
         # Verify results between substrait plan query and sql running against
         # duckdb are equal.
-        self.verify_equals(
+        self.verifier.verify_equals(
             col_names,
             exp_col_names,
             message=f"Actual column names: \n{col_names} \n"
             f"are not equal to the expected"
             f"column names: \n{exp_col_names}",
         )
-        self.verify_equals(
+        self.verifier.verify_equals(
             subtrait_query_result_tb,
             duckdb_query_result_tb,
             message=f"Result table: \n{subtrait_query_result_tb} \n"
