@@ -38,39 +38,40 @@ Tests are located in the `tests/integration` folder and are run with pytest.
 pytest test_acero_tpch.py
 ```
 
-After running your tests, any failures will be output to a failures.log file, where you can see 
-the test method and test cases that failed:
-```commandline
-Failures logged to: failures.log
-to see run
-cat failures.log
-.
-.
-.
-cat failures.log
-================================ short test summary info =================================
-FAILED test_acero_tpch.py::TestAceroConsumer::test_substrait_query[test_tpch_sql_1]
-```
-
-
 # Test Files
 Testing methods are located in the `tests/integration` folder and prefixed with `test_`. 
 `test_acero_tpch.py`
 
 
-## Test Case Args
-Test case arguments located in `tests/integration/queries/tpch_test_cases`.  They specify 
+## Test Cases
+Test case arguments located in `tests/integration/queries/tpch_test_cases.py`.  They specify 
 the parquet files, the SQL query, and substrait query plan that will be used for the test cases.
 
 query_1.py
 ```python
-TESTCASE = [
+TPCH_QUERY_TESTS = (
     {
         "test_name": "test_tpch_sql_1",
-        "file_names": ["lineitem_0.1.parquet"],
+        "file_names": ["lineitem.parquet"],
         "sql_query": get_sql("q1.sql"),
         "substrait_query": get_substrait_plan("query_1_plan.json"),
-    }
+    },
+    {
+        "test_name": "test_tpch_sql_2",
+        "file_names": [
+            "part.parquet",
+            "supplier.parquet",
+            "partsupp.parquet",
+            "nation.parquet",
+            "region.parquet",
+            "partsupp.parquet",
+            "supplier.parquet",
+            "nation.parquet",
+            "region.parquet",
+        ],
+        "sql_query": get_sql("q2.sql"),
+        "substrait_query": get_substrait_plan("query_2_plan.json"),
+    },
 ]
 ```
 ## Substrait Plans
