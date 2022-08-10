@@ -1,6 +1,9 @@
+from collections.abc import Iterable
+
 import duckdb
+import pyarrow as pa
 import pytest
-import substrait_validator as sv
+from pyarrow import compute
 
 from ..common import SubstraitUtils
 from ..consumers.acero_consumer import AceroConsumer
@@ -58,10 +61,6 @@ class TestAceroConsumer:
             sort_results:
                 Whether to sort the results before comparison.
         """
-
-        # self.logger.info(f"Start to run test: {test_name}")
-        # sv.check_plan_valid(substrait_query)
-
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
         substrait_query = self.utils.format_substrait_query(substrait_query, file_names)
@@ -79,11 +78,11 @@ class TestAceroConsumer:
         # Sort results by specified column names
         if sort_results:
             subtrait_sort_col = subtrait_query_result_tb.column_names[0]
-            subtrait_query_result_tb = self.utils.arrow_sort_tb_values(
+            subtrait_query_result_tb = arrow_sort_tb_values(
                 subtrait_query_result_tb, sortby=[subtrait_sort_col]
             )
             duckdb_sort_col = duckdb_query_result_tb.column_names[0]
-            duckdb_query_result_tb = self.utils.arrow_sort_tb_values(
+            duckdb_query_result_tb = arrow_sort_tb_values(
                 duckdb_query_result_tb, sortby=[duckdb_sort_col]
             )
 
@@ -103,3 +102,24 @@ class TestAceroConsumer:
             f"is not equal to the expected "
             f"table: \n{duckdb_query_result_tb}",
         )
+
+
+def arrow_sort_tb_values(table: pa.Table, sortby: Iterable[str]) -> pa.Table:
+    """
+    Sort the pyarrow table by the given list of columns.
+
+    Parameters:
+        table:
+            Original pyarrow Table.
+        sortby:
+            Columns to sort the results by.
+
+    Returns:
+        Pyarrow Table sorted by given columns.
+
+    """
+    table_sorted_indexes = pa.compute.bottom_k_unstable(
+        table, sort_keys=sortby, k=len(table)
+    )
+    table_sorted = table.take(table_sorted_indexes)
+    return table_sorted

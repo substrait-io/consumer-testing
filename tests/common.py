@@ -1,8 +1,6 @@
 from collections.abc import Iterable
 from pathlib import Path
 
-import pyarrow as pa
-
 CUR_DIR = Path(__file__).parent
 
 
@@ -62,27 +60,6 @@ class SubstraitUtils:
 
         return full_paths_list
 
-    @staticmethod
-    def arrow_sort_tb_values(table: pa.Table, sortby: Iterable[str]) -> pa.Table:
-        """
-        Sort the pyarrow table by the given list of columns.
-
-        Parameters:
-            table:
-                Original pyarrow Table.
-            sortby:
-                Columns to sort the results by.
-
-        Returns:
-            Pyarrow Table sorted by given columns.
-
-        """
-        table_sorted_indexes = pa.compute.bottom_k_unstable(
-            table, sort_keys=sortby, k=len(table)
-        )
-        table_sorted = table.take(table_sorted_indexes)
-        return table_sorted
-
     def format_sql_query(self, sql_query: str, file_names: list[str]) -> str:
         """
         Replace the 'Table' Parameters from the SQL query with the relative
@@ -106,7 +83,7 @@ class SubstraitUtils:
 
     def format_substrait_query(
         self, substrait_query: str, file_names: list[str]
-    ) -> bytes:
+    ) -> str:
         """
         Replace the 'local_files' path in the substrait query plan with
         the full path of the parquet data.
@@ -130,4 +107,4 @@ class SubstraitUtils:
                 f"FILENAME_PLACEHOLDER_{count}", file_path
             )
 
-        return pa.lib.tobytes(substrait_query)
+        return substrait_query

@@ -21,14 +21,13 @@ start of the test class using the `prepare_tpch_parquet_data` fixture, which is 
 `tests/conftest.py`.
 
 # Setup
-
 Create and activate your conda environment with python3.9:
 ```commandline
 conda create -y -n substrait_consumer_testing -c conda-forge python=3.9
 conda activate substrait_consumer_testing
 ```
 
-Install requirements from `tests` directory:
+Install requirements from the top level directory:
 ```commandline
 pip install -r requirements.txt
 ```
@@ -40,7 +39,7 @@ pytest test_acero_tpch.py
 
 # Test Files
 Testing methods are located in the `tests/integration` folder and prefixed with `test_`. 
-`test_acero_tpch.py`
+For example, `test_acero_tpch.py`
 
 
 ## Test Cases
@@ -108,4 +107,4 @@ used.
 # How to Add New Consumers
 Consumers should be added to the `tests/consumers` directory and provide 
 methods on how to run the substrait query plan against that consumer.  Look at 
-`tests/consumers/acero_consumer.py` for implementation details.
+`tests/consumers/acero_consumer.py` for an example implementation.
