@@ -69,7 +69,7 @@ class TestAceroConsumer:
         # Calculate the result of running the substrait query plan.
         substrait_query = self.utils.format_substrait_query(substrait_query, file_names)
         subtrait_query_result_tb = self.acero_consumer.run_substrait_query(
-            substrait_query.encode()
+            substrait_query
         )
 
         # Reformat the sql query to be used by duck db by inserting all the
