@@ -31,6 +31,14 @@ class TestArithmeticFunctions:
             "(1, 1, TRUE), (2, 1, FALSE), (3, 1, TRUE), (-4, 1, TRUE), (5, 1, FALSE), "
             "(-6, 2, TRUE), (7, 2, FALSE), (8, 2, True), (9, 2, FALSE), (NULL, 2, FALSE);"
         )
+        cls.table_t = ibis.table(
+            [
+                ("a", dt.int32),
+                ("b", dt.int32),
+                ("c", dt.boolean),
+            ],
+            name="t",
+        )
 
         cls.created_tables = set()
 
@@ -48,6 +56,7 @@ class TestArithmeticFunctions:
         producer,
         consumer,
         partsupp,
+        lineitem,
     ) -> None:
         """
         Test for verifying duckdb is able to run substrait plans that include
@@ -77,7 +86,7 @@ class TestArithmeticFunctions:
         # Convert the SQL/Ibis expression to a substrait query plan
         if ibis_expr:
             substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(partsupp)
+                sql_query, consumer, ibis_expr(partsupp, lineitem, self.table_t)
             )
         else:
             substrait_plan = producer.produce_substrait(sql_query, consumer)
