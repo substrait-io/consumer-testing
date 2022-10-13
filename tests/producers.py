@@ -1,4 +1,5 @@
 import string
+import pytest
 from pathlib import Path
 from typing import Iterable
 from google.protobuf import json_format
@@ -99,6 +100,8 @@ class IbisProducer:
         Returns:
             Substrait query plan in byte format.
         """
+        if ibis_expr is None:
+            pytest.skip("ibis expression currently undefined")
         tpch_proto_bytes = self.compiler.compile(ibis_expr)
         if type(consumer).__name__ == "DuckDBConsumer":
             substrait_plan = tpch_proto_bytes.SerializeToString()

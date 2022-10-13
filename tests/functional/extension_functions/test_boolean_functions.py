@@ -25,6 +25,15 @@ class TestBooleanFunctions:
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
         cls.db_connection.execute("create table t (a int, b int, c boolean, d boolean)")
+        cls.table_t = ibis.table(
+            [
+                ("a", dt.int32),
+                ("b", dt.int32),
+                ("c", dt.boolean),
+                ("d", dt.boolean)
+            ],
+            name="t",
+        )
         cls.db_connection.execute(
             "INSERT INTO t VALUES "
             "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
@@ -49,7 +58,6 @@ class TestBooleanFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp,
     ) -> None:
         """
         Test for verifying duckdb is able to run substrait plans that include
@@ -79,7 +87,7 @@ class TestBooleanFunctions:
         # Convert the SQL/Ibis expression to a substrait query plan
         if ibis_expr:
             substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(partsupp)
+                sql_query, consumer, ibis_expr(self.table_t)
             )
         else:
             substrait_plan = producer.produce_substrait(sql_query, consumer)

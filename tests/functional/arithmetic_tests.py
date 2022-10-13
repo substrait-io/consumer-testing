@@ -33,7 +33,7 @@ SCALAR_FUNCTIONS = (
         "test_name": "modulus",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_SCALAR["modulus"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["modulus"]
     },
     {
         "test_name": "factorial",

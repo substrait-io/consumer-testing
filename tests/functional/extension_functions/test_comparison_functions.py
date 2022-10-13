@@ -49,6 +49,7 @@ class TestComparisonFunctions:
         producer,
         consumer,
         partsupp,
+        nation
     ) -> None:
         """
         Test for verifying duckdb is able to run substrait plans that include
@@ -78,7 +79,7 @@ class TestComparisonFunctions:
         # Convert the SQL/Ibis expression to a substrait query plan
         if ibis_expr:
             substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(partsupp)
+                sql_query, consumer, ibis_expr(partsupp, nation)
             )
         else:
             substrait_plan = producer.produce_substrait(sql_query, consumer)

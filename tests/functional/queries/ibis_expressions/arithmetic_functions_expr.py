@@ -18,9 +18,15 @@ def divide_expr(partsupp):
     return partsupp[partsupp.ps_partkey, new_col]
 
 
+def modulus_expr(partsupp):
+    new_col = (partsupp.ps_partkey % 10).name('MODULUS_KEY')
+    return partsupp[partsupp.ps_partkey, new_col]
+
+
 IBIS_SCALAR = {
     "add": add_expr,
     "subtract": subtract_expr,
     "multiply": multiply_expr,
-    "divide": divide_expr
+    "divide": divide_expr,
+    "modulus": modulus_expr
 }

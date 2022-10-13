@@ -1,19 +1,20 @@
 from tests.functional.queries.sql.comparison_functions_sql import (
     SQL_SCALAR
 )
+from tests.functional.queries.ibis_expressions.comparison_functions_expr import IBIS_SCALAR
 
 SCALAR_FUNCTIONS = (
     {
         "test_name": "not_equal",
         "file_names": ["nation.parquet"],
         "sql_query": SQL_SCALAR["not_equal"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["not_equal"]
     },
     {
         "test_name": "equal",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_SCALAR["equal"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["equal"]
     },
     {
         "test_name": "is_not_distinct_from",
@@ -25,25 +26,25 @@ SCALAR_FUNCTIONS = (
         "test_name": "lt",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_SCALAR["lt"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["lt"]
     },
     {
         "test_name": "lte",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_SCALAR["lte"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["lte"]
     },
     {
         "test_name": "gt",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_SCALAR["gt"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["gt"]
     },
     {
         "test_name": "gte",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_SCALAR["gte"],
-        "ibis_expr": None
+        "ibis_expr": IBIS_SCALAR["gte"]
     },
     {
         "test_name": "is_not_null",
