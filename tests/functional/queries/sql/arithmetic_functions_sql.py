@@ -87,12 +87,12 @@ SQL_SCALAR = {
     "abs":
         """
         SELECT a, abs(a) AS ABS_A
-        FROM t;
+        FROM 't';
         """,
     "sign":
         """
         SELECT a, sign(a) AS SIGN_A
-        FROM t;
+        FROM 't';
         """,
 }
 
