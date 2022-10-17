@@ -42,7 +42,8 @@ class TestStringFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp,
+        nation,
+        orders,
     ) -> None:
         """
         Test for verifying duckdb is able to run substrait plans that include
@@ -72,7 +73,7 @@ class TestStringFunctions:
         # Convert the SQL/Ibis expression to a substrait query plan
         if ibis_expr:
             substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(partsupp)
+                sql_query, consumer, ibis_expr(nation, orders)
             )
         else:
             substrait_plan = producer.produce_substrait(sql_query, consumer)
