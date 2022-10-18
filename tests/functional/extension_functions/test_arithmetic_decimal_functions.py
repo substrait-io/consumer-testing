@@ -4,7 +4,6 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.consumers import AceroConsumer, DuckDBConsumer
 from tests.functional.arithmetic_decimal_tests import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
 from tests.parametrization import custom_parametrization
@@ -25,14 +24,17 @@ class TestArithmeticDecimalFunctions:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
-        cls.db_connection.execute("create table t (a int, b int, c boolean)")
+        cls.db_connection.execute(
+            "create table t (a int, b int, c boolean, d boolean)"
+        )
         cls.db_connection.execute(
             "INSERT INTO t VALUES "
-            "(1, 1, TRUE), (2, 1, FALSE), (3, 1, TRUE), (4, 1, TRUE), (5, 1, FALSE), "
-            "(6, 2, TRUE), (7, 2, FALSE), (8, 2, True), (9, 2, FALSE), (NULL, 2, FALSE);"
+            "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
+            "(-4, 1, TRUE, TRUE), (5, 1, FALSE, TRUE), (-6, 2, TRUE, TRUE), "
+            "(7, 2, FALSE, TRUE), (8, 2, True, TRUE), (9, 2, FALSE, TRUE), "
+            "(NULL, 2, FALSE, TRUE);"
         )
-        cls.duckdb_consumer = DuckDBConsumer(cls.db_connection)
-        cls.acero_consumer = AceroConsumer()
+
         cls.created_tables = set()
 
         yield

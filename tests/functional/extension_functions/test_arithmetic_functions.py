@@ -10,7 +10,6 @@ from tests.verification import verify_equals
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-@pytest.mark.usefixtures("partsupp")
 class TestArithmeticFunctions:
     """
     Test Class for testing arithmetic functions in substrait plans created by different
@@ -25,18 +24,18 @@ class TestArithmeticFunctions:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
-        cls.db_connection.execute("create table t (a int, b int, c boolean)")
+        cls.db_connection.execute(
+            "create table t (a int, b int, c boolean, d boolean)"
+        )
         cls.db_connection.execute(
             "INSERT INTO t VALUES "
-            "(1, 1, TRUE), (2, 1, FALSE), (3, 1, TRUE), (-4, 1, TRUE), (5, 1, FALSE), "
-            "(-6, 2, TRUE), (7, 2, FALSE), (8, 2, True), (9, 2, FALSE), (NULL, 2, FALSE);"
+            "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
+            "(-4, 1, TRUE, TRUE), (5, 1, FALSE, TRUE), (-6, 2, TRUE, TRUE), "
+            "(7, 2, FALSE, TRUE), (8, 2, True, TRUE), (9, 2, FALSE, TRUE), "
+            "(NULL, 2, FALSE, TRUE);"
         )
         cls.table_t = ibis.table(
-            [
-                ("a", dt.int32),
-                ("b", dt.int32),
-                ("c", dt.boolean),
-            ],
+            [("a", dt.int32), ("b", dt.int32), ("c", dt.boolean), ("d", dt.boolean)],
             name="t",
         )
 

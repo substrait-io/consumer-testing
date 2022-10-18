@@ -16,9 +16,8 @@ class DuckDBProducer:
             self.db_connection = db_connection
         else:
             self.db_connection = duckdb.connect()
-
-        self.db_connection.execute("INSTALL substrait")
-        self.db_connection.execute("LOAD substrait")
+            self.db_connection.execute("INSTALL substrait")
+            self.db_connection.execute("LOAD substrait")
 
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection

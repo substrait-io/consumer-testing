@@ -4,7 +4,6 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.consumers import AceroConsumer, DuckDBConsumer
 from tests.functional.datetime_tests import SCALAR_FUNCTIONS
 from tests.parametrization import custom_parametrization
 from tests.verification import verify_equals
@@ -17,15 +16,13 @@ class TestDatetimeFunctions:
     """
 
     @staticmethod
-    @pytest.fixture(scope="class", autouse=True)
-    def setup_teardown_class(request):
+    @pytest.fixture(scope="function", autouse=True)
+    def setup_teardown_function(request):
         cls = request.cls
 
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
-        cls.duckdb_consumer = DuckDBConsumer(cls.db_connection)
-        cls.acero_consumer = AceroConsumer()
         cls.created_tables = set()
 
         yield
