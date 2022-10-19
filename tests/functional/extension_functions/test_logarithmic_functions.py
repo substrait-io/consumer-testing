@@ -66,10 +66,13 @@ class TestLogarithmicFunctions:
             sql_query = sql_query.format(*table_names)
 
         # Convert the SQL/Ibis expression to a substrait query plan
-        if ibis_expr:
-            substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(partsupp)
-            )
+        if type(producer).__name__ == "IbisProducer":
+            if ibis_expr:
+                substrait_plan = producer.produce_substrait(
+                    sql_query, consumer, ibis_expr(partsupp)
+                )
+            else:
+                pytest.skip("ibis expression currently undefined")
         else:
             substrait_plan = producer.produce_substrait(sql_query, consumer)
 

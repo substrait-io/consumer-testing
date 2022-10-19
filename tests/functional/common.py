@@ -1,5 +1,5 @@
 def check_subtrait_function_names(
-    substrait_plans: str,
+    substrait_plans: dict,
     expected_function_name,
 ):
     """

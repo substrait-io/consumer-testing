@@ -78,10 +78,13 @@ class TestBooleanFunctions:
             sql_query = sql_query.format(*table_names)
 
         # Convert the SQL/Ibis expression to a substrait query plan
-        if ibis_expr:
-            substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(self.table_t)
-            )
+        if type(producer).__name__ == "IbisProducer":
+            if ibis_expr:
+                substrait_plan = producer.produce_substrait(
+                    sql_query, consumer, ibis_expr(self.table_t)
+                )
+            else:
+                pytest.skip("ibis expression currently undefined")
         else:
             substrait_plan = producer.produce_substrait(sql_query, consumer)
 
