@@ -6,13 +6,14 @@ from ibis_substrait.tests.compiler.conftest import *
 
 from tests.functional.rounding_tests import SCALAR_FUNCTIONS
 from tests.parametrization import custom_parametrization
-from tests.verification import verify_equals
+from tests.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
 class TestRoundingFunctions:
     """
-    Test Class for testing Substrait comparison functions
+    Test Class verifying different consumers are able to run substrait plans
+    that include substrait rounding functions.
     """
 
     @staticmethod
@@ -40,49 +41,13 @@ class TestRoundingFunctions:
         consumer,
         partsupp,
     ) -> None:
-        """
-        Test for verifying duckdb is able to run substrait plans that include
-        arithmetic functions produced by different producers.
-
-        Parameters:
-            test_name:
-                Name of substrait function.
-            file_names:
-                List of parquet files.
-            sql_query:
-                SQL query.
-            ibis_expr:
-                Ibis expression.
-        """
-        producer.set_db_connection(self.db_connection)
-        consumer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = consumer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
-
-        # Convert the SQL/Ibis expression to a substrait query plan
-        if type(producer).__name__ == "IbisProducer":
-            if ibis_expr:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, consumer, ibis_expr(partsupp)
-                )
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            substrait_plan = producer.produce_substrait(sql_query, consumer)
-
-        actual_result = consumer.run_substrait_query(substrait_plan)
-        expected_result = self.db_connection.query(f"{sql_query}").arrow()
-
-        verify_equals(
-            actual_result.columns,
-            expected_result.columns,
-            message=f"Result: {actual_result.columns} "
-            f"is not equal to the expected: "
-            f"{expected_result.columns}",
+        substrait_function_test(
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
+            ibis_expr,
+            producer,
+            consumer,
+            partsupp
         )

@@ -184,7 +184,7 @@ class TestSubstraitFunctionNames:
             ibis_expr:
                 Ibis expression.
             producer:
-                Substrait producer class
+                Substrait producer class.
             *args:
                 The data tables to be passed to the ibis expression.
         """
