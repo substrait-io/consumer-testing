@@ -86,7 +86,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, nation)
+                    sql_query, DuckDBConsumer, ibis_expr(partsupp, lineitem, self.table_t)
                 )
                 substrait_plan = json.loads(substrait_plan)
             else:
@@ -138,7 +138,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, nation)
+                    sql_query, DuckDBConsumer, ibis_expr(self.table_t)
                 )
                 substrait_plan = json.loads(substrait_plan)
             else:
@@ -286,7 +286,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, nation)
+                    sql_query, DuckDBConsumer, ibis_expr(partsupp)
                 )
                 substrait_plan = json.loads(substrait_plan)
             else:
@@ -335,7 +335,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, nation)
+                    sql_query, DuckDBConsumer, ibis_expr(partsupp)
                 )
                 substrait_plan = json.loads(substrait_plan)
             else:
