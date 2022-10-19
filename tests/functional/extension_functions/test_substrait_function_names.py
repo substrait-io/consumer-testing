@@ -16,8 +16,8 @@ from tests.parametrization import custom_parametrization
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
 class TestSubstraitFunctionNames:
     """
-    Test Class for testing arithmetic functions in substrait plans created by different
-    producers and consumed by different consumers.
+    Test Class for testing functions names in substrait plans created by different
+    producers.
     """
 
     @staticmethod
@@ -60,43 +60,18 @@ class TestSubstraitFunctionNames:
         lineitem,
     ) -> None:
         """
-        Verify the substrait function names that appear in the produced plan match up
-        with the function names as defined in Substrait.
-
-        Parameters:
-            test_name:
-                Expected function name as defined by the substrait spec.
-            file_names:
-                List of parquet files.
-            sql_query:
-                SQL query.
+        Verify the substrait function names for arithmetic functions.
         """
-        producer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = producer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
-
-        # Grab the json representation of the produced substrait plan to verify
-        # the proper substrait function name.
-        if type(producer).__name__ == "IbisProducer":
-            if ibis_expr:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, lineitem, self.table_t)
-                )
-                substrait_plan = json.loads(substrait_plan)
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            substrait_json = self.db_connection.get_substrait_json(sql_query)
-            proto = substrait_json.fetchone()[0]
-            substrait_plan = json.loads(proto)
-
-        check_subtrait_function_names(substrait_plan, test_name)
+        self.run_function_name_test(
+            test_name,
+            file_names,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
+            lineitem,
+            self.table_t,
+        )
 
     @custom_parametrization(
         boolean_tests.SCALAR_FUNCTIONS + boolean_tests.AGGREGATE_FUNCTIONS
@@ -108,47 +83,13 @@ class TestSubstraitFunctionNames:
         sql_query: str,
         ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
-        nation,
     ) -> None:
         """
-        Verify the substrait function names that appear in the produced plan match up
-        with the function names as defined in Substrait.
-
-        Parameters:
-            test_name:
-                Expected function name as defined by the substrait spec.
-            file_names:
-                List of parquet files.
-            sql_query:
-                SQL query.
+        Verify the substrait function names for boolean functions.
         """
-        producer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = producer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
-
-        # Grab the json representation of the produced substrait plan to verify
-        # the proper substrait function name.
-        if type(producer).__name__ == "IbisProducer":
-            if ibis_expr:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(self.table_t)
-                )
-                substrait_plan = json.loads(substrait_plan)
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            substrait_json = self.db_connection.get_substrait_json(sql_query)
-            proto = substrait_json.fetchone()[0]
-            substrait_plan = json.loads(proto)
-
-        check_subtrait_function_names(substrait_plan, test_name)
+        self.run_function_name_test(
+            test_name, file_names, sql_query, ibis_expr, producer, self.table_t
+        )
 
     @custom_parametrization(comparison_tests.SCALAR_FUNCTIONS)
     def test_comparison_function_names(
@@ -159,46 +100,14 @@ class TestSubstraitFunctionNames:
         ibis_expr: Callable[[Table], Table],
         producer,
         partsupp,
-        lineitem,
+        nation,
     ) -> None:
         """
-        Verify the substrait function names that appear in the produced plan match up
-        with the function names as defined in Substrait.
-
-        Parameters:
-            test_name:
-                Expected function name as defined by the substrait spec.
-            file_names:
-                List of parquet files.
-            sql_query:
-                SQL query.
+        Verify the substrait function names for comparison functions.
         """
-        producer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = producer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
-
-        # Grab the json representation of the produced substrait plan to verify
-        # the proper substrait function name.
-        if type(producer).__name__ == "IbisProducer":
-            if ibis_expr:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, nation)
-                )
-                substrait_plan = json.loads(substrait_plan)
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            substrait_json = self.db_connection.get_substrait_json(sql_query)
-            proto = substrait_json.fetchone()[0]
-            substrait_plan = json.loads(proto)
-
-        check_subtrait_function_names(substrait_plan, test_name)
+        self.run_function_name_test(
+            test_name, file_names, sql_query, ibis_expr, producer, partsupp, nation
+        )
 
     @custom_parametrization(datetime_tests.SCALAR_FUNCTIONS)
     def test_datetime_function_names(
@@ -211,43 +120,11 @@ class TestSubstraitFunctionNames:
         partsupp,
     ) -> None:
         """
-        Verify the substrait function names that appear in the produced plan match up
-        with the function names as defined in Substrait.
-
-        Parameters:
-            test_name:
-                Expected function name as defined by the substrait spec.
-            file_names:
-                List of parquet files.
-            sql_query:
-                SQL query.
+        Verify the substrait function names for datetime functions.
         """
-        producer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = producer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
-
-        # Grab the json representation of the produced substrait plan to verify
-        # the proper substrait function name.
-        if type(producer).__name__ == "IbisProducer":
-            if ibis_expr:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp, nation)
-                )
-                substrait_plan = json.loads(substrait_plan)
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            substrait_json = self.db_connection.get_substrait_json(sql_query)
-            proto = substrait_json.fetchone()[0]
-            substrait_plan = json.loads(proto)
-
-        check_subtrait_function_names(substrait_plan, test_name)
+        self.run_function_name_test(
+            test_name, file_names, sql_query, ibis_expr, producer, partsupp
+        )
 
     @custom_parametrization(logarithmic_tests.SCALAR_FUNCTIONS)
     def test_logarithmic_function_names(
@@ -260,43 +137,11 @@ class TestSubstraitFunctionNames:
         partsupp,
     ) -> None:
         """
-        Verify the substrait function names that appear in the produced plan match up
-        with the function names as defined in Substrait.
-
-        Parameters:
-            test_name:
-                Expected function name as defined by the substrait spec.
-            file_names:
-                List of parquet files.
-            sql_query:
-                SQL query.
+        Verify the substrait function names for logarithmic functions.
         """
-        producer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = producer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
-
-        # Grab the json representation of the produced substrait plan to verify
-        # the proper substrait function name.
-        if type(producer).__name__ == "IbisProducer":
-            if ibis_expr:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp)
-                )
-                substrait_plan = json.loads(substrait_plan)
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            substrait_json = self.db_connection.get_substrait_json(sql_query)
-            proto = substrait_json.fetchone()[0]
-            substrait_plan = json.loads(proto)
-
-        check_subtrait_function_names(substrait_plan, test_name)
+        self.run_function_name_test(
+            test_name, file_names, sql_query, ibis_expr, producer, partsupp
+        )
 
     @custom_parametrization(rounding_tests.SCALAR_FUNCTIONS)
     def test_rounding_function_names(
@@ -309,6 +154,23 @@ class TestSubstraitFunctionNames:
         partsupp,
     ) -> None:
         """
+        Verify the substrait function names for rounding functions.
+        """
+        self.run_function_name_test(
+            test_name, file_names, sql_query, ibis_expr, producer, partsupp
+        )
+
+    def run_function_name_test(
+        self,
+        test_name: str,
+        file_names: Iterable[str],
+        sql_query: str,
+        ibis_expr: Callable[[Table], Table],
+        producer,
+        *args
+    ):
+        """
+
         Verify the substrait function names that appear in the produced plan match up
         with the function names as defined in Substrait.
 
@@ -319,7 +181,14 @@ class TestSubstraitFunctionNames:
                 List of parquet files.
             sql_query:
                 SQL query.
+            ibis_expr:
+                Ibis expression.
+            producer:
+                Substrait producer class
+            *args:
+                The data tables to be passed to the ibis expression.
         """
+
         producer.set_db_connection(self.db_connection)
 
         # Load the parquet files into DuckDB and return all the table names as a list
@@ -335,7 +204,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(partsupp)
+                    sql_query, DuckDBConsumer, ibis_expr(*args)
                 )
                 substrait_plan = json.loads(substrait_plan)
             else:
