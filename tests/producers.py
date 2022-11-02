@@ -1,13 +1,13 @@
 import string
-import pytest
 from pathlib import Path
 from typing import Iterable
-from google.protobuf import json_format
 
 import duckdb
+import pytest
+from google.protobuf import json_format
+from ibis_substrait.compiler.core import SubstraitCompiler
 
 from tests.common import SubstraitUtils
-from ibis_substrait.compiler.core import SubstraitCompiler
 
 
 class DuckDBProducer:
@@ -22,8 +22,9 @@ class DuckDBProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, consumer,
-                          ibis_expr: str = None) -> bytes:
+    def produce_substrait(
+        self, sql_query: str, consumer, ibis_expr: str = None
+    ) -> bytes:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 
@@ -43,9 +44,9 @@ class DuckDBProducer:
         return proto_bytes
 
     def load_tables_from_parquet(
-            self,
-            created_tables: set,
-            file_names: Iterable[str],
+        self,
+        created_tables: set,
+        file_names: Iterable[str],
     ) -> list:
         """
         Load all the parquet files into separate tables in DuckDB.
@@ -92,8 +93,9 @@ class IbisProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, consumer,
-                          ibis_expr: str = None) -> bytes:
+    def produce_substrait(
+        self, sql_query: str, consumer, ibis_expr: str = None
+    ) -> bytes:
         """
         Produce the Ibis substrait plan using the given Ibis expression
 
@@ -111,15 +113,13 @@ class IbisProducer:
         if type(consumer).__name__ == "DuckDBConsumer":
             substrait_plan = tpch_proto_bytes.SerializeToString()
         else:
-            substrait_plan = json_format.MessageToJson(
-                tpch_proto_bytes
-            )
+            substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
         return substrait_plan
 
     def load_tables_from_parquet(
-            self,
-            created_tables: set,
-            file_names: Iterable[str],
+        self,
+        created_tables: set,
+        file_names: Iterable[str],
     ) -> list:
         """
         Load all the parquet files into separate tables in DuckDB.

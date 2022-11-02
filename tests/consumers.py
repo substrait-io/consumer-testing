@@ -9,7 +9,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pyarrow.substrait as substrait
 
-from .common import SubstraitUtils
+from tests.common import SubstraitUtils
 
 
 class DuckDBConsumer:
