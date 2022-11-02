@@ -6,8 +6,8 @@ from ibis_substrait.tests.compiler.conftest import *
 
 from tests.functional.arithmetic_decimal_tests import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
+from tests.functional.common import load_custom_duckdb_table, substrait_function_test
 from tests.parametrization import custom_parametrization
-from tests.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -25,16 +25,7 @@ class TestArithmeticDecimalFunctions:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
-        cls.db_connection.execute(
-            "create table t (a int, b int, c boolean, d boolean)"
-        )
-        cls.db_connection.execute(
-            "INSERT INTO t VALUES "
-            "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
-            "(-4, 1, TRUE, TRUE), (5, 1, FALSE, TRUE), (-6, 2, TRUE, TRUE), "
-            "(7, 2, FALSE, TRUE), (8, 2, True, TRUE), (9, 2, FALSE, TRUE), "
-            "(NULL, 2, FALSE, TRUE);"
-        )
+        load_custom_duckdb_table(cls.db_connection)
 
         cls.created_tables = set()
 
@@ -61,5 +52,5 @@ class TestArithmeticDecimalFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp
+            partsupp,
         )

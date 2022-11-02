@@ -8,7 +8,7 @@ from tests.verification import verify_equals
 
 
 def check_subtrait_function_names(
-    substrait_plans: dict,
+    substrait_plan: dict,
     expected_function_name,
 ):
     """
@@ -16,14 +16,14 @@ def check_subtrait_function_names(
     substrait functions.
 
     Parameters:
-        substrait_plans:
+        substrait_plan:
             Substrait Plan
         expected_function_name:
             Name of function as defined in substrait
     """
     functions_list = set()
 
-    for function in substrait_plans["extensions"]:
+    for function in substrait_plan["extensions"]:
         function_name = function["extensionFunction"]["name"]
         functions_list.add(function_name)
 
@@ -46,7 +46,8 @@ def substrait_function_test(
 ):
     """
     Verify the substrait plan produced for the specified function can run and return
-    results equal to the results of running the SQL/Ibis expression against the data.
+    results equal to the results of running the SQL/Ibis expression against the data
+    with a trusted SQL consumer.
 
     Parameters:
         db_con:
@@ -67,11 +68,11 @@ def substrait_function_test(
             The data tables to be passed to the ibis expression.
     """
     producer.set_db_connection(db_con)
-    consumer.set_db_connection(db_con)
+    consumer.setup(db_con, file_names)
 
     # Load the parquet files into DuckDB and return all the table names as a list
     if len(file_names) > 0:
-        table_names = consumer.load_tables_from_parquet(created_tables, file_names)
+        table_names = producer.load_tables_from_parquet(created_tables, file_names)
         # Format the sql_queries query by inserting all the table names
         sql_query = sql_query.format(*table_names)
 
@@ -95,4 +96,15 @@ def substrait_function_test(
         message=f"Result: {actual_result.columns} "
         f"is not equal to the expected: "
         f"{expected_result.columns}",
+    )
+
+
+def load_custom_duckdb_table(db_connection):
+    db_connection.execute("create table t (a int, b int, c boolean, d boolean)")
+    db_connection.execute(
+        "INSERT INTO t VALUES "
+        "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
+        "(-4, 1, TRUE, TRUE), (5, 1, FALSE, TRUE), (-6, 2, TRUE, TRUE), "
+        "(7, 2, FALSE, TRUE), (8, 2, True, TRUE), (9, 2, FALSE, TRUE), "
+        "(NULL, 2, FALSE, TRUE);"
     )

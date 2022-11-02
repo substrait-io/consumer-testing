@@ -10,7 +10,7 @@ Table of Contents
   * [Test Case Args](#Test-Case-Args)
   * [Substrait Plans](#Substrait-Plans)
   * [SQL Queries](#SQL-Queries)
-* [Substrait Function Tests](#Substrait-Function-Tests)
+* [Function Tests](#Substrait-Function-Tests)
   * [Test Case Args](#Test-Case-Args)
   * [SQL Queries](#SQL-Queries)
   * [Ibis Expressions](#Ibis-Expressions)
@@ -20,9 +20,10 @@ Table of Contents
 
 # Overview
 This testing repository provides instructions on how to add and run substrait consumer 
-integration tests.  The tests are organized into two categories; tpch tests and substrait function tests.
-Test data is created using DuckDB at the start of the test class using the `prepare_tpch_parquet_data` fixture, which is located in 
-`tests/conftest.py`.
+integration tests.  The tests are organized into two categories; tpch tests (which test common benchmark queries) 
+and substrait function tests (which test individual extension functions).Test data is created 
+using DuckDB at the start of the test class using the `prepare_tpch_parquet_data` fixture, 
+which is located in `tests/conftest.py`.
 
 # Setup
 Create and activate your conda environment with python3.9:
@@ -47,7 +48,7 @@ cd tests/integration/
 pytest test_acero_tpch.py
 ```
 
-Substrait Function Tests:
+Function Tests:
 ```commandline
 cd tests/functional/
 
@@ -63,7 +64,7 @@ TPCH test files are located in the `tests/integration` folder.
 
 
 ## Test Case Args
-Test case arguments located in `tests/integration/queries/tpch_test_cases.py`.  They specify 
+Test case arguments are located in `tests/integration/queries/tpch_test_cases.py`.  They specify 
 the parquet files, the SQL query, and substrait query plan that will be used for the test cases.
 
 query_1.py
@@ -124,19 +125,19 @@ table names in the SQL query. The actual format after replacement will depend on
 used.
  
 
-# Substrait Function Tests
-The substrait function tests aim to test the functions available in substrait.  This is done
+# Function Tests
+The substrait function tests aim to test the functions available in Substrait.  This is done
 by converting queries (SQL/Ibis expressions) into substrait plans via various producers and
 running the substrait plans on different consumers.  The results of running the substrait plans
 are then compared to an expected result, which is determined by running the original query
-against an known engine (currently we use DuckDB).
+against a trusted engine (currently we use DuckDB).
 
 Substrait function test files are located in the `tests/functional/extension_functions` folder.
 
 
 ## Test Case Args
 Test case arguments located in `tests/functional/queries/{*_tests}.py`.  They specify 
-the parquet files, a SQL query, and an ibis expression.
+the parquet files, an SQL query, and an ibis expression.
 
 The tests also take in the consumer and producer as test input via the producer/consumer test fixtures,
 which are defined in `test/conftest.py`.  The fixtures allow the tests to cycle through all combinations
@@ -166,7 +167,7 @@ SQL_SCALAR = {
 ```
 
 ## Ibis Expressions
-The Ibis expressions are located in The SQL queries are located in `tests/functional/queries/ibis_expressions`.
+The Ibis expressions are located in `tests/functional/queries/ibis_expressions`.
 arithmetic_functions_expr.py
 ```python
 def add_expr(partsupp, lineitem, t):
@@ -179,11 +180,11 @@ IBIS_SCALAR = {
 ```
 
 # How to Add Producers
-Consumers should be added to the `tests/producers.py` file and provide 
+Producers should be added to the `tests/producers.py` file and provide 
 methods on how to produce the substrait query plan.  Look at 
 `DuckDBProducer` class for an example implementation.
 
-In order for the test to use the new consumer, the producer class name should also be added
+In order for the test to use the new producer, the producer class name should also be added
 to the PRODUCERS list in `tests/conftest.py`.
 
 

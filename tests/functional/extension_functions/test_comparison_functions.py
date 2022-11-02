@@ -4,9 +4,9 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
+from tests.functional.common import load_custom_duckdb_table, substrait_function_test
 from tests.functional.comparison_tests import SCALAR_FUNCTIONS
 from tests.parametrization import custom_parametrization
-from tests.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -24,16 +24,7 @@ class TestComparisonFunctions:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
-        cls.db_connection.execute(
-            "create table t (a int, b int, c boolean, d boolean)"
-        )
-        cls.db_connection.execute(
-            "INSERT INTO t VALUES "
-            "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
-            "(-4, 1, TRUE, TRUE), (5, 1, FALSE, TRUE), (-6, 2, TRUE, TRUE), "
-            "(7, 2, FALSE, TRUE), (8, 2, True, TRUE), (9, 2, FALSE, TRUE), "
-            "(NULL, 2, FALSE, TRUE);"
-        )
+        load_custom_duckdb_table(cls.db_connection)
 
         cls.created_tables = set()
 
@@ -51,7 +42,7 @@ class TestComparisonFunctions:
         producer,
         consumer,
         partsupp,
-        nation
+        nation,
     ) -> None:
         substrait_function_test(
             self.db_connection,
@@ -62,5 +53,5 @@ class TestComparisonFunctions:
             producer,
             consumer,
             partsupp,
-            nation
+            nation,
         )
