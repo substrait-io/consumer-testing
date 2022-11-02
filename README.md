@@ -19,9 +19,9 @@ Table of Contents
 
 
 # Overview
-This testing repository provides instructions on how to add and run substrait consumer 
-integration tests.  The tests are organized into two categories; tpch tests (which test common benchmark queries) 
-and substrait function tests (which test individual extension functions).Test data is created 
+This testing repository provides instructions on how to add and run substrait integration 
+tests.  The tests are organized into two categories; tpch tests (which test common benchmark queries) 
+and substrait function tests (which test individual extension functions). Test data is created 
 using DuckDB at the start of the test class using the `prepare_tpch_parquet_data` fixture, 
 which is located in `tests/conftest.py`.
 

@@ -71,10 +71,7 @@ def substrait_function_test(
     consumer.setup(db_con, file_names)
 
     # Load the parquet files into DuckDB and return all the table names as a list
-    if len(file_names) > 0:
-        table_names = producer.load_tables_from_parquet(created_tables, file_names)
-        # Format the sql_queries query by inserting all the table names
-        sql_query = sql_query.format(*table_names)
+    sql_query = producer.format_sql(created_tables, sql_query, file_names)
 
     # Convert the SQL/Ibis expression to a substrait query plan
     if type(producer).__name__ == "IbisProducer":

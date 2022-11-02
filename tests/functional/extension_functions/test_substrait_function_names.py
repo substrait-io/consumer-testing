@@ -9,7 +9,7 @@ from tests.consumers import DuckDBConsumer
 from tests.functional import (
     arithmetic_tests, boolean_tests, comparison_tests, datetime_tests, logarithmic_tests,
     rounding_tests)
-from tests.functional.common import check_subtrait_function_names
+from tests.functional.common import check_subtrait_function_names, load_custom_duckdb_table
 from tests.parametrization import custom_parametrization
 
 
@@ -28,14 +28,7 @@ class TestSubstraitFunctionNames:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
-        cls.db_connection.execute("create table t (a int, b int, c boolean, d boolean)")
-        cls.db_connection.execute(
-            "INSERT INTO t VALUES "
-            "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "
-            "(-4, 1, TRUE, TRUE), (5, 1, FALSE, TRUE), (-6, 2, TRUE, TRUE), "
-            "(7, 2, FALSE, TRUE), (8, 2, True, TRUE), (9, 2, FALSE, TRUE), "
-            "(NULL, 2, FALSE, TRUE);"
-        )
+        load_custom_duckdb_table(cls.db_connection)
         cls.table_t = ibis.table(
             [("a", dt.int32), ("b", dt.int32), ("c", dt.boolean), ("d", dt.boolean)],
             name="t",
@@ -192,12 +185,7 @@ class TestSubstraitFunctionNames:
         producer.set_db_connection(self.db_connection)
 
         # Load the parquet files into DuckDB and return all the table names as a list
-        if len(file_names) > 0:
-            table_names = producer.load_tables_from_parquet(
-                self.created_tables, file_names
-            )
-            # Format the sql_queries query by inserting all the table names
-            sql_query = sql_query.format(*table_names)
+        sql_query = producer.format_sql(self.created_tables, sql_query, file_names)
 
         # Grab the json representation of the produced substrait plan to verify
         # the proper substrait function name.
