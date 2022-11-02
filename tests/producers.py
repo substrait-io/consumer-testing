@@ -74,9 +74,8 @@ class DuckDBProducer:
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
             table_names = self.load_tables_from_parquet(created_tables, file_names)
-            return sql_query.format(*table_names)
-        else:
-            return sql_query
+            sql_query = sql_query.format(*table_names)
+        return sql_query
 
 
 class IbisProducer:
@@ -149,6 +148,5 @@ class IbisProducer:
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
             table_names = self.load_tables_from_parquet(created_tables, file_names)
-            return sql_query.format(*table_names)
-        else:
-            return sql_query
+            sql_query = sql_query.format(*table_names)
+        return sql_query
