@@ -77,19 +77,55 @@ class AceroConsumer:
     """
     Adapts the Acero Substrait consumer to the test framework.
     """
+
     def __init__(self):
         self.created_tables = set()
         self.tables = {}
         self.table_provider = lambda names: self.tables[names[0]]
 
     def setup(self, db_connection, file_names: Iterable[str]):
-        parquet_file_paths = SubstraitUtils.get_full_path(file_names)
-        for file_name, file_path in zip(file_names, parquet_file_paths):
-            table_name = Path(file_name).stem
-            table_name = table_name.translate(str.maketrans("", "", string.punctuation))
-            if table_name not in self.created_tables:
-                self.created_tables.add(table_name)
-                self.tables[table_name] = pq.read_table(file_path)
+        if len(file_names) > 0:
+            parquet_file_paths = SubstraitUtils.get_full_path(file_names)
+            for file_name, file_path in zip(file_names, parquet_file_paths):
+                table_name = Path(file_name).stem
+                table_name = table_name.translate(
+                    str.maketrans("", "", string.punctuation)
+                )
+                if table_name not in self.created_tables:
+                    self.created_tables.add(table_name)
+                    self.tables[table_name] = pq.read_table(file_path)
+        else:
+            table = pa.table(
+                {
+                    "a": [1, 2, 3, -4, 5, -6, 7, 8, 9, None],
+                    "b": [1, 1, 1, 1, 1, 2, 2, 2, 2, 2],
+                    "c": [
+                        "TRUE",
+                        "FALSE",
+                        "TRUE",
+                        "TRUE",
+                        "FALSE",
+                        "TRUE",
+                        "FALSE",
+                        "TRUE",
+                        "FALSE",
+                        "FALSE",
+                    ],
+                    "d": [
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                        "TRUE",
+                    ],
+                }
+            )
+            self.tables["t"] = table
 
     def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
         """
