@@ -12,7 +12,7 @@ SELECT
 FROM
   '{}'
 WHERE
-  l_shipdate <= date '1998-12-01' - interval '120' day (3)
+  l_shipdate <= date '1998-12-01' - interval '120' day
 GROUP BY
   l_returnflag,
   l_linestatus
