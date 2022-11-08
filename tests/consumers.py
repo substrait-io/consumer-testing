@@ -125,7 +125,7 @@ class AceroConsumer:
                     ],
                 }
             )
-            self.tables["t"] = table
+            self.tables["T"] = table
 
     def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
         """

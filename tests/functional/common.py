@@ -97,7 +97,7 @@ def substrait_function_test(
 
 
 def load_custom_duckdb_table(db_connection):
-    db_connection.execute("create table t (a int, b int, c boolean, d boolean)")
+    db_connection.execute("create table t (a BIGINT, b BIGINT, c boolean, d boolean)")
     db_connection.execute(
         "INSERT INTO t VALUES "
         "(1, 1, TRUE, TRUE), (2, 1, FALSE, TRUE), (3, 1, TRUE, TRUE), "

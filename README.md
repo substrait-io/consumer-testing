@@ -28,7 +28,7 @@ which is located in `tests/conftest.py`.
 # Setup
 Create and activate your conda environment with python3.9:
 ```commandline
-conda create -y -n substrait_consumer_testing -c conda-forge python=3.9
+conda create -y -n substrait_consumer_testing -c conda-forge python=3.9 openjdk
 conda activate substrait_consumer_testing
 ```
 
