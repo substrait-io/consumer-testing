@@ -7,8 +7,8 @@ import pytest
 from google.protobuf import json_format
 from ibis_substrait.compiler.core import SubstraitCompiler
 
-from tests.common import SubstraitUtils
-from tests.context import get_schema, produce_isthmus_substrait
+from substrait_consumer.common import SubstraitUtils
+from substrait_consumer.context import get_schema, produce_isthmus_substrait
 
 
 class DuckDBProducer:

@@ -1,5 +1,5 @@
 import pytest
-from _pytest.mark.structures import MarkDecorator
+from pytest.mark.structures import MarkDecorator
 
 
 def custom_parametrization(test_cases: list[dict]) -> MarkDecorator:

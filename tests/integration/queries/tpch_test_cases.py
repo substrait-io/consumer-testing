@@ -1,4 +1,4 @@
-from ...common import get_sql, get_substrait_plan
+from substrait_consumer.common import get_sql, get_substrait_plan
 
 TPCH_QUERY_TESTS = (
     {

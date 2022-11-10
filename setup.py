@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name='substrait_consumer',
+    name='substrait-consumer',
     version='0.0.1',
     author='Substrait',
     description='A Substrait consumer test suite',
@@ -8,13 +8,13 @@ setup(
     url='https://github.com/substrait-io/consumer-testing',
     keywords='substrait, consumer',
     python_requires='>=3.9, <4',
-    packages=find_packages(include=['substrait_consumer', 'substrait_consumer.*']),
+    packages=find_packages(include=['substrait_consumer*', 'substrait_consumer.*']),
     install_requires=[
         'duckdb',
         'filelock',
         'ibis-framework',
         'ibis-substrait',
-        'protobuf',
+        'protobuf==3.20.1',
         'pyarrow',
         'pytest',
         'pytest-xdist',

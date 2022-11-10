@@ -2,8 +2,8 @@ import duckdb
 import pytest
 import substrait_validator as sv
 
-from ..consumers import DuckDBConsumer
-from ..parametrization import custom_parametrization
+from substrait_consumer.consumers import DuckDBConsumer
+from substrait_consumer.parametrization import custom_parametrization
 from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 

@@ -4,8 +4,8 @@ import duckdb
 import pytest
 
 from filelock import FileLock
-from tests.consumers import AceroConsumer, DuckDBConsumer
-from tests.producers import DuckDBProducer, IbisProducer, IsthmusProducer
+from substrait_consumer.consumers import AceroConsumer, DuckDBConsumer
+from substrait_consumer.producers import DuckDBProducer, IbisProducer, IsthmusProducer
 
 
 @pytest.fixture(scope="session")
