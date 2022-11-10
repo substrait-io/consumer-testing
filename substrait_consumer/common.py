@@ -15,7 +15,7 @@ def get_substrait_plan(filename: str) -> str:
     Returns:
         String representation of the json formatted substrait plan.
     """
-    plan_path = CUR_DIR / "integration" / "queries" / "tpch_substrait_plans" / filename
+    plan_path = CUR_DIR / "tests" / "integration" / "queries" / "tpch_substrait_plans" / filename
 
     with open(plan_path, "r") as f:
         return f.read()
@@ -32,7 +32,7 @@ def get_sql(filename: str) -> str:
     Returns:
         String representation of the SQL query.
     """
-    plan_path = CUR_DIR / "integration" / "queries" / "tpch_sql" / filename
+    plan_path = CUR_DIR / "tests" / "integration" / "queries" / "tpch_sql" / filename
 
     with open(plan_path, "r") as f:
         return f.read()

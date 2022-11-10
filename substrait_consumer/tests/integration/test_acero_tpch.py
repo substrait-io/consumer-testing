@@ -9,7 +9,7 @@ from substrait_consumer.common import SubstraitUtils
 from substrait_consumer.consumers import AceroConsumer, DuckDBConsumer
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.verification import verify_equals
-from .queries.tpch_test_cases import TPCH_QUERY_TESTS
+from substrait_consumer.tests.integration.queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
