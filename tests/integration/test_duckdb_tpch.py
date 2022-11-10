@@ -1,9 +1,9 @@
 import duckdb
 import pytest
 
-from ..consumers import DuckDBConsumer
-from ..parametrization import custom_parametrization
-from ..verification import verify_equals
+from substrait_consumer.consumers import DuckDBConsumer
+from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.verification import verify_equals
 from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 
