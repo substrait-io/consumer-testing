@@ -1,4 +1,4 @@
-from tests.functional.queries.sql.approximation_functions_sql import SQL_AGGREGATE
+from substrait_consumer.functional.queries.sql.approximation_functions_sql import SQL_AGGREGATE
 
 AGGREGATE_FUNCTIONS = (
     {

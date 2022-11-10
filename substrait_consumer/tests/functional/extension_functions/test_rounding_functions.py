@@ -4,28 +4,26 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.common import load_custom_duckdb_table, substrait_function_test
-from tests.functional.comparison_tests import SCALAR_FUNCTIONS
-from tests.parametrization import custom_parametrization
+from substrait_consumer.functional.rounding_configs import SCALAR_FUNCTIONS
+from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestComparisonFunctions:
+class TestRoundingFunctions:
     """
     Test Class verifying different consumers are able to run substrait plans
-    that include substrait comparison functions.
+    that include substrait rounding functions.
     """
 
     @staticmethod
-    @pytest.fixture(scope="function", autouse=True)
-    def setup_teardown_function(request):
+    @pytest.fixture(scope="class", autouse=True)
+    def setup_teardown_class(request):
         cls = request.cls
 
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
-        load_custom_duckdb_table(cls.db_connection)
-
         cls.created_tables = set()
 
         yield
@@ -33,7 +31,7 @@ class TestComparisonFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    def test_comparison_functions(
+    def test_rounding_functions(
         self,
         test_name: str,
         file_names: Iterable[str],
@@ -42,7 +40,6 @@ class TestComparisonFunctions:
         producer,
         consumer,
         partsupp,
-        nation,
     ) -> None:
         substrait_function_test(
             self.db_connection,
@@ -52,6 +49,5 @@ class TestComparisonFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp,
-            nation,
+            partsupp
         )

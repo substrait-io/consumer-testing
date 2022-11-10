@@ -4,10 +4,10 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.arithmetic_decimal_tests import (
+from substrait_consumer.functional.arithmetic_decimal_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
-from tests.functional.common import load_custom_duckdb_table, substrait_function_test
-from tests.parametrization import custom_parametrization
+from substrait_consumer.functional.common import load_custom_duckdb_table, substrait_function_test
+from substrait_consumer.parametrization import custom_parametrization
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")

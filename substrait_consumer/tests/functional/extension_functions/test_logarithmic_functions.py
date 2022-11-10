@@ -4,16 +4,16 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.rounding_tests import SCALAR_FUNCTIONS
-from tests.parametrization import custom_parametrization
-from tests.functional.common import substrait_function_test
+from substrait_consumer.functional.logarithmic_configs import SCALAR_FUNCTIONS
+from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestRoundingFunctions:
+class TestLogarithmicFunctions:
     """
     Test Class verifying different consumers are able to run substrait plans
-    that include substrait rounding functions.
+    that include substrait logarithmic functions.
     """
 
     @staticmethod
@@ -31,7 +31,7 @@ class TestRoundingFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    def test_rounding_functions(
+    def test_logarithmic_functions(
         self,
         test_name: str,
         file_names: Iterable[str],

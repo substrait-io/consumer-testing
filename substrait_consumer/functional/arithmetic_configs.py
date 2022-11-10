@@ -1,6 +1,6 @@
-from tests.functional.queries.ibis_expressions.arithmetic_functions_expr import (
+from substrait_consumer.functional.queries.ibis_expressions.arithmetic_functions_expr import (
     IBIS_AGGREGATE, IBIS_SCALAR)
-from tests.functional.queries.sql.arithmetic_functions_sql import (
+from substrait_consumer.functional.queries.sql.arithmetic_functions_sql import (
     SQL_AGGREGATE, SQL_SCALAR)
 
 SCALAR_FUNCTIONS = (

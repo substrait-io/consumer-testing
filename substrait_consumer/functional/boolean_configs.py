@@ -1,5 +1,5 @@
-from tests.functional.queries.sql.boolean_functions_sql import SQL_SCALAR, SQL_AGGREGATE
-from tests.functional.queries.ibis_expressions.boolean_functions_expr import IBIS_SCALAR
+from substrait_consumer.functional.queries.sql.boolean_functions_sql import SQL_SCALAR, SQL_AGGREGATE
+from substrait_consumer.functional.queries.ibis_expressions.boolean_functions_expr import IBIS_SCALAR
 
 SCALAR_FUNCTIONS = (
     {
