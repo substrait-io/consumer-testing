@@ -1,6 +1,6 @@
-from tests.functional.queries.ibis_expressions.logarithmic_functions_expr import (
+from substrait_consumer.functional.queries.ibis_expressions.logarithmic_functions_expr import (
     IBIS_SCALAR)
-from tests.functional.queries.sql.logarithmic_functions_sql import SQL_SCALAR
+from substrait_consumer.functional.queries.sql.logarithmic_functions_sql import SQL_SCALAR
 
 SCALAR_FUNCTIONS = (
     {

@@ -4,17 +4,16 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.arithmetic_decimal_tests import (
-    AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
-from tests.functional.common import load_custom_duckdb_table, substrait_function_test
-from tests.parametrization import custom_parametrization
+from substrait_consumer.functional.logarithmic_configs import SCALAR_FUNCTIONS
+from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestArithmeticDecimalFunctions:
+class TestLogarithmicFunctions:
     """
     Test Class verifying different consumers are able to run substrait plans
-    that include substrait arithmetic decimal functions.
+    that include substrait logarithmic functions.
     """
 
     @staticmethod
@@ -23,18 +22,16 @@ class TestArithmeticDecimalFunctions:
         cls = request.cls
 
         cls.db_connection = duckdb.connect()
-        cls.db_connection.execute("INSTALL substrait")
-        cls.db_connection.execute("LOAD substrait")
-        load_custom_duckdb_table(cls.db_connection)
-
+        cls.db_connection.execute("install substrait")
+        cls.db_connection.execute("load substrait")
         cls.created_tables = set()
 
         yield
 
         cls.db_connection.close()
 
-    @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    def test_arithmetic_decimal_functions(
+    @custom_parametrization(SCALAR_FUNCTIONS)
+    def test_logarithmic_functions(
         self,
         test_name: str,
         file_names: Iterable[str],
@@ -52,5 +49,5 @@ class TestArithmeticDecimalFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp,
+            partsupp
         )

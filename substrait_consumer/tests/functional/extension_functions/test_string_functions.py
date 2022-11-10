@@ -4,16 +4,16 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.logarithmic_tests import SCALAR_FUNCTIONS
-from tests.parametrization import custom_parametrization
-from tests.functional.common import substrait_function_test
+from substrait_consumer.functional.string_configs import AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS
+from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestLogarithmicFunctions:
+class TestStringFunctions:
     """
     Test Class verifying different consumers are able to run substrait plans
-    that include substrait logarithmic functions.
+    that include substrait string functions.
     """
 
     @staticmethod
@@ -30,8 +30,8 @@ class TestLogarithmicFunctions:
 
         cls.db_connection.close()
 
-    @custom_parametrization(SCALAR_FUNCTIONS)
-    def test_logarithmic_functions(
+    @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    def test_string_functions(
         self,
         test_name: str,
         file_names: Iterable[str],
@@ -39,7 +39,8 @@ class TestLogarithmicFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp,
+        nation,
+        orders,
     ) -> None:
         substrait_function_test(
             self.db_connection,
@@ -49,5 +50,6 @@ class TestLogarithmicFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp
+            nation,
+            orders
         )

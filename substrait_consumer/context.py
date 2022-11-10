@@ -2,7 +2,7 @@ from pathlib import Path
 
 import jpype.imports
 
-import tests.java_definitions as java
+import substrait_consumer.java_definitions as java
 
 REPO_DIR = Path(__file__).parent.parent
 from com.google.protobuf.util import JsonFormat as json_formatter

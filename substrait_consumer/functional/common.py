@@ -4,7 +4,7 @@ import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
 
-from tests.verification import verify_equals
+from substrait_consumer.verification import verify_equals
 
 
 def check_subtrait_function_names(

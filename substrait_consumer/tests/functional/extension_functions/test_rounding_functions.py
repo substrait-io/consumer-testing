@@ -4,9 +4,9 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.rounding_tests import SCALAR_FUNCTIONS
-from tests.parametrization import custom_parametrization
-from tests.functional.common import substrait_function_test
+from substrait_consumer.functional.rounding_configs import SCALAR_FUNCTIONS
+from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")

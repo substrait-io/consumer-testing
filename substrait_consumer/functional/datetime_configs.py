@@ -1,4 +1,4 @@
-from tests.functional.queries.sql.datetime_functions_sql import SQL_SCALAR
+from substrait_consumer.functional.queries.sql.datetime_functions_sql import SQL_SCALAR
 
 SCALAR_FUNCTIONS = (
     {

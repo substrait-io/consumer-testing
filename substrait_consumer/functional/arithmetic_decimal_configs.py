@@ -1,4 +1,4 @@
-from tests.functional.queries.sql.arithmetic_demical_functions_sql import (
+from substrait_consumer.functional.queries.sql.arithmetic_demical_functions_sql import (
     SQL_SCALAR,
     SQL_AGGREGATE,
 )

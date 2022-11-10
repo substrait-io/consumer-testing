@@ -4,16 +4,17 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from tests.functional.string_tests import AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS
-from tests.parametrization import custom_parametrization
-from tests.functional.common import substrait_function_test
+from substrait_consumer.functional.arithmetic_decimal_configs import (
+    AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
+from substrait_consumer.functional.common import load_custom_duckdb_table, substrait_function_test
+from substrait_consumer.parametrization import custom_parametrization
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestStringFunctions:
+class TestArithmeticDecimalFunctions:
     """
     Test Class verifying different consumers are able to run substrait plans
-    that include substrait string functions.
+    that include substrait arithmetic decimal functions.
     """
 
     @staticmethod
@@ -22,8 +23,10 @@ class TestStringFunctions:
         cls = request.cls
 
         cls.db_connection = duckdb.connect()
-        cls.db_connection.execute("install substrait")
-        cls.db_connection.execute("load substrait")
+        cls.db_connection.execute("INSTALL substrait")
+        cls.db_connection.execute("LOAD substrait")
+        load_custom_duckdb_table(cls.db_connection)
+
         cls.created_tables = set()
 
         yield
@@ -31,7 +34,7 @@ class TestStringFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    def test_string_functions(
+    def test_arithmetic_decimal_functions(
         self,
         test_name: str,
         file_names: Iterable[str],
@@ -39,8 +42,7 @@ class TestStringFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        nation,
-        orders,
+        partsupp,
     ) -> None:
         substrait_function_test(
             self.db_connection,
@@ -50,6 +52,5 @@ class TestStringFunctions:
             ibis_expr,
             producer,
             consumer,
-            nation,
-            orders
+            partsupp,
         )
