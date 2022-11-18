@@ -1,33 +1,6 @@
-import os
-from pathlib import Path
+from tests.java_definitions import *
 
-import jpype
-import jpype.imports
-from jpype.types import *
-
-REPO_DIR = Path(__file__).parent.parent
 schema_file = Path.joinpath(REPO_DIR, "tests/data/tpch_parquet/schema.sql")
-
-calcite_jars = Path.joinpath(REPO_DIR, "jars/*")
-
-the_java_home = "CONDA_PREFIX"
-if "JAVA_HOME" in os.environ:
-    the_java_home = "JAVA_HOME"
-
-java_home_path = os.environ[the_java_home]
-jvm_path = java_home_path
-
-if not os.path.isfile(jvm_path):
-    jvm_path = java_home_path + "/lib/libjli.dylib"
-
-jpype.startJVM("--enable-preview", convertStrings=True, jvmpath=jvm_path)
-jpype.addClassPath(calcite_jars)
-from com.google.protobuf.util import JsonFormat
-
-ArrayListClass = jpype.JClass("java.util.ArrayList")
-ListClass = jpype.JClass("java.util.List")
-SqlToSubstraitClass = jpype.JClass("io.substrait.isthmus.SqlToSubstrait")
-json_formatter = JsonFormat
 
 
 def produce_isthmus_substrait(sql_string, schema_list):
