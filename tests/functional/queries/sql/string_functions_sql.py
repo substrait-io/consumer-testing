@@ -1,102 +1,173 @@
+from tests.producers import *
+
 SQL_SCALAR = {
-    "concat": """
+    "concat": (
+        """
         SELECT N_NAME, concat(N_NAME, N_COMMENT) AS concat_nation
         FROM '{}';
         """,
-    "concat_ws": """
+        [DuckDBProducer],
+    ),
+    "concat_ws": (
+        """
         SELECT concat_ws('.', N_NAME, N_COMMENT)
         FROM '{}';
         """,
-    "like": """
+        [DuckDBProducer],
+    ),
+    "like": (
+        """
         SELECT N_NAME
         FROM '{}'
         WHERE N_NAME LIKE 'ALGERIA';
         """,
-    "starts_with": """
+        [DuckDBProducer],
+    ),
+    "starts_with": (
+        """
         SELECT N_NAME
         FROM '{}'
         WHERE prefix(N_NAME, 'A');
         """,
-    "ends_with": """
+        [DuckDBProducer],
+    ),
+    "ends_with": (
+        """
         SELECT N_NAME
         FROM '{}'
         WHERE suffix(N_NAME, 'A');
         """,
-    "substring": """
+        [DuckDBProducer],
+    ),
+    "substring": (
+        """
         SELECT N_NAME, substr(N_NAME, 1, 3) AS substr_name
         FROM '{}';
         """,
-    "contains": """
+        [DuckDBProducer],
+    ),
+    "contains": (
+        """
         SELECT N_NAME
         FROM '{}'
         WHERE contains(N_NAME, 'IA');
         """,
-    "strpos": """
+        [DuckDBProducer],
+    ),
+    "strpos": (
+        """
         SELECT N_NAME, strpos(N_NAME, 'A') AS strpos_name
         FROM '{}'
         """,
-    "replace": """
+        [DuckDBProducer],
+    ),
+    "replace": (
+        """
         SELECT N_NAME, replace(N_NAME, 'A', 'a') AS replace_name
         FROM '{}'
         """,
-    "repeat": """
+        [DuckDBProducer],
+    ),
+    "repeat": (
+        """
         SELECT N_NAME, repeat(N_NAME, 2) AS repeated_N_NAME
         FROM '{}'
         """,
-    "reverse": """
+        [DuckDBProducer],
+    ),
+    "reverse": (
+        """
         SELECT N_NAME, reverse(N_NAME) AS reversed_N_NAME
         FROM '{}'
         """,
-    "lower": """
+        [DuckDBProducer],
+    ),
+    "lower": (
+        """
         SELECT N_NAME, lower(N_NAME) AS lowercase_N_NAME
         FROM '{}'
         """,
-    "upper": """
+        [DuckDBProducer],
+    ),
+    "upper": (
+        """
         SELECT O_COMMENT, upper(O_COMMENT) AS uppercase_O_COMMENT
         FROM '{}'
         """,
-    "char_length": """
+        [DuckDBProducer],
+    ),
+    "char_length": (
+        """
         SELECT N_NAME, length(N_NAME) AS char_length_N_NAME
         FROM '{}'
         """,
-    "bit_length": """
+        [DuckDBProducer],
+    ),
+    "bit_length": (
+        """
         SELECT N_NAME, bit_length(N_NAME) AS bit_length_N_NAME
         FROM '{}'
         """,
-    "ltrim": """
+        [DuckDBProducer],
+    ),
+    "ltrim": (
+        """
         SELECT N_NAME, ltrim(N_NAME, 'A') AS ltrim_N_NAME
         FROM '{}'
         """,
-    "rtrim": """
+        [DuckDBProducer],
+    ),
+    "rtrim": (
+        """
         SELECT N_NAME, rtrim(N_NAME, 'A') AS rtrim_N_NAME
         FROM '{}'
         """,
-    "trim": """
+        [DuckDBProducer],
+    ),
+    "trim": (
+        """
         SELECT N_NAME, trim(N_NAME, 'A') AS trim_N_NAME
         FROM '{}'
         """,
-    "lpad": """
+        [DuckDBProducer],
+    ),
+    "lpad": (
+        """
         SELECT N_NAME, lpad(N_NAME, 10, ' ') AS lpad_N_NAME
         FROM '{}'
         """,
-    "rpad": """
+        [DuckDBProducer],
+    ),
+    "rpad": (
+        """
         SELECT N_NAME, rpad(N_NAME, 10, ' ') AS rpad_N_NAME
         FROM '{}'
         """,
-    "left": """
+        [DuckDBProducer],
+    ),
+    "left": (
+        """
         SELECT N_NAME, left(N_NAME, 2) AS left_extract_N_NAME
         FROM '{}'
         """,
-    "right": """
+        [DuckDBProducer],
+    ),
+    "right": (
+        """
         SELECT N_NAME, right(N_NAME, 2) AS right_extract_N_NAME
         FROM '{}'
         """,
+        [DuckDBProducer],
+    ),
 }
 
 SQL_AGGREGATE = {
-    "string_agg": """
+    "string_agg": (
+        """
         SELECT N_NAME, string_agg(N_NAME, ',')
         FROM '{}'
         GROUP BY N_NAME
         """,
+        [DuckDBProducer],
+    ),
 }

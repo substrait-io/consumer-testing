@@ -1,150 +1,210 @@
+from tests.producers import *
+
 SQL_SCALAR = {
-    "add":
+    "add": (
         """
         SELECT PS_PARTKEY, PS_SUPPKEY, add(PS_PARTKEY, PS_SUPPKEY) AS ADD_KEY
         FROM '{}';
         """,
-    "subtract":
+        [DuckDBProducer],
+    ),
+    "subtract": (
         """
         SELECT PS_PARTKEY, PS_SUPPKEY, subtract(PS_PARTKEY, PS_SUPPKEY) AS SUBTRACT_KEY
         FROM '{}';
         """,
-    "multiply":
+        [DuckDBProducer],
+    ),
+    "multiply": (
         """
         SELECT PS_PARTKEY, multiply(PS_PARTKEY, 10) AS MULTIPLY_KEY
         FROM '{}';
         """,
-    "divide":
+        [DuckDBProducer],
+    ),
+    "divide": (
         """
         SELECT PS_PARTKEY, divide(PS_PARTKEY, 10) AS DIVIDE_KEY
         FROM '{}';
         """,
-    "modulus":
+        [DuckDBProducer],
+    ),
+    "modulus": (
         """
         SELECT PS_PARTKEY, mod(PS_PARTKEY, 10) AS MODULO_KEY
         FROM '{}';
         """,
-    "factorial":
+        [DuckDBProducer],
+    ),
+    "factorial": (
         """
         SELECT PS_PARTKEY, factorial(PS_PARTKEY) AS FACTORIAL_KEY
         FROM '{}';
         """,
-    "power":
+        [DuckDBProducer],
+    ),
+    "power": (
         """
         SELECT PS_PARTKEY, power(PS_PARTKEY, 2) AS POWER_KEY
         FROM '{}';
         """,
-    "sqrt":
+        [DuckDBProducer],
+    ),
+    "sqrt": (
         """
         SELECT PS_PARTKEY, sqrt(PS_PARTKEY) AS SQRT_KEY
         FROM '{}';
         """,
-    "exp":
+        [DuckDBProducer],
+    ),
+    "exp": (
         """
         SELECT PS_PARTKEY, exp(PS_PARTKEY) AS EXP_KEY
         FROM '{}';
         """,
-    "negate":
+        [DuckDBProducer],
+    ),
+    "negate": (
         """
         SELECT PS_PARTKEY, negate(PS_PARTKEY) AS NEGATE_KEY
         FROM '{}';
         """,
-    "cos":
+        [DuckDBProducer],
+    ),
+    "cos": (
         """
         SELECT cos(PS_SUPPLYCOST) AS COS_SUPPLY
         FROM '{}';
         """,
-    "acos":
+        [DuckDBProducer],
+    ),
+    "acos": (
         """
         SELECT acos(L_TAX) AS ACOS_TAX
         FROM '{}';
         """,
-    "sin":
+        [DuckDBProducer],
+    ),
+    "sin": (
         """
         SELECT sin(PS_SUPPLYCOST) AS SIN_SUPPLY
         FROM '{}';
         """,
-    "asin":
+        [DuckDBProducer],
+    ),
+    "asin": (
         """
         SELECT asin(L_TAX) AS ASIN_TAX
         FROM '{}';
         """,
-    "tan":
+        [DuckDBProducer],
+    ),
+    "tan": (
         """
         SELECT tan(PS_SUPPLYCOST) AS TAN_SUPPLY
         FROM '{}';
         """,
-    "atan":
+        [DuckDBProducer],
+    ),
+    "atan": (
         """
         SELECT atan(L_TAX) AS ATAN_TAX
         FROM '{}';
         """,
-    "atan2":
+        [DuckDBProducer],
+    ),
+    "atan2": (
         """
         SELECT atan2(L_TAX, L_TAX) AS ATAN2_TAX
         FROM '{}';
         """,
-    "abs":
+        [DuckDBProducer],
+    ),
+    "abs": (
         """
         SELECT a, abs(a) AS ABS_A
         FROM 't';
         """,
-    "sign":
+        [DuckDBProducer],
+    ),
+    "sign": (
         """
         SELECT a, sign(a) AS SIGN_A
         FROM 't';
         """,
+        [DuckDBProducer],
+    ),
 }
 
 SQL_AGGREGATE = {
-    "sum":
+    "sum": (
         """
         SELECT sum(PS_SUPPLYCOST) AS SUM_SUPPLYCOST
         FROM '{}';
         """,
-    "count":
+        [DuckDBProducer],
+    ),
+    "count": (
         """
         SELECT count(PS_SUPPLYCOST) AS COUNT_SUPPLYCOST
         FROM '{}';
         """,
-    "avg":
+        [DuckDBProducer],
+    ),
+    "avg": (
         """
         SELECT avg(PS_SUPPLYCOST) AS AVG_SUPPLYCOST
         FROM '{}';
         """,
-    "min":
+        [DuckDBProducer],
+    ),
+    "min": (
         """
         SELECT min(PS_SUPPLYCOST) AS MIN_SUPPLYCOST
         FROM '{}';
         """,
-    "max":
+        [DuckDBProducer],
+    ),
+    "max": (
         """
         SELECT max(PS_SUPPLYCOST) AS MAX_SUPPLYCOST
         FROM '{}';
         """,
-    "median":
+        [DuckDBProducer],
+    ),
+    "median": (
         """
         SELECT median(PS_SUPPLYCOST) AS MEDIAN_SUPPLYCOST
         FROM '{}';
         """,
-    "mode":
+        [DuckDBProducer],
+    ),
+    "mode": (
         """
         SELECT mode(PS_SUPPLYCOST) AS MODE_SUPPLYCOST
         FROM '{}';
         """,
-    "product":
+        [DuckDBProducer],
+    ),
+    "product": (
         """
         SELECT product(PS_SUPPLYCOST) AS PRODUCT_SUPPLYCOST
         FROM '{}';
         """,
-    "std_dev":
+        [DuckDBProducer],
+    ),
+    "std_dev": (
         """
         SELECT stddev(PS_SUPPLYCOST) AS STDDEV_SUPPLYCOST
         FROM '{}';
         """,
-    "variance":
+        [DuckDBProducer],
+    ),
+    "variance": (
         """
         SELECT variance(PS_SUPPLYCOST) AS VARIANCE_SUPPLYCOST
         FROM '{}';
         """,
+        [DuckDBProducer],
+    ),
 }

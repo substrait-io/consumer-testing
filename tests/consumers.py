@@ -81,7 +81,7 @@ class AceroConsumer:
     def __init__(self):
         self.created_tables = set()
         self.tables = {}
-        self.table_provider = lambda names: self.tables[names[0]]
+        self.table_provider = lambda names: self.tables[names[0].lower()]
 
     def setup(self, db_connection, file_names: Iterable[str]):
         if len(file_names) > 0:
@@ -125,7 +125,7 @@ class AceroConsumer:
                     ],
                 }
             )
-            self.tables["T"] = table
+            self.tables["t"] = table
 
     def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
         """

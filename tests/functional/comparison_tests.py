@@ -4,12 +4,12 @@ from tests.functional.queries.ibis_expressions.comparison_functions_expr import 
 )
 
 SCALAR_FUNCTIONS = (
-    {
-        "test_name": "not_equal",
-        "file_names": ["nation.parquet"],
-        "sql_query": SQL_SCALAR["not_equal"],
-        "ibis_expr": IBIS_SCALAR["not_equal"],
-    },
+    # {
+    #     "test_name": "not_equal",
+    #     "file_names": ["nation.parquet"],
+    #     "sql_query": SQL_SCALAR["not_equal"],
+    #     "ibis_expr": IBIS_SCALAR["not_equal"],
+    # },
     {
         "test_name": "equal",
         "file_names": ["partsupp.parquet"],

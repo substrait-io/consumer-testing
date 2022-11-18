@@ -43,7 +43,7 @@ def pytest_addoption(parser):
     )
 
 
-PRODUCERS = [DuckDBProducer, IbisProducer]
+PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
 CONSUMERS = [AceroConsumer, DuckDBConsumer]
 
 

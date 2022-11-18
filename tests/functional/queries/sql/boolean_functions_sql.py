@@ -1,36 +1,50 @@
+from tests.producers import *
+
 SQL_SCALAR = {
-    "or":
+    "or": (
         """
         SELECT a
         FROM 't'
         WHERE a = 5 OR a = 7;
         """,
-    "and":
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "and": (
         """
         SELECT a, b
         FROM 't'
         WHERE a < 5 AND b = 1;
         """,
-    "not":
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "not": (
         """
         SELECT c FROM 't' WHERE NOT c
         """,
-    "xor":
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "xor": (
         """
         SELECT a, b,  xor(a, b) AS xor_a_b
         FROM 't';
         """,
+        [DuckDBProducer],
+    ),
 }
 
 SQL_AGGREGATE = {
-    "bool_and":
+    "bool_and": (
         """
         SELECT bool_and(c) AS bool_and_c
         FROM 't'
         """,
-    "bool_or":
+        [DuckDBProducer],
+    ),
+    "bool_or": (
         """
         SELECT bool_or(c) AS bool_or_c
         FROM 't'
         """,
+        [DuckDBProducer],
+    ),
 }

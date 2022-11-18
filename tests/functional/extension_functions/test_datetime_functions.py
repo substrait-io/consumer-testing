@@ -17,8 +17,8 @@ class TestDatetimeFunctions:
     """
 
     @staticmethod
-    @pytest.fixture(scope="function", autouse=True)
-    def setup_teardown_function(request):
+    @pytest.fixture(scope="class", autouse=True)
+    def setup_teardown_class(request):
         cls = request.cls
 
         cls.db_connection = duckdb.connect()

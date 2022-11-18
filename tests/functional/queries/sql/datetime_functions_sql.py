@@ -1,41 +1,59 @@
+from tests.producers import *
+
 SQL_SCALAR = {
-    "extract":
+    "extract": (
         """
         SELECT L_SHIPDATE, extract('year' FROM L_SHIPDATE)
         FROM '{}';
         """,
-    "add":
+        [DuckDBProducer],
+    ),
+    "add": (
         """
         SELECT L_SHIPDATE, L_SHIPDATE + INTERVAL 5 DAY
         FROM '{}';
         """,
-    "add_intervals":
+        [DuckDBProducer],
+    ),
+    "add_intervals": (
         """
         SELECT INTERVAL 1 HOUR + INTERVAL 5 HOUR
         """,
-    "subtract":
+        [DuckDBProducer],
+    ),
+    "subtract": (
         """
         SELECT L_SHIPDATE, L_SHIPDATE - INTERVAL 5 DAY
         FROM '{}';
         """,
-    "lt":
+        [DuckDBProducer],
+    ),
+    "lt": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE < L_RECEIPTDATE
         FROM '{}';
         """,
-    "lte":
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "lte": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE <= L_RECEIPTDATE
         FROM '{}';
         """,
-    "gt":
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "gt": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE > L_RECEIPTDATE
         FROM '{}';
         """,
-    "gte":
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "gte": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE >= L_RECEIPTDATE
         FROM '{}';
         """,
+        [DuckDBProducer, IsthmusProducer],
+    ),
 }
