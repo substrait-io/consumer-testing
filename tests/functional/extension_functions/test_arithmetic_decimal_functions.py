@@ -38,7 +38,7 @@ class TestArithmeticDecimalFunctions:
         self,
         test_name: str,
         file_names: Iterable[str],
-        sql_query: str,
+        sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,

@@ -141,7 +141,7 @@ class TestSubstraitFunctionNames:
         self,
         test_name: str,
         file_names: Iterable[str],
-        sql_query: str,
+        sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
         partsupp,
@@ -157,7 +157,7 @@ class TestSubstraitFunctionNames:
         self,
         test_name: str,
         file_names: Iterable[str],
-        sql_query: str,
+        sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
         *args
@@ -185,7 +185,7 @@ class TestSubstraitFunctionNames:
         producer.set_db_connection(self.db_connection)
 
         # Load the parquet files into DuckDB and return all the table names as a list
-        sql_query = producer.format_sql(self.created_tables, sql_query, file_names)
+        sql_query = producer.format_sql(self.created_tables, sql_query[0], file_names)
 
         # Grab the json representation of the produced substrait plan to verify
         # the proper substrait function name.
