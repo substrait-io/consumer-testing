@@ -40,6 +40,13 @@ Install requirements from the top level directory:
 pip install -r requirements.txt
 ```
 
+Install the project in the developer mode (recommended)
+
+```bash
+python3 setup.py develop
+```
+
+
 Get the java dependencies needed by the Isthmus Substrait producer:
 1. Clone the substrait-java repo
 2. From the consumer-testing repo, run the build-and-copy-isthmus-shadow-jar.sh script
