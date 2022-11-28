@@ -3,7 +3,7 @@ setup(
     name='substrait-consumer',
     version='0.0.1',
     author='Substrait',
-    description='A Substrait consumer test suite',
+    description='A Substrait consumer test bench',
     long_description='Testing Substrait consumers with standard data processing queries',
     url='https://github.com/substrait-io/consumer-testing',
     keywords='substrait, consumer',
