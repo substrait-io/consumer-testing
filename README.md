@@ -32,10 +32,18 @@ conda create -y -n substrait_consumer_testing -c conda-forge python=3.9
 conda activate substrait_consumer_testing
 ```
 
-Install requirements from the top level directory:
+Install the project
+
 ```commandline
-pip install -r requirements.txt
+python3 setup.py install
 ```
+
+Install the project in the developer mode (recommended)
+
+```bash
+python3 setup.py develop
+```
+
 # How to Run Tests
 TPCH tests are located in the `tests/integration` folder and substrait function tests
 are located in the `tests/functional` folder.
