@@ -1,4 +1,11 @@
-from tests.java_definitions import *
+from pathlib import Path
+
+import jpype.imports
+
+import tests.java_definitions as java
+
+REPO_DIR = Path(__file__).parent.parent
+from com.google.protobuf.util import JsonFormat as json_formatter
 
 schema_file = Path.joinpath(REPO_DIR, "tests/data/tpch_parquet/schema.sql")
 
@@ -16,7 +23,7 @@ def produce_isthmus_substrait(sql_string, schema_list):
     Returns:
         Substrait plan in json format.
     """
-    sql_to_substrait = SqlToSubstraitClass()
+    sql_to_substrait = java.SqlToSubstraitClass()
     java_sql_string = jpype.java.lang.String(sql_string)
     plan = sql_to_substrait.execute(java_sql_string, schema_list)
     json_plan = json_formatter.printer().print_(plan)
@@ -34,17 +41,17 @@ def get_schema(file_names):
     Returns:
         List of all schemas as a java list.
     """
-    arr = ArrayListClass()
+    arr = java.ArrayListClass()
     if file_names:
         text_schema_file = open(schema_file)
         schema_string = text_schema_file.read().replace("\n", " ").split(";")[:-1]
         for create_table in schema_string:
-            java_obj = JObject @ JString(create_table)
+            java_obj = jpype.JObject @ jpype.JString(create_table)
             arr.add(java_obj)
     else:
-        java_obj = JObject @ JString(
+        java_obj = jpype.JObject @ jpype.JString(
             "CREATE TABLE T(a integer, b integer, c boolean, d boolean)"
         )
         arr.add(java_obj)
 
-    return ListClass @ arr
+    return java.ListClass @ arr

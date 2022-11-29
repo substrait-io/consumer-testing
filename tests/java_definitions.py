@@ -2,8 +2,6 @@ import os
 from pathlib import Path
 
 import jpype
-import jpype.imports
-from jpype.types import *
 
 REPO_DIR = Path(__file__).parent.parent
 calcite_jars = Path.joinpath(REPO_DIR, "jars/*")
@@ -20,9 +18,7 @@ if not os.path.isfile(jvm_path):
 
 jpype.startJVM("--enable-preview", convertStrings=True, jvmpath=jvm_path)
 jpype.addClassPath(calcite_jars)
-from com.google.protobuf.util import JsonFormat
 
 ArrayListClass = jpype.JClass("java.util.ArrayList")
 ListClass = jpype.JClass("java.util.List")
 SqlToSubstraitClass = jpype.JClass("io.substrait.isthmus.SqlToSubstrait")
-json_formatter = JsonFormat
