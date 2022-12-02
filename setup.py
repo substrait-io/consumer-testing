@@ -24,6 +24,7 @@ setup(
       '--extra-index-url https://pypi.fury.io/arrow-nightlies --prefer-binary --pre'
     ],
     package_data={
-        'tests': ['tests/integration'],
+        'tests': ['tests/integration',
+                  'tests/functional'],
     }
 )
