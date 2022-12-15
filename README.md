@@ -39,6 +39,15 @@ Install requirements from the top level directory:
 ```commandline
 pip install -r requirements.txt
 ```
+
+Get the java dependencies needed by the Isthmus Substrait producer:
+```commandline
+git clone https://github.com/substrait-io/substrait-java.git
+export SUBSTRAIT_JAVA_HOME=$(pwd)/substrait-java
+cd consumer-testing
+make
+```
+
 # How to Run Tests
 TPCH tests are located in the `tests/integration` folder and substrait function tests
 are located in the `tests/functional` folder.

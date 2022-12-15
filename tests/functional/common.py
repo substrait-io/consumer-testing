@@ -81,12 +81,12 @@ def substrait_function_test(
                 sql_query, consumer, ibis_expr(*args)
             )
         else:
-            pytest.skip("ibis expression currently undefined")
+            pytest.xfail("ibis expression currently undefined")
     else:
         if type(producer) in supported_producers:
             substrait_plan = producer.produce_substrait(sql_query, consumer)
         else:
-            pytest.skip(f"{type(producer).__name__} does not support the following SQL: "
+            pytest.xfail(f"{type(producer).__name__} does not support the following SQL: "
                         f"{sql_query}")
 
     actual_result = consumer.run_substrait_query(substrait_plan)
