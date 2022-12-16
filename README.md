@@ -32,8 +32,8 @@ conda create -y -n substrait_consumer_testing -c conda-forge python=3.9 openjdk
 conda activate substrait_consumer_testing
 ```
 *Note: Java is used by Jpype to access the Isthmus producer.  
-JPype has been tested with Java versions from Java 1.7 to Java 13.
-However, it should work with all versions of Java.*
+JPype should work with all versions of Java but to see details on which versions are 
+officially supported see https://jpype.readthedocs.io/en/latest/install.html*
 
 Install requirements from the top level directory:
 ```commandline
@@ -41,12 +41,14 @@ pip install -r requirements.txt
 ```
 
 Get the java dependencies needed by the Isthmus Substrait producer:
+1. Clone the substrait-java repo
+2. From the consumer-testing repo, run the build-and-copy-isthmus-shadow-jar.sh script
 ```commandline
 git clone https://github.com/substrait-io/substrait-java.git
-export SUBSTRAIT_JAVA_HOME=$(pwd)/substrait-java
 cd consumer-testing
-make
+sh build-and-copy-isthmus-shadow-jar.sh
 ```
+*This shell script may not work on Windows environments.*
 
 # How to Run Tests
 TPCH tests are located in the `tests/integration` folder and substrait function tests
