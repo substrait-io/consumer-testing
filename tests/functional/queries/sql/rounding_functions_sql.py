@@ -1,12 +1,18 @@
+from tests.producers import *
+
 SQL_SCALAR = {
-    "ceil":
+    "ceil": (
         """
         SELECT PS_SUPPLYCOST, ceil(PS_SUPPLYCOST) AS CEIL_SUPPLYCOST
         FROM '{}';
         """,
-    "floor":
+        [DuckDBProducer],
+    ),
+    "floor": (
         """
         SELECT PS_SUPPLYCOST, floor(PS_SUPPLYCOST) AS FLOOR_SUPPLYCOST
         FROM '{}';
         """,
+        [DuckDBProducer],
+    ),
 }

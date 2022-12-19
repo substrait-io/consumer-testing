@@ -5,7 +5,7 @@ import pytest
 
 from filelock import FileLock
 from tests.consumers import AceroConsumer, DuckDBConsumer
-from tests.producers import DuckDBProducer, IbisProducer
+from tests.producers import DuckDBProducer, IbisProducer, IsthmusProducer
 
 
 @pytest.fixture(scope="session")
@@ -43,7 +43,7 @@ def pytest_addoption(parser):
     )
 
 
-PRODUCERS = [DuckDBProducer, IbisProducer]
+PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
 CONSUMERS = [AceroConsumer, DuckDBConsumer]
 
 

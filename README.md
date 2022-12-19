@@ -28,14 +28,28 @@ which is located in `tests/conftest.py`.
 # Setup
 Create and activate your conda environment with python3.9:
 ```commandline
-conda create -y -n substrait_consumer_testing -c conda-forge python=3.9
+conda create -y -n substrait_consumer_testing -c conda-forge python=3.9 openjdk
 conda activate substrait_consumer_testing
 ```
+*Note: Java is used by Jpype to access the Isthmus producer.  
+JPype should work with all versions of Java but to see details on which versions are 
+officially supported see https://jpype.readthedocs.io/en/latest/install.html*
 
 Install requirements from the top level directory:
 ```commandline
 pip install -r requirements.txt
 ```
+
+Get the java dependencies needed by the Isthmus Substrait producer:
+1. Clone the substrait-java repo
+2. From the consumer-testing repo, run the build-and-copy-isthmus-shadow-jar.sh script
+```commandline
+git clone https://github.com/substrait-io/substrait-java.git
+cd consumer-testing
+sh build-and-copy-isthmus-shadow-jar.sh
+```
+*This shell script may not work on Windows environments.*
+
 # How to Run Tests
 TPCH tests are located in the `tests/integration` folder and substrait function tests
 are located in the `tests/functional` folder.

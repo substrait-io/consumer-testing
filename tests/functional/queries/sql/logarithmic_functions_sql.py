@@ -1,18 +1,32 @@
+from tests.producers import *
+
 SQL_SCALAR = {
-    "ln": """
+    "ln": (
+        """
         SELECT PS_SUPPLYCOST, ln(PS_SUPPLYCOST) AS LN_SUPPLY
         FROM '{}';
         """,
-    "log10": """
+        [DuckDBProducer],
+    ),
+    "log10": (
+        """
         SELECT PS_SUPPLYCOST, log10(PS_SUPPLYCOST) AS LOG10_SUPPLY
         FROM '{}';
         """,
-    "log2": """
+        [DuckDBProducer],
+    ),
+    "log2": (
+        """
         SELECT PS_SUPPLYCOST, log2(PS_SUPPLYCOST) AS LOG2_SUPPLY
         FROM '{}';
         """,
-    "logb": """
+        [DuckDBProducer],
+    ),
+    "logb": (
+        """
         SELECT PS_SUPPLYCOST, logb(PS_SUPPLYCOST, 10) AS LOGB_SUPPLY
         FROM '{}';
         """,
+        [DuckDBProducer],
+    ),
 }

@@ -17,8 +17,8 @@ class TestBooleanFunctions:
     """
 
     @staticmethod
-    @pytest.fixture(scope="function", autouse=True)
-    def setup_teardown_function(request):
+    @pytest.fixture(scope="class", autouse=True)
+    def setup_teardown_class(request):
         cls = request.cls
 
         cls.db_connection = duckdb.connect()
@@ -41,10 +41,11 @@ class TestBooleanFunctions:
         self,
         test_name: str,
         file_names: Iterable[str],
-        sql_query: str,
+        sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
+        partsupp
     ) -> None:
         substrait_function_test(
             self.db_connection,
@@ -54,5 +55,6 @@ class TestBooleanFunctions:
             ibis_expr,
             producer,
             consumer,
+            partsupp,
             self.table_t,
         )
