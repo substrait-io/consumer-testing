@@ -41,6 +41,17 @@ def pytest_addoption(parser):
         help="A comma separated list of producers to run against.",
         choices=[x.__name__ for x in PRODUCERS]
     )
+    parser.addoption(
+        "--saveplan",
+        action="store",
+        default=False,
+        help="Save the substrait plans created by each producer."
+    )
+
+
+@pytest.fixture
+def saveplan(request):
+    return request.config.getoption("--saveplan")
 
 
 PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
