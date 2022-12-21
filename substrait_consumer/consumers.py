@@ -8,8 +8,10 @@ import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
 import pyarrow.substrait as substrait
+import velox
 
 from substrait_consumer.common import SubstraitUtils
+from substrait_consumer.schema_updates import PA_SCHEMA, TABLE_TO_RECREATE
 
 
 class DuckDBConsumer:
@@ -68,6 +70,14 @@ class DuckDBConsumer:
                 create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
                 self.db_connection.execute(create_table_sql)
                 created_tables.add(table_name)
+                if table_name in TABLE_TO_RECREATE.keys():
+                    self.db_connection.query(
+                        f"ALTER TABLE {table_name} RENAME TO {table_name}_orig"
+                    )
+                    self.db_connection.query(f"{TABLE_TO_RECREATE[table_name]}")
+                    self.db_connection.query(
+                        f"insert into {table_name} select * from {table_name}_orig"
+                    )
             table_names.append(table_name)
 
         return table_names
@@ -93,7 +103,9 @@ class AceroConsumer:
                 )
                 if table_name not in self.created_tables:
                     self.created_tables.add(table_name)
-                    self.tables[table_name] = pq.read_table(file_path)
+                    self.tables[table_name] = pq.read_table(
+                        file_path, schema=PA_SCHEMA[table_name]
+                    )
         else:
             table = pa.table(
                 {
@@ -147,3 +159,36 @@ class AceroConsumer:
         result = reader.read_all()
 
         return result
+
+
+class VeloxConsumer:
+    """
+    Adapts the Velox Substrait consumer to the test framework.
+    """
+
+    def __init__(self):
+        self.created_tables = set()
+        self.tables = {}
+        self.table_provider = lambda names: self.tables[names[0]]
+
+    def setup(self, db_connection, file_names: Iterable[str]):
+        pass
+
+    def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
+        """
+        Run the substrait plan against Velox.
+
+        Parameters:
+            substrait_query:
+                A json formatted byte representation of the substrait query plan.
+
+        Returns:
+            A pyarrow table resulting from running the substrait query plan.
+        """
+        velox_result = velox.from_json(substrait_query)
+
+        record_batches = []
+        for vec in velox_result:
+            record_batches.append(vec.to_arrow())
+
+        return pa.Table.from_batches(record_batches)

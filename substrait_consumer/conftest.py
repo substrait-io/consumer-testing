@@ -32,19 +32,19 @@ def pytest_addoption(parser):
         action="store",
         default=",".join([x.__name__ for x in CONSUMERS]),
         help=f"A comma separated list of consumers to run against.",
-        choices=[x.__name__ for x in CONSUMERS]
+        choices=[x.__name__ for x in CONSUMERS],
     )
     parser.addoption(
         "--producer",
         action="store",
         default=",".join([x.__name__ for x in PRODUCERS]),
         help="A comma separated list of producers to run against.",
-        choices=[x.__name__ for x in PRODUCERS]
+        choices=[x.__name__ for x in PRODUCERS],
     )
 
 
 PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
-CONSUMERS = [AceroConsumer, DuckDBConsumer]
+CONSUMERS = [AceroConsumer, DuckDBConsumer, VeloxConsumer]
 
 
 def _get_consumers():

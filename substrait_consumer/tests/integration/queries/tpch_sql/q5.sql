@@ -1,6 +1,6 @@
 SELECT
     n_name,
-    sum(l_extendedprice * (1 - l_discount)) AS revenue
+    round(sum(l_extendedprice * (1 - l_discount)), 2) AS revenue
 FROM
     '{}', '{}', '{}', '{}', '{}', '{}'
 WHERE

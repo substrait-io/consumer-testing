@@ -90,17 +90,15 @@
                                   "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 1,
                                   "typeVariationReference": 0,
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               }, {
-                                "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
+                                "fp64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
@@ -108,13 +106,13 @@
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 15,
                                   "typeVariationReference": 0,
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 15,
                                   "typeVariationReference": 0,
                                   "nullability": "NULLABILITY_NULLABLE"
@@ -286,41 +284,33 @@
                                                   "nullability": "NULLABILITY_NULLABLE"
                                                 }
                                               }, {
-                                                "decimal": {
-                                                  "scale": 0,
-                                                  "precision": 19,
+                                                "fp64": {
                                                   "typeVariationReference": 0,
-                                                  "nullability": "NULLABILITY_NULLABLE"
+                                                  "nullability": "NULLABILITY_REQUIRED"
                                                 }
                                               }, {
-                                                "decimal": {
-                                                  "scale": 0,
-                                                  "precision": 19,
+                                                "fp64": {
                                                   "typeVariationReference": 0,
-                                                  "nullability": "NULLABILITY_NULLABLE"
+                                                  "nullability": "NULLABILITY_REQUIRED"
                                                 }
                                               }, {
-                                                "decimal": {
-                                                  "scale": 0,
-                                                  "precision": 19,
+                                                "fp64": {
                                                   "typeVariationReference": 0,
-                                                  "nullability": "NULLABILITY_NULLABLE"
+                                                  "nullability": "NULLABILITY_REQUIRED"
                                                 }
                                               }, {
-                                                "decimal": {
-                                                  "scale": 0,
-                                                  "precision": 19,
+                                                "fp64": {
                                                   "typeVariationReference": 0,
-                                                  "nullability": "NULLABILITY_NULLABLE"
+                                                  "nullability": "NULLABILITY_REQUIRED"
                                                 }
                                               }, {
-                                                "fixedChar": {
+                                                "varchar": {
                                                   "length": 1,
                                                   "typeVariationReference": 0,
                                                   "nullability": "NULLABILITY_NULLABLE"
                                                 }
                                               }, {
-                                                "fixedChar": {
+                                                "varchar": {
                                                   "length": 1,
                                                   "typeVariationReference": 0,
                                                   "nullability": "NULLABILITY_NULLABLE"
@@ -341,13 +331,13 @@
                                                   "nullability": "NULLABILITY_NULLABLE"
                                                 }
                                               }, {
-                                                "fixedChar": {
+                                                "varchar": {
                                                   "length": 25,
                                                   "typeVariationReference": 0,
                                                   "nullability": "NULLABILITY_NULLABLE"
                                                 }
                                               }, {
-                                                "fixedChar": {
+                                                "varchar": {
                                                   "length": 10,
                                                   "typeVariationReference": 0,
                                                   "nullability": "NULLABILITY_NULLABLE"

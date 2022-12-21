@@ -9,6 +9,7 @@ from ibis_substrait.compiler.core import SubstraitCompiler
 
 from substrait_consumer.common import SubstraitUtils
 from substrait_consumer.context import get_schema, produce_isthmus_substrait
+from substrait_consumer.schema_updates import TABLE_TO_RECREATE
 
 
 class DuckDBProducer:
@@ -46,7 +47,9 @@ class DuckDBProducer:
 
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
-            table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
+            table_names = load_tables_from_parquet(
+                self.db_connection, created_tables, file_names
+            )
             sql_query = sql_query.format(*table_names)
         return sql_query
 
@@ -93,7 +96,9 @@ class IbisProducer:
 
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
-            table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
+            table_names = load_tables_from_parquet(
+                self.db_connection, created_tables, file_names
+            )
             sql_query = sql_query.format(*table_names)
         return sql_query
 
@@ -116,9 +121,7 @@ class IsthmusProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(
-        self, sql_query: str, consumer, ibis_expr: str = None
-    ) -> str:
+    def produce_substrait(self, sql_query: str, consumer, ibis_expr: str = None) -> str:
         """
         Produce the Isthmus substrait plan using the given SQL query.
 
@@ -140,7 +143,9 @@ class IsthmusProducer:
         sql_query = sql_query.replace("'t'", "t")
         if len(file_names) > 0:
             self.file_names = file_names
-            table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
+            table_names = load_tables_from_parquet(
+                self.db_connection, created_tables, file_names
+            )
             sql_query = sql_query.format(*table_names)
         return sql_query
 
@@ -175,6 +180,14 @@ def load_tables_from_parquet(
             create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
             db_connection.execute(create_table_sql)
             created_tables.add(table_name)
+            if table_name in TABLE_TO_RECREATE.keys():
+                db_connection.query(
+                    f"ALTER TABLE {table_name} RENAME TO {table_name}_orig"
+                )
+                db_connection.query(f"{TABLE_TO_RECREATE[table_name]}")
+                db_connection.query(
+                    f"insert into {table_name} select * from {table_name}_orig"
+                )
         table_names.append(table_name)
 
     return table_names

@@ -41,14 +41,14 @@ SQL_SCALAR = {
 SQL_AGGREGATE = {
     "sum": (
         """
-        SELECT sum(L_EXTENDEDPRICE) AS SUM_EXTENDEDPRICE
+        SELECT  CAST(sum(L_EXTENDEDPRICE) AS DECIMAL(15,2)) AS SUM_EXTENDEDPRICE
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "avg": (
         """
-        SELECT avg(L_EXTENDEDPRICE) AS AVG_EXTENDEDPRICE
+        SELECT CAST(avg(L_EXTENDEDPRICE) AS DECIMAL(15,2)) AVG_EXTENDEDPRICE
         FROM '{}';
         """,
         [DuckDBProducer],
