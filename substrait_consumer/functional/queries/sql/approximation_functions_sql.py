@@ -1,4 +1,4 @@
-from tests.producers import *
+from substrait_consumer.producers import *
 
 SQL_AGGREGATE = {
     "approx_count_distinct": (

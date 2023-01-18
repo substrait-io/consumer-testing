@@ -1,4 +1,4 @@
-from tests.producers import *
+from substrait_consumer.producers import *
 
 SQL_SCALAR = {
     "ceil": (

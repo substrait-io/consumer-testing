@@ -71,10 +71,10 @@ Function Tests:
 ```commandline
 cd substrait_consumer/tests/functional/
 
-Run all function tests:
+# Run all function tests:
 pytest extension_functions
 
-Run a single function test:
+# Run a single function test:
 pytest extension_functions/test_arithmetic_functions.py
 ```
 
