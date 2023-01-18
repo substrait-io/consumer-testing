@@ -42,20 +42,18 @@ pip install -r requirements.txt
 
 Install the project in the developer mode (recommended)
 
-```bash
-python3 setup.py develop
-```
-
-
-Get the java dependencies needed by the Isthmus Substrait producer:
-1. Clone the substrait-java repo
-2. From the consumer-testing repo, run the build-and-copy-isthmus-shadow-jar.sh script
 ```commandline
-git clone https://github.com/substrait-io/substrait-java.git
+git submodule init
+git submodule update --init
 cd consumer-testing
 sh build-and-copy-isthmus-shadow-jar.sh
 ```
+
 *This shell script may not work on Windows environments.*
+
+```bash
+python3 setup.py develop
+```
 
 # How to Run Tests
 TPCH tests are located in the `substrait_consumer/tests/integration` folder and substrait function tests

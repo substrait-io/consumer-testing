@@ -50,6 +50,9 @@ class DuckDBProducer:
             sql_query = sql_query.format(*table_names)
         return sql_query
 
+    def name(self):
+        return "DuckDBProducer"
+
 
 class IbisProducer:
     def __init__(self, db_connection=None):
@@ -94,6 +97,9 @@ class IbisProducer:
             sql_query = sql_query.format(*table_names)
         return sql_query
 
+    def name(self):
+        return "IbisProducer"
+
 
 class IsthmusProducer:
     def __init__(self, db_connection=None):
@@ -137,6 +143,9 @@ class IsthmusProducer:
             table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
             sql_query = sql_query.format(*table_names)
         return sql_query
+
+    def name(self):
+        return "IsthmusProducer"
 
 
 def load_tables_from_parquet(

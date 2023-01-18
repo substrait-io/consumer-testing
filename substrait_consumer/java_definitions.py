@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from sys import platform
 
 import jpype
 
@@ -14,7 +15,10 @@ java_home_path = os.environ[the_java_home]
 jvm_path = java_home_path
 
 if not os.path.isfile(jvm_path):
-    jvm_path = java_home_path + "/lib/libjli.dylib"
+    if platform == "darwin":
+        jvm_path = java_home_path + "/lib/libjli.dylib"
+    elif platform == "linux":
+        jvm_path = java_home_path + "/lib/server/libjvm.so"
 
 jpype.startJVM("--enable-preview", convertStrings=True, jvmpath=jvm_path)
 jpype.addClassPath(isthmus_jars)

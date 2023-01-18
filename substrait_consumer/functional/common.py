@@ -89,6 +89,11 @@ def substrait_function_test(
             pytest.xfail(f"{type(producer).__name__} does not support the following SQL: "
                         f"{sql_query}")
 
+    if type(substrait_plan) == str:
+        substrait_plan = substrait_plan.encode()
+    if type(substrait_plan) != bytes:
+        raise Exception(f"substrait_plan must be bytes, but provided with {type(substrait_plan)}")
+
     actual_result = consumer.run_substrait_query(substrait_plan)
     expected_result = db_con.query(f"{sql_query}").arrow()
 

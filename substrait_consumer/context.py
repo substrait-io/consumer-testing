@@ -7,7 +7,7 @@ import substrait_consumer.java_definitions as java
 REPO_DIR = Path(__file__).parent.parent
 from com.google.protobuf.util import JsonFormat as json_formatter
 
-schema_file = Path.joinpath(REPO_DIR, "tests/data/tpch_parquet/schema.sql")
+schema_file = Path.joinpath(REPO_DIR, "substrait_consumer/data/tpch_parquet/schema.sql")
 
 
 def produce_isthmus_substrait(sql_string, schema_list):
