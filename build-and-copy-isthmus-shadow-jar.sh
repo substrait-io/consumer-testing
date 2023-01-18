@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eou pipefail
+set -euo pipefail
 
 echo "Building Isthmus"
 cd substrait-java/isthmus; ../gradlew shadowJar

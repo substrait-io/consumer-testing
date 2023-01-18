@@ -138,7 +138,10 @@ class AceroConsumer:
         Returns:
             A pyarrow table resulting from running the substrait query plan.
         """
-        buf = pa._substrait._parse_json_plan(substrait_query)
+        if isinstance(substrait_query, str):
+            buf = pa._substrait._parse_json_plan(substrait_query.encode())
+        else:
+            buf = pa._substrait._parse_json_plan(substrait_query)
 
         reader = substrait.run_query(buf, table_provider=self.table_provider)
         result = reader.read_all()

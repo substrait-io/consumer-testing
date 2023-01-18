@@ -46,7 +46,7 @@ Install the project in the developer mode (recommended)
 git submodule init
 git submodule update --init
 cd consumer-testing
-sh build-and-copy-isthmus-shadow-jar.sh
+./build-and-copy-isthmus-shadow-jar.sh
 ```
 
 *This shell script may not work on Windows environments.*
