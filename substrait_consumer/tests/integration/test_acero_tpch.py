@@ -68,7 +68,7 @@ class TestAceroConsumer:
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
         substrait_query = self.utils.format_substrait_query(substrait_query, file_names)
-        print("test_isthmus_substrait_plan: ", type(substrait_query))
+
         subtrait_query_result_tb = self.acero_consumer.run_substrait_query(
             substrait_query
         )
@@ -149,7 +149,6 @@ class TestAceroConsumer:
         proto_bytes = duckdb_substrait_plan.fetchone()[0].encode()
 
         # Run the duckdb produced substrait plan against Acero
-        print("test_duckdb_substrait_plan: ", type(proto_bytes))
         subtrait_query_result_tb = self.acero_consumer.run_substrait_query(proto_bytes)
 
         # Calculate results to verify against by running the SQL query on DuckDB

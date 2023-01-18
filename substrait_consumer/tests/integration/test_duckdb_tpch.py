@@ -66,7 +66,6 @@ class TestDuckDBConsumer:
         substrait_plan = self.db_connection.get_substrait(sql_query)
         proto_bytes = substrait_plan.fetchone()[0]
 
-        print("test_substrait_query: ", type(proto_bytes))
         subtrait_query_result_tb = self.consumer.run_substrait_query(proto_bytes)
 
         # Calculate results to verify against by running the SQL query on DuckDB
