@@ -9,17 +9,6 @@ setup(
     keywords='substrait, consumer',
     python_requires='>=3.9, <4',
     packages=find_packages(include=['substrait_consumer*', 'substrait_consumer.*']),
-    # install_requires=[
-    #     'duckdb',
-    #     'filelock',
-    #     'ibis-framework',
-    #     'ibis-substrait',
-    #     'protobuf==3.20.1',
-    #     'pyarrow',
-    #     'pytest',
-    #     'pytest-xdist',
-    #     'substrait-validator',
-    # ],
     dependency_links=[
       '--extra-index-url https://pypi.fury.io/arrow-nightlies --prefer-binary --pre'
     ],
