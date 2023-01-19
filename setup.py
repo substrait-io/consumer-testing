@@ -9,9 +9,6 @@ setup(
     keywords='substrait, consumer',
     python_requires='>=3.9, <4',
     packages=find_packages(include=['substrait_consumer*', 'substrait_consumer.*']),
-    dependency_links=[
-      '--extra-index-url https://pypi.fury.io/arrow-nightlies --prefer-binary --pre'
-    ],
     package_data={
         'tests': ['tests/integration',
                   'tests/functional'],
