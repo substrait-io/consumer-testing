@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo "Enter the absolute path of the substrait-java repo"
-read substrait_java_path
-cd ${substrait_java_path}/isthmus; ../gradlew shadowJar
+set -euo pipefail
+
+echo "Building Isthmus"
+cd substrait-java/isthmus; ../gradlew shadowJar
 cd -
 mkdir -p jars
-cp ${substrait_java_path}/isthmus/build/libs/*all.jar ./jars/
+cp substrait-java/isthmus/build/libs/*all.jar ./jars/
+echo "Build Succeed!!!"
