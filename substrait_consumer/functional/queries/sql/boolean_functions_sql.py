@@ -19,7 +19,7 @@ SQL_SCALAR = {
     ),
     "not": (
         """
-        SELECT c FROM 't' WHERE NOT c
+        SELECT c FROM 't' WHERE NOT FALSE
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
