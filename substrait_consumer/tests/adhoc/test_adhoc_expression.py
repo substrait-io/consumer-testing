@@ -51,7 +51,7 @@ class TestAdhocExpression:
 
     def test_adhoc_expression(
         self,
-        producer,
+        adhoc_producer,
         consumer,
         saveplan,
         part,
@@ -63,7 +63,7 @@ class TestAdhocExpression:
         nation,
         region,
     ) -> None:
-        producer.set_db_connection(self.db_connection)
+        adhoc_producer.set_db_connection(self.db_connection)
         consumer.setup(self.db_connection, FILE_NAMES)
 
         with open(SQL_FILE_PATH, "r") as f:
@@ -71,15 +71,15 @@ class TestAdhocExpression:
 
         if not sql_query:
             raise ValueError("No SQL query.  Please write SQL into query.sql")
-        sql_query = producer.format_sql(set(), sql_query, FILE_NAMES)
-        substrait_plan = producer.produce_substrait(
+        sql_query = adhoc_producer.format_sql(set(), sql_query, FILE_NAMES)
+        substrait_plan = adhoc_producer.produce_substrait(
             sql_query,
             consumer,
             ibis_expr(
                 part, supplier, partsupp, customer, orders, lineitem, nation, region
             ),
         )
-        producer_name = type(producer).__name__
+        producer_name = type(adhoc_producer).__name__
         if isinstance(substrait_plan, str) and saveplan:
             if producer_name not in self.produced_plans:
                 self.produced_plans.add(producer_name)

@@ -217,24 +217,24 @@ Copy your Ibis expression into `substrait_consumer/tests/adhoc/ibis_expr.py`
 Run using the following command:
 ```commandline
 cd substrait_consumer/tests/adhoc
-pytest test_adhoc_expression.py
+pytest --adhoc_producer=IsthmusProducer test_adhoc_expression.py
 ```
 
-In addition to running the plans against the consumers, you can also save the 
+In addition to running the plans against the consumers, you can save the 
 produced substrait plans by specifying the `--saveplan` option.
 ```commandline
-pytest --saveplan test_adhoc_expression.py
+pytest --saveplan True --adhoc_producer=IsthmusProducer test_adhoc_expression.py
 ```
 Plans will be saved as {producer_name}_substrait.json
 ```commandline
 ls *.json
-DuckDBProducer_substrait.json	IbisProducer_substrait.json	IsthmusProducer_substrait.json
+IsthmusProducer_substrait.json
 ```
 
-If you want to only generate plans from a specific producer or run the plans against a
-specific consumer, you can also use the `--producer` and `--consumer` options.
+If you want to run the tests from specific producer/consumer pairs, you can use 
+the `--adhoc_producer` and `--consumer` options.
 ```commandline
-pytest --producer=IsthmusProducer --consumer=AceroConsumer test_adhoc_expression.py
+pytest --adhoc_producer=IsthmusProducer --consumer=AceroConsumer test_adhoc_expression.py
 ```
 
 
