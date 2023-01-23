@@ -209,19 +209,23 @@ written using the same TPCH data used in the integration tests.  This tool will 
 the substrait plans for each supported producer and run that plan against all supported consumers.
 
 ## How to Use
-Copy your SQL query into `substrait_consumer/tests/adhoc/query.sql`.  
-Copy your Ibis expression into `substrait_consumer/tests/adhoc/ibis_expr.py`
-
-*Note: The test expects a specific name for the ibis expression as well as the named tables being passed to it. This is line 1 of ibis_expr.py, and it should not be modified.
-
-Run using the following command:
+If you are testing out an SQL query, copy your SQL query into `substrait_consumer/tests/adhoc/query.sql`
+and run the following command (make sure to specify a producer that can convert SQL to Substrait):
 ```commandline
 cd substrait_consumer/tests/adhoc
 pytest --adhoc_producer=IsthmusProducer test_adhoc_expression.py
 ```
 
-In addition to running the plans against the consumers, you can save the 
-produced substrait plans by specifying the `--saveplan` option.
+If you are testing out an Ibis expression, copy your Ibis expression into 
+`substrait_consumer/tests/adhoc/ibis_expr.py` and run the following command:
+```commandline
+cd substrait_consumer/tests/adhoc
+pytest --adhoc_producer=IbisProducer test_adhoc_expression.py
+```
+*Note: If you're using the IbisProducer, make sure you do not edit the function name and arguments
+already in line 2 of `ibis_expr.py`.  The test is expecting the specific name and arguments.
+
+You can save the produced substrait plans with the `--saveplan` option.
 ```commandline
 pytest --saveplan True --adhoc_producer=IsthmusProducer test_adhoc_expression.py
 ```
@@ -231,8 +235,8 @@ ls *.json
 IsthmusProducer_substrait.json
 ```
 
-If you want to run the tests from specific producer/consumer pairs, you can use 
-the `--adhoc_producer` and `--consumer` options.
+If you want to run the tests using specific producer/consumer pairs, you can use 
+the both the `--adhoc_producer` and `--consumer` options.
 ```commandline
 pytest --adhoc_producer=IsthmusProducer --consumer=AceroConsumer test_adhoc_expression.py
 ```
