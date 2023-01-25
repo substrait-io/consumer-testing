@@ -44,7 +44,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--adhoc_producer",
         action="store",
-        default=",".join([x.__name__ for x in []]),
+        default="",
         help="A comma separated list of producers to run against.",
         choices=[x.__name__ for x in PRODUCERS]
     )
