@@ -45,7 +45,6 @@ class TestBooleanFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp
     ) -> None:
         substrait_function_test(
             self.db_connection,
@@ -55,6 +54,5 @@ class TestBooleanFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp,
             self.table_t,
         )

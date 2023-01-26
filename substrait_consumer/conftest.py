@@ -41,6 +41,24 @@ def pytest_addoption(parser):
         help="A comma separated list of producers to run against.",
         choices=[x.__name__ for x in PRODUCERS]
     )
+    parser.addoption(
+        "--adhoc_producer",
+        action="store",
+        default="",
+        help="A comma separated list of producers to run against.",
+        choices=[x.__name__ for x in PRODUCERS]
+    )
+    parser.addoption(
+        "--saveplan",
+        action="store",
+        default=False,
+        help="Save the substrait plans created by each producer."
+    )
+
+
+@pytest.fixture
+def saveplan(request):
+    return request.config.getoption("--saveplan")
 
 
 PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
@@ -71,6 +89,19 @@ def consumer(request):
 @pytest.fixture(params=_get_producers(), scope="session")
 def producer(request):
     producers_list = request.config.option.producer.split(",")
+    producer = request.param()
+    if type(producer).__name__ in producers_list:
+        return producer
+    else:
+        pytest.skip(
+            f"Skipping producer: '{type(producer).__name__})', "
+            f"the specified producers are: {producers_list}"
+        )
+
+
+@pytest.fixture(params=_get_producers(), scope="session")
+def adhoc_producer(request):
+    producers_list = request.config.option.adhoc_producer.split(",")
     producer = request.param()
     if type(producer).__name__ in producers_list:
         return producer

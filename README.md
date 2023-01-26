@@ -14,13 +14,17 @@ Table of Contents
   * [Test Case Args](#Test-Case-Args)
   * [SQL Queries](#SQL-Queries)
   * [Ibis Expressions](#Ibis-Expressions)
+* [CLI Tool](#Generating-Substrait-from-Adhoc-SQL-Ibis)
+  * [How to Use](#How-to-Use)
 * [How to Add Producers](#How-to-Add-Producers)
 * [How to Add Consumers](#How-to-Add-Consumers)
 
 
 # Overview
 This testing repository provides instructions on how to add and run substrait integration 
-tests.  The tests are organized into two categories; tpch tests (which test common benchmark queries) 
+tests as well as a CLI tool for generating substrait plans from adhoc SQL queries.  
+
+The tests are organized into two categories; tpch tests (which test common benchmark queries) 
 and substrait function tests (which test individual extension functions). Test data is created 
 using DuckDB at the start of the test class using the `prepare_tpch_parquet_data` fixture, 
 which is located in `substrait_consumer/conftest.py`.
@@ -197,6 +201,47 @@ IBIS_SCALAR = {
     "add": add_expr,
 }
 ```
+
+# Generating Substrait from Adhoc SQL/Ibis
+The CLI tool for generating substrait plans from adhoc SQL queries and Ibis expression
+is located in the `substrait_consumer/tests/adhoc` directory.  The SQL queries should be 
+written using the same TPCH data used in the integration tests.  This tool will generate 
+the substrait plans for each supported producer and run that plan against all supported consumers.
+
+## How to Use
+If you are testing out an SQL query, copy your SQL query into `substrait_consumer/tests/adhoc/query.sql`
+and run the following command (make sure to specify a producer that can convert SQL to Substrait):
+```commandline
+cd substrait_consumer/tests/adhoc
+pytest --adhoc_producer=IsthmusProducer test_adhoc_expression.py
+```
+
+If you are testing out an Ibis expression, copy your Ibis expression into 
+`substrait_consumer/tests/adhoc/ibis_expr.py` and run the following command:
+```commandline
+cd substrait_consumer/tests/adhoc
+pytest --adhoc_producer=IbisProducer test_adhoc_expression.py
+```
+*Note: If you're using the IbisProducer, make sure you do not edit the function name and arguments
+already in line 2 of `ibis_expr.py`.  The test is expecting the specific name and arguments.
+
+You can save the produced substrait plans with the `--saveplan` option.
+```commandline
+pytest --saveplan True --adhoc_producer=IsthmusProducer test_adhoc_expression.py
+```
+Plans will be saved as {producer_name}_substrait.json
+```commandline
+ls *.json
+IsthmusProducer_substrait.json
+```
+
+If you want to run the tests using specific producer/consumer pairs, you can use 
+the both the `--adhoc_producer` and `--consumer` options.
+```commandline
+pytest --adhoc_producer=IsthmusProducer --consumer=AceroConsumer test_adhoc_expression.py
+```
+
+
 
 # How to Add Producers
 Producers should be added to the `substrait_consumer/producers.py` file and provide 
