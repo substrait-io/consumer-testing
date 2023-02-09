@@ -3,8 +3,11 @@ from typing import Callable, Iterable
 import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
+from pathlib import Path
 
 from substrait_consumer.verification import verify_equals
+
+SNAPSHOT_DIR = Path(__file__).parent.parent / f"tests/functional/extension_functions"
 
 
 def check_subtrait_function_names(
@@ -34,14 +37,15 @@ def check_subtrait_function_names(
     ), f"Error in function: {expected_function_name}.  Does not appear in {functions_list}."
 
 
-def substrait_function_test(
+def substrait_producer_function_test(
+    test_name,
+    snapshot,
     db_con: DuckDBPyConnection,
     created_tables: set,
     file_names: Iterable[str],
     sql_query: tuple,
     ibis_expr: Callable[[Table], Table],
     producer,
-    consumer,
     *args,
 ):
     """
@@ -50,6 +54,7 @@ def substrait_function_test(
     with a trusted SQL consumer.
 
     Parameters:
+        snapshot:
         db_con:
             DuckDB connection for creating in memory tables.
         created_tables:
@@ -68,7 +73,6 @@ def substrait_function_test(
             The data tables to be passed to the ibis expression.
     """
     producer.set_db_connection(db_con)
-    consumer.setup(db_con, file_names)
     supported_producers = sql_query[1]
 
     # Load the parquet files into DuckDB and return all the table names as a list
@@ -78,27 +82,67 @@ def substrait_function_test(
     if type(producer).__name__ == "IbisProducer":
         if ibis_expr:
             substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(*args)
+                sql_query, ibis_expr(*args)
             )
         else:
             pytest.xfail("ibis expression currently undefined")
     else:
         if type(producer) in supported_producers:
-            substrait_plan = producer.produce_substrait(sql_query, consumer)
+            substrait_plan = producer.produce_substrait(sql_query)
         else:
-            pytest.xfail(f"{type(producer).__name__} does not support the following SQL: "
-                        f"{sql_query}")
+            pytest.xfail(
+                f"{type(producer).__name__} does not support the following SQL: "
+                f"{sql_query}"
+            )
 
-    actual_result = consumer.run_substrait_query(substrait_plan)
-    expected_result = db_con.query(f"{sql_query}").arrow()
-
-    verify_equals(
-        actual_result.columns,
-        expected_result.columns,
-        message=f"Result: {actual_result.columns} "
-        f"is not equal to the expected: "
-        f"{expected_result.columns}",
+    function_group = test_name.split(":")[0]
+    function_name = test_name.split(":")[1]
+    snapshot.snapshot_dir = (
+        f"{function_group}/{type(producer).__name__}"
     )
+    snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.txt")
+
+    # actual_result = consumer.run_substrait_query(substrait_plan)
+    # expected_result = db_con.query(f"{sql_query}").arrow()
+    #
+    # verify_equals(
+    #     actual_result.columns,
+    #     expected_result.columns,
+    #     message=f"Result: {actual_result.columns} "
+    #     f"is not equal to the expected: "
+    #     f"{expected_result.columns}",
+    # )
+
+
+def substrait_consumer_function_test(
+    test_name,
+    snapshot,
+    db_con: DuckDBPyConnection,
+    created_tables: set,
+    file_names: Iterable[str],
+    sql_query: tuple,
+    ibis_expr: Callable[[Table], Table],
+    producer,
+    consumer
+):
+
+    consumer.setup(db_con, file_names)
+    function_group = test_name.split(":")[0]
+    function_name = test_name.split(":")[1]
+    substrait_plan_dir = f"{function_group}/{type(producer).__name__}"
+    # substrait_file = substrait_plan_dir + f"{function_name}.txt"
+    file_name = f"{function_name}_plan.txt"
+    plan_path = SNAPSHOT_DIR / substrait_plan_dir / file_name
+    if plan_path.is_file():
+        # Convert to Path
+        substrait_plan = plan_path.read_text()
+
+        snapshot.snapshot_dir = (
+            f"{function_group}/{type(consumer).__name__}/{type(producer).__name__}"
+        )
+        actual_result = consumer.run_substrait_query(substrait_plan)
+        # expected_result = db_con.query(f"{sql_query}").arrow()
+        snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
 
 
 def load_custom_duckdb_table(db_connection):

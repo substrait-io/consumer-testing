@@ -7,5 +7,6 @@ protobuf
 --extra-index-url https://pypi.fury.io/arrow-nightlies --prefer-binary --pre
 pyarrow
 pytest
+pytest-snapshot
 pytest-xdist
 substrait-validator

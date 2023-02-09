@@ -4,8 +4,11 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from substrait_consumer.functional.boolean_configs import AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS
-from substrait_consumer.functional.common import load_custom_duckdb_table, substrait_function_test
+from substrait_consumer.functional.boolean_configs import (
+    AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
+from substrait_consumer.functional.common import (
+    load_custom_duckdb_table, substrait_consumer_function_test,
+    substrait_producer_function_test)
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -37,22 +40,48 @@ class TestBooleanFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    def test_boolean_functions(
+    def test_producer_boolean_functions(
         self,
+        snapshot,
         test_name: str,
         file_names: Iterable[str],
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
-        consumer,
     ) -> None:
-        substrait_function_test(
+        test_name = f"boolean_snapshots:{test_name}"
+        substrait_producer_function_test(
+            test_name,
+            snapshot,
             self.db_connection,
             self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
             producer,
-            consumer,
             self.table_t,
+        )
+
+    @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    def test_consumer_boolean_functions(
+        self,
+        snapshot,
+        test_name: str,
+        file_names: Iterable[str],
+        sql_query: tuple,
+        ibis_expr: Callable[[Table], Table],
+        producer,
+        consumer
+    ) -> None:
+        test_name = f"boolean_snapshots:{test_name}"
+        substrait_consumer_function_test(
+            test_name,
+            snapshot,
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
+            ibis_expr,
+            producer,
+            consumer
         )
