@@ -4,8 +4,6 @@ import string
 from pathlib import Path
 from typing import Iterable
 
-import json
-
 import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -25,6 +23,7 @@ class DuckDBConsumer:
         else:
             self.db_connection = duckdb.connect()
 
+        self.created_tables = set()
         self.db_connection.execute("INSTALL substrait")
         self.db_connection.execute("LOAD substrait")
 
@@ -42,7 +41,7 @@ class DuckDBConsumer:
         Returns:
             A pyarrow table resulting from running the substrait query plan.
         """
-        return self.db_connection.from_substrait(substrait_query).arrow()
+        return self.db_connection.from_substrait_json(substrait_query).arrow()
 
     def load_tables_from_parquet(
         self,
@@ -140,17 +139,11 @@ class AceroConsumer:
         Returns:
             A pyarrow table resulting from running the substrait query plan.
         """
-        # if isinstance(substrait_query, str):
-        #     buf = pa._substrait._parse_json_plan(substrait_query.encode())
-        # else:
-        #     buf = pa._substrait._parse_json_plan(substrait_query)
-        if isinstance(eval(substrait_query), dict):
-            substrait_query = pa._substrait._parse_json_plan(
-                json.dumps(eval(substrait_query)).encode())
-        else:
-            substrait_query = eval(substrait_query)
+        substrait_query = pa._substrait._parse_json_plan(substrait_query.encode())
 
-        reader = substrait.run_query(substrait_query, table_provider=self.table_provider)
+        reader = substrait.run_query(
+            substrait_query, table_provider=self.table_provider
+        )
         result = reader.read_all()
 
         return result

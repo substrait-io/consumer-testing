@@ -4,9 +4,10 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
+from substrait_consumer.functional.common import (
+    substrait_consumer_function_test, substrait_producer_function_test)
 from substrait_consumer.functional.datetime_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
-from substrait_consumer.functional.common import substrait_function_test
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -31,8 +32,33 @@ class TestDatetimeFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    def test_datetime_functions(
+    def test_producer_datetime_functions(
         self,
+        snapshot,
+        test_name: str,
+        file_names: Iterable[str],
+        sql_query: tuple,
+        ibis_expr: Callable[[Table], Table],
+        producer,
+        partsupp,
+    ) -> None:
+        test_name = f"datetime_snapshots:{test_name}"
+        substrait_producer_function_test(
+            test_name,
+            snapshot,
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
+        )
+
+    @custom_parametrization(SCALAR_FUNCTIONS)
+    def test_consumer_datetime_functions(
+        self,
+        snapshot,
         test_name: str,
         file_names: Iterable[str],
         sql_query: tuple,
@@ -41,7 +67,10 @@ class TestDatetimeFunctions:
         consumer,
         partsupp,
     ) -> None:
-        substrait_function_test(
+        test_name = f"datetime_snapshots:{test_name}"
+        substrait_consumer_function_test(
+            test_name,
+            snapshot,
             self.db_connection,
             self.created_tables,
             file_names,
@@ -49,5 +78,4 @@ class TestDatetimeFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp
         )

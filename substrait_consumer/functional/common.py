@@ -1,11 +1,9 @@
+from pathlib import Path
 from typing import Callable, Iterable
 
 import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
-from pathlib import Path
-
-from substrait_consumer.verification import verify_equals
 
 SNAPSHOT_DIR = Path(__file__).parent.parent / f"tests/functional/extension_functions"
 
@@ -81,9 +79,7 @@ def substrait_producer_function_test(
     # Convert the SQL/Ibis expression to a substrait query plan
     if type(producer).__name__ == "IbisProducer":
         if ibis_expr:
-            substrait_plan = producer.produce_substrait(
-                sql_query, ibis_expr(*args)
-            )
+            substrait_plan = producer.produce_substrait(sql_query, ibis_expr(*args))
         else:
             pytest.xfail("ibis expression currently undefined")
     else:
@@ -97,21 +93,8 @@ def substrait_producer_function_test(
 
     function_group = test_name.split(":")[0]
     function_name = test_name.split(":")[1]
-    snapshot.snapshot_dir = (
-        f"{function_group}/{type(producer).__name__}"
-    )
+    snapshot.snapshot_dir = f"{function_group}/{type(producer).__name__}"
     snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.txt")
-
-    # actual_result = consumer.run_substrait_query(substrait_plan)
-    # expected_result = db_con.query(f"{sql_query}").arrow()
-    #
-    # verify_equals(
-    #     actual_result.columns,
-    #     expected_result.columns,
-    #     message=f"Result: {actual_result.columns} "
-    #     f"is not equal to the expected: "
-    #     f"{expected_result.columns}",
-    # )
 
 
 def substrait_consumer_function_test(
@@ -123,14 +106,14 @@ def substrait_consumer_function_test(
     sql_query: tuple,
     ibis_expr: Callable[[Table], Table],
     producer,
-    consumer
+    consumer,
 ):
 
     consumer.setup(db_con, file_names)
+
     function_group = test_name.split(":")[0]
     function_name = test_name.split(":")[1]
     substrait_plan_dir = f"{function_group}/{type(producer).__name__}"
-    # substrait_file = substrait_plan_dir + f"{function_name}.txt"
     file_name = f"{function_name}_plan.txt"
     plan_path = SNAPSHOT_DIR / substrait_plan_dir / file_name
     if plan_path.is_file():
@@ -141,7 +124,6 @@ def substrait_consumer_function_test(
             f"{function_group}/{type(consumer).__name__}/{type(producer).__name__}"
         )
         actual_result = consumer.run_substrait_query(substrait_plan)
-        # expected_result = db_con.query(f"{sql_query}").arrow()
         snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
 
 

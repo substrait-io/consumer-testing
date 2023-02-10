@@ -71,7 +71,7 @@ class TestBooleanFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
-        consumer
+        consumer,
     ) -> None:
         test_name = f"boolean_snapshots:{test_name}"
         substrait_consumer_function_test(
@@ -83,5 +83,5 @@ class TestBooleanFunctions:
             sql_query,
             ibis_expr,
             producer,
-            consumer
+            consumer,
         )

@@ -6,7 +6,9 @@ from ibis_substrait.tests.compiler.conftest import *
 
 from substrait_consumer.functional.arithmetic_decimal_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
-from substrait_consumer.functional.common import load_custom_duckdb_table, substrait_function_test
+from substrait_consumer.functional.common import (
+    load_custom_duckdb_table, substrait_consumer_function_test,
+    substrait_producer_function_test)
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -34,8 +36,33 @@ class TestArithmeticDecimalFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    def test_arithmetic_decimal_functions(
+    def test_producer_arithmetic_decimal_functions(
         self,
+        snapshot,
+        test_name: str,
+        file_names: Iterable[str],
+        sql_query: tuple,
+        ibis_expr: Callable[[Table], Table],
+        producer,
+        partsupp,
+    ) -> None:
+        test_name = f"arithmetic_decimal_snapshots:{test_name}"
+        substrait_producer_function_test(
+            test_name,
+            snapshot,
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
+        )
+
+    @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    def test_consumer_arithmetic_decimal_functions(
+        self,
+        snapshot,
         test_name: str,
         file_names: Iterable[str],
         sql_query: tuple,
@@ -44,7 +71,10 @@ class TestArithmeticDecimalFunctions:
         consumer,
         partsupp,
     ) -> None:
-        substrait_function_test(
+        test_name = f"arithmetic_decimal_snapshots:{test_name}"
+        substrait_consumer_function_test(
+            test_name,
+            snapshot,
             self.db_connection,
             self.created_tables,
             file_names,
@@ -52,5 +82,4 @@ class TestArithmeticDecimalFunctions:
             ibis_expr,
             producer,
             consumer,
-            partsupp,
         )
