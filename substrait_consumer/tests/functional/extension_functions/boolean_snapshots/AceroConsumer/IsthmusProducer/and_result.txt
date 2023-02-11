@@ -1,0 +1,6 @@
+pyarrow.Table
+FieldPath(0): int64
+FieldPath(1): int64
+----
+FieldPath(0): [[1,2,3,-4]]
+FieldPath(1): [[1,1,1,1]]

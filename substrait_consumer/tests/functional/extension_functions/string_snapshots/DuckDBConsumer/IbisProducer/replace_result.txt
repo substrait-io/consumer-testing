@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+replace_name: string
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+replace_name: [["aLGERIa","aRGENTINa","BRaZIL","CaNaDa","EGYPT",...,"SaUDI aRaBIa","VIETNaM","RUSSIa","UNITED KINGDOM","UNITED STaTES"]]

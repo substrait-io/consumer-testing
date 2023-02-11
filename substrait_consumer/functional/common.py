@@ -94,7 +94,7 @@ def substrait_producer_function_test(
     function_group = test_name.split(":")[0]
     function_name = test_name.split(":")[1]
     snapshot.snapshot_dir = f"{function_group}/{type(producer).__name__}"
-    snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.txt")
+    snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.json")
 
 
 def substrait_consumer_function_test(
@@ -114,7 +114,7 @@ def substrait_consumer_function_test(
     function_group = test_name.split(":")[0]
     function_name = test_name.split(":")[1]
     substrait_plan_dir = f"{function_group}/{type(producer).__name__}"
-    file_name = f"{function_name}_plan.txt"
+    file_name = f"{function_name}_plan.json"
     plan_path = SNAPSHOT_DIR / substrait_plan_dir / file_name
     if plan_path.is_file():
         # Convert to Path

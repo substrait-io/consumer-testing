@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+char_length_N_NAME: int64
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+char_length_N_NAME: [[7,9,6,6,5,...,12,7,6,14,13]]

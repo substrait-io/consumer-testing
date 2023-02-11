@@ -1,0 +1,6 @@
+pyarrow.Table
+FieldPath(2): int32
+FieldPath(0): int32
+----
+FieldPath(2): [[2404,2494,2767],[],[]]
+FieldPath(0): [[2404,2494,2767],[],[]]

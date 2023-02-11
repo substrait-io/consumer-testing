@@ -1,0 +1,6 @@
+pyarrow.Table
+o_comment: string
+uppercase_O_COMMENT: string
+----
+o_comment: [["nstructions sleep furiously among "," foxes. pending accounts at the pending, silent asymptot","sly final accounts boost. carefully regular ideas cajole carefully. depos","sits. slyly regular warthogs cajole. regular, regular theodolites acro","quickly. bold deposits sleep slyly. packages use slyly",...,"efully special platelets; furiously regular","ual, even excuses cajole bold instructions. instructions a","riously special theodolites. express pinto beans wake slyly acros","onic deposits. slyly regular accounts detect fluffy instructions. theo","ic instructions boost final reques"]]
+uppercase_O_COMMENT: [["NSTRUCTIONS SLEEP FURIOUSLY AMONG "," FOXES. PENDING ACCOUNTS AT THE PENDING, SILENT ASYMPTOT","SLY FINAL ACCOUNTS BOOST. CAREFULLY REGULAR IDEAS CAJOLE CAREFULLY. DEPOS","SITS. SLYLY REGULAR WARTHOGS CAJOLE. REGULAR, REGULAR THEODOLITES ACRO","QUICKLY. BOLD DEPOSITS SLEEP SLYLY. PACKAGES USE SLYLY",...,"EFULLY SPECIAL PLATELETS; FURIOUSLY REGULAR","UAL, EVEN EXCUSES CAJOLE BOLD INSTRUCTIONS. INSTRUCTIONS A","RIOUSLY SPECIAL THEODOLITES. EXPRESS PINTO BEANS WAKE SLYLY ACROS","ONIC DEPOSITS. SLYLY REGULAR ACCOUNTS DETECT FLUFFY INSTRUCTIONS. THEO","IC INSTRUCTIONS BOOST FINAL REQUES"]]

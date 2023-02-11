@@ -1,0 +1,4 @@
+pyarrow.Table
+STDDEV_SUPPLYCOST: double
+----
+STDDEV_SUPPLYCOST: [[288.6433242801254]]

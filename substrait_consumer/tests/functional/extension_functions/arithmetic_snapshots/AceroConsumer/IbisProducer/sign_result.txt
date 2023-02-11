@@ -1,0 +1,6 @@
+pyarrow.Table
+FieldPath(0): int64
+sign(FieldPath(0)): int8
+----
+FieldPath(0): [[1,2,3,-4,5,-6,7,8,9,null]]
+sign(FieldPath(0)): [[1,1,1,-1,1,-1,1,1,1,null]]

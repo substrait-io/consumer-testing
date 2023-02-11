@@ -1,0 +1,4 @@
+pyarrow.Table
+FieldPath(2): bool
+----
+FieldPath(2): [[true,false,true,true,false,true,false,true,false,false]]

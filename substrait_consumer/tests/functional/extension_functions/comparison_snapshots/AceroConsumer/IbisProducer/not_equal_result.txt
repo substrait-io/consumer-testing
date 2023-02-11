@@ -1,0 +1,4 @@
+pyarrow.Table
+FieldPath(1): string
+----
+FieldPath(1): [["ALGERIA","ARGENTINA","BRAZIL","EGYPT","ETHIOPIA",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]

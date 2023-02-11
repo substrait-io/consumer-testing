@@ -1,0 +1,4 @@
+pyarrow.Table
+SUM_EXTENDEDPRICE: decimal128(38, 2)
+----
+SUM_EXTENDEDPRICE: [[21615929280.24]]

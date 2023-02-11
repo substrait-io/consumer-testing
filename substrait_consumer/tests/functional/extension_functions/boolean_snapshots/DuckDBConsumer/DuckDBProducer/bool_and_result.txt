@@ -1,0 +1,4 @@
+pyarrow.Table
+bool_and_c: bool
+----
+bool_and_c: [[false]]

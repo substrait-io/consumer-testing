@@ -1,0 +1,4 @@
+pyarrow.Table
+C: bool
+----
+C: [[true,false,true,true,false,true,false,true,false,false]]

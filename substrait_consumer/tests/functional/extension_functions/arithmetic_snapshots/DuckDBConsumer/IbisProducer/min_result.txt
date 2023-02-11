@@ -1,0 +1,4 @@
+pyarrow.Table
+MIN_SUPPLYCOST: decimal128(15, 2)
+----
+MIN_SUPPLYCOST: [[1.01]]
