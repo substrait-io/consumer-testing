@@ -47,12 +47,10 @@ def substrait_producer_function_test(
     *args,
 ):
     """
-    Verify the substrait plan produced for the specified function can run and return
-    results equal to the results of running the SQL/Ibis expression against the data
-    with a trusted SQL consumer.
+    Verify the substrait plan produced for the specified function matches up with the
+    expected substrait plan snapshot.
 
     Parameters:
-        snapshot:
         db_con:
             DuckDB connection for creating in memory tables.
         created_tables:
@@ -65,8 +63,6 @@ def substrait_producer_function_test(
             Ibis expression.
         producer:
             Substrait producer class.
-        consumer:
-            Substrait consumer class.
         *args:
             The data tables to be passed to the ibis expression.
     """
@@ -108,7 +104,26 @@ def substrait_consumer_function_test(
     producer,
     consumer,
 ):
+    """
+    Iterate through the substrait plan snapshots and verify the consumer is able to run
+    them and produce results matching the results snapshots.
 
+    Parameters:
+        db_con:
+            DuckDB connection for creating in memory tables.
+        created_tables:
+            Tables names that have already been created.
+        file_names:
+            List of parquet files.
+        sql_query:
+            SQL query.
+        ibis_expr:
+            Ibis expression.
+        producer:
+            Substrait producer class.
+        consumer:
+            Substrait consumer class.
+    """
     consumer.setup(db_con, file_names)
 
     function_group = test_name.split(":")[0]
@@ -117,7 +132,6 @@ def substrait_consumer_function_test(
     file_name = f"{function_name}_plan.json"
     plan_path = SNAPSHOT_DIR / substrait_plan_dir / file_name
     if plan_path.is_file():
-        # Convert to Path
         substrait_plan = plan_path.read_text()
 
         snapshot.snapshot_dir = (

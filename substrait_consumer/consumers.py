@@ -30,13 +30,13 @@ class DuckDBConsumer:
     def setup(self, db_connection, file_names: Iterable[str]):
         self.db_connection = db_connection
 
-    def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
+    def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """
         Run the substrait plan against DuckDB.
 
         Parameters:
             substrait_query:
-                A substrait plan in byte format
+                A substrait plan in json format.
 
         Returns:
             A pyarrow table resulting from running the substrait query plan.
@@ -134,7 +134,7 @@ class AceroConsumer:
 
         Parameters:
             substrait_query:
-                A json formatted byte representation of the substrait query plan.
+                A substrait plan in json format.
 
         Returns:
             A pyarrow table resulting from running the substrait query plan.

@@ -151,9 +151,20 @@ used.
 # Function Tests
 The substrait function tests aim to test the functions available in Substrait.  This is done
 by converting queries (SQL/Ibis expressions) into substrait plans via various producers and
-running the substrait plans on different consumers.  The results of running the substrait plans
-are then compared to an expected result, which is determined by running the original query
-against a trusted engine (currently we use DuckDB).
+running the substrait plans on different consumers.  
+
+The producer tests take the SQL/Ibis query and generate a substrait plan in json format.  
+These plans are saved as snapshots to be used later on for verification as well as an input to 
+the consumer tests.
+
+The consumer tests read the saved substrait plan snapshots and generate results.  These
+results are saved as a snapshot to be used for verification.
+
+If there is a mismatch between results and a saved snapshot, the test will fail and a diff
+will be generated.
+
+Snapshots can be updated by rerunning the test with the `--snapshot-update` argument added to
+the pytest command.
 
 Substrait function test files are located in the `substrait_consumer/functional/extension_functions` folder.
 

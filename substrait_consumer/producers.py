@@ -24,7 +24,7 @@ class DuckDBProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> bytes:
+    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 
@@ -32,7 +32,7 @@ class DuckDBProducer:
             sql_query:
                 SQL query.
         Returns:
-            Substrait query plan in byte format.
+            Substrait query plan in json format.
         """
         duckdb_substrait_plan = self.db_connection.get_substrait_json(sql_query)
         proto_bytes = duckdb_substrait_plan.fetchone()[0]
@@ -65,7 +65,7 @@ class IbisProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> bytes:
+    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
         Produce the Ibis substrait plan using the given Ibis expression
 
@@ -73,7 +73,7 @@ class IbisProducer:
             ibis_expr:
                 Ibis expression.
         Returns:
-            Substrait query plan in byte format.
+            Substrait query plan in json format.
         """
         if ibis_expr is None:
             pytest.skip("ibis expression currently undefined")
