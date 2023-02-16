@@ -32,6 +32,7 @@ class TestRoundingFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
+    @pytest.mark.producer
     def test_producer_rounding_functions(
         self,
         snapshot,
@@ -56,6 +57,7 @@ class TestRoundingFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
+    @pytest.mark.consumer
     def test_consumer_rounding_functions(
         self,
         snapshot,

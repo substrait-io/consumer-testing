@@ -33,6 +33,7 @@ class TestStringFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    @pytest.mark.producer
     def test_producer_string_functions(
         self,
         snapshot,
@@ -59,6 +60,7 @@ class TestStringFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    @pytest.mark.consumer
     def test_consumer_string_functions(
         self,
         snapshot,

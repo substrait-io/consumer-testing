@@ -40,6 +40,7 @@ class TestBooleanFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    @pytest.mark.producer
     def test_producer_boolean_functions(
         self,
         snapshot,
@@ -63,6 +64,7 @@ class TestBooleanFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    @pytest.mark.consumer
     def test_consumer_boolean_functions(
         self,
         snapshot,
