@@ -146,7 +146,7 @@ class TestAceroConsumer:
 
         # Convert the SQL into a substrait query plan
         duckdb_substrait_plan = self.db_connection.get_substrait_json(sql_query)
-        proto_bytes = duckdb_substrait_plan.fetchone()[0].encode()
+        proto_bytes = duckdb_substrait_plan.fetchone()[0]
 
         # Run the duckdb produced substrait plan against Acero
         subtrait_query_result_tb = self.acero_consumer.run_substrait_query(proto_bytes)

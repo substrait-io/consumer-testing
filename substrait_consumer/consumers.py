@@ -23,12 +23,12 @@ class DuckDBConsumer:
         else:
             self.db_connection = duckdb.connect()
 
-        self.created_tables = set()
         self.db_connection.execute("INSTALL substrait")
         self.db_connection.execute("LOAD substrait")
 
-    def setup(self, db_connection, file_names: Iterable[str]):
+    def setup(self, db_connection, created_tables, file_names: Iterable[str]):
         self.db_connection = db_connection
+        self.load_tables_from_parquet(created_tables, file_names)
 
     def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """

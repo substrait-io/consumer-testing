@@ -124,7 +124,7 @@ def substrait_consumer_function_test(
         consumer:
             Substrait consumer class.
     """
-    consumer.setup(db_con, file_names)
+    consumer.setup(db_con, created_tables, file_names)
 
     function_group = test_name.split(":")[0]
     function_name = test_name.split(":")[1]
