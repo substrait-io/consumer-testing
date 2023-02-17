@@ -77,9 +77,7 @@ class TestArithmeticFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
-        consumer,
-        partsupp,
-        lineitem,
+        consumer
     ) -> None:
         test_name = f"arithmetic_snapshots:{test_name}"
         substrait_consumer_function_test(

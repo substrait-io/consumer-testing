@@ -48,10 +48,9 @@ def get_schema(file_names):
         for create_table in schema_string:
             java_obj = jpype.JObject @ jpype.JString(create_table)
             arr.add(java_obj)
-    else:
-        java_obj = jpype.JObject @ jpype.JString(
-            "CREATE TABLE T(a integer, b integer, c boolean, d boolean)"
-        )
-        arr.add(java_obj)
+    java_obj = jpype.JObject @ jpype.JString(
+        "CREATE TABLE T(a integer, b integer, c boolean, d boolean)"
+    )
+    arr.add(java_obj)
 
     return java.ListClass @ arr
