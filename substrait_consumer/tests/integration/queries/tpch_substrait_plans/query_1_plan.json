@@ -4,7 +4,7 @@
     "uri": "/functions_aggregate_generic.yaml"
   }, {
     "extensionUriAnchor": 2,
-    "uri": "/functions_arithmetic_decimal.yaml"
+    "uri": "/functions_arithmetic.yaml"
   }, {
     "extensionUriAnchor": 1,
     "uri": "/functions_datetime.yaml"
@@ -25,31 +25,31 @@
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "multiply:opt_decimal_decimal"
+      "name": "multiply:opt_fp64_fp64"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "subtract:opt_decimal_decimal"
+      "name": "subtract:opt_fp64_fp64"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 4,
-      "name": "add:opt_decimal_decimal"
+      "name": "add:opt_fp64_fp64"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 5,
-      "name": "sum:opt_decimal"
+      "name": "sum:opt_fp64"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 6,
-      "name": "avg:opt_decimal"
+      "name": "avg:opt_fp64"
     }
   }, {
     "extensionFunction": {
@@ -75,7 +75,9 @@
               "input": {
                 "project": {
                   "common": {
-
+                    "emit": {
+                      "outputMapping": [16, 17, 18, 19, 20, 21, 22]
+                    }
                   },
                   "input": {
                     "filter": {
@@ -95,95 +97,87 @@
                               "types": [{
                                 "i64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "i64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "i64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "i32": {
+                                "i64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
+                                "fp64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
+                                "fp64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
+                                "fp64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
+                                "fp64": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 1,
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 1,
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 25,
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
+                                "varchar": {
                                   "length": 10,
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "varchar": {
                                   "length": 44,
                                   "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }],
                               "typeVariationReference": 0,
@@ -207,7 +201,7 @@
                           "outputType": {
                             "bool": {
                               "typeVariationReference": 0,
-                              "nullability": "NULLABILITY_NULLABLE"
+                              "nullability": "NULLABILITY_REQUIRED"
                             }
                           },
                           "arguments": [{
@@ -306,11 +300,9 @@
                       "functionReference": 2,
                       "args": [],
                       "outputType": {
-                        "decimal": {
-                          "scale": 0,
-                          "precision": 19,
+                        "fp64": {
                           "typeVariationReference": 0,
-                          "nullability": "NULLABILITY_NULLABLE"
+                          "nullability": "NULLABILITY_REQUIRED"
                         }
                       },
                       "arguments": [{
@@ -331,22 +323,18 @@
                             "functionReference": 3,
                             "args": [],
                             "outputType": {
-                              "decimal": {
-                                "scale": 0,
-                                "precision": 19,
+                              "fp64": {
                                 "typeVariationReference": 0,
-                                "nullability": "NULLABILITY_NULLABLE"
+                                "nullability": "NULLABILITY_REQUIRED"
                               }
                             },
                             "arguments": [{
                               "value": {
                                 "cast": {
                                   "type": {
-                                    "decimal": {
-                                      "scale": 0,
-                                      "precision": 19,
+                                    "fp64": {
                                       "typeVariationReference": 0,
-                                      "nullability": "NULLABILITY_NULLABLE"
+                                      "nullability": "NULLABILITY_REQUIRED"
                                     }
                                   },
                                   "input": {
@@ -381,11 +369,9 @@
                       "functionReference": 2,
                       "args": [],
                       "outputType": {
-                        "decimal": {
-                          "scale": 0,
-                          "precision": 19,
+                        "fp64": {
                           "typeVariationReference": 0,
-                          "nullability": "NULLABILITY_NULLABLE"
+                          "nullability": "NULLABILITY_REQUIRED"
                         }
                       },
                       "arguments": [{
@@ -394,11 +380,9 @@
                             "functionReference": 2,
                             "args": [],
                             "outputType": {
-                              "decimal": {
-                                "scale": 0,
-                                "precision": 19,
+                              "fp64": {
                                 "typeVariationReference": 0,
-                                "nullability": "NULLABILITY_NULLABLE"
+                                "nullability": "NULLABILITY_REQUIRED"
                               }
                             },
                             "arguments": [{
@@ -419,22 +403,18 @@
                                   "functionReference": 3,
                                   "args": [],
                                   "outputType": {
-                                    "decimal": {
-                                      "scale": 0,
-                                      "precision": 19,
+                                    "fp64": {
                                       "typeVariationReference": 0,
-                                      "nullability": "NULLABILITY_NULLABLE"
+                                      "nullability": "NULLABILITY_REQUIRED"
                                     }
                                   },
                                   "arguments": [{
                                     "value": {
                                       "cast": {
                                         "type": {
-                                          "decimal": {
-                                            "scale": 0,
-                                            "precision": 19,
+                                          "fp64": {
                                             "typeVariationReference": 0,
-                                            "nullability": "NULLABILITY_NULLABLE"
+                                            "nullability": "NULLABILITY_REQUIRED"
                                           }
                                         },
                                         "input": {
@@ -471,22 +451,18 @@
                             "functionReference": 4,
                             "args": [],
                             "outputType": {
-                              "decimal": {
-                                "scale": 0,
-                                "precision": 19,
+                              "fp64": {
                                 "typeVariationReference": 0,
-                                "nullability": "NULLABILITY_NULLABLE"
+                                "nullability": "NULLABILITY_REQUIRED"
                               }
                             },
                             "arguments": [{
                               "value": {
                                 "cast": {
                                   "type": {
-                                    "decimal": {
-                                      "scale": 0,
-                                      "precision": 19,
+                                    "fp64": {
                                       "typeVariationReference": 0,
-                                      "nullability": "NULLABILITY_NULLABLE"
+                                      "nullability": "NULLABILITY_REQUIRED"
                                     }
                                   },
                                   "input": {
@@ -559,11 +535,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
@@ -588,11 +562,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
@@ -617,11 +589,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
@@ -646,11 +616,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
@@ -675,11 +643,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
@@ -704,11 +670,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
@@ -733,11 +697,9 @@
                   "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
-                    "decimal": {
-                      "scale": 0,
-                      "precision": 19,
+                    "fp64": {
                       "typeVariationReference": 0,
-                      "nullability": "NULLABILITY_NULLABLE"
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
                   "invocation": "AGGREGATION_INVOCATION_ALL",
