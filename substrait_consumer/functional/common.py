@@ -5,7 +5,7 @@ import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
 
-SNAPSHOT_DIR = Path(__file__).parent.parent / f"tests/functional/extension_functions"
+SNAPSHOT_DIR = Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
 
 
 def check_subtrait_function_names(
