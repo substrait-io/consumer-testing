@@ -1,4 +1,0 @@
-pyarrow.Table
-: decimal128(15, 2)
-----
-: [[1.01]]

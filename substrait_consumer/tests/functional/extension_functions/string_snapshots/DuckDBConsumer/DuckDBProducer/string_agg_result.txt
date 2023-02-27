@@ -1,6 +1,0 @@
-pyarrow.Table
-n_name: string
-string_agg(n_name): string
-----
-n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
-string_agg(n_name): [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]

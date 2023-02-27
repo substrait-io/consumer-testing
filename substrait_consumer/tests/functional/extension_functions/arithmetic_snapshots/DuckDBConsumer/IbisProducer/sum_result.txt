@@ -1,4 +1,0 @@
-pyarrow.Table
-SUM_SUPPLYCOST: decimal128(38, 2)
-----
-SUM_SUPPLYCOST: [[39975583.86]]

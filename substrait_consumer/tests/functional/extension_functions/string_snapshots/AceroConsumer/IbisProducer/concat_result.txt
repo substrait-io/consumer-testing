@@ -1,6 +1,0 @@
-pyarrow.Table
-FieldPath(1): string
-binary_join_element_wise(""): string
-----
-FieldPath(1): [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
-binary_join_element_wise(""): [["","","","","",...,"","","","",""]]

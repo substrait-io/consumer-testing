@@ -1,6 +1,0 @@
-pyarrow.Table
-ps_partkey: int32
-DIVIDE_KEY: int32
-----
-ps_partkey: [[1,1,1,1,2,...,19999,20000,20000,20000,20000]]
-DIVIDE_KEY: [[0,0,0,0,0,...,1999,2000,2000,2000,2000]]

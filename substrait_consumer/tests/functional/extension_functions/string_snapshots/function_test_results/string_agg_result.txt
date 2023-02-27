@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+string_agg("N_NAME", ','): string
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+string_agg("N_NAME", ','): [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]

@@ -4,6 +4,7 @@ from typing import Callable, Iterable
 import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
+from substrait_consumer.producers import DuckDBProducer
 
 SNAPSHOT_DIR = Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
 
@@ -33,6 +34,26 @@ def check_subtrait_function_names(
     assert (
         expected_function_name in functions_list
     ), f"Error in function: {expected_function_name}.  Does not appear in {functions_list}."
+
+
+def generate_snapshot_results(
+        test_name,
+        snapshot,
+        db_con: DuckDBPyConnection,
+        created_tables: set,
+        file_names: Iterable[str],
+        sql_query: tuple
+):
+    # Load the parquet files into DuckDB and return all the table names as a list
+    producer = DuckDBProducer()
+    producer.set_db_connection(db_con)
+    sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
+
+    duckdb_result = db_con.query(f"{sql_query}").arrow()
+    function_group = test_name.split(":")[0]
+    function_name = test_name.split(":")[1]
+    snapshot.snapshot_dir = f"{function_group}/function_test_results"
+    snapshot.assert_match(str(duckdb_result), f"{function_name}_result.txt")
 
 
 def substrait_producer_function_test(
@@ -134,9 +155,7 @@ def substrait_consumer_function_test(
     if plan_path.is_file():
         substrait_plan = plan_path.read_text()
 
-        snapshot.snapshot_dir = (
-            f"{function_group}/{type(consumer).__name__}/{type(producer).__name__}"
-        )
+        snapshot.snapshot_dir = f"{function_group}/function_test_results"
         actual_result = consumer.run_substrait_query(substrait_plan)
         snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
 

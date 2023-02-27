@@ -6,7 +6,7 @@ from ibis_substrait.tests.compiler.conftest import *
 
 from substrait_consumer.functional.approximation_configs import AGGREGATE_FUNCTIONS
 from substrait_consumer.functional.common import (
-    substrait_consumer_function_test, substrait_producer_function_test)
+    substrait_consumer_function_test, substrait_producer_function_test, generate_snapshot_results)
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -80,4 +80,24 @@ class TestApproximationFunctions:
             ibis_expr,
             producer,
             consumer,
+        )
+
+    @custom_parametrization(AGGREGATE_FUNCTIONS)
+    @pytest.mark.generate_function_snapshots
+    def test_generate_approximation_functions_results(
+            self,
+            snapshot,
+            test_name: str,
+            file_names: Iterable[str],
+            sql_query: tuple,
+            ibis_expr: Callable[[Table], Table],
+    ) -> None:
+        test_name = f"approximation_snapshots:{test_name}"
+        generate_snapshot_results(
+            test_name,
+            snapshot,
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
         )

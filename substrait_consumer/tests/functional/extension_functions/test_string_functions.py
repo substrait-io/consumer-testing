@@ -5,7 +5,7 @@ from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
 from substrait_consumer.functional.common import (
-    substrait_consumer_function_test, substrait_producer_function_test)
+    substrait_consumer_function_test, substrait_producer_function_test, generate_snapshot_results)
 from substrait_consumer.functional.string_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
 from substrait_consumer.parametrization import custom_parametrization
@@ -84,4 +84,24 @@ class TestStringFunctions:
             ibis_expr,
             producer,
             consumer,
+        )
+
+    @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    @pytest.mark.generate_function_snapshots
+    def test_generate_string_functions_results(
+        self,
+        snapshot,
+        test_name: str,
+        file_names: Iterable[str],
+        sql_query: tuple,
+        ibis_expr: Callable[[Table], Table],
+    ) -> None:
+        test_name = f"string_snapshots:{test_name}"
+        generate_snapshot_results(
+            test_name,
+            snapshot,
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
         )

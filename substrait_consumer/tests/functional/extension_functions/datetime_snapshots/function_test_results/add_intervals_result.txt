@@ -1,0 +1,4 @@
+pyarrow.Table
+(to_hours(CAST(1 AS BIGINT)) + to_hours(CAST(5 AS BIGINT))): duration[ms]
+----
+(to_hours(CAST(1 AS BIGINT)) + to_hours(CAST(5 AS BIGINT))): [[21600000]]

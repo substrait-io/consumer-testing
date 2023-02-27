@@ -1,4 +1,0 @@
-pyarrow.Table
-ps_availqty: int32
-----
-ps_availqty: [[4,8,7,3,6,...,3,2,6,4,9]]

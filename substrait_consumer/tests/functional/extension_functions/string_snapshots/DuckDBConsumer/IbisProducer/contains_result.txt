@@ -1,4 +1,0 @@
-pyarrow.Table
-n_name: string
-----
-n_name: [["ALGERIA","ETHIOPIA","INDIA","INDONESIA","ROMANIA","SAUDI ARABIA","RUSSIA"]]

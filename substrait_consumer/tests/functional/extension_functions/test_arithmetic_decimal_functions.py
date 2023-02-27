@@ -8,7 +8,7 @@ from substrait_consumer.functional.arithmetic_decimal_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
 from substrait_consumer.functional.common import (
     load_custom_duckdb_table, substrait_consumer_function_test,
-    substrait_producer_function_test)
+    substrait_producer_function_test, generate_snapshot_results)
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -84,4 +84,24 @@ class TestArithmeticDecimalFunctions:
             ibis_expr,
             producer,
             consumer,
+        )
+
+    @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
+    @pytest.mark.generate_function_snapshots
+    def test_generate_arithmetic_decimal_functions_results(
+        self,
+        snapshot,
+        test_name: str,
+        file_names: Iterable[str],
+        sql_query: tuple,
+        ibis_expr: Callable[[Table], Table],
+    ) -> None:
+        test_name = f"arithmetic_decimal_snapshots:{test_name}"
+        generate_snapshot_results(
+            test_name,
+            snapshot,
+            self.db_connection,
+            self.created_tables,
+            file_names,
+            sql_query,
         )
