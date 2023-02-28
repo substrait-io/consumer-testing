@@ -65,10 +65,10 @@ class DuckDBConsumer:
         for file_name, file_path in zip(file_names, parquet_file_paths):
             table_name = Path(file_name).stem
             table_name = table_name.translate(str.maketrans("", "", string.punctuation))
-            if table_name not in created_tables:
+            if f"{self.__class__.__name__}{table_name}" not in created_tables:
                 create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
                 self.db_connection.execute(create_table_sql)
-                created_tables.add(table_name)
+                created_tables.add(f"{self.__class__.__name__}{table_name}")
             table_names.append(table_name)
 
         return table_names
@@ -91,8 +91,8 @@ class AceroConsumer:
                 table_name = table_name.translate(
                     str.maketrans("", "", string.punctuation)
                 )
-                if table_name not in created_tables:
-                    created_tables.add(table_name)
+                if f"{self.__class__.__name__}{table_name}" not in created_tables:
+                    created_tables.add(f"{self.__class__.__name__}{table_name}")
                     self.tables[table_name] = pq.read_table(file_path)
         else:
             table = pa.table(

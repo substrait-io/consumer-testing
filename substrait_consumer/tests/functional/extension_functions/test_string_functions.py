@@ -5,7 +5,8 @@ from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
 from substrait_consumer.functional.common import (
-    substrait_consumer_function_test, substrait_producer_function_test, generate_snapshot_results)
+    generate_snapshot_results, substrait_consumer_function_test,
+    substrait_producer_function_test)
 from substrait_consumer.functional.string_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
 from substrait_consumer.parametrization import custom_parametrization
