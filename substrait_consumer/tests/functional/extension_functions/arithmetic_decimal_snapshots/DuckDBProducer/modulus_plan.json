@@ -3,6 +3,12 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
+        "name": "round"
+      }
+    },
+    {
+      "extensionFunction": {
+        "functionAnchor": 2,
         "name": "modulus"
       }
     }
@@ -180,41 +186,62 @@
                   "arguments": [
                     {
                       "value": {
-                        "cast": {
-                          "type": {
+                        "scalarFunction": {
+                          "functionReference": 2,
+                          "outputType": {
                             "fp64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
-                          "input": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              },
-                              "rootReference": {}
+                          "arguments": [
+                            {
+                              "value": {
+                                "cast": {
+                                  "type": {
+                                    "fp64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  },
+                                  "input": {
+                                    "selection": {
+                                      "directReference": {
+                                        "structField": {}
+                                      },
+                                      "rootReference": {}
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "value": {
+                                "cast": {
+                                  "type": {
+                                    "fp64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  },
+                                  "input": {
+                                    "selection": {
+                                      "directReference": {
+                                        "structField": {
+                                          "field": 1
+                                        }
+                                      },
+                                      "rootReference": {}
+                                    }
+                                  }
+                                }
+                              }
                             }
-                          }
+                          ]
                         }
                       }
                     },
                     {
                       "value": {
-                        "cast": {
-                          "type": {
-                            "fp64": {
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
-                          },
-                          "input": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {
-                                  "field": 1
-                                }
-                              },
-                              "rootReference": {}
-                            }
-                          }
+                        "literal": {
+                          "i32": 2
                         }
                       }
                     }

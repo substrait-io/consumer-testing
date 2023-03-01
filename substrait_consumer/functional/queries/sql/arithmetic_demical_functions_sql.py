@@ -17,21 +17,21 @@ SQL_SCALAR = {
     ),
     "multiply": (
         """
-        SELECT L_TAX, L_EXTENDEDPRICE, multiply(L_TAX, L_EXTENDEDPRICE) AS MULTIPLY_KEY
+        SELECT L_TAX, L_EXTENDEDPRICE, round(multiply(L_TAX, L_EXTENDEDPRICE), 2) AS MULTIPLY_KEY
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "divide": (
         """
-        SELECT L_TAX, L_EXTENDEDPRICE, divide(L_TAX, L_EXTENDEDPRICE) AS DIVIDE_KEY
+        SELECT L_TAX, L_EXTENDEDPRICE, round(divide(L_EXTENDEDPRICE, L_TAX), 2) AS DIVIDE_KEY
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "modulus": (
         """
-        SELECT L_EXTENDEDPRICE, L_TAX, mod(L_EXTENDEDPRICE, L_TAX) AS MODULUS_KEY
+        SELECT L_EXTENDEDPRICE, L_TAX, round(mod(L_EXTENDEDPRICE, L_TAX), 2) AS MODULUS_KEY
         FROM '{}';
         """,
         [DuckDBProducer],
@@ -48,7 +48,7 @@ SQL_AGGREGATE = {
     ),
     "avg": (
         """
-        SELECT avg(L_EXTENDEDPRICE) AS AVG_EXTENDEDPRICE
+        SELECT round(avg(L_EXTENDEDPRICE), 2) AS AVG_EXTENDEDPRICE
         FROM '{}';
         """,
         [DuckDBProducer],

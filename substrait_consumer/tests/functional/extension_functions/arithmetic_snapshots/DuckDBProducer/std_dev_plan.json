@@ -5,6 +5,12 @@
         "functionAnchor": 1,
         "name": "std_dev"
       }
+    },
+    {
+      "extensionFunction": {
+        "functionAnchor": 2,
+        "name": "round"
+      }
     }
   ],
   "relations": [
@@ -115,11 +121,32 @@
             },
             "expressions": [
               {
-                "selection": {
-                  "directReference": {
-                    "structField": {}
+                "scalarFunction": {
+                  "functionReference": 2,
+                  "outputType": {
+                    "fp64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
                   },
-                  "rootReference": {}
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          },
+                          "rootReference": {}
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i32": 2
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             ]

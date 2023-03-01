@@ -3,6 +3,12 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
+        "name": "round"
+      }
+    },
+    {
+      "extensionFunction": {
+        "functionAnchor": 2,
         "name": "multiply"
       }
     }
@@ -174,7 +180,7 @@
                   "functionReference": 1,
                   "outputType": {
                     "decimal": {
-                      "scale": 4,
+                      "scale": 2,
                       "precision": 18,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
@@ -182,23 +188,46 @@
                   "arguments": [
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
+                        "scalarFunction": {
+                          "functionReference": 2,
+                          "outputType": {
+                            "decimal": {
+                              "scale": 4,
+                              "precision": 18,
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
                           },
-                          "rootReference": {}
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            },
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {
+                                      "field": 1
+                                    }
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 1
-                            }
-                          },
-                          "rootReference": {}
+                        "literal": {
+                          "i32": 2
                         }
                       }
                     }

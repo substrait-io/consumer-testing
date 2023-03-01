@@ -3,6 +3,12 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
+        "name": "round"
+      }
+    },
+    {
+      "extensionFunction": {
+        "functionAnchor": 2,
         "name": "atan2"
       }
     }
@@ -182,21 +188,42 @@
                   "arguments": [
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
+                        "scalarFunction": {
+                          "functionReference": 2,
+                          "outputType": {
+                            "fp64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
                           },
-                          "rootReference": {}
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            },
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          },
-                          "rootReference": {}
+                        "literal": {
+                          "i32": 2
                         }
                       }
                     }

@@ -52,14 +52,14 @@ SQL_SCALAR = {
     ),
     "sqrt": (
         """
-        SELECT PS_PARTKEY, sqrt(PS_PARTKEY) AS SQRT_KEY
+        SELECT PS_PARTKEY, round(sqrt(PS_PARTKEY), 2) AS SQRT_KEY
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "exp": (
         """
-        SELECT PS_PARTKEY, exp(PS_PARTKEY) AS EXP_KEY
+        SELECT PS_PARTKEY, round(exp(PS_PARTKEY), 2) AS EXP_KEY
         FROM '{}';
         """,
         [DuckDBProducer],
@@ -73,49 +73,49 @@ SQL_SCALAR = {
     ),
     "cos": (
         """
-        SELECT cos(PS_SUPPLYCOST) AS COS_SUPPLY
+        SELECT round(cos(PS_SUPPLYCOST), 2) AS COS_SUPPLY
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "acos": (
         """
-        SELECT acos(L_TAX) AS ACOS_TAX
+        SELECT round(acos(L_TAX), 2) AS ACOS_TAX
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "sin": (
         """
-        SELECT sin(PS_SUPPLYCOST) AS SIN_SUPPLY
+        SELECT round(sin(PS_SUPPLYCOST), 2) AS SIN_SUPPLY
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "asin": (
         """
-        SELECT asin(L_TAX) AS ASIN_TAX
+        SELECT round(asin(L_TAX), 2) AS ASIN_TAX
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "tan": (
         """
-        SELECT tan(PS_SUPPLYCOST) AS TAN_SUPPLY
+        SELECT round(tan(PS_SUPPLYCOST), 2) AS TAN_SUPPLY
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "atan": (
         """
-        SELECT atan(L_TAX) AS ATAN_TAX
+        SELECT round(atan(L_TAX), 2) AS ATAN_TAX
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "atan2": (
         """
-        SELECT atan2(L_TAX, L_TAX) AS ATAN2_TAX
+        SELECT round(atan2(L_TAX, L_TAX), 2) AS ATAN2_TAX
         FROM '{}';
         """,
         [DuckDBProducer],
@@ -153,7 +153,7 @@ SQL_AGGREGATE = {
     ),
     "avg": (
         """
-        SELECT avg(PS_SUPPLYCOST) AS AVG_SUPPLYCOST
+        SELECT round(avg(PS_SUPPLYCOST), 2) AS AVG_SUPPLYCOST
         FROM '{}';
         """,
         [DuckDBProducer],
@@ -195,14 +195,14 @@ SQL_AGGREGATE = {
     ),
     "std_dev": (
         """
-        SELECT stddev(PS_SUPPLYCOST) AS STDDEV_SUPPLYCOST
+        SELECT round(stddev(PS_SUPPLYCOST), 2) AS STDDEV_SUPPLYCOST
         FROM '{}';
         """,
         [DuckDBProducer],
     ),
     "variance": (
         """
-        SELECT variance(PS_SUPPLYCOST) AS VARIANCE_SUPPLYCOST
+        SELECT round(variance(PS_SUPPLYCOST), 2) AS VARIANCE_SUPPLYCOST
         FROM '{}';
         """,
         [DuckDBProducer],

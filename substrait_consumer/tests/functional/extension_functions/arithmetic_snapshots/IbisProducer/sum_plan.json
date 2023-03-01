@@ -51,83 +51,27 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "sqrt"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 8,
-        "name": "exp"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 9,
         "name": "negate"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
-        "functionAnchor": 10,
-        "name": "cos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 11,
-        "name": "acos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 12,
-        "name": "sin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 13,
-        "name": "asin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 14,
-        "name": "tan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 15,
-        "name": "atan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 16,
+        "functionAnchor": 8,
         "name": "abs"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
-        "functionAnchor": 17,
+        "functionAnchor": 9,
         "name": "sign"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
-        "functionAnchor": 18,
+        "functionAnchor": 10,
         "name": "sum"
       }
     }
@@ -193,7 +137,7 @@
             "measures": [
               {
                 "measure": {
-                  "functionReference": 18,
+                  "functionReference": 10,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
