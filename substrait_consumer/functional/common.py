@@ -4,9 +4,13 @@ from typing import Callable, Iterable
 import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
+from pytest_snapshot.plugin import Snapshot
+
 from substrait_consumer.producers import DuckDBProducer
 
-SNAPSHOT_DIR = Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
+SNAPSHOT_DIR = (
+    Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
+)
 
 
 def check_subtrait_function_names(
@@ -37,13 +41,31 @@ def check_subtrait_function_names(
 
 
 def generate_snapshot_results(
-        test_name,
-        snapshot,
-        db_con: DuckDBPyConnection,
-        created_tables: set,
-        file_names: Iterable[str],
-        sql_query: tuple
+    test_name: str,
+    snapshot: Snapshot,
+    db_con: DuckDBPyConnection,
+    created_tables: set,
+    file_names: Iterable[str],
+    sql_query: tuple,
 ):
+    """
+    Generate a "golden" results snapshot using DuckDB.
+
+    Parameters:
+        test_name:
+            Extension function name and grouping used to determine the folder locations
+            of snapshot files.
+        snapshot:
+            Pytest snapshot plugin used for verification.
+        db_con:
+            DuckDB connection for creating in memory tables.
+        created_tables:
+            Tables names that have already been created.
+        file_names:
+            List of parquet files.
+        sql_query:
+            SQL query.
+    """
     # Load the parquet files into DuckDB and return all the table names as a list
     producer = DuckDBProducer()
     producer.set_db_connection(db_con)
@@ -57,8 +79,8 @@ def generate_snapshot_results(
 
 
 def substrait_producer_function_test(
-    test_name,
-    snapshot,
+    test_name: str,
+    snapshot: Snapshot,
     db_con: DuckDBPyConnection,
     created_tables: set,
     file_names: Iterable[str],
@@ -72,6 +94,11 @@ def substrait_producer_function_test(
     expected substrait plan snapshot.
 
     Parameters:
+        test_name:
+            Extension function name and grouping used to determine the folder locations
+            of snapshot files.
+        snapshot:
+            Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
         created_tables:
@@ -115,8 +142,8 @@ def substrait_producer_function_test(
 
 
 def substrait_consumer_function_test(
-    test_name,
-    snapshot,
+    test_name: str,
+    snapshot: Snapshot,
     db_con: DuckDBPyConnection,
     created_tables: set,
     file_names: Iterable[str],
@@ -126,10 +153,15 @@ def substrait_consumer_function_test(
     consumer,
 ):
     """
-    Iterate through the substrait plan snapshots and verify the consumer is able to run
-    them and produce results matching the results snapshots.
+    Iterate through the substrait plan snapshots from each producer and verify the
+    consumer is able to run them and generate results matching the results snapshots.
 
     Parameters:
+        test_name:
+            Extension function name and grouping used to determine the folder locations
+            of snapshot files.
+        snapshot:
+            Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
         created_tables:
