@@ -51,27 +51,34 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "sqrt"
+        "name": "round"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 8,
-        "name": "exp"
+        "name": "sqrt"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 9,
-        "name": "negate"
+        "name": "exp"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 10,
+        "name": "negate"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 11,
         "name": "cos"
       }
     }
@@ -144,7 +151,7 @@
             "expressions": [
               {
                 "scalarFunction": {
-                  "functionReference": 10,
+                  "functionReference": 7,
                   "outputType": {
                     "decimal": {
                       "scale": 2,
@@ -155,13 +162,36 @@
                   "arguments": [
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 3
+                        "scalarFunction": {
+                          "functionReference": 11,
+                          "outputType": {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
-                          "rootReference": {}
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {
+                                      "field": 3
+                                    }
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i8": 2
                         }
                       }
                     }

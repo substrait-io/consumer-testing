@@ -51,6 +51,27 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
+        "name": "round"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 8,
+        "name": "sqrt"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 9,
+        "name": "exp"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 10,
         "name": "negate"
       }
     }
@@ -132,7 +153,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 7,
+                  "functionReference": 10,
                   "outputType": {
                     "i32": {
                       "nullability": "NULLABILITY_REQUIRED"

@@ -115,7 +115,7 @@ def min_expr(partsupp, lineitem, t):
 
 
 def avg_expr(partsupp, lineitem, t):
-    stats = [partsupp.ps_supplycost.mean().round(2).name("AVG_SUPPLYCOST")]
+    stats = [partsupp.ps_supplycost.mean().name("AVG_SUPPLYCOST")]
     return partsupp.aggregate(stats)
 
 

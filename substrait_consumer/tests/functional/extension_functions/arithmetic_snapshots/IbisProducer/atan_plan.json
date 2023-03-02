@@ -51,62 +51,69 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "sqrt"
+        "name": "round"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 8,
-        "name": "exp"
+        "name": "sqrt"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 9,
-        "name": "negate"
+        "name": "exp"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 10,
-        "name": "cos"
+        "name": "negate"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 11,
-        "name": "acos"
+        "name": "cos"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 12,
-        "name": "sin"
+        "name": "acos"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 13,
-        "name": "asin"
+        "name": "sin"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 14,
-        "name": "tan"
+        "name": "asin"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 15,
+        "name": "tan"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 16,
         "name": "atan"
       }
     }
@@ -251,7 +258,7 @@
             "expressions": [
               {
                 "scalarFunction": {
-                  "functionReference": 15,
+                  "functionReference": 7,
                   "outputType": {
                     "decimal": {
                       "scale": 2,
@@ -262,13 +269,36 @@
                   "arguments": [
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 7
+                        "scalarFunction": {
+                          "functionReference": 16,
+                          "outputType": {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
-                          "rootReference": {}
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {
+                                      "field": 7
+                                    }
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i8": 2
                         }
                       }
                     }

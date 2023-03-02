@@ -51,13 +51,20 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "sqrt"
+        "name": "round"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 8,
+        "name": "sqrt"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 9,
         "name": "exp"
       }
     }
@@ -139,7 +146,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 8,
+                  "functionReference": 7,
                   "outputType": {
                     "fp64": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -148,11 +155,32 @@
                   "arguments": [
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
+                        "scalarFunction": {
+                          "functionReference": 9,
+                          "outputType": {
+                            "fp64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
                           },
-                          "rootReference": {}
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i8": 2
                         }
                       }
                     }
