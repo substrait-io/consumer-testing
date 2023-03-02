@@ -1,6 +1,6 @@
 pyarrow.Table
 ps_partkey: int32
-MODULO_KEY: int32
+MODULUS_KEY: int32
 ----
 ps_partkey: [[1,1,1,1,2,...,19999,20000,20000,20000,20000]]
-MODULO_KEY: [[1,1,1,1,2,...,9,0,0,0,0]]
+MODULUS_KEY: [[1,1,1,1,2,...,9,0,0,0,0]]

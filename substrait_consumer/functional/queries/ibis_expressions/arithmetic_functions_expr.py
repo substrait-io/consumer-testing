@@ -4,7 +4,7 @@ def add_expr(partsupp, lineitem, t):
 
 
 def subtract_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey - partsupp.ps_suppkey).name("SUBSTRACT_KEY")
+    new_col = (partsupp.ps_partkey - partsupp.ps_suppkey).name("SUBTRACT_KEY")
     return partsupp[partsupp.ps_partkey, partsupp.ps_suppkey, new_col]
 
 

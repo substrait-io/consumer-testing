@@ -31,7 +31,7 @@ SQL_SCALAR = {
     ),
     "modulus": (
         """
-        SELECT PS_PARTKEY, mod(PS_PARTKEY, 10) AS MODULO_KEY
+        SELECT PS_PARTKEY, mod(PS_PARTKEY, 10) AS MODULUS_KEY
         FROM '{}';
         """,
         [DuckDBProducer],

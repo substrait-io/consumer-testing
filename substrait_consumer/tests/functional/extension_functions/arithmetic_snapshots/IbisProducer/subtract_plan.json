@@ -146,7 +146,7 @@
         "names": [
           "ps_partkey",
           "ps_suppkey",
-          "SUBSTRACT_KEY"
+          "SUBTRACT_KEY"
         ]
       }
     }

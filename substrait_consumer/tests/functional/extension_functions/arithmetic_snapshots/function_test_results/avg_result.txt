@@ -1,4 +1,4 @@
 pyarrow.Table
 AVG_SUPPLYCOST: double
 ----
-AVG_SUPPLYCOST: [[499.69479825]]
+AVG_SUPPLYCOST: [[499.69]]
