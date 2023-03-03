@@ -43,6 +43,7 @@ class TestRoundingFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         partsupp,
+        lineitem
     ) -> None:
         test_name = f"rounding_snapshots:{test_name}"
         substrait_producer_function_test(
@@ -55,6 +56,7 @@ class TestRoundingFunctions:
             ibis_expr,
             producer,
             partsupp,
+            lineitem,
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
@@ -69,6 +71,7 @@ class TestRoundingFunctions:
         producer,
         consumer,
         partsupp,
+        lineitem,
     ) -> None:
         test_name = f"rounding_snapshots:{test_name}"
         substrait_consumer_function_test(

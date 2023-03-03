@@ -14,4 +14,10 @@ SCALAR_FUNCTIONS = (
         "sql_query": SQL_SCALAR["floor"],
         "ibis_expr": IBIS_SCALAR["floor"],
     },
+    {
+        "test_name": "round",
+        "file_names": ["lineitem.parquet"],
+        "sql_query": SQL_SCALAR["round"],
+        "ibis_expr": IBIS_SCALAR["round"],
+    },
 )
