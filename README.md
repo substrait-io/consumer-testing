@@ -157,8 +157,8 @@ by converting queries (SQL/Ibis expressions) into substrait plans via various pr
 running the substrait plans on different consumers.  
 
 The producer tests take the SQL/Ibis query and generate a substrait plan in json format. 
-These plans are saved as snapshots to be used later on for verification as well as an input to 
-the consumer tests.
+These plans are saved as snapshots, [using pytest-snapshot](https://pypi.org/project/pytest-snapshot/),
+to be used later on for verification as well as an input to the consumer tests.
 
 The consumer tests read the saved substrait plan snapshots and generate results. These
 results are saved as a snapshot to be used for verification.
