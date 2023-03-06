@@ -35,7 +35,7 @@ class TestComparisonFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.mark.producer
+    @pytest.mark.produce_substrait_snapshotr
     def test_producer_comparison_functions(
         self,
         snapshot,
@@ -62,7 +62,7 @@ class TestComparisonFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.mark.consumer
+    @pytest.mark.consume_substrait_snapshot
     def test_consumer_comparison_functions(
         self,
         snapshot,

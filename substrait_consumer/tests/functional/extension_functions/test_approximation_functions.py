@@ -33,7 +33,7 @@ class TestApproximationFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(AGGREGATE_FUNCTIONS)
-    @pytest.mark.producer
+    @pytest.mark.produce_substrait_snapshot
     def test_producer_approximation_functions(
         self,
         snapshot,
@@ -58,7 +58,7 @@ class TestApproximationFunctions:
         )
 
     @custom_parametrization(AGGREGATE_FUNCTIONS)
-    @pytest.mark.consumer
+    @pytest.mark.consume_substrait_snapshot
     def test_consumer_approximation_functions(
         self,
         snapshot,

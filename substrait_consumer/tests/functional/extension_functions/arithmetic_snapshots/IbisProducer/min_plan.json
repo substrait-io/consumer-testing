@@ -142,6 +142,13 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 20,
+        "name": "avg"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 21,
         "name": "min"
       }
     }
@@ -207,7 +214,7 @@
             "measures": [
               {
                 "measure": {
-                  "functionReference": 20,
+                  "functionReference": 21,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {

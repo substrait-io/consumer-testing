@@ -33,7 +33,7 @@ class TestDatetimeFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.mark.producer
+    @pytest.mark.produce_substrait_snapshotr
     def test_producer_datetime_functions(
         self,
         snapshot,
@@ -58,7 +58,7 @@ class TestDatetimeFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.mark.consumer
+    @pytest.markconsume_substrait_snapshot
     def test_consumer_datetime_functions(
         self,
         snapshot,

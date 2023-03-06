@@ -51,118 +51,132 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "sqrt"
+        "name": "round"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 8,
-        "name": "exp"
+        "name": "sqrt"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 9,
-        "name": "negate"
+        "name": "exp"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 10,
-        "name": "cos"
+        "name": "negate"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 11,
-        "name": "acos"
+        "name": "cos"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 12,
-        "name": "sin"
+        "name": "acos"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 13,
-        "name": "asin"
+        "name": "sin"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 14,
-        "name": "tan"
+        "name": "asin"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 15,
-        "name": "atan"
+        "name": "tan"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 16,
-        "name": "abs"
+        "name": "atan"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 17,
-        "name": "sign"
+        "name": "abs"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 18,
-        "name": "sum"
+        "name": "sign"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 19,
-        "name": "avg"
+        "name": "sum"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 20,
-        "name": "min"
+        "name": "avg"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 21,
-        "name": "max"
+        "name": "min"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 22,
-        "name": "or"
+        "name": "max"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 23,
+        "name": "median"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 24,
+        "name": "or"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 25,
         "name": "equal"
       }
     }
@@ -228,7 +242,7 @@
                 },
                 "condition": {
                   "scalarFunction": {
-                    "functionReference": 22,
+                    "functionReference": 24,
                     "outputType": {
                       "bool": {
                         "nullability": "NULLABILITY_NULLABLE"
@@ -238,7 +252,7 @@
                       {
                         "value": {
                           "scalarFunction": {
-                            "functionReference": 23,
+                            "functionReference": 25,
                             "outputType": {
                               "bool": {
                                 "nullability": "NULLABILITY_NULLABLE"
@@ -269,7 +283,7 @@
                       {
                         "value": {
                           "scalarFunction": {
-                            "functionReference": 23,
+                            "functionReference": 25,
                             "outputType": {
                               "bool": {
                                 "nullability": "NULLABILITY_NULLABLE"

@@ -142,20 +142,27 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 20,
-        "name": "min"
+        "name": "avg"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 21,
-        "name": "max"
+        "name": "min"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 22,
+        "name": "max"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 23,
         "name": "median"
       }
     }
@@ -221,7 +228,7 @@
             "measures": [
               {
                 "measure": {
-                  "functionReference": 22,
+                  "functionReference": 23,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {

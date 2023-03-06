@@ -36,7 +36,7 @@ class TestArithmeticDecimalFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    @pytest.mark.producer
+    @pytest.mark.produce_substrait_snapshotr
     def test_producer_arithmetic_decimal_functions(
         self,
         snapshot,
@@ -61,7 +61,7 @@ class TestArithmeticDecimalFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    @pytest.mark.consumer
+    @pytest.mark.consume_substrait_snapshot
     def test_consumer_arithmetic_decimal_functions(
         self,
         snapshot,
