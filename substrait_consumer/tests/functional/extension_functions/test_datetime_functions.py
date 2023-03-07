@@ -58,7 +58,7 @@ class TestDatetimeFunctions:
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.markconsume_substrait_snapshot
+    @pytest.mark.consume_substrait_snapshot
     def test_consumer_datetime_functions(
         self,
         snapshot,
