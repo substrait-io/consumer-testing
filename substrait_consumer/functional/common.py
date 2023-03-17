@@ -189,6 +189,9 @@ def substrait_consumer_function_test(
 
         snapshot.snapshot_dir = f"{function_group}/function_test_results"
         actual_result = consumer.run_substrait_query(substrait_plan)
+        actual_result = actual_result.rename_columns(
+            list(map(str.lower, actual_result.column_names))
+        )
         snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
 
 
