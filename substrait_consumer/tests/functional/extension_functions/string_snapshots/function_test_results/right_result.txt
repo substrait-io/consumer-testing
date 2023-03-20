@@ -1,6 +1,6 @@
 pyarrow.Table
 n_name: string
-right_extract_N_NAME: string
+right_extract_n_name: string
 ----
 n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
-right_extract_N_NAME: [["IA","NA","IL","DA","PT",...,"IA","AM","IA","OM","ES"]]
+right_extract_n_name: [["IA","NA","IL","DA","PT",...,"IA","AM","IA","OM","ES"]]

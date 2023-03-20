@@ -1,10 +1,12 @@
 from pathlib import Path
-from typing import Callable, Iterable
+from typing import TYPE_CHECKING, Callable, Iterable
 
 import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
-from pytest_snapshot.plugin import Snapshot
+
+if TYPE_CHECKING:
+    from pytest_snapshot.plugin import Snapshot
 
 from substrait_consumer.producers import DuckDBProducer
 
@@ -72,9 +74,11 @@ def generate_snapshot_results(
     sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
 
     duckdb_result = db_con.query(f"{sql_query}").arrow()
-    function_group = test_name.split(":")[0]
-    function_name = test_name.split(":")[1]
-    snapshot.snapshot_dir = f"{function_group}/function_test_results"
+    duckdb_result = duckdb_result.rename_columns(
+        list(map(str.lower, duckdb_result.column_names))
+    )
+    function_group, function_name = test_name.split(":")
+    snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
     snapshot.assert_match(str(duckdb_result), f"{function_name}_result.txt")
 
 
@@ -135,9 +139,8 @@ def substrait_producer_function_test(
                 f"{sql_query}"
             )
 
-    function_group = test_name.split(":")[0]
-    function_name = test_name.split(":")[1]
-    snapshot.snapshot_dir = f"{function_group}/{type(producer).__name__}"
+    function_group, function_name = test_name.split(":")
+    snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / type(producer).__name__
     snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.json")
 
 
@@ -179,15 +182,17 @@ def substrait_consumer_function_test(
     """
     consumer.setup(db_con, created_tables, file_names)
 
-    function_group = test_name.split(":")[0]
-    function_name = test_name.split(":")[1]
-    substrait_plan_dir = f"{function_group}/{type(producer).__name__}"
-    file_name = f"{function_name}_plan.json"
-    plan_path = SNAPSHOT_DIR / substrait_plan_dir / file_name
+    function_group, function_name = test_name.split(":")
+    plan_path = (
+        SNAPSHOT_DIR
+        / function_group
+        / type(producer).__name__
+        / f"{function_name}_plan.json"
+    )
     if plan_path.is_file():
         substrait_plan = plan_path.read_text()
 
-        snapshot.snapshot_dir = f"{function_group}/function_test_results"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
         actual_result = consumer.run_substrait_query(substrait_plan)
         actual_result = actual_result.rename_columns(
             list(map(str.lower, actual_result.column_names))
