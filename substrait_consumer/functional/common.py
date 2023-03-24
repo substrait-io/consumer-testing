@@ -1,10 +1,18 @@
-from typing import Callable, Iterable
+from pathlib import Path
+from typing import TYPE_CHECKING, Callable, Iterable
 
 import pytest
 from duckdb import DuckDBPyConnection
 from ibis.expr.types.relations import Table
 
-from substrait_consumer.verification import verify_equals
+if TYPE_CHECKING:
+    from pytest_snapshot.plugin import Snapshot
+
+from substrait_consumer.producers import DuckDBProducer
+
+SNAPSHOT_DIR = (
+    Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
+)
 
 
 def check_subtrait_function_names(
@@ -34,7 +42,111 @@ def check_subtrait_function_names(
     ), f"Error in function: {expected_function_name}.  Does not appear in {functions_list}."
 
 
-def substrait_function_test(
+def generate_snapshot_results(
+    test_name: str,
+    snapshot: Snapshot,
+    db_con: DuckDBPyConnection,
+    created_tables: set,
+    file_names: Iterable[str],
+    sql_query: tuple,
+):
+    """
+    Generate a "golden" results snapshot using DuckDB.
+
+    Parameters:
+        test_name:
+            Extension function name and grouping used to determine the folder locations
+            of snapshot files.
+        snapshot:
+            Pytest snapshot plugin used for verification.
+        db_con:
+            DuckDB connection for creating in memory tables.
+        created_tables:
+            Tables names that have already been created.
+        file_names:
+            List of parquet files.
+        sql_query:
+            SQL query.
+    """
+    # Load the parquet files into DuckDB and return all the table names as a list
+    producer = DuckDBProducer()
+    producer.set_db_connection(db_con)
+    sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
+
+    duckdb_result = db_con.query(f"{sql_query}").arrow()
+    duckdb_result = duckdb_result.rename_columns(
+        list(map(str.lower, duckdb_result.column_names))
+    )
+    function_group, function_name = test_name.split(":")
+    snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
+    snapshot.assert_match(str(duckdb_result), f"{function_name}_result.txt")
+
+
+def substrait_producer_function_test(
+    test_name: str,
+    snapshot: Snapshot,
+    db_con: DuckDBPyConnection,
+    created_tables: set,
+    file_names: Iterable[str],
+    sql_query: tuple,
+    ibis_expr: Callable[[Table], Table],
+    producer,
+    *args,
+):
+    """
+    Verify the substrait plan produced for the specified function matches up with the
+    expected substrait plan snapshot.
+
+    Parameters:
+        test_name:
+            Extension function name and grouping used to determine the folder locations
+            of snapshot files.
+        snapshot:
+            Pytest snapshot plugin used for verification.
+        db_con:
+            DuckDB connection for creating in memory tables.
+        created_tables:
+            Tables names that have already been created.
+        file_names:
+            List of parquet files.
+        sql_query:
+            SQL query.
+        ibis_expr:
+            Ibis expression.
+        producer:
+            Substrait producer class.
+        *args:
+            The data tables to be passed to the ibis expression.
+    """
+    producer.set_db_connection(db_con)
+    supported_producers = sql_query[1]
+
+    # Load the parquet files into DuckDB and return all the table names as a list
+    sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
+
+    # Convert the SQL/Ibis expression to a substrait query plan
+    if type(producer).__name__ == "IbisProducer":
+        if ibis_expr:
+            substrait_plan = producer.produce_substrait(sql_query, ibis_expr(*args))
+        else:
+            pytest.xfail("ibis expression currently undefined")
+    else:
+        if type(producer) in supported_producers:
+            substrait_plan = producer.produce_substrait(sql_query)
+        else:
+            pytest.xfail(
+                f"{type(producer).__name__} does not support the following SQL: "
+                f"{sql_query}"
+            )
+
+    function_group, function_name = test_name.split(":")
+    snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / type(producer).__name__
+    snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.json")
+
+
+def substrait_consumer_function_test(
+    test_name: str,
+    snapshot: Snapshot,
     db_con: DuckDBPyConnection,
     created_tables: set,
     file_names: Iterable[str],
@@ -42,14 +154,17 @@ def substrait_function_test(
     ibis_expr: Callable[[Table], Table],
     producer,
     consumer,
-    *args,
 ):
     """
-    Verify the substrait plan produced for the specified function can run and return
-    results equal to the results of running the SQL/Ibis expression against the data
-    with a trusted SQL consumer.
+    Iterate through the substrait plan snapshots from each producer and verify the
+    consumer is able to run them and generate results matching the results snapshots.
 
     Parameters:
+        test_name:
+            Extension function name and grouping used to determine the folder locations
+            of snapshot files.
+        snapshot:
+            Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
         created_tables:
@@ -64,41 +179,25 @@ def substrait_function_test(
             Substrait producer class.
         consumer:
             Substrait consumer class.
-        *args:
-            The data tables to be passed to the ibis expression.
     """
-    producer.set_db_connection(db_con)
-    consumer.setup(db_con, file_names)
-    supported_producers = sql_query[1]
+    consumer.setup(db_con, created_tables, file_names)
 
-    # Load the parquet files into DuckDB and return all the table names as a list
-    sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
-
-    # Convert the SQL/Ibis expression to a substrait query plan
-    if type(producer).__name__ == "IbisProducer":
-        if ibis_expr:
-            substrait_plan = producer.produce_substrait(
-                sql_query, consumer, ibis_expr(*args)
-            )
-        else:
-            pytest.xfail("ibis expression currently undefined")
-    else:
-        if type(producer) in supported_producers:
-            substrait_plan = producer.produce_substrait(sql_query, consumer)
-        else:
-            pytest.xfail(f"{type(producer).__name__} does not support the following SQL: "
-                        f"{sql_query}")
-
-    actual_result = consumer.run_substrait_query(substrait_plan)
-    expected_result = db_con.query(f"{sql_query}").arrow()
-
-    verify_equals(
-        actual_result.columns,
-        expected_result.columns,
-        message=f"Result: {actual_result.columns} "
-        f"is not equal to the expected: "
-        f"{expected_result.columns}",
+    function_group, function_name = test_name.split(":")
+    plan_path = (
+        SNAPSHOT_DIR
+        / function_group
+        / type(producer).__name__
+        / f"{function_name}_plan.json"
     )
+    if plan_path.is_file():
+        substrait_plan = plan_path.read_text()
+
+        snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
+        actual_result = consumer.run_substrait_query(substrait_plan)
+        actual_result = actual_result.rename_columns(
+            list(map(str.lower, actual_result.column_names))
+        )
+        snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
 
 
 def load_custom_duckdb_table(db_connection):

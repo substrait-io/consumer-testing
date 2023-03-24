@@ -1,0 +1,4 @@
+pyarrow.Table
+MIN_EXTENDEDPRICE: decimal128(15, 2)
+----
+MIN_EXTENDEDPRICE: [[901.00]]

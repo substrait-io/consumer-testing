@@ -1,0 +1,4 @@
+pyarrow.Table
+a: int64
+----
+a: [[5,7]]

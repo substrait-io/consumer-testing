@@ -4,7 +4,7 @@ def add_expr(partsupp, lineitem, t):
 
 
 def subtract_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey - partsupp.ps_suppkey).name("SUBSTRACT_KEY")
+    new_col = (partsupp.ps_partkey - partsupp.ps_suppkey).name("SUBTRACT_KEY")
     return partsupp[partsupp.ps_partkey, partsupp.ps_suppkey, new_col]
 
 
@@ -24,7 +24,7 @@ def modulus_expr(partsupp, lineitem, t):
 
 
 def exp_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey.exp()).name("EXP_KEY")
+    new_col = (partsupp.ps_partkey.exp()).round(2).name("EXP_KEY")
     return partsupp[partsupp.ps_partkey, new_col]
 
 
@@ -34,7 +34,7 @@ def power_expr(partsupp, lineitem, t):
 
 
 def sqrt_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey.sqrt()).name("SQRT_KEY")
+    new_col = (partsupp.ps_partkey.sqrt()).round(2).name("SQRT_KEY")
     return partsupp[partsupp.ps_partkey, new_col]
 
 
@@ -54,32 +54,32 @@ def negate_expr(partsupp, lineitem, t):
 
 
 def sin_expr(partsupp, lineitem, t):
-    new_col = partsupp.ps_supplycost.sin().name("SIN_SUPPLY")
+    new_col = partsupp.ps_supplycost.sin().round(2).name("SIN_SUPPLY")
     return partsupp[new_col]
 
 
 def cos_expr(partsupp, lineitem, t):
-    new_col = partsupp.ps_supplycost.cos().name("COS_SUPPLY")
+    new_col = partsupp.ps_supplycost.cos().round(2).name("COS_SUPPLY")
     return partsupp[new_col]
 
 
 def tan_expr(partsupp, lineitem, t):
-    new_col = partsupp.ps_supplycost.tan().name("TAN_SUPPLY")
+    new_col = partsupp.ps_supplycost.tan().round(2).name("TAN_SUPPLY")
     return partsupp[new_col]
 
 
 def asin_expr(partsupp, lineitem, t):
-    new_col = lineitem.l_tax.asin().name("ASIN_TAX")
+    new_col = lineitem.l_tax.asin().round(2).name("ASIN_TAX")
     return lineitem[new_col]
 
 
 def acos_expr(partsupp, lineitem, t):
-    new_col = lineitem.l_tax.acos().name("ACOS_TAX")
+    new_col = lineitem.l_tax.acos().round(2).name("ACOS_TAX")
     return lineitem[new_col]
 
 
 def atan_expr(partsupp, lineitem, t):
-    new_col = lineitem.l_tax.atan().name("ATAN_TAX")
+    new_col = lineitem.l_tax.atan().round(2).name("ATAN_TAX")
     return lineitem[new_col]
 
 

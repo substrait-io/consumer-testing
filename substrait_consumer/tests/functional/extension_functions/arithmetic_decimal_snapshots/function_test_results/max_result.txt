@@ -1,0 +1,4 @@
+pyarrow.Table
+MAX_EXTENDEDPRICE: decimal128(15, 2)
+----
+MAX_EXTENDEDPRICE: [[95949.50]]

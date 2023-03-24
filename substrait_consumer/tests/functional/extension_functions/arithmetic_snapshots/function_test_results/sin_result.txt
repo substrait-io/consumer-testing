@@ -1,0 +1,4 @@
+pyarrow.Table
+SIN_SUPPLY: double
+----
+SIN_SUPPLY: [[-0.93,0.68,-0.81,-0.3,1,...,-0.48,0.79,0.14,0.93,0.99]]

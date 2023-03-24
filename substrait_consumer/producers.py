@@ -1,3 +1,4 @@
+import json
 import string
 from pathlib import Path
 from typing import Iterable
@@ -23,30 +24,26 @@ class DuckDBProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(
-        self, sql_query: str, consumer, ibis_expr: str = None
-    ) -> bytes:
+    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 
         Parameters:
             sql_query:
                 SQL query.
-            consumer:
-                Name of substrait consumer.
         Returns:
-            Substrait query plan in byte format.
+            Substrait query plan in json format.
         """
-        if type(consumer).__name__ == "AceroConsumer":
-            duckdb_substrait_plan = self.db_connection.get_substrait_json(sql_query)
-        else:
-            duckdb_substrait_plan = self.db_connection.get_substrait(sql_query)
+        duckdb_substrait_plan = self.db_connection.get_substrait_json(sql_query)
         proto_bytes = duckdb_substrait_plan.fetchone()[0]
-        return proto_bytes
+        python_json = json.loads(proto_bytes)
+        return json.dumps(python_json, indent=2)
 
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
-            table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
+            table_names = load_tables_from_parquet(
+                self.db_connection, created_tables, file_names
+            )
             sql_query = sql_query.format(*table_names)
         return sql_query
 
@@ -68,32 +65,27 @@ class IbisProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(
-        self, sql_query: str, consumer, ibis_expr: str = None
-    ) -> bytes:
+    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
         Produce the Ibis substrait plan using the given Ibis expression
 
         Parameters:
-            consumer:
-                Name of substrait consumer.
             ibis_expr:
                 Ibis expression.
         Returns:
-            Substrait query plan in byte format.
+            Substrait query plan in json format.
         """
         if ibis_expr is None:
             pytest.skip("ibis expression currently undefined")
         tpch_proto_bytes = self.compiler.compile(ibis_expr)
-        if type(consumer).__name__ == "DuckDBConsumer":
-            substrait_plan = tpch_proto_bytes.SerializeToString()
-        else:
-            substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
+        substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
         return substrait_plan
 
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
-            table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
+            table_names = load_tables_from_parquet(
+                self.db_connection, created_tables, file_names
+            )
             sql_query = sql_query.format(*table_names)
         return sql_query
 
@@ -116,17 +108,13 @@ class IsthmusProducer:
     def set_db_connection(self, db_connection):
         self.db_connection = db_connection
 
-    def produce_substrait(
-        self, sql_query: str, consumer, ibis_expr: str = None
-    ) -> str:
+    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
         Produce the Isthmus substrait plan using the given SQL query.
 
         Parameters:
             sql_query:
                 SQL query.
-            consumer:
-                Name of substrait consumer.
         Returns:
             Substrait query plan in json format.
         """
@@ -140,7 +128,9 @@ class IsthmusProducer:
         sql_query = sql_query.replace("'t'", "t")
         if len(file_names) > 0:
             self.file_names = file_names
-            table_names = load_tables_from_parquet(self.db_connection, created_tables, file_names)
+            table_names = load_tables_from_parquet(
+                self.db_connection, created_tables, file_names
+            )
             sql_query = sql_query.format(*table_names)
         return sql_query
 

@@ -1,0 +1,4 @@
+pyarrow.Table
+AVG_EXTENDEDPRICE: double
+----
+AVG_EXTENDEDPRICE: [[35992.24]]

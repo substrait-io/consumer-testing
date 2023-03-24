@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+lpad_n_name: string
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+lpad_n_name: [["   ALGERIA"," ARGENTINA","    BRAZIL","    CANADA","     EGYPT",...,"SAUDI ARAB","   VIETNAM","    RUSSIA","UNITED KIN","UNITED STA"]]

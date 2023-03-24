@@ -1,0 +1,4 @@
+pyarrow.Table
+COUNT_SUPPLYCOST: int64
+----
+COUNT_SUPPLYCOST: [[80000]]

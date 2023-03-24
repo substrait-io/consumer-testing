@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+bit_length_n_name: int64
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+bit_length_n_name: [[56,72,48,48,40,...,96,56,48,112,104]]

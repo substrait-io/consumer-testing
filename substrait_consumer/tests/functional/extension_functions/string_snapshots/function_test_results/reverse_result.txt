@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+reversed_n_name: string
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+reversed_n_name: [["AIREGLA","ANITNEGRA","LIZARB","ADANAC","TPYGE",...,"AIBARA IDUAS","MANTEIV","AISSUR","MODGNIK DETINU","SETATS DETINU"]]

@@ -1,0 +1,6 @@
+pyarrow.Table
+n_name: string
+lowercase_n_name: string
+----
+n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
+lowercase_n_name: [["algeria","argentina","brazil","canada","egypt",...,"saudi arabia","vietnam","russia","united kingdom","united states"]]

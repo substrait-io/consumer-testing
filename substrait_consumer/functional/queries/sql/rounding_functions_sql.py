@@ -15,4 +15,11 @@ SQL_SCALAR = {
         """,
         [DuckDBProducer],
     ),
+    "round": (
+        """
+        SELECT L_EXTENDEDPRICE, round(L_EXTENDEDPRICE, 1) AS ROUND_EXTENDEDPRICE
+        FROM '{}';
+        """,
+        [DuckDBProducer],
+    ),
 }

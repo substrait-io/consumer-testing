@@ -1,0 +1,4 @@
+pyarrow.Table
+MAX_SUPPLYCOST: decimal128(15, 2)
+----
+MAX_SUPPLYCOST: [[999.99]]
