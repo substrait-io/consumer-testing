@@ -1,4 +1,4 @@
 pyarrow.Table
-STDDEV_SUPPLYCOST: double
+stddev_supplycost: double
 ----
-STDDEV_SUPPLYCOST: [[288.64]]
+stddev_supplycost: [[288.64]]

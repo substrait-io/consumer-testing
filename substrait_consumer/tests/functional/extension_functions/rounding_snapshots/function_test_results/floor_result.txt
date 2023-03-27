@@ -1,6 +1,6 @@
 pyarrow.Table
 ps_supplycost: decimal128(15, 2)
-FLOOR_SUPPLYCOST: decimal128(15, 0)
+floor_supplycost: decimal128(15, 0)
 ----
 ps_supplycost: [[771.64,993.49,337.09,357.84,378.49,...,179.57,203.29,292.03,203.00,522.95]]
-FLOOR_SUPPLYCOST: [[771,993,337,357,378,...,179,203,292,203,522]]
+floor_supplycost: [[771,993,337,357,378,...,179,203,292,203,522]]

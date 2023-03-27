@@ -1,4 +1,4 @@
 pyarrow.Table
-SUM_SUPPLYCOST: decimal128(38, 2)
+sum_supplycost: decimal128(38, 2)
 ----
-SUM_SUPPLYCOST: [[39975583.86]]
+sum_supplycost: [[39975583.86]]

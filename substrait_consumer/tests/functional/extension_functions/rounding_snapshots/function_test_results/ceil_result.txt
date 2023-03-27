@@ -1,6 +1,6 @@
 pyarrow.Table
 ps_supplycost: decimal128(15, 2)
-CEIL_SUPPLYCOST: decimal128(15, 0)
+ceil_supplycost: decimal128(15, 0)
 ----
 ps_supplycost: [[771.64,993.49,337.09,357.84,378.49,...,179.57,203.29,292.03,203.00,522.95]]
-CEIL_SUPPLYCOST: [[772,994,338,358,379,...,180,204,293,203,523]]
+ceil_supplycost: [[772,994,338,358,379,...,180,204,293,203,523]]

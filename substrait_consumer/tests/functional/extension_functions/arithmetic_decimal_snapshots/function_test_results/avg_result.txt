@@ -1,4 +1,4 @@
 pyarrow.Table
-AVG_EXTENDEDPRICE: double
+avg_extendedprice: double
 ----
-AVG_EXTENDEDPRICE: [[35992.24]]
+avg_extendedprice: [[35992.24]]

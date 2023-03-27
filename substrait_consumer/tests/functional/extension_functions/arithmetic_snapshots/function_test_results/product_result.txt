@@ -1,4 +1,4 @@
 pyarrow.Table
-PRODUCT_SUPPLYCOST: double
+product_supplycost: double
 ----
-PRODUCT_SUPPLYCOST: [[inf]]
+product_supplycost: [[inf]]

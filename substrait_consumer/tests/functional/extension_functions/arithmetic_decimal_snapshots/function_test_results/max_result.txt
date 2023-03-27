@@ -1,4 +1,4 @@
 pyarrow.Table
-MAX_EXTENDEDPRICE: decimal128(15, 2)
+max_extendedprice: decimal128(15, 2)
 ----
-MAX_EXTENDEDPRICE: [[95949.50]]
+max_extendedprice: [[95949.50]]

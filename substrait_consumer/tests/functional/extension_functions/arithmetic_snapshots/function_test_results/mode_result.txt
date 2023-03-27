@@ -1,4 +1,4 @@
 pyarrow.Table
-MODE_SUPPLYCOST: decimal128(15, 2)
+mode_supplycost: decimal128(15, 2)
 ----
-MODE_SUPPLYCOST: [[266.53]]
+mode_supplycost: [[266.53]]
