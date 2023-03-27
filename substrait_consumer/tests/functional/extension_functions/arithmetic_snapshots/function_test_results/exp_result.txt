@@ -1,6 +1,6 @@
 pyarrow.Table
 ps_partkey: int32
-EXP_KEY: double
+exp_key: double
 ----
 ps_partkey: [[1,1,1,1,2,...,19999,20000,20000,20000,20000]]
-EXP_KEY: [[2.72,2.72,2.72,2.72,7.39,...,inf,inf,inf,inf,inf]]
+exp_key: [[2.72,2.72,2.72,2.72,7.39,...,inf,inf,inf,inf,inf]]

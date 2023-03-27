@@ -1,4 +1,4 @@
 pyarrow.Table
-MIN_SUPPLYCOST: decimal128(15, 2)
+min_supplycost: decimal128(15, 2)
 ----
-MIN_SUPPLYCOST: [[1.01]]
+min_supplycost: [[1.01]]

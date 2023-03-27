@@ -1,4 +1,4 @@
 pyarrow.Table
-(to_hours(CAST(1 AS BIGINT)) + to_hours(CAST(5 AS BIGINT))): duration[ms]
+(to_hours(cast(1 as bigint)) + to_hours(cast(5 as bigint))): duration[ms]
 ----
-(to_hours(CAST(1 AS BIGINT)) + to_hours(CAST(5 AS BIGINT))): [[21600000]]
+(to_hours(cast(1 as bigint)) + to_hours(cast(5 as bigint))): [[21600000]]

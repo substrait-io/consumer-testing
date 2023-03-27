@@ -1,4 +1,4 @@
 pyarrow.Table
-VARIANCE_SUPPLYCOST: double
+variance_supplycost: double
 ----
-VARIANCE_SUPPLYCOST: [[83314.97]]
+variance_supplycost: [[83314.97]]

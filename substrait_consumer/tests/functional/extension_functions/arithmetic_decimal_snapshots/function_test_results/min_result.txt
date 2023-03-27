@@ -1,4 +1,4 @@
 pyarrow.Table
-MIN_EXTENDEDPRICE: decimal128(15, 2)
+min_extendedprice: decimal128(15, 2)
 ----
-MIN_EXTENDEDPRICE: [[901.00]]
+min_extendedprice: [[901.00]]

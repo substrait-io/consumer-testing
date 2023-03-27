@@ -1,4 +1,4 @@
 pyarrow.Table
-MEDIAN_SUPPLYCOST: decimal128(15, 2)
+median_supplycost: decimal128(15, 2)
 ----
-MEDIAN_SUPPLYCOST: [[498.72]]
+median_supplycost: [[498.72]]

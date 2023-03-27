@@ -1,4 +1,4 @@
 pyarrow.Table
-MAX_SUPPLYCOST: decimal128(15, 2)
+max_supplycost: decimal128(15, 2)
 ----
-MAX_SUPPLYCOST: [[999.99]]
+max_supplycost: [[999.99]]

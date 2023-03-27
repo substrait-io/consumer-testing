@@ -1,4 +1,4 @@
 pyarrow.Table
-COUNT_SUPPLYCOST: int64
+count_supplycost: int64
 ----
-COUNT_SUPPLYCOST: [[80000]]
+count_supplycost: [[80000]]

@@ -1,4 +1,4 @@
 pyarrow.Table
-AVG_SUPPLYCOST: double
+avg_supplycost: double
 ----
-AVG_SUPPLYCOST: [[499.69]]
+avg_supplycost: [[499.69]]

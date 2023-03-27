@@ -1,8 +1,8 @@
 pyarrow.Table
 l_commitdate: date32[day]
 l_receiptdate: date32[day]
-("L_COMMITDATE" > "L_RECEIPTDATE"): bool
+("l_commitdate" > "l_receiptdate"): bool
 ----
 l_commitdate: [[1996-02-12,1996-02-28,1996-03-05,1996-03-30,1996-03-14,...,1997-06-24,1997-07-17,1997-07-05,1998-04-02,1998-05-24]]
 l_receiptdate: [[1996-03-22,1996-04-20,1996-01-31,1996-05-16,1996-04-01,...,1997-06-14,1997-07-29,1997-05-11,1998-05-17,1998-04-30]]
-("L_COMMITDATE" > "L_RECEIPTDATE"): [[false,false,true,false,false,...,true,false,true,false,true]]
+("l_commitdate" > "l_receiptdate"): [[false,false,true,false,false,...,true,false,true,false,true]]
