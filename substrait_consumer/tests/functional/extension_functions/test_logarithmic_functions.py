@@ -33,7 +33,7 @@ class TestLogarithmicFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.mark.produce_substrait_snapshotr
+    @pytest.mark.produce_substrait_snapshot
     def test_producer_logarithmic_functions(
         self,
         snapshot,
