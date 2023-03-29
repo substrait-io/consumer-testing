@@ -40,7 +40,7 @@ class TestBooleanFunctions:
         cls.db_connection.close()
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
-    @pytest.mark.produce_substrait_snapshotr
+    @pytest.mark.produce_substrait_snapshot
     def test_producer_boolean_functions(
         self,
         snapshot,
