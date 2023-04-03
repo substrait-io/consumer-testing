@@ -201,6 +201,11 @@ def substrait_consumer_function_test(
         )
         snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
 
+    else:
+        pytest.skip(
+            f"No substrait plan exists for {type(producer).__name__}:{function_name}"
+        )
+
 
 def load_custom_duckdb_table(db_connection):
     db_connection.execute("create table t (a BIGINT, b BIGINT, c boolean, d boolean)")
