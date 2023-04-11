@@ -81,7 +81,7 @@ class AceroConsumer:
 
     def __init__(self):
         self.tables = {}
-        self.table_provider = lambda names: self.tables[names[0].lower()]
+        self.table_provider = lambda names, schema: self.tables[names[0].lower()]
 
     def setup(self, db_connection, created_tables, file_names: Iterable[str]):
         if len(file_names) > 0:
