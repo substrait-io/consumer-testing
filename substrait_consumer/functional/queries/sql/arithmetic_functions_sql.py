@@ -3,38 +3,38 @@ from substrait_consumer.producers import *
 SQL_SCALAR = {
     "add": (
         """
-        SELECT PS_PARTKEY, PS_SUPPKEY, add(PS_PARTKEY, PS_SUPPKEY) AS ADD_KEY
+        SELECT PS_PARTKEY, PS_SUPPKEY, PS_PARTKEY + PS_SUPPKEY AS ADD_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "subtract": (
         """
-        SELECT PS_PARTKEY, PS_SUPPKEY, subtract(PS_PARTKEY, PS_SUPPKEY) AS SUBTRACT_KEY
+        SELECT PS_PARTKEY, PS_SUPPKEY, PS_PARTKEY - PS_SUPPKEY AS SUBTRACT_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "multiply": (
         """
-        SELECT PS_PARTKEY, multiply(PS_PARTKEY, 10) AS MULTIPLY_KEY
+        SELECT PS_PARTKEY, PS_PARTKEY * 10 AS MULTIPLY_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "divide": (
         """
-        SELECT PS_PARTKEY, divide(PS_PARTKEY, 10) AS DIVIDE_KEY
+        SELECT PS_PARTKEY, PS_PARTKEY / 10 AS DIVIDE_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "modulus": (
         """
         SELECT PS_PARTKEY, mod(PS_PARTKEY, 10) AS MODULUS_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "factorial": (
         """
@@ -52,17 +52,17 @@ SQL_SCALAR = {
     ),
     "sqrt": (
         """
-        SELECT PS_PARTKEY, round(sqrt(PS_PARTKEY), 2) AS SQRT_KEY
+        SELECT PS_PARTKEY, round(sqrt(CAST(PS_PARTKEY AS DOUBLE)), 2) AS SQRT_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "exp": (
         """
-        SELECT PS_PARTKEY, round(exp(PS_PARTKEY), 2) AS EXP_KEY
+        SELECT PS_PARTKEY, round(exp(CAST(PS_PARTKEY AS DOUBLE)), 2) AS EXP_KEY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "negate": (
         """
@@ -73,66 +73,66 @@ SQL_SCALAR = {
     ),
     "cos": (
         """
-        SELECT round(cos(PS_SUPPLYCOST), 2) AS COS_SUPPLY
+        SELECT round(cos(CAST(ps_supplycost AS DOUBLE)), 2) AS COS_SUPPLY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "acos": (
         """
-        SELECT round(acos(L_TAX), 2) AS ACOS_TAX
+        SELECT round(acos(CAST(l_tax AS DOUBLE)), 2) AS ACOS_TAX
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "sin": (
         """
-        SELECT round(sin(PS_SUPPLYCOST), 2) AS SIN_SUPPLY
+        SELECT round(sin(CAST(ps_supplycost AS DOUBLE)), 2) AS SIN_SUPPLY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "asin": (
         """
-        SELECT round(asin(L_TAX), 2) AS ASIN_TAX
+        SELECT round(asin(CAST(l_tax AS DOUBLE)), 2) AS ASIN_TAX
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "tan": (
         """
-        SELECT round(tan(PS_SUPPLYCOST), 2) AS TAN_SUPPLY
+        SELECT round(tan(CAST(ps_supplycost AS DOUBLE)), 2) AS TAN_SUPPLY
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "atan": (
         """
-        SELECT round(atan(L_TAX), 2) AS ATAN_TAX
+        SELECT round(atan(CAST(l_tax AS DOUBLE)), 2) AS ATAN_TAX
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "atan2": (
         """
-        SELECT round(atan2(L_TAX, L_TAX), 2) AS ATAN2_TAX
+        SELECT round(atan2(CAST(l_tax AS DOUBLE), CAST(l_tax AS DOUBLE)), 2) AS ATAN2_TAX
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "abs": (
         """
         SELECT a, abs(a) AS ABS_A
         FROM 't';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "sign": (
         """
         SELECT a, sign(a) AS SIGN_A
         FROM 't';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
 }
 
