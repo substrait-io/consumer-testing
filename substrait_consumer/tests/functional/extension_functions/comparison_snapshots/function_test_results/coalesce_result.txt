@@ -1,4 +1,4 @@
 pyarrow.Table
-COALESCE(NULL, NULL, 'test_string'): string
+coalesce(null, null, 'test_string'): string
 ----
-COALESCE(NULL, NULL, 'test_string'): [["test_string"]]
+coalesce(null, null, 'test_string'): [["test_string"]]

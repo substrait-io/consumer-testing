@@ -1,0 +1,57 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [1]
+            }
+          },
+          "input": {
+            "read": {
+              "common": {
+                "direct": {
+                }
+              },
+              "baseSchema": {
+                "names": ["ZERO"],
+                "struct": {
+                  "types": [{
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }],
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "virtualTable": {
+                "values": [{
+                  "fields": [{
+                    "i32": 0
+                  }]
+                }]
+              }
+            }
+          },
+          "expressions": [{
+            "cast": {
+              "type": {
+                "fixedChar": {
+                  "length": 11,
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              },
+              "input": {
+                "literal": {
+                  "fixedChar": "test_string"
+                }
+              }
+            }
+          }]
+        }
+      },
+      "names": ["EXPR$0"]
+    }
+  }]
+}

@@ -135,6 +135,12 @@ AGGREGATE_FUNCTIONS = (
         "ibis_expr": None,
     },
     {
+        "test_name": "count_star",
+        "file_names": ["partsupp.parquet"],
+        "sql_query": SQL_AGGREGATE["count_star"],
+        "ibis_expr": None,
+    },
+    {
         "test_name": "avg",
         "file_names": ["partsupp.parquet"],
         "sql_query": SQL_AGGREGATE["avg"],

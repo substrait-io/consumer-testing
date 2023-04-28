@@ -1,0 +1,116 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_string.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "name": "like:str_str"
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [4]
+            }
+          },
+          "input": {
+            "filter": {
+              "common": {
+                "direct": {
+                }
+              },
+              "input": {
+                "read": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "baseSchema": {
+                    "names": ["N_NATIONKEY", "N_NAME", "N_REGIONKEY", "N_COMMENT"],
+                    "struct": {
+                      "types": [{
+                        "i32": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "i32": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "namedTable": {
+                    "names": ["NATION"]
+                  }
+                }
+              },
+              "condition": {
+                "scalarFunction": {
+                  "outputType": {
+                    "bool": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 1
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }
+                  }, {
+                    "value": {
+                      "cast": {
+                        "type": {
+                          "string": {
+                            "nullability": "NULLABILITY_REQUIRED"
+                          }
+                        },
+                        "input": {
+                          "literal": {
+                            "fixedChar": "ALGERIA"
+                          }
+                        }
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          },
+          "expressions": [{
+            "selection": {
+              "directReference": {
+                "structField": {
+                  "field": 1
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }]
+        }
+      },
+      "names": ["N_NAME"]
+    }
+  }]
+}

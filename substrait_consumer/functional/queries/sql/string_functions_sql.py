@@ -3,10 +3,10 @@ from substrait_consumer.producers import *
 SQL_SCALAR = {
     "concat": (
         """
-        SELECT N_NAME, concat(N_NAME, N_COMMENT) AS concat_nation
+        SELECT N_NAME, N_NAME || N_COMMENT AS concat_nation
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "concat_ws": (
         """
@@ -21,7 +21,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE N_NAME LIKE 'ALGERIA';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "starts_with": (
         """
@@ -45,6 +45,13 @@ SQL_SCALAR = {
         FROM '{}';
         """,
         [DuckDBProducer],
+    ),
+    "substring_isthmus": (
+        """
+        SELECT N_NAME, SUBSTRING(N_NAME FROM 1 FOR 3) AS substr_name
+        FROM '{}';
+        """,
+        [IsthmusProducer],
     ),
     "contains": (
         """

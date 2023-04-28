@@ -142,14 +142,21 @@ SQL_AGGREGATE = {
         SELECT sum(PS_SUPPLYCOST) AS SUM_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "count": (
         """
         SELECT count(PS_SUPPLYCOST) AS COUNT_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "count_star": (
+        """
+        SELECT count(*)
+        FROM '{}';
+        """,
+        [DuckDBProducer, IsthmusProducer],
     ),
     "avg": (
         """
@@ -163,14 +170,14 @@ SQL_AGGREGATE = {
         SELECT min(PS_SUPPLYCOST) AS MIN_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "max": (
         """
         SELECT max(PS_SUPPLYCOST) AS MAX_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "median": (
         """
