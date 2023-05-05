@@ -3,10 +3,10 @@ from substrait_consumer.producers import *
 SQL_SCALAR = {
     "extract": (
         """
-        SELECT L_SHIPDATE, extract('year' FROM L_SHIPDATE)
+        SELECT L_SHIPDATE, extract(year FROM L_SHIPDATE)
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "add": (
         """

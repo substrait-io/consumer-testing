@@ -82,4 +82,10 @@ SCALAR_FUNCTIONS = (
         "sql_query": SQL_SCALAR["coalesce"],
         "ibis_expr": None,
     },
+    {
+        "test_name": "between",
+        "file_names": [],
+        "sql_query": SQL_SCALAR["between"],
+        "ibis_expr": None,
+    },
 )

@@ -1,0 +1,161 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_boolean.yaml"
+  }, {
+    "extensionUriAnchor": 2,
+    "uri": "/functions_comparison.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "name": "and:bool"
+    }
+  }, {
+    "extensionFunction": {
+      "extensionUriReference": 2,
+      "functionAnchor": 1,
+      "name": "gte:any_any"
+    }
+  }, {
+    "extensionFunction": {
+      "extensionUriReference": 2,
+      "functionAnchor": 2,
+      "name": "lte:any_any"
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [4]
+            }
+          },
+          "input": {
+            "filter": {
+              "common": {
+                "direct": {
+                }
+              },
+              "input": {
+                "read": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "baseSchema": {
+                    "names": ["A", "B", "C", "D"],
+                    "struct": {
+                      "types": [{
+                        "i32": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i32": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "bool": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "bool": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "namedTable": {
+                    "names": ["T"]
+                  }
+                }
+              },
+              "condition": {
+                "scalarFunction": {
+                  "outputType": {
+                    "bool": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "scalarFunction": {
+                        "functionReference": 1,
+                        "outputType": {
+                          "bool": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "arguments": [{
+                          "value": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }
+                        }, {
+                          "value": {
+                            "literal": {
+                              "i32": 1
+                            }
+                          }
+                        }]
+                      }
+                    }
+                  }, {
+                    "value": {
+                      "scalarFunction": {
+                        "functionReference": 2,
+                        "outputType": {
+                          "bool": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "arguments": [{
+                          "value": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }
+                        }, {
+                          "value": {
+                            "literal": {
+                              "i32": 5
+                            }
+                          }
+                        }]
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          },
+          "expressions": [{
+            "selection": {
+              "directReference": {
+                "structField": {
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }]
+        }
+      },
+      "names": ["A"]
+    }
+  }]
+}

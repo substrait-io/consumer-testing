@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE NOT N_NAME = 'CANADA'
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "equal": (
         """
@@ -23,7 +23,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NOT DISTINCT FROM NULL
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "lt": (
         """
@@ -63,7 +63,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NOT NULL
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "is_null": (
         """
@@ -71,7 +71,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NULL
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "is_nan": (
         """
@@ -98,6 +98,12 @@ SQL_SCALAR = {
         """
         SELECT coalesce(NULL,NULL,'test_string')
         """,
-        [DuckDBProducer],
+        [DuckDBProducer, IsthmusProducer],
+    ),
+    "between": (
+        """
+        SELECT a FROM 't' WHERE a BETWEEN 1 AND 5
+        """,
+        [DuckDBProducer, IsthmusProducer],
     ),
 }

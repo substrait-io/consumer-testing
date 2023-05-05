@@ -1,0 +1,78 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_aggregate_generic.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "name": "count:"
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "aggregate": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "read": {
+              "common": {
+                "direct": {
+                }
+              },
+              "baseSchema": {
+                "names": ["PS_PARTKEY", "PS_SUPPKEY", "PS_AVAILQTY", "PS_SUPPLYCOST", "PS_COMMENT"],
+                "struct": {
+                  "types": [{
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 15,
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }],
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "namedTable": {
+                "names": ["PARTSUPP"]
+              }
+            }
+          },
+          "groupings": [{
+          }],
+          "measures": [{
+            "measure": {
+              "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
+              "outputType": {
+                "i64": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "invocation": "AGGREGATION_INVOCATION_ALL"
+            }
+          }]
+        }
+      },
+      "names": ["COUNT_SUPPLYCOST"]
+    }
+  }]
+}

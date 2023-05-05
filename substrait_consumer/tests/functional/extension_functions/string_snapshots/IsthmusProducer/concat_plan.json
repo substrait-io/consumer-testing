@@ -1,0 +1,104 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_string.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "name": "concat:str"
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [4, 5]
+            }
+          },
+          "input": {
+            "read": {
+              "common": {
+                "direct": {
+                }
+              },
+              "baseSchema": {
+                "names": ["N_NATIONKEY", "N_NAME", "N_REGIONKEY", "N_COMMENT"],
+                "struct": {
+                  "types": [{
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }],
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "namedTable": {
+                "names": ["NATION"]
+              }
+            }
+          },
+          "expressions": [{
+            "selection": {
+              "directReference": {
+                "structField": {
+                  "field": 1
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }, {
+            "scalarFunction": {
+              "outputType": {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "arguments": [{
+                "value": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                        "field": 1
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                }
+              }, {
+                "value": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                        "field": 3
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                }
+              }]
+            }
+          }]
+        }
+      },
+      "names": ["N_NAME", "CONCAT_NATION"]
+    }
+  }]
+}

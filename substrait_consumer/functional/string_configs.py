@@ -40,6 +40,12 @@ SCALAR_FUNCTIONS = (
         "ibis_expr": IBIS_SCALAR["substr"],
     },
     {
+        "test_name": "substring",
+        "file_names": ["nation.parquet"],
+        "sql_query": SQL_SCALAR["substring_isthmus"],
+        "ibis_expr": None,
+    },
+    {
         "test_name": "contains",
         "file_names": ["nation.parquet"],
         "sql_query": SQL_SCALAR["contains"],
