@@ -2,9 +2,10 @@ from pathlib import Path
 
 import duckdb
 import pytest
-
 from filelock import FileLock
-from substrait_consumer.consumers import AceroConsumer, DuckDBConsumer
+
+from substrait_consumer.consumers import (
+    AceroConsumer, DatafusionConsumer, DuckDBConsumer)
 from substrait_consumer.producers import DuckDBProducer, IbisProducer, IsthmusProducer
 
 
@@ -32,27 +33,27 @@ def pytest_addoption(parser):
         action="store",
         default=",".join([x.__name__ for x in CONSUMERS]),
         help=f"A comma separated list of consumers to run against.",
-        choices=[x.__name__ for x in CONSUMERS]
+        choices=[x.__name__ for x in CONSUMERS],
     )
     parser.addoption(
         "--producer",
         action="store",
         default=",".join([x.__name__ for x in PRODUCERS]),
         help="A comma separated list of producers to run against.",
-        choices=[x.__name__ for x in PRODUCERS]
+        choices=[x.__name__ for x in PRODUCERS],
     )
     parser.addoption(
         "--adhoc_producer",
         action="store",
         default="",
         help="A comma separated list of producers to run against.",
-        choices=[x.__name__ for x in PRODUCERS]
+        choices=[x.__name__ for x in PRODUCERS],
     )
     parser.addoption(
         "--saveplan",
         action="store",
         default=False,
-        help="Save the substrait plans created by each producer."
+        help="Save the substrait plans created by each producer.",
     )
 
 
