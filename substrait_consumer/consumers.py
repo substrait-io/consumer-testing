@@ -13,6 +13,33 @@ from datafusion import substrait as ds
 
 from substrait_consumer.common import SubstraitUtils
 
+COLUMN_A = [1, 2, 3, -4, 5, -6, 7, 8, 9, None]
+COLUMN_B = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+COLUMN_C = [
+    True,
+    False,
+    True,
+    True,
+    False,
+    True,
+    False,
+    True,
+    False,
+    False,
+]
+COLUMN_D = [
+    True,
+    True,
+    True,
+    True,
+    True,
+    True,
+    True,
+    True,
+    True,
+    True,
+]
+
 
 class DuckDBConsumer:
     """
@@ -99,32 +126,10 @@ class AceroConsumer:
         else:
             table = pa.table(
                 {
-                    "a": [1, 2, 3, -4, 5, -6, 7, 8, 9, None],
-                    "b": [1, 1, 1, 1, 1, 2, 2, 2, 2, 2],
-                    "c": [
-                        True,
-                        False,
-                        True,
-                        True,
-                        False,
-                        True,
-                        False,
-                        True,
-                        False,
-                        False,
-                    ],
-                    "d": [
-                        True,
-                        True,
-                        True,
-                        True,
-                        True,
-                        True,
-                        True,
-                        True,
-                        True,
-                        True,
-                    ],
+                    "a": COLUMN_A,
+                    "b": COLUMN_B,
+                    "c": COLUMN_C,
+                    "d": COLUMN_D,
                 }
             )
             self.tables["t"] = table
@@ -172,36 +177,10 @@ class DatafusionConsumer:
         else:
             tables = pa.RecordBatch.from_arrays(
                 [
-                    pa.array([1, 2, 3, -4, 5, -6, 7, 8, 9, None]),
-                    pa.array([1, 1, 1, 1, 1, 2, 2, 2, 2, 2]),
-                    pa.array(
-                        [
-                            True,
-                            False,
-                            True,
-                            True,
-                            False,
-                            True,
-                            False,
-                            True,
-                            False,
-                            False,
-                        ]
-                    ),
-                    pa.array(
-                        [
-                            True,
-                            True,
-                            True,
-                            True,
-                            True,
-                            True,
-                            True,
-                            True,
-                            True,
-                            True,
-                        ]
-                    ),
+                    pa.array(COLUMN_A),
+                    pa.array(COLUMN_B),
+                    pa.array(COLUMN_C),
+                    pa.array(COLUMN_D),
                 ],
                 names=["a", "b", "c", "d"],
             )
