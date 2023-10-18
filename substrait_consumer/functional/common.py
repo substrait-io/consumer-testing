@@ -82,6 +82,7 @@ def generate_snapshot_results(
     duckdb_result_data = []
     for column in duckdb_result.columns:
         duckdb_result_data.extend(column.data)
+        duckdb_result_data.extend([' '])
     str_result_data = '\n'.join(map(str, duckdb_result_data))
     function_group, function_name = test_name.split(":")
     snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
@@ -206,6 +207,7 @@ def substrait_consumer_function_test(
         result_list = []
         for column in actual_result:
             result_list.extend(column.data)
+            result_list.extend([' '])
         str_result = '\n'.join(map(str, result_list))
         snapshot.assert_match(str_result, f"{function_name}_result.txt")
 
