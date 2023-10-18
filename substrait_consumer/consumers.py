@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import string
 from pathlib import Path
 from typing import Iterable
@@ -10,6 +11,8 @@ import pyarrow.parquet as pq
 import pyarrow.substrait as substrait
 from datafusion import SessionContext
 from datafusion import substrait as ds
+from google.protobuf.json_format import Parse
+from substrait.gen.proto.plan_pb2 import Plan
 
 from substrait_consumer.common import SubstraitUtils
 
@@ -175,17 +178,18 @@ class DatafusionConsumer:
                     created_tables.add(f"{self.__class__.__name__}{table_name}")
                     self.ctx.register_parquet(f"{table_name}", file_path)
         else:
-            tables = pa.RecordBatch.from_arrays(
-                [
-                    pa.array(COLUMN_A),
-                    pa.array(COLUMN_B),
-                    pa.array(COLUMN_C),
-                    pa.array(COLUMN_D),
-                ],
-                names=["a", "b", "c", "d"],
-            )
+            if not self.ctx.table_exist("t"):
+                tables = pa.RecordBatch.from_arrays(
+                    [
+                        pa.array(COLUMN_A),
+                        pa.array(COLUMN_B),
+                        pa.array(COLUMN_C),
+                        pa.array(COLUMN_D),
+                    ],
+                    names=["a", "b", "c", "d"],
+                )
 
-            self.ctx.register_record_batches("t", [[tables]])
+                self.ctx.register_record_batches("t", [[tables]])
 
     def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
         """
@@ -198,7 +202,10 @@ class DatafusionConsumer:
         Returns:
             A pyarrow table resulting from running the substrait query plan.
         """
-        substrait_plan = ds.substrait.serde.deserialize_bytes(substrait_query)
+        substrait_json = json.loads(substrait_query)
+        plan_proto = Parse(json.dumps(substrait_json), Plan())
+        plan_bytes = plan_proto.SerializeToString()
+        substrait_plan = ds.substrait.serde.deserialize_bytes(plan_bytes)
         logical_plan = ds.substrait.consumer.from_substrait_plan(
             self.ctx, substrait_plan
         )

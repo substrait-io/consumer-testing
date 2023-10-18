@@ -1,4 +1,1 @@
-pyarrow.Table
-a: int64
-----
-a: [[null]]
+None

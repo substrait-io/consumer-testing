@@ -45,7 +45,7 @@ SQL_SCALAR = {
         """
         SELECT PS_AVAILQTY
         FROM '{}'
-        WHERE PS_AVAILQTY > 10
+        WHERE PS_AVAILQTY > 9990
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
@@ -53,7 +53,7 @@ SQL_SCALAR = {
         """
         SELECT PS_AVAILQTY
         FROM '{}'
-        WHERE PS_AVAILQTY >= 10
+        WHERE PS_AVAILQTY >= 9990
         """,
         [DuckDBProducer, IsthmusProducer],
     ),

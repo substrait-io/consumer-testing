@@ -102,7 +102,7 @@
                               {
                                 "value": {
                                   "literal": {
-                                    "i32": 10
+                                    "i32": 9990
                                   }
                                 }
                               }
@@ -173,5 +173,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }
