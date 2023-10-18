@@ -79,7 +79,9 @@ def generate_snapshot_results(
     duckdb_result = duckdb_result.rename_columns(
         list(map(str.lower, duckdb_result.column_names))
     )
-    duckdb_result_data = duckdb_result.columns[0].data
+    duckdb_result_data = []
+    for column in duckdb_result.columns:
+        duckdb_result_data.extend(column.data)
     str_result_data = '\n'.join(map(str, duckdb_result_data))
     function_group, function_name = test_name.split(":")
     snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
@@ -200,8 +202,11 @@ def substrait_consumer_function_test(
         actual_result = consumer.run_substrait_query(substrait_plan)
         actual_result = actual_result.rename_columns(
             list(map(str.lower, actual_result.column_names))
-        ).columns[0].data
-        str_result = '\n'.join(map(str, actual_result))
+        ).columns
+        result_list = []
+        for column in actual_result:
+            result_list.extend(column.data)
+        str_result = '\n'.join(map(str, result_list))
         snapshot.assert_match(str_result, f"{function_name}_result.txt")
 
     else:
