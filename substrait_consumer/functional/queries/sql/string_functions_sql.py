@@ -3,7 +3,7 @@ from substrait_consumer.producers import *
 SQL_SCALAR = {
     "concat": (
         """
-        SELECT N_NAME, N_NAME || N_COMMENT AS concat_nation
+        SELECT N_NAME, concat(N_NAME, N_COMMENT) AS concat_nation
         FROM '{}';
         """,
         [DuckDBProducer, IsthmusProducer],
