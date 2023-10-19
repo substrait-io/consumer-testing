@@ -100,6 +100,7 @@ SQL_SCALAR = {
         """
         SELECT O_COMMENT, upper(O_COMMENT) AS uppercase_O_COMMENT
         FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer],
     ),
