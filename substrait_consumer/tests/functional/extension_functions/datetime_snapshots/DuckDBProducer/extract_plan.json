@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
-        "name": "year"
+        "name": "extract"
       }
     }
   ],
@@ -56,7 +56,9 @@
                         }
                       },
                       {
-                        "i32": {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -166,6 +168,9 @@
                   },
                   "arguments": [
                     {
+                      "enum": "year"
+                    },
+                    {
                       "value": {
                         "selection": {
                           "directReference": {
@@ -187,5 +192,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }

@@ -1,7 +1,8 @@
 {
   "extensionUris": [
     {
-      "extensionUriAnchor": 1
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
     }
   ],
   "extensions": [
@@ -9,70 +10,42 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add"
+        "name": "add:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "subtract"
+        "name": "subtract:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 3,
-        "name": "multiply"
+        "name": "multiply:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "divide"
+        "name": "divide:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 5,
-        "name": "modulus"
+        "name": "modulus:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 6,
-        "name": "power"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 7,
-        "name": "round"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 8,
-        "name": "sqrt"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 9,
-        "name": "exp"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 10,
-        "name": "negate"
+        "name": "negate:i32"
       }
     }
   ],
@@ -153,7 +126,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 10,
+                  "functionReference": 6,
                   "outputType": {
                     "i32": {
                       "nullability": "NULLABILITY_REQUIRED"
@@ -182,5 +155,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 35,
+    "producer": "ibis-substrait"
+  }
 }

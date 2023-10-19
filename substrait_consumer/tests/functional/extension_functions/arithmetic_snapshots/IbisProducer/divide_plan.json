@@ -1,7 +1,8 @@
 {
   "extensionUris": [
     {
-      "extensionUriAnchor": 1
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
     }
   ],
   "extensions": [
@@ -9,28 +10,28 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add"
+        "name": "add:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "subtract"
+        "name": "subtract:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 3,
-        "name": "multiply"
+        "name": "multiply:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "divide"
+        "name": "divide:i32_i32"
       }
     }
   ],
@@ -130,8 +131,18 @@
                     },
                     {
                       "value": {
-                        "literal": {
-                          "i8": 10
+                        "cast": {
+                          "type": {
+                            "i32": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          "input": {
+                            "literal": {
+                              "i8": 10
+                            }
+                          },
+                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                         }
                       }
                     }
@@ -147,5 +158,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 35,
+    "producer": "ibis-substrait"
+  }
 }

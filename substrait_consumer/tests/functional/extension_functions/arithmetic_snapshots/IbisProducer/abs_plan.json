@@ -1,7 +1,8 @@
 {
   "extensionUris": [
     {
-      "extensionUriAnchor": 1
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
     }
   ],
   "extensions": [
@@ -9,119 +10,49 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add"
+        "name": "add:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "subtract"
+        "name": "subtract:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 3,
-        "name": "multiply"
+        "name": "multiply:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "divide"
+        "name": "divide:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 5,
-        "name": "modulus"
+        "name": "modulus:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 6,
-        "name": "power"
+        "name": "negate:i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "round"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 8,
-        "name": "sqrt"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 9,
-        "name": "exp"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 10,
-        "name": "negate"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 11,
-        "name": "cos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 12,
-        "name": "acos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 13,
-        "name": "sin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 14,
-        "name": "asin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 15,
-        "name": "tan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 16,
-        "name": "atan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 17,
-        "name": "abs"
+        "name": "abs:i32"
       }
     }
   ],
@@ -194,7 +125,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 17,
+                  "functionReference": 7,
                   "outputType": {
                     "i32": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -223,5 +154,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 35,
+    "producer": "ibis-substrait"
+  }
 }

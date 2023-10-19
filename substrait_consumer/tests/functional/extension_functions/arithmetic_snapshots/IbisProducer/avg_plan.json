@@ -1,7 +1,12 @@
 {
   "extensionUris": [
     {
-      "extensionUriAnchor": 1
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
+    },
+    {
+      "extensionUriAnchor": 2,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic_decimal.yaml"
     }
   ],
   "extensions": [
@@ -9,140 +14,70 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add"
+        "name": "add:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "subtract"
+        "name": "subtract:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 3,
-        "name": "multiply"
+        "name": "multiply:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "divide"
+        "name": "divide:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 5,
-        "name": "modulus"
+        "name": "modulus:i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 6,
-        "name": "power"
+        "name": "negate:i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 7,
-        "name": "round"
+        "name": "abs:i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 8,
-        "name": "sqrt"
+        "name": "sign:i32"
       }
     },
     {
       "extensionFunction": {
-        "extensionUriReference": 1,
+        "extensionUriReference": 2,
         "functionAnchor": 9,
-        "name": "exp"
+        "name": "sum:dec"
       }
     },
     {
       "extensionFunction": {
-        "extensionUriReference": 1,
+        "extensionUriReference": 2,
         "functionAnchor": 10,
-        "name": "negate"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 11,
-        "name": "cos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 12,
-        "name": "acos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 13,
-        "name": "sin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 14,
-        "name": "asin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 15,
-        "name": "tan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 16,
-        "name": "atan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 17,
-        "name": "abs"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 18,
-        "name": "sign"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 19,
-        "name": "sum"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 20,
-        "name": "avg"
+        "name": "avg:dec"
       }
     }
   ],
@@ -207,7 +142,7 @@
             "measures": [
               {
                 "measure": {
-                  "functionReference": 20,
+                  "functionReference": 10,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
@@ -240,5 +175,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 35,
+    "producer": "ibis-substrait"
+  }
 }

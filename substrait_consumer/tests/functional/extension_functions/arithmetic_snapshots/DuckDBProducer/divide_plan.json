@@ -84,25 +84,34 @@
                 "scalarFunction": {
                   "functionReference": 1,
                   "outputType": {
-                    "i32": {
+                    "fp64": {
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
                   "arguments": [
                     {
                       "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
+                        "cast": {
+                          "type": {
+                            "fp64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
                           },
-                          "rootReference": {}
+                          "input": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              },
+                              "rootReference": {}
+                            }
+                          }
                         }
                       }
                     },
                     {
                       "value": {
                         "literal": {
-                          "i32": 10
+                          "fp64": 10
                         }
                       }
                     }
@@ -118,5 +127,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }
