@@ -1,4 +1,2 @@
-pyarrow.Table
-count_supplycost: int64
-----
-count_supplycost: [[80000]]
+80000
+ 

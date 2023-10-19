@@ -58,7 +58,9 @@
                             }
                           },
                           {
-                            "i32": {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -197,5 +199,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }

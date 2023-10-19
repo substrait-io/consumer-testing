@@ -1,4 +1,2 @@
-pyarrow.Table
-approx_count_distinct(l_comment): int64
-----
-approx_count_distinct(l_comment): [[543348]]
+523942
+ 

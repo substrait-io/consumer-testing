@@ -1,4 +1,2 @@
-pyarrow.Table
-avg_supplycost: double
-----
-avg_supplycost: [[499.69]]
+499.69
+ 

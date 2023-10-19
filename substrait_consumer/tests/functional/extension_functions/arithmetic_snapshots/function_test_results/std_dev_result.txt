@@ -1,4 +1,2 @@
-pyarrow.Table
-stddev_supplycost: double
-----
-stddev_supplycost: [[288.64]]
+288.64
+ 

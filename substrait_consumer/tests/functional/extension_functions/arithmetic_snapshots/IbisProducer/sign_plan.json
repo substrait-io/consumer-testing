@@ -77,48 +77,53 @@
               }
             },
             "input": {
-              "read": {
-                "common": {
-                  "direct": {}
-                },
-                "baseSchema": {
-                  "names": [
-                    "a",
-                    "b",
-                    "c",
-                    "d"
-                  ],
-                  "struct": {
-                    "types": [
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
+              "fetch": {
+                "input": {
+                  "read": {
+                    "common": {
+                      "direct": {}
+                    },
+                    "baseSchema": {
+                      "names": [
+                        "a",
+                        "b",
+                        "c",
+                        "d"
+                      ],
+                      "struct": {
+                        "types": [
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "bool": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "bool": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }
+                        ],
+                        "nullability": "NULLABILITY_REQUIRED"
                       }
-                    ],
-                    "nullability": "NULLABILITY_REQUIRED"
+                    },
+                    "namedTable": {
+                      "names": [
+                        "t"
+                      ]
+                    }
                   }
                 },
-                "namedTable": {
-                  "names": [
-                    "t"
-                  ]
-                }
+                "count": "10"
               }
             },
             "expressions": [

@@ -1,4 +1,2 @@
-pyarrow.Table
-sum_extendedprice: decimal128(38, 2)
-----
-sum_extendedprice: [[21615929280.24]]
+21615929280.24
+ 

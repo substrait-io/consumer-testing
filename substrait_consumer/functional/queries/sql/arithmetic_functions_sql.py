@@ -4,133 +4,152 @@ SQL_SCALAR = {
     "add": (
         """
         SELECT PS_PARTKEY, PS_SUPPKEY, PS_PARTKEY + PS_SUPPKEY AS ADD_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "subtract": (
         """
         SELECT PS_PARTKEY, PS_SUPPKEY, PS_PARTKEY - PS_SUPPKEY AS SUBTRACT_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "multiply": (
         """
         SELECT PS_PARTKEY, PS_PARTKEY * 10 AS MULTIPLY_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "divide": (
         """
         SELECT PS_PARTKEY, PS_PARTKEY / 10 AS DIVIDE_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "modulus": (
         """
         SELECT PS_PARTKEY, mod(PS_PARTKEY, 10) AS MODULUS_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "factorial": (
         """
         SELECT PS_PARTKEY, factorial(PS_PARTKEY) AS FACTORIAL_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer],
     ),
     "power": (
         """
         SELECT PS_PARTKEY, power(PS_PARTKEY, 2) AS POWER_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer],
     ),
     "sqrt": (
         """
         SELECT PS_PARTKEY, round(sqrt(CAST(PS_PARTKEY AS DOUBLE)), 2) AS SQRT_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "exp": (
         """
         SELECT PS_PARTKEY, round(exp(CAST(PS_PARTKEY AS DOUBLE)), 2) AS EXP_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "negate": (
         """
         SELECT PS_PARTKEY, negate(PS_PARTKEY) AS NEGATE_KEY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer],
     ),
     "cos": (
         """
         SELECT round(cos(CAST(ps_supplycost AS DOUBLE)), 2) AS COS_SUPPLY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "acos": (
         """
         SELECT round(acos(CAST(l_tax AS DOUBLE)), 2) AS ACOS_TAX
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "sin": (
         """
         SELECT round(sin(CAST(ps_supplycost AS DOUBLE)), 2) AS SIN_SUPPLY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "asin": (
         """
         SELECT round(asin(CAST(l_tax AS DOUBLE)), 2) AS ASIN_TAX
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "tan": (
         """
         SELECT round(tan(CAST(ps_supplycost AS DOUBLE)), 2) AS TAN_SUPPLY
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "atan": (
         """
         SELECT round(atan(CAST(l_tax AS DOUBLE)), 2) AS ATAN_TAX
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "atan2": (
         """
         SELECT round(atan2(CAST(l_tax AS DOUBLE), CAST(l_tax AS DOUBLE)), 2) AS ATAN2_TAX
-        FROM '{}';
+        FROM '{}'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "abs": (
         """
         SELECT a, abs(a) AS ABS_A
-        FROM 't';
+        FROM 't'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),
     "sign": (
         """
         SELECT a, sign(a) AS SIGN_A
-        FROM 't';
+        FROM 't'
+        LIMIT 10;
         """,
         [DuckDBProducer, IsthmusProducer],
     ),

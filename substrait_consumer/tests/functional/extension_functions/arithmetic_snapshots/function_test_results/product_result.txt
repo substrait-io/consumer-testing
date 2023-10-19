@@ -1,4 +1,2 @@
-pyarrow.Table
-product_supplycost: double
-----
-product_supplycost: [[inf]]
+inf
+ 

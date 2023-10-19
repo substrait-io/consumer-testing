@@ -1,4 +1,2 @@
-pyarrow.Table
-(to_hours(cast(1 as bigint)) + to_hours(cast(5 as bigint))): duration[ms]
-----
-(to_hours(cast(1 as bigint)) + to_hours(cast(5 as bigint))): [[21600000]]
+MonthDayNano(months=0, days=0, nanoseconds=21600000000000)
+ 

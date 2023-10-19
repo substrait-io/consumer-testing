@@ -11,99 +11,104 @@
     {
       "root": {
         "input": {
-          "project": {
+          "fetch": {
             "input": {
-              "read": {
-                "baseSchema": {
-                  "names": [
-                    "ps_partkey",
-                    "ps_suppkey",
-                    "ps_availqty",
-                    "ps_supplycost",
-                    "ps_comment"
-                  ],
-                  "struct": {
-                    "types": [
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "decimal": {
-                          "scale": 2,
-                          "precision": 15,
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "varchar": {
-                          "length": 198,
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
+              "project": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "ps_partkey",
+                        "ps_suppkey",
+                        "ps_availqty",
+                        "ps_supplycost",
+                        "ps_comment"
+                      ],
+                      "struct": {
+                        "types": [
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "varchar": {
+                              "length": 198,
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }
+                        ],
+                        "nullability": "NULLABILITY_REQUIRED"
                       }
-                    ],
-                    "nullability": "NULLABILITY_REQUIRED"
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {}
+                        ]
+                      },
+                      "maintainSingularStruct": true
+                    },
+                    "namedTable": {
+                      "names": [
+                        "partsupp"
+                      ]
+                    }
                   }
                 },
-                "projection": {
-                  "select": {
-                    "structItems": [
-                      {}
-                    ]
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
+                      },
+                      "rootReference": {}
+                    }
                   },
-                  "maintainSingularStruct": true
-                },
-                "namedTable": {
-                  "names": [
-                    "partsupp"
-                  ]
-                }
+                  {
+                    "scalarFunction": {
+                      "functionReference": 1,
+                      "outputType": {
+                        "decimal": {
+                          "precision": 38,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "value": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              },
+                              "rootReference": {}
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             },
-            "expressions": [
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {}
-                  },
-                  "rootReference": {}
-                }
-              },
-              {
-                "scalarFunction": {
-                  "functionReference": 1,
-                  "outputType": {
-                    "decimal": {
-                      "precision": 38,
-                      "nullability": "NULLABILITY_NULLABLE"
-                    }
-                  },
-                  "arguments": [
-                    {
-                      "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          },
-                          "rootReference": {}
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "count": "10"
           }
         },
         "names": [
