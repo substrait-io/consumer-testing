@@ -1,4 +1,2 @@
-pyarrow.Table
-variance_supplycost: double
-----
-variance_supplycost: [[83314.97]]
+83314.97
+ 

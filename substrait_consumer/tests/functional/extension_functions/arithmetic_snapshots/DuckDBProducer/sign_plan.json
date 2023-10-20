@@ -11,89 +11,94 @@
     {
       "root": {
         "input": {
-          "project": {
+          "fetch": {
             "input": {
-              "read": {
-                "baseSchema": {
-                  "names": [
-                    "a",
-                    "b",
-                    "c",
-                    "d"
-                  ],
-                  "struct": {
-                    "types": [
-                      {
-                        "i64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "i64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
+              "project": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "a",
+                        "b",
+                        "c",
+                        "d"
+                      ],
+                      "struct": {
+                        "types": [
+                          {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "bool": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "bool": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }
+                        ],
+                        "nullability": "NULLABILITY_REQUIRED"
                       }
-                    ],
-                    "nullability": "NULLABILITY_REQUIRED"
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {}
+                        ]
+                      },
+                      "maintainSingularStruct": true
+                    },
+                    "namedTable": {
+                      "names": [
+                        "t"
+                      ]
+                    }
                   }
                 },
-                "projection": {
-                  "select": {
-                    "structItems": [
-                      {}
-                    ]
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
+                      },
+                      "rootReference": {}
+                    }
                   },
-                  "maintainSingularStruct": true
-                },
-                "namedTable": {
-                  "names": [
-                    "t"
-                  ]
-                }
+                  {
+                    "scalarFunction": {
+                      "functionReference": 1,
+                      "outputType": {
+                        "i8": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "value": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              },
+                              "rootReference": {}
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             },
-            "expressions": [
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {}
-                  },
-                  "rootReference": {}
-                }
-              },
-              {
-                "scalarFunction": {
-                  "functionReference": 1,
-                  "outputType": {
-                    "i8": {
-                      "nullability": "NULLABILITY_NULLABLE"
-                    }
-                  },
-                  "arguments": [
-                    {
-                      "value": {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          },
-                          "rootReference": {}
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "count": "10"
           }
         },
         "names": [
@@ -102,5 +107,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }

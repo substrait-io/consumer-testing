@@ -63,7 +63,7 @@ def saveplan(request):
 
 
 PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
-CONSUMERS = [AceroConsumer, DuckDBConsumer]
+CONSUMERS = [DatafusionConsumer, DuckDBConsumer]
 
 
 def _get_consumers():

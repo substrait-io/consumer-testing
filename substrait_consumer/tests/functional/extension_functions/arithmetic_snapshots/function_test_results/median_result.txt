@@ -1,4 +1,2 @@
-pyarrow.Table
-median_supplycost: decimal128(15, 2)
-----
-median_supplycost: [[498.72]]
+498.72
+ 

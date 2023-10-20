@@ -1,6 +1,8 @@
-pyarrow.Table
-ps_availqty: int32
-ps_partkey: int32
-----
-ps_availqty: [[2404,2494,2767]]
-ps_partkey: [[2404,2494,2767]]
+2404
+2494
+2767
+ 
+2404
+2494
+2767
+ 

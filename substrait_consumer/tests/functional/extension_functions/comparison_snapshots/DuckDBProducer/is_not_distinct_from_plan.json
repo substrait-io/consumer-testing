@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
-        "name": "bool_and"
+        "name": "is_not_distinct_from"
       }
     }
   ],
@@ -13,7 +13,7 @@
         "input": {
           "project": {
             "input": {
-              "aggregate": {
+              "filter": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -52,9 +52,7 @@
                     "projection": {
                       "select": {
                         "structItems": [
-                          {
-                            "field": 2
-                          }
+                          {}
                         ]
                       },
                       "maintainSingularStruct": true
@@ -66,33 +64,35 @@
                     }
                   }
                 },
-                "groupings": [
-                  {}
-                ],
-                "measures": [
-                  {
-                    "measure": {
-                      "functionReference": 1,
-                      "outputType": {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "value": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              },
-                              "rootReference": {}
-                            }
+                "condition": {
+                  "scalarFunction": {
+                    "functionReference": 1,
+                    "outputType": {
+                      "bool": {
+                        "nullability": "NULLABILITY_NULLABLE"
+                      }
+                    },
+                    "arguments": [
+                      {
+                        "value": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {}
+                            },
+                            "rootReference": {}
                           }
                         }
-                      ]
-                    }
+                      },
+                      {
+                        "value": {
+                          "literal": {
+                            "null": {}
+                          }
+                        }
+                      }
+                    ]
                   }
-                ]
+                }
               }
             },
             "expressions": [
@@ -108,7 +108,7 @@
           }
         },
         "names": [
-          "bool_and_c"
+          "a"
         ]
       }
     }

@@ -1,4 +1,2 @@
-pyarrow.Table
-n_name: string
-----
-n_name: [["ALGERIA"]]
+ALGERIA
+ 

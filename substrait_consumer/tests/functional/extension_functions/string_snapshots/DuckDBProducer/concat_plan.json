@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
-        "name": "||"
+        "name": "concat"
       }
     }
   ],
@@ -122,5 +122,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }

@@ -120,5 +120,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 24,
+    "producer": "DuckDB"
+  }
 }

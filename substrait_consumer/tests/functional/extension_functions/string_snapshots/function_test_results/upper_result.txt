@@ -1,6 +1,22 @@
-pyarrow.Table
-o_comment: string
-uppercase_o_comment: string
-----
-o_comment: [["nstructions sleep furiously among "," foxes. pending accounts at the pending, silent asymptot","sly final accounts boost. carefully regular ideas cajole carefully. depos","sits. slyly regular warthogs cajole. regular, regular theodolites acro","quickly. bold deposits sleep slyly. packages use slyly",...,"efully special platelets; furiously regular","ual, even excuses cajole bold instructions. instructions a","riously special theodolites. express pinto beans wake slyly acros","onic deposits. slyly regular accounts detect fluffy instructions. theo","ic instructions boost final reques"]]
-uppercase_o_comment: [["NSTRUCTIONS SLEEP FURIOUSLY AMONG "," FOXES. PENDING ACCOUNTS AT THE PENDING, SILENT ASYMPTOT","SLY FINAL ACCOUNTS BOOST. CAREFULLY REGULAR IDEAS CAJOLE CAREFULLY. DEPOS","SITS. SLYLY REGULAR WARTHOGS CAJOLE. REGULAR, REGULAR THEODOLITES ACRO","QUICKLY. BOLD DEPOSITS SLEEP SLYLY. PACKAGES USE SLYLY",...,"EFULLY SPECIAL PLATELETS; FURIOUSLY REGULAR","UAL, EVEN EXCUSES CAJOLE BOLD INSTRUCTIONS. INSTRUCTIONS A","RIOUSLY SPECIAL THEODOLITES. EXPRESS PINTO BEANS WAKE SLYLY ACROS","ONIC DEPOSITS. SLYLY REGULAR ACCOUNTS DETECT FLUFFY INSTRUCTIONS. THEO","IC INSTRUCTIONS BOOST FINAL REQUES"]]
+ly express platelets. deposits acc
+ve the furiously fluffy dependencies. carefully regular 
+ after the asymptotes. instructions cajole after the foxes. carefully unu
+st the furiously bold pinto beans. furiously pending theodolites cajol
+onic requests. carefully daring foxes among the carefu
+furiously ironic accounts haggle blithely carefully regular de
+, ironic packages wa
+ly about the carefully express theodolites. ironic, iron
+ careful, regular courts. unusual
+osits according to the ideas are furiously final requests? slyly pe
+ 
+LY EXPRESS PLATELETS. DEPOSITS ACC
+VE THE FURIOUSLY FLUFFY DEPENDENCIES. CAREFULLY REGULAR 
+ AFTER THE ASYMPTOTES. INSTRUCTIONS CAJOLE AFTER THE FOXES. CAREFULLY UNU
+ST THE FURIOUSLY BOLD PINTO BEANS. FURIOUSLY PENDING THEODOLITES CAJOL
+ONIC REQUESTS. CAREFULLY DARING FOXES AMONG THE CAREFU
+FURIOUSLY IRONIC ACCOUNTS HAGGLE BLITHELY CAREFULLY REGULAR DE
+, IRONIC PACKAGES WA
+LY ABOUT THE CAREFULLY EXPRESS THEODOLITES. IRONIC, IRON
+ CAREFUL, REGULAR COURTS. UNUSUAL
+OSITS ACCORDING TO THE IDEAS ARE FURIOUSLY FINAL REQUESTS? SLYLY PE
+ 

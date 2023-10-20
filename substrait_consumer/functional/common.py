@@ -79,9 +79,14 @@ def generate_snapshot_results(
     duckdb_result = duckdb_result.rename_columns(
         list(map(str.lower, duckdb_result.column_names))
     )
+    duckdb_result_data = []
+    for column in duckdb_result.columns:
+        duckdb_result_data.extend(column.data)
+        duckdb_result_data.extend([' '])
+    str_result_data = '\n'.join(map(str, duckdb_result_data))
     function_group, function_name = test_name.split(":")
     snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
-    snapshot.assert_match(str(duckdb_result), f"{function_name}_result.txt")
+    snapshot.assert_match(str_result_data, f"{function_name}_result.txt")
 
 
 def substrait_producer_function_test(
@@ -198,8 +203,13 @@ def substrait_consumer_function_test(
         actual_result = consumer.run_substrait_query(substrait_plan)
         actual_result = actual_result.rename_columns(
             list(map(str.lower, actual_result.column_names))
-        )
-        snapshot.assert_match(str(actual_result), f"{function_name}_result.txt")
+        ).columns
+        result_list = []
+        for column in actual_result:
+            result_list.extend(column.data)
+            result_list.extend([' '])
+        str_result = '\n'.join(map(str, result_list))
+        snapshot.assert_match(str_result, f"{function_name}_result.txt")
 
     else:
         pytest.skip(

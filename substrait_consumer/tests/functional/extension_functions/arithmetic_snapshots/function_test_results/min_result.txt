@@ -1,4 +1,2 @@
-pyarrow.Table
-min_supplycost: decimal128(15, 2)
-----
-min_supplycost: [[1.01]]
+1.01
+ 

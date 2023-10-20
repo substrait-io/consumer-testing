@@ -10,4 +10,5 @@ pyarrow
 pytest
 pytest-snapshot
 pytest-xdist
+substrait
 substrait-validator

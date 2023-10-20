@@ -1,4 +1,2 @@
-pyarrow.Table
-avg_extendedprice: double
-----
-avg_extendedprice: [[35992.24]]
+35992.24
+ 

@@ -1,86 +1,103 @@
 def add_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey + partsupp.ps_suppkey).name("ADD_KEY")
-    return partsupp[partsupp.ps_partkey, partsupp.ps_suppkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey + limited.ps_suppkey).name("ADD_KEY")
+    return limited[limited.ps_partkey, limited.ps_suppkey, new_col]
 
 
 def subtract_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey - partsupp.ps_suppkey).name("SUBTRACT_KEY")
-    return partsupp[partsupp.ps_partkey, partsupp.ps_suppkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey - limited.ps_suppkey).name("SUBTRACT_KEY")
+    return limited[limited.ps_partkey, limited.ps_suppkey, new_col]
 
 
 def multiply_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey * 10).name("MULTIPLY_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey * 10).name("MULTIPLY_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def divide_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey / 10).name("DIVIDE_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey / 10).name("DIVIDE_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def modulus_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey % 10).name("MODULUS_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey % 10).name("MODULUS_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def exp_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey.exp()).round(2).name("EXP_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey.exp()).round(2).name("EXP_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def power_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey.pow(2)).name("POWER_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey.pow(2)).name("POWER_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def sqrt_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey.sqrt()).round(2).name("SQRT_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey.sqrt()).round(2).name("SQRT_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def abs_expr(partsupp, lineitem, t):
-    new_col = t.a.abs().name("ABS_A")
-    return t[t.a, new_col]
+    limited = t.limit(10)
+    new_col = limited.a.abs().name("ABS_A")
+    return limited[limited.a, new_col]
 
 
 def sign_expr(partsupp, lineitem, t):
-    new_col = t.a.sign().name("SIGN_A")
-    return t[t.a, new_col]
+    limited = t.limit(10)
+    new_col = limited.a.sign().name("SIGN_A")
+    return limited[limited.a, new_col]
 
 
 def negate_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey.negate()).name("NEGATE_KEY")
-    return partsupp[partsupp.ps_partkey, new_col]
+    limited = partsupp.limit(10)
+    new_col = (limited.ps_partkey.negate()).name("NEGATE_KEY")
+    return limited[limited.ps_partkey, new_col]
 
 
 def sin_expr(partsupp, lineitem, t):
-    new_col = partsupp.ps_supplycost.sin().round(2).name("SIN_SUPPLY")
-    return partsupp[new_col]
+    limited = partsupp.limit(10)
+    new_col = limited.ps_supplycost.sin().round(2).name("SIN_SUPPLY")
+    return limited[new_col]
 
 
 def cos_expr(partsupp, lineitem, t):
-    new_col = partsupp.ps_supplycost.cos().round(2).name("COS_SUPPLY")
-    return partsupp[new_col]
+    limited = partsupp.limit(10)
+    new_col = limited.ps_supplycost.cos().round(2).name("COS_SUPPLY")
+    return limited[new_col]
 
 
 def tan_expr(partsupp, lineitem, t):
-    new_col = partsupp.ps_supplycost.tan().round(2).name("TAN_SUPPLY")
-    return partsupp[new_col]
+    limited = partsupp.limit(10)
+    new_col = limited.ps_supplycost.tan().round(2).name("TAN_SUPPLY")
+    return limited[new_col]
 
 
 def asin_expr(partsupp, lineitem, t):
-    new_col = lineitem.l_tax.asin().round(2).name("ASIN_TAX")
-    return lineitem[new_col]
+    limited = lineitem.limit(10)
+    new_col = limited.l_tax.asin().round(2).name("ASIN_TAX")
+    return limited[new_col]
 
 
 def acos_expr(partsupp, lineitem, t):
-    new_col = lineitem.l_tax.acos().round(2).name("ACOS_TAX")
-    return lineitem[new_col]
+    limited = lineitem.limit(10)
+    new_col = limited.l_tax.acos().round(2).name("ACOS_TAX")
+    return limited[new_col]
 
 
 def atan_expr(partsupp, lineitem, t):
-    new_col = lineitem.l_tax.atan().round(2).name("ATAN_TAX")
-    return lineitem[new_col]
+    limited = lineitem.limit(10)
+    new_col = limited.l_tax.atan().round(2).name("ATAN_TAX")
+    return limited[new_col]
 
 
 IBIS_SCALAR = {

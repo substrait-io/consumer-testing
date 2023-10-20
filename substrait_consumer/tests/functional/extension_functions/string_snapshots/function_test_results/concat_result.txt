@@ -1,6 +1,52 @@
-pyarrow.Table
-n_name: string
-concat_nation: string
-----
-n_name: [["ALGERIA","ARGENTINA","BRAZIL","CANADA","EGYPT",...,"SAUDI ARABIA","VIETNAM","RUSSIA","UNITED KINGDOM","UNITED STATES"]]
-concat_nation: [["ALGERIA haggle. carefully final deposits detect slyly agai","ARGENTINAal foxes promise slyly according to the regular accounts. bold requests alon","BRAZILy alongside of the pending deposits. carefully special packages are about the ironic forges. slyly special ","CANADAeas hang ironic, silent packages. slyly regular packages are furiously over the tithes. fluffily bold","EGYPTy above the carefully unusual theodolites. final dugouts are quickly across the furiously regular d",...,"SAUDI ARABIAts. silent requests haggle. closely express packages sleep across the blithely","VIETNAMhely enticingly express accounts. even, final ","RUSSIA requests against the platelets use never according to the quickly regular pint","UNITED KINGDOMeans boost carefully special requests. accounts are. carefull","UNITED STATESy final packages. slow foxes cajole quickly. quickly silent platelets breach ironic accounts. unusual pinto be"]]
+ALGERIA
+ARGENTINA
+BRAZIL
+CANADA
+EGYPT
+ETHIOPIA
+FRANCE
+GERMANY
+INDIA
+INDONESIA
+IRAN
+IRAQ
+JAPAN
+JORDAN
+KENYA
+MOROCCO
+MOZAMBIQUE
+PERU
+CHINA
+ROMANIA
+SAUDI ARABIA
+VIETNAM
+RUSSIA
+UNITED KINGDOM
+UNITED STATES
+ 
+ALGERIAfuriously regular requests. platelets affix furious
+ARGENTINAinstructions wake quickly. final deposits haggle. final, silent theodolites 
+BRAZILasymptotes use fluffily quickly bold instructions. slyly bold dependencies sleep carefully pending accounts
+CANADAss deposits wake across the pending foxes. packages after the carefully bold requests integrate caref
+EGYPTusly ironic, pending foxes. even, special instructions nag. sly, final foxes detect slyly fluffily 
+ETHIOPIAregular requests sleep carefull
+FRANCEoggedly. regular packages solve across
+GERMANYong the regular requests: blithely silent pinto beans hagg
+INDIAuriously unusual deposits about the slyly final pinto beans could
+INDONESIAd deposits sleep quickly according to the dogged, regular dolphins. special excuses haggle furiously special reque
+IRANfuriously idle platelets nag. express asymptotes s
+IRAQpendencies; slyly express foxes integrate carefully across the reg
+JAPAN quickly final packages. furiously i
+JORDANthe slyly regular ideas. silent Tiresias affix slyly fu
+KENYAlyly special foxes. slyly regular deposits sleep carefully. carefully permanent accounts slee
+MOROCCOct blithely: blithely express accounts nag carefully. silent packages haggle carefully abo
+MOZAMBIQUE beans after the carefully regular accounts r
+PERUly final foxes. blithely ironic accounts haggle. regular foxes about the regular deposits are furiously ir
+CHINAckly special packages cajole slyly. unusual, unusual theodolites mold furiously. slyly sile
+ROMANIAsly blithe requests. thinly bold deposits above the blithely regular accounts nag special, final requests. care
+SAUDI ARABIAse slyly across the blithely regular deposits. deposits use carefully regular 
+VIETNAMlly across the quickly even pinto beans. caref
+RUSSIAuctions. furiously unusual instructions sleep furiously ironic packages. slyly 
+UNITED KINGDOMcarefully pending courts sleep above the ironic, regular theo
+UNITED STATESly ironic requests along the slyly bold ideas hang after the blithely special notornis; blithely even accounts
+ 

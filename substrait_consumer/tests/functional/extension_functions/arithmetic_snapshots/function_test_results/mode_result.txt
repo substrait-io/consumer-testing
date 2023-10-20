@@ -1,4 +1,2 @@
-pyarrow.Table
-mode_supplycost: decimal128(15, 2)
-----
-mode_supplycost: [[266.53]]
+266.53
+ 

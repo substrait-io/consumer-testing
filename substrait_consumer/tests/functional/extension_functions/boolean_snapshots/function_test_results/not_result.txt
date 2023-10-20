@@ -1,4 +1,11 @@
-pyarrow.Table
-c: bool
-----
-c: [[true,false,true,true,false,true,false,true,false,false]]
+True
+False
+True
+True
+False
+True
+False
+True
+False
+False
+ 

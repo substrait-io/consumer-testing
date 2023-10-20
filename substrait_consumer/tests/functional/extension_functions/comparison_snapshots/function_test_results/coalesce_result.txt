@@ -1,4 +1,2 @@
-pyarrow.Table
-coalesce(null, null, 'test_string'): string
-----
-coalesce(null, null, 'test_string'): [["test_string"]]
+test_string
+ 

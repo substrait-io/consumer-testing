@@ -1,7 +1,8 @@
 {
   "extensionUris": [
     {
-      "extensionUriAnchor": 1
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_string.yaml"
     }
   ],
   "extensions": [
@@ -9,322 +10,42 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add"
+        "name": "starts_with:str_str"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "subtract"
+        "name": "ends_with:str_str"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 3,
-        "name": "multiply"
+        "name": "substring:str_i32_i32"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "divide"
+        "name": "contains:str_str"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 5,
-        "name": "modulus"
+        "name": "replace:str_str_str"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 6,
-        "name": "power"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 7,
-        "name": "round"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 8,
-        "name": "sqrt"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 9,
-        "name": "exp"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 10,
-        "name": "negate"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 11,
-        "name": "cos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 12,
-        "name": "acos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 13,
-        "name": "sin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 14,
-        "name": "asin"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 15,
-        "name": "tan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 16,
-        "name": "atan"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 17,
-        "name": "abs"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 18,
-        "name": "sign"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 19,
-        "name": "sum"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 20,
-        "name": "avg"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 21,
-        "name": "min"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 22,
-        "name": "max"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 23,
-        "name": "median"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 24,
-        "name": "or"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 25,
-        "name": "equal"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 26,
-        "name": "and"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 27,
-        "name": "lt"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 28,
-        "name": "not_equal"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 29,
-        "name": "lte"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 30,
-        "name": "gt"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 31,
-        "name": "gte"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 32,
-        "name": "ln"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 33,
-        "name": "log10"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 34,
-        "name": "log2"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 35,
-        "name": "logb"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 36,
-        "name": "ceil"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 37,
-        "name": "floor"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 38,
-        "name": "concat"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 39,
-        "name": "starts_with"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 40,
-        "name": "ends_with"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 41,
-        "name": "substring"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 42,
-        "name": "contains"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 43,
-        "name": "strpos"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 44,
-        "name": "replace"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 45,
-        "name": "repeat"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 46,
-        "name": "reverse"
+        "name": "reverse:str"
       }
     }
   ],
@@ -399,7 +120,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 46,
+                  "functionReference": 6,
                   "outputType": {
                     "string": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -430,5 +151,9 @@
         ]
       }
     }
-  ]
+  ],
+  "version": {
+    "minorNumber": 35,
+    "producer": "ibis-substrait"
+  }
 }

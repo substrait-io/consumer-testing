@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "functionAnchor": 1,
-        "name": "gte"
+        "name": "+"
       }
     }
   ],
@@ -138,10 +138,7 @@
                       "select": {
                         "structItems": [
                           {
-                            "field": 11
-                          },
-                          {
-                            "field": 12
+                            "field": 10
                           }
                         ]
                       },
@@ -164,20 +161,10 @@
                     }
                   },
                   {
-                    "selection": {
-                      "directReference": {
-                        "structField": {
-                          "field": 1
-                        }
-                      },
-                      "rootReference": {}
-                    }
-                  },
-                  {
                     "scalarFunction": {
                       "functionReference": 1,
                       "outputType": {
-                        "bool": {
+                        "date": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -194,13 +181,10 @@
                         },
                         {
                           "value": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {
-                                  "field": 1
-                                }
-                              },
-                              "rootReference": {}
+                            "literal": {
+                              "intervalDayToSecond": {
+                                "days": 5
+                              }
                             }
                           }
                         }
@@ -214,9 +198,8 @@
           }
         },
         "names": [
-          "l_commitdate",
-          "l_receiptdate",
-          "(l_commitdate >= l_receiptdate)"
+          "l_shipdate",
+          "(l_shipdate + '5 days'::INTERVAL)"
         ]
       }
     }
