@@ -19,16 +19,19 @@ from substrait_consumer.context import get_schema, produce_isthmus_substrait
 
 
 class DuckDBProducer:
+    """
+    Adapts the DuckDB Substrait producer to the test framework.
+    """
     def __init__(self, db_connection=None):
         if db_connection is not None:
-            self.db_connection = db_connection
+            self._db_connection = db_connection
         else:
-            self.db_connection = duckdb.connect()
-            self.db_connection.execute("INSTALL substrait")
-            self.db_connection.execute("LOAD substrait")
+            self._db_connection = duckdb.connect()
+            self._db_connection.execute("INSTALL substrait")
+            self._db_connection.execute("LOAD substrait")
 
     def set_db_connection(self, db_connection):
-        self.db_connection = db_connection
+        self._db_connection = db_connection
 
     def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
@@ -40,7 +43,7 @@ class DuckDBProducer:
         Returns:
             Substrait query plan in json format.
         """
-        duckdb_substrait_plan = self.db_connection.get_substrait_json(sql_query)
+        duckdb_substrait_plan = self._db_connection.get_substrait_json(sql_query)
         proto_bytes = duckdb_substrait_plan.fetchone()[0]
         python_json = json.loads(proto_bytes)
         return json.dumps(python_json, indent=2)
@@ -48,7 +51,7 @@ class DuckDBProducer:
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
             table_names = load_tables_from_parquet(
-                self.db_connection, created_tables, file_names
+                self._db_connection, created_tables, file_names
             )
             sql_query = sql_query.format(*table_names)
         return sql_query
@@ -58,18 +61,21 @@ class DuckDBProducer:
 
 
 class IbisProducer:
+    """
+    Adapts the Ibis Substrait producer to the test framework.
+    """
     def __init__(self, db_connection=None):
         if db_connection is not None:
-            self.db_connection = db_connection
+            self._db_connection = db_connection
         else:
-            self.db_connection = duckdb.connect()
+            self._db_connection = duckdb.connect()
 
-        self.db_connection.execute("INSTALL substrait")
-        self.db_connection.execute("LOAD substrait")
+        self._db_connection.execute("INSTALL substrait")
+        self._db_connection.execute("LOAD substrait")
         self.compiler = SubstraitCompiler()
 
     def set_db_connection(self, db_connection):
-        self.db_connection = db_connection
+        self._db_connection = db_connection
 
     def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
@@ -90,7 +96,7 @@ class IbisProducer:
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
             table_names = load_tables_from_parquet(
-                self.db_connection, created_tables, file_names
+                self._db_connection, created_tables, file_names
             )
             sql_query = sql_query.format(*table_names)
         return sql_query
@@ -100,19 +106,22 @@ class IbisProducer:
 
 
 class IsthmusProducer:
+    """
+    Adapts the Isthmus Substrait producer to the test framework.
+    """
     def __init__(self, db_connection=None):
         if db_connection is not None:
-            self.db_connection = db_connection
+            self._db_connection = db_connection
         else:
-            self.db_connection = duckdb.connect()
+            self._db_connection = duckdb.connect()
 
-        self.db_connection.execute("INSTALL substrait")
-        self.db_connection.execute("LOAD substrait")
+        self._db_connection.execute("INSTALL substrait")
+        self._db_connection.execute("LOAD substrait")
         self.compiler = SubstraitCompiler()
         self.file_names = None
 
     def set_db_connection(self, db_connection):
-        self.db_connection = db_connection
+        self._db_connection = db_connection
 
     def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
@@ -135,7 +144,7 @@ class IsthmusProducer:
         if len(file_names) > 0:
             self.file_names = file_names
             table_names = load_tables_from_parquet(
-                self.db_connection, created_tables, file_names
+                self._db_connection, created_tables, file_names
             )
             sql_query = sql_query.format(*table_names)
         return sql_query
@@ -145,15 +154,18 @@ class IsthmusProducer:
 
 
 class DataFusionProducer:
+    """
+    Adapts the DataFusion Substrait producer to the test framework.
+    """
     def __init__(self, db_connection=None):
-        self.ctx = SessionContext()
+        self._ctx = SessionContext()
         if db_connection is not None:
-            self.db_connection = db_connection
+            self._db_connection = db_connection
         else:
-            self.db_connection = db_connection
+            self._db_connection = db_connection
 
     def set_db_connection(self, db_connection):
-        self.db_connection = db_connection
+        self._db_connection = db_connection
 
     def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
         """
@@ -167,7 +179,7 @@ class DataFusionProducer:
         """
         substrait_proto = plan_pb2.Plan()
 
-        substrait_plan = ss.substrait.serde.serialize_to_plan(sql_query, self.ctx)
+        substrait_plan = ss.substrait.serde.serialize_to_plan(sql_query, self._ctx)
         substrait_plan_bytes = substrait_plan.encode()
         substrait_proto.ParseFromString(substrait_plan_bytes)
 
@@ -175,7 +187,7 @@ class DataFusionProducer:
 
     def register_tables(self, created_tables, file_names):
         """
-        Register tables to the datafusion session context
+        Register tables to the datafusion session context.
 
         Parameters:
             created_tables:
@@ -194,9 +206,9 @@ class DataFusionProducer:
                 )
                 if f"{self.__class__.__name__}{table_name}" not in created_tables:
                     created_tables.add(f"{self.__class__.__name__}{table_name}")
-                    self.ctx.register_parquet(f"{table_name}", file_path)
+                    self._ctx.register_parquet(f"{table_name}", file_path)
         else:
-            if not self.ctx.table_exist("t"):
+            if not self._ctx.table_exist("t"):
                 tables = pa.RecordBatch.from_arrays(
                     [
                         pa.array(COLUMN_A),
@@ -206,13 +218,13 @@ class DataFusionProducer:
                     ],
                     names=["a", "b", "c", "d"],
                 )
-                self.ctx.register_record_batches("t", [[tables]])
+                self._ctx.register_record_batches("t", [[tables]])
 
     def format_sql(self, created_tables, sql_query, file_names):
         self.register_tables(created_tables, file_names)
         if len(file_names) > 0:
             table_names = load_tables_from_parquet(
-                self.db_connection, created_tables, file_names
+                self._db_connection, created_tables, file_names
             )
             sql_query = sql_query.format(*table_names)
         return sql_query
