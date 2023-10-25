@@ -6,7 +6,8 @@ from filelock import FileLock
 
 from substrait_consumer.consumers import (
     AceroConsumer, DatafusionConsumer, DuckDBConsumer)
-from substrait_consumer.producers import DuckDBProducer, IbisProducer, IsthmusProducer
+from substrait_consumer.producers import (
+    DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer)
 
 
 @pytest.fixture(scope="session")
@@ -62,7 +63,7 @@ def saveplan(request):
     return request.config.getoption("--saveplan")
 
 
-PRODUCERS = [DuckDBProducer, IbisProducer, IsthmusProducer]
+PRODUCERS = [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer]
 CONSUMERS = [DatafusionConsumer, DuckDBConsumer]
 
 
