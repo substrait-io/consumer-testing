@@ -176,6 +176,8 @@ class DataFusionProducer:
                 SQL query.
         Returns:
             Substrait query plan in json format.
+        Raises:
+            DecodeError if the plan cannot be parsed.
         """
         substrait_proto = plan_pb2.Plan()
 
