@@ -1,0 +1,115 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "equal"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "or"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "filter": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {}
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "t"
+                  ]
+                }
+              }
+            },
+            "condition": {
+              "scalarFunction": {
+                "functionReference": 1,
+                "arguments": [
+                  {
+                    "value": {
+                      "scalarFunction": {
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "i64": "5",
+                                "nullable": true
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "value": {
+                      "scalarFunction": {
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "i64": "7",
+                                "nullable": true
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "names": [
+          "t.a"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

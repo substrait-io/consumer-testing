@@ -1,0 +1,92 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "concat"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "n_nationkey",
+                    "n_name",
+                    "n_regionkey",
+                    "n_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {
+                        "field": 1
+                      },
+                      {
+                        "field": 3
+                      }
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "nation"
+                  ]
+                }
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "scalarFunction": {
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "nation.n_name",
+          "concat_nation"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

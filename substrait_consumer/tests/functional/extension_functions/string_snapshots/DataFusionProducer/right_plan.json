@@ -1,0 +1,86 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "right"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "n_nationkey",
+                    "n_name",
+                    "n_regionkey",
+                    "n_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {
+                        "field": 1
+                      }
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "nation"
+                  ]
+                }
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "scalarFunction": {
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i64": "2",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "nation.n_name",
+          "right_extract_n_name"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

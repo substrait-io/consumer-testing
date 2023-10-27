@@ -1,0 +1,132 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "round"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "avg"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "aggregate": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "l_orderkey",
+                        "l_partkey",
+                        "l_suppkey",
+                        "l_linenumber",
+                        "l_quantity",
+                        "l_extendedprice",
+                        "l_discount",
+                        "l_tax",
+                        "l_returnflag",
+                        "l_linestatus",
+                        "l_shipdate",
+                        "l_commitdate",
+                        "l_receiptdate",
+                        "l_shipinstruct",
+                        "l_shipmode",
+                        "l_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {
+                            "field": 5
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "lineitem"
+                      ]
+                    }
+                  }
+                },
+                "groupings": [
+                  {}
+                ],
+                "measures": [
+                  {
+                    "measure": {
+                      "functionReference": 1,
+                      "invocation": "AGGREGATION_INVOCATION_ALL",
+                      "arguments": [
+                        {
+                          "value": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "expressions": [
+              {
+                "scalarFunction": {
+                  "arguments": [
+                    {
+                      "value": {
+                        "cast": {
+                          "type": {
+                            "fp64": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          "input": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i64": "2",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "avg_extendedprice"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE NOT N_NAME = 'CANADA'
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "equal": (
         """
@@ -15,7 +15,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE PS_AVAILQTY = PS_PARTKEY
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "is_not_distinct_from": (
         """
@@ -23,7 +23,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NOT DISTINCT FROM NULL
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "lt": (
         """
@@ -31,7 +31,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE PS_AVAILQTY < 10
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "lte": (
         """
@@ -39,7 +39,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE PS_AVAILQTY <= 10
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "gt": (
         """
@@ -47,7 +47,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE PS_AVAILQTY > 9990
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "gte": (
         """
@@ -55,7 +55,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE PS_AVAILQTY >= 9990
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "is_not_null": (
         """
@@ -63,7 +63,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NOT NULL
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "is_null": (
         """
@@ -71,7 +71,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NULL
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "is_nan": (
         """
@@ -98,12 +98,12 @@ SQL_SCALAR = {
         """
         SELECT coalesce(NULL,NULL,'test_string')
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "between": (
         """
         SELECT a FROM 't' WHERE a BETWEEN 1 AND 5
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
 }

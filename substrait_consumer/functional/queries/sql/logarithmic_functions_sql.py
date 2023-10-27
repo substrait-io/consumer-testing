@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "log10": (
         """
@@ -15,7 +15,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "log2": (
         """
@@ -23,7 +23,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "logb": (
         """
@@ -31,6 +31,6 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }

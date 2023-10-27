@@ -1,0 +1,73 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "count"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "aggregate": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "ps_partkey",
+                    "ps_suppkey",
+                    "ps_availqty",
+                    "ps_supplycost",
+                    "ps_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {}
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "partsupp"
+                  ]
+                }
+              }
+            },
+            "groupings": [
+              {}
+            ],
+            "measures": [
+              {
+                "measure": {
+                  "invocation": "AGGREGATION_INVOCATION_ALL",
+                  "arguments": [
+                    {
+                      "value": {
+                        "literal": {
+                          "i8": 1,
+                          "nullable": true,
+                          "typeVariationReference": 1
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "COUNT(*)"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

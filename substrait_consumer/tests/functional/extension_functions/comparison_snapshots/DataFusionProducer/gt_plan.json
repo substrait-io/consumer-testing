@@ -1,0 +1,77 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "gt"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "filter": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "ps_partkey",
+                    "ps_suppkey",
+                    "ps_availqty",
+                    "ps_supplycost",
+                    "ps_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {
+                        "field": 2
+                      }
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "partsupp"
+                  ]
+                }
+              }
+            },
+            "condition": {
+              "scalarFunction": {
+                "arguments": [
+                  {
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "value": {
+                      "literal": {
+                        "i32": 9990,
+                        "nullable": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "names": [
+          "partsupp.ps_availqty"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

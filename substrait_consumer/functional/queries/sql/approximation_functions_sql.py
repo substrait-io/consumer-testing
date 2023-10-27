@@ -8,4 +8,11 @@ SQL_AGGREGATE = {
         """,
         [DuckDBProducer],
     ),
+    "approx_distinct": (
+        """
+        SELECT approx_distinct(l_comment)
+        FROM '{}';
+        """,
+        [DataFusionProducer],
+    ),
 }

@@ -1,0 +1,120 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "acos"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "round"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "fetch": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "l_orderkey",
+                        "l_partkey",
+                        "l_suppkey",
+                        "l_linenumber",
+                        "l_quantity",
+                        "l_extendedprice",
+                        "l_discount",
+                        "l_tax",
+                        "l_returnflag",
+                        "l_linestatus",
+                        "l_shipdate",
+                        "l_commitdate",
+                        "l_receiptdate",
+                        "l_shipinstruct",
+                        "l_shipmode",
+                        "l_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {
+                            "field": 7
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "lineitem"
+                      ]
+                    }
+                  }
+                },
+                "count": "10"
+              }
+            },
+            "expressions": [
+              {
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "arguments": [
+                    {
+                      "value": {
+                        "scalarFunction": {
+                          "arguments": [
+                            {
+                              "value": {
+                                "cast": {
+                                  "type": {
+                                    "fp64": {
+                                      "nullability": "NULLABILITY_REQUIRED"
+                                    }
+                                  },
+                                  "input": {
+                                    "selection": {
+                                      "directReference": {
+                                        "structField": {}
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i64": "2",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "acos_tax"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "subtract"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "fetch": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "ps_partkey",
+                        "ps_suppkey",
+                        "ps_availqty",
+                        "ps_supplycost",
+                        "ps_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {},
+                          {
+                            "field": 1
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "partsupp"
+                      ]
+                    }
+                  }
+                },
+                "count": "10"
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  }
+                }
+              },
+              {
+                "scalarFunction": {
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "partsupp.ps_partkey",
+          "partsupp.ps_suppkey",
+          "subtract_key"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

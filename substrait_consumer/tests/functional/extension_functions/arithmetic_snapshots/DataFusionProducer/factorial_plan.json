@@ -1,0 +1,91 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "factorial"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "fetch": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "ps_partkey",
+                        "ps_suppkey",
+                        "ps_availqty",
+                        "ps_supplycost",
+                        "ps_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {}
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "partsupp"
+                      ]
+                    }
+                  }
+                },
+                "count": "10"
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "scalarFunction": {
+                  "arguments": [
+                    {
+                      "value": {
+                        "cast": {
+                          "type": {
+                            "i64": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          "input": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "partsupp.ps_partkey",
+          "factorial_key"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "replace"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "n_nationkey",
+                    "n_name",
+                    "n_regionkey",
+                    "n_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {
+                        "field": 1
+                      }
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "nation"
+                  ]
+                }
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "scalarFunction": {
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "string": "A",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "string": "a",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "nation.n_name",
+          "replace_name"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

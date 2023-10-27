@@ -1,0 +1,78 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "is_not_distinct_from"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "filter": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {}
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "t"
+                  ]
+                }
+              }
+            },
+            "condition": {
+              "scalarFunction": {
+                "arguments": [
+                  {
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "value": {
+                      "literal": {
+                        "null": {
+                          "i64": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "nullable": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "names": [
+          "t.a"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

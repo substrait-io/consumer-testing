@@ -7,4 +7,10 @@ AGGREGATE_FUNCTIONS = (
         "sql_query": SQL_AGGREGATE["approx_count_distinct"],
         "ibis_expr": None,
     },
+    {
+        "test_name": "approx_distinct",
+        "file_names": ["lineitem.parquet"],
+        "sql_query": SQL_AGGREGATE["approx_distinct"],
+        "ibis_expr": None,
+    },
 )

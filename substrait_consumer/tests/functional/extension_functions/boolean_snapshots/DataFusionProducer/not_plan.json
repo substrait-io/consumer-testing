@@ -1,0 +1,41 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "read": {
+            "baseSchema": {
+              "names": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ]
+            },
+            "projection": {
+              "select": {
+                "structItems": [
+                  {
+                    "field": 2
+                  }
+                ]
+              }
+            },
+            "namedTable": {
+              "names": [
+                "t"
+              ]
+            }
+          }
+        },
+        "names": [
+          "t.c"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

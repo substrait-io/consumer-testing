@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM 't'
         WHERE a = 5 OR a = 7;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "and": (
         """
@@ -15,20 +15,20 @@ SQL_SCALAR = {
         FROM 't'
         WHERE a < 5 AND b = 1;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "not": (
         """
         SELECT c FROM 't' WHERE NOT FALSE
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "xor": (
         """
         SELECT a, b,  xor(a, b) AS xor_a_b
         FROM 't';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }
 
@@ -38,13 +38,13 @@ SQL_AGGREGATE = {
         SELECT bool_and(c) AS bool_and_c
         FROM 't'
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "bool_or": (
         """
         SELECT bool_or(c) AS bool_or_c
         FROM 't'
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }

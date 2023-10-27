@@ -1,0 +1,87 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "bool_and"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "aggregate": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "a",
+                        "b",
+                        "c",
+                        "d"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {
+                            "field": 2
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "t"
+                      ]
+                    }
+                  }
+                },
+                "groupings": [
+                  {}
+                ],
+                "measures": [
+                  {
+                    "measure": {
+                      "invocation": "AGGREGATION_INVOCATION_ALL",
+                      "arguments": [
+                        {
+                          "value": {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "bool_and_c"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "log2"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "round"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "fetch": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "ps_partkey",
+                        "ps_suppkey",
+                        "ps_availqty",
+                        "ps_supplycost",
+                        "ps_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {
+                            "field": 3
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "partsupp"
+                      ]
+                    }
+                  }
+                },
+                "count": "10"
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "arguments": [
+                    {
+                      "value": {
+                        "scalarFunction": {
+                          "arguments": [
+                            {
+                              "value": {
+                                "cast": {
+                                  "type": {
+                                    "fp64": {
+                                      "nullability": "NULLABILITY_REQUIRED"
+                                    }
+                                  },
+                                  "input": {
+                                    "selection": {
+                                      "directReference": {
+                                        "structField": {}
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i64": "2",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "partsupp.ps_supplycost",
+          "log2_supply"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 33,
+    "producer": "datafusion"
+  }
+}
