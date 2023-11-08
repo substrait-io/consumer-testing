@@ -12,7 +12,7 @@ def floor_expr(partsupp, lineitem):
 
 def round_expr(partsupp, lineitem):
     limited = lineitem.limit(10)
-    new_col = limited.l_extendedprice.round(1).name("ROUND_EXTENDEDPRICE")
+    new_col = limited.l_extendedprice.round(digits=1).name("ROUND_EXTENDEDPRICE")
     return limited[limited.l_extendedprice, new_col]
 
 

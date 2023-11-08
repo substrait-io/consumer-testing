@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "subtract": (
         """
@@ -15,7 +15,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "multiply": (
         """
@@ -23,7 +23,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "divide": (
         """
@@ -31,7 +31,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "modulus": (
         """
@@ -45,9 +45,10 @@ SQL_SCALAR = {
         """
         SELECT PS_PARTKEY, factorial(PS_PARTKEY) AS FACTORIAL_KEY
         FROM '{}'
-        LIMIT 10;
+        WHERE PS_PARTKEY <= 10
+        LIMIT 100;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "power": (
         """
@@ -55,7 +56,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "sqrt": (
         """
@@ -63,7 +64,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "exp": (
         """
@@ -71,7 +72,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "negate": (
         """
@@ -87,7 +88,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "acos": (
         """
@@ -95,7 +96,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "sin": (
         """
@@ -103,7 +104,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "asin": (
         """
@@ -111,7 +112,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "tan": (
         """
@@ -119,7 +120,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "atan": (
         """
@@ -127,7 +128,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "atan2": (
         """
@@ -135,7 +136,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "abs": (
         """
@@ -143,7 +144,7 @@ SQL_SCALAR = {
         FROM 't'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "sign": (
         """
@@ -161,49 +162,49 @@ SQL_AGGREGATE = {
         SELECT sum(PS_SUPPLYCOST) AS SUM_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "count": (
         """
         SELECT count(PS_SUPPLYCOST) AS COUNT_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "count_star": (
         """
         SELECT count(*)
         FROM '{}';
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "avg": (
         """
         SELECT round(avg(PS_SUPPLYCOST), 2) AS AVG_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "min": (
         """
         SELECT min(PS_SUPPLYCOST) AS MIN_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "max": (
         """
         SELECT max(PS_SUPPLYCOST) AS MAX_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "median": (
         """
         SELECT median(PS_SUPPLYCOST) AS MEDIAN_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "mode": (
         """

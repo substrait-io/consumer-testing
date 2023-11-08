@@ -77,80 +77,85 @@
               }
             },
             "input": {
-              "read": {
-                "common": {
-                  "direct": {}
-                },
-                "baseSchema": {
-                  "names": [
-                    "o_orderkey",
-                    "o_custkey",
-                    "o_orderstatus",
-                    "o_totalprice",
-                    "o_orderdate",
-                    "o_orderpriority",
-                    "o_clerk",
-                    "o_shippriority",
-                    "o_comment"
-                  ],
-                  "struct": {
-                    "types": [
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "string": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "decimal": {
-                          "scale": 2,
-                          "precision": 15,
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "date": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "string": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "string": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "i32": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      {
-                        "string": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
+              "fetch": {
+                "input": {
+                  "read": {
+                    "common": {
+                      "direct": {}
+                    },
+                    "baseSchema": {
+                      "names": [
+                        "o_orderkey",
+                        "o_custkey",
+                        "o_orderstatus",
+                        "o_totalprice",
+                        "o_orderdate",
+                        "o_orderpriority",
+                        "o_clerk",
+                        "o_shippriority",
+                        "o_comment"
+                      ],
+                      "struct": {
+                        "types": [
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "date": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "i32": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }
+                        ],
+                        "nullability": "NULLABILITY_REQUIRED"
                       }
-                    ],
-                    "nullability": "NULLABILITY_REQUIRED"
+                    },
+                    "namedTable": {
+                      "names": [
+                        "orders"
+                      ]
+                    }
                   }
                 },
-                "namedTable": {
-                  "names": [
-                    "orders"
-                  ]
-                }
+                "count": "10"
               }
             },
             "expressions": [

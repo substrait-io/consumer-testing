@@ -21,8 +21,9 @@ def lower_expr(nation, orders):
 
 
 def upper_expr(nation, orders):
-    new_col = orders.o_comment.upper().name("uppercase_O_COMMENT")
-    return orders[orders.o_comment, new_col]
+    limited = orders.limit(10)
+    new_col = limited.o_comment.upper().name("uppercase_O_COMMENT")
+    return limited[limited.o_comment, new_col]
 
 
 def substr_expr(nation, orders):

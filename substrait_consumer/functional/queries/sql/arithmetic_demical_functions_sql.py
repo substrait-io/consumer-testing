@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "subtract": (
         """
@@ -15,7 +15,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "multiply": (
         """
@@ -23,7 +23,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "divide": (
         """
@@ -31,7 +31,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "modulus": (
         """
@@ -39,7 +39,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }
 
@@ -49,27 +49,27 @@ SQL_AGGREGATE = {
         SELECT sum(L_EXTENDEDPRICE) AS SUM_EXTENDEDPRICE
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "avg": (
         """
         SELECT round(avg(L_EXTENDEDPRICE), 2) AS AVG_EXTENDEDPRICE
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "min": (
         """
         SELECT min(L_EXTENDEDPRICE) AS MIN_EXTENDEDPRICE
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "max": (
         """
         SELECT max(L_EXTENDEDPRICE) AS MAX_EXTENDEDPRICE
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }

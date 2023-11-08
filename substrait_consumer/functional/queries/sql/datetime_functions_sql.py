@@ -7,7 +7,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "add": (
         """
@@ -37,7 +37,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "lte": (
         """
@@ -45,7 +45,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "gt": (
         """
@@ -53,7 +53,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "gte": (
         """
@@ -61,6 +61,6 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
 }
