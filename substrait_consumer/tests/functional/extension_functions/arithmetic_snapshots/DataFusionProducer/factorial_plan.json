@@ -5,6 +5,13 @@
         "extensionUriReference": 4294967295,
         "name": "factorial"
       }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "lte"
+      }
     }
   ],
   "relations": [
@@ -15,31 +22,59 @@
             "input": {
               "fetch": {
                 "input": {
-                  "read": {
-                    "baseSchema": {
-                      "names": [
-                        "ps_partkey",
-                        "ps_suppkey",
-                        "ps_availqty",
-                        "ps_supplycost",
-                        "ps_comment"
-                      ]
-                    },
-                    "projection": {
-                      "select": {
-                        "structItems": [
-                          {}
-                        ]
+                  "filter": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "ps_partkey",
+                            "ps_suppkey",
+                            "ps_availqty",
+                            "ps_supplycost",
+                            "ps_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {}
+                            ]
+                          }
+                        },
+                        "namedTable": {
+                          "names": [
+                            "partsupp"
+                          ]
+                        }
                       }
                     },
-                    "namedTable": {
-                      "names": [
-                        "partsupp"
-                      ]
+                    "condition": {
+                      "scalarFunction": {
+                        "functionReference": 1,
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "i32": 10,
+                                "nullable": true
+                              }
+                            }
+                          }
+                        ]
+                      }
                     }
                   }
                 },
-                "count": "10"
+                "count": "100"
               }
             },
             "expressions": [

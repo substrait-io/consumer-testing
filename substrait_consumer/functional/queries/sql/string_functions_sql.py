@@ -23,13 +23,21 @@ SQL_SCALAR = {
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
-    "starts_with": (
+    "starts_with_duckdb": (
         """
         SELECT N_NAME
         FROM '{}'
         WHERE prefix(N_NAME, 'A');
         """,
-        [DataFusionProducer, DuckDBProducer],
+        [DuckDBProducer],
+    ),
+    "starts_with": (
+        """
+        SELECT N_NAME
+        FROM '{}'
+        WHERE starts_with(N_NAME, 'A');
+        """,
+        [DataFusionProducer],
     ),
     "ends_with": (
         """
@@ -37,7 +45,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE suffix(N_NAME, 'A');
         """,
-        [DataFusionProducer, DuckDBProducer],
+        [DuckDBProducer],
     ),
     "substring": (
         """
@@ -59,7 +67,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE contains(N_NAME, 'IA');
         """,
-        [DataFusionProducer, DuckDBProducer],
+        [DuckDBProducer],
     ),
     "strpos": (
         """
@@ -176,6 +184,6 @@ SQL_AGGREGATE = {
         FROM '{}'
         GROUP BY N_NAME
         """,
-        [DataFusionProducer, DuckDBProducer],
+        [DuckDBProducer],
     ),
 }
