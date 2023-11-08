@@ -63,8 +63,8 @@ def saveplan(request):
     return request.config.getoption("--saveplan")
 
 
-PRODUCERS = [DuckDBProducer]
-CONSUMERS = [DatafusionConsumer]
+PRODUCERS = [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer]
+CONSUMERS = [DatafusionConsumer, DuckDBConsumer]
 
 
 def _get_consumers():
