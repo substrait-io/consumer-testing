@@ -28,6 +28,12 @@ SCALAR_FUNCTIONS = (
         "ibis_expr": IBIS_SCALAR["starts_with"],
     },
     {
+        "test_name": "starts_with",
+        "file_names": ["nation.parquet"],
+        "sql_query": SQL_SCALAR["starts_with_duckdb"],
+        "ibis_expr": None,
+    },
+    {
         "test_name": "ends_with",
         "file_names": ["nation.parquet"],
         "sql_query": SQL_SCALAR["ends_with"],
