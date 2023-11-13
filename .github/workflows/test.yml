@@ -1,0 +1,31 @@
+name: Test
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - duckdb_producer_ci
+
+jobs:
+  duckdb_producer:
+    name: Run DuckDB producer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_producer.Dockerfile .)
+  duckdb_consumer:
+    name: Run DuckDB consumer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer.Dockerfile .)
