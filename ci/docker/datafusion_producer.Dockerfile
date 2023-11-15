@@ -8,4 +8,4 @@ RUN pip install --upgrade pip setuptools pytest pytest-snapshot substrait pyarro
 WORKDIR /substrait_consumer
 COPY . .
 
-CMD /usr/bin/python -mpytest -m produce_substrait_snapshot --producer=DatafusionProducer substrait_consumer/tests/functional/extension_functions
+CMD /usr/bin/python -mpytest -m produce_substrait_snapshot --producer=DataFusionProducer substrait_consumer/tests/functional/extension_functions
