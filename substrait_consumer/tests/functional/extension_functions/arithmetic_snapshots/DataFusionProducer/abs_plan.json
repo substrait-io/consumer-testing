@@ -54,18 +54,9 @@
                   "arguments": [
                     {
                       "value": {
-                        "cast": {
-                          "type": {
-                            "fp64": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          },
-                          "input": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              }
-                            }
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
                           }
                         }
                       }
@@ -84,7 +75,7 @@
     }
   ],
   "version": {
-    "minorNumber": 33,
+    "minorNumber": 35,
     "producer": "datafusion"
   }
 }

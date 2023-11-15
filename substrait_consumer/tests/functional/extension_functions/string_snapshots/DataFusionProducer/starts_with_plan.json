@@ -70,7 +70,7 @@
     }
   ],
   "version": {
-    "minorNumber": 33,
+    "minorNumber": 35,
     "producer": "datafusion"
   }
 }
