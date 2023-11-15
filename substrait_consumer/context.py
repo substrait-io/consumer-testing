@@ -2,10 +2,8 @@ from pathlib import Path
 
 import jpype.imports
 
-import substrait_consumer.java_definitions as java
-
 REPO_DIR = Path(__file__).parent.parent
-from com.google.protobuf.util import JsonFormat as json_formatter
+
 
 schema_file = Path.joinpath(REPO_DIR, "substrait_consumer/data/tpch_parquet/schema.sql")
 
@@ -23,6 +21,10 @@ def produce_isthmus_substrait(sql_string, schema_list):
     Returns:
         Substrait plan in json format.
     """
+    from com.google.protobuf.util import JsonFormat as json_formatter
+
+    import substrait_consumer.java_definitions as java
+
     sql_to_substrait = java.SqlToSubstraitClass()
     java_sql_string = jpype.java.lang.String(sql_string)
     plan = sql_to_substrait.execute(java_sql_string, schema_list)
@@ -41,6 +43,8 @@ def get_schema(file_names):
     Returns:
         List of all schemas as a java list.
     """
+    import substrait_consumer.java_definitions as java
+
     arr = java.ArrayListClass()
     if file_names:
         text_schema_file = open(schema_file)
