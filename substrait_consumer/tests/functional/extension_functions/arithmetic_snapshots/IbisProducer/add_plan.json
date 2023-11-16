@@ -151,7 +151,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }

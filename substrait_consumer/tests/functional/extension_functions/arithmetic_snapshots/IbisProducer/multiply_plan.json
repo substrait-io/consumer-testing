@@ -10,20 +10,6 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 2,
-        "name": "subtract:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 3,
         "name": "multiply:i32_i32"
       }
     }
@@ -110,7 +96,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 3,
+                  "functionReference": 1,
                   "outputType": {
                     "i64": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -158,7 +144,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }

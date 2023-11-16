@@ -10,27 +10,6 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "not_equal:any_any"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 2,
-        "name": "equal:any_any"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 3,
-        "name": "lt:any_any"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 4,
         "name": "lte:any_any"
       }
     }
@@ -104,7 +83,7 @@
                 },
                 "condition": {
                   "scalarFunction": {
-                    "functionReference": 4,
+                    "functionReference": 1,
                     "outputType": {
                       "bool": {
                         "nullability": "NULLABILITY_NULLABLE"
@@ -156,7 +135,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }

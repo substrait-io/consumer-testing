@@ -10,34 +10,6 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "starts_with:str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 2,
-        "name": "ends_with:str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 3,
-        "name": "substring:str_i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 4,
-        "name": "contains:str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 5,
         "name": "replace:str_str_str"
       }
     }
@@ -113,7 +85,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 5,
+                  "functionReference": 1,
                   "outputType": {
                     "string": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -160,7 +132,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }

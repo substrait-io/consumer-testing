@@ -14,28 +14,21 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "or:bool"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 2,
-        "functionAnchor": 2,
-        "name": "equal:any_any"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 3,
         "name": "and:bool"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 2,
-        "functionAnchor": 4,
+        "functionAnchor": 2,
         "name": "lt:any_any"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 2,
+        "functionAnchor": 3,
+        "name": "equal:any_any"
       }
     }
   ],
@@ -101,7 +94,7 @@
                 },
                 "condition": {
                   "scalarFunction": {
-                    "functionReference": 3,
+                    "functionReference": 1,
                     "outputType": {
                       "bool": {
                         "nullability": "NULLABILITY_NULLABLE"
@@ -111,7 +104,7 @@
                       {
                         "value": {
                           "scalarFunction": {
-                            "functionReference": 4,
+                            "functionReference": 2,
                             "outputType": {
                               "bool": {
                                 "nullability": "NULLABILITY_NULLABLE"
@@ -142,7 +135,7 @@
                       {
                         "value": {
                           "scalarFunction": {
-                            "functionReference": 2,
+                            "functionReference": 3,
                             "outputType": {
                               "bool": {
                                 "nullability": "NULLABILITY_NULLABLE"
@@ -207,7 +200,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }

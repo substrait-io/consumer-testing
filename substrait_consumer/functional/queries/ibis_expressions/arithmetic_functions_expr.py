@@ -142,7 +142,7 @@ def max_expr(partsupp, lineitem, t):
 
 
 def median_expr(partsupp, lineitem, t):
-    stats = [partsupp.ps_supplycost.approx_median().name("MEDIAN_SUPPLYCOST")]
+    stats = [partsupp.ps_supplycost.cast("float64").approx_median().name("MEDIAN_SUPPLYCOST")]
     return partsupp.aggregate(stats)
 
 

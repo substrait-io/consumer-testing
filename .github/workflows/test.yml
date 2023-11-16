@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - ibis_ci
 
 jobs:
   datafusion_producer:
@@ -50,3 +50,14 @@ jobs:
 
       - name: Build & run
         run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer.Dockerfile .)
+  ibis_producer:
+    name: Run Ibis producer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/ibis_producer.Dockerfile .)
