@@ -4,9 +4,30 @@ on:
   push:
     branches:
       - main
-      - duckdb_producer_ci
 
 jobs:
+  datafusion_producer:
+    name: Run DataFusion producer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_producer.Dockerfile .)
+  datafusion_consumer:
+    name: Run DataFusion consumer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer.Dockerfile .)
   duckdb_producer:
     name: Run DuckDB producer tests
     runs-on: ubuntu-latest

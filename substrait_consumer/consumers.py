@@ -158,7 +158,7 @@ class AceroConsumer:
         return result
 
 
-class DatafusionConsumer:
+class DataFusionConsumer:
     """
     Adapts the Datafusion Substrait consumer to the test framework.
     """

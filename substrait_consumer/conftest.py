@@ -5,7 +5,7 @@ import pytest
 from filelock import FileLock
 
 from substrait_consumer.consumers import (
-    AceroConsumer, DatafusionConsumer, DuckDBConsumer)
+    AceroConsumer, DataFusionConsumer, DuckDBConsumer)
 from substrait_consumer.producers import (
     DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer)
 
@@ -64,7 +64,7 @@ def saveplan(request):
 
 
 PRODUCERS = [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer]
-CONSUMERS = [DatafusionConsumer, DuckDBConsumer]
+CONSUMERS = [DataFusionConsumer, DuckDBConsumer]
 
 
 def _get_consumers():
