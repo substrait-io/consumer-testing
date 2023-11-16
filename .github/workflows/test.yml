@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - add_datafusion_ci
 
 jobs:
   datafusion_producer:
