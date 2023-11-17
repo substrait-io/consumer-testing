@@ -2,6 +2,7 @@ import json
 import string
 from pathlib import Path
 from typing import Iterable
+import itertools
 
 import duckdb
 import pyarrow as pa
@@ -72,7 +73,6 @@ class IbisProducer:
 
         self._db_connection.execute("INSTALL substrait")
         self._db_connection.execute("LOAD substrait")
-        self.compiler = SubstraitCompiler()
 
     def set_db_connection(self, db_connection):
         self._db_connection = db_connection
@@ -89,7 +89,9 @@ class IbisProducer:
         """
         if ibis_expr is None:
             pytest.skip("ibis expression currently undefined")
-        tpch_proto_bytes = self.compiler.compile(ibis_expr)
+        compiler = SubstraitCompiler()
+
+        tpch_proto_bytes = compiler.compile(ibis_expr)
         substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
         return substrait_plan
 

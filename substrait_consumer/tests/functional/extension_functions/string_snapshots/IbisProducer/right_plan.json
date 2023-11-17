@@ -10,83 +10,6 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "starts_with:str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 2,
-        "name": "ends_with:str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 3,
-        "name": "substring:str_i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 4,
-        "name": "contains:str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 5,
-        "name": "replace:str_str_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 6,
-        "name": "reverse:str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 7,
-        "name": "lower:str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 8,
-        "name": "upper:str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 9,
-        "name": "char_length:str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 10,
-        "name": "lpad:str_i32_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 11,
-        "name": "rpad:str_i32_str"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 12,
         "name": "right:str_i32"
       }
     }
@@ -162,7 +85,7 @@
               },
               {
                 "scalarFunction": {
-                  "functionReference": 12,
+                  "functionReference": 1,
                   "outputType": {
                     "string": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -212,7 +135,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }

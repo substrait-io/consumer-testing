@@ -2,10 +2,6 @@
   "extensionUris": [
     {
       "extensionUriAnchor": 1,
-      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
-    },
-    {
-      "extensionUriAnchor": 2,
       "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic_decimal.yaml"
     }
   ],
@@ -14,69 +10,6 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "add:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 2,
-        "name": "subtract:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 3,
-        "name": "multiply:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 4,
-        "name": "divide:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 5,
-        "name": "modulus:i32_i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 6,
-        "name": "negate:i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 7,
-        "name": "abs:i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 1,
-        "functionAnchor": 8,
-        "name": "sign:i32"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 2,
-        "functionAnchor": 9,
-        "name": "sum:dec"
-      }
-    },
-    {
-      "extensionFunction": {
-        "extensionUriReference": 2,
-        "functionAnchor": 10,
         "name": "avg:dec"
       }
     }
@@ -142,7 +75,7 @@
             "measures": [
               {
                 "measure": {
-                  "functionReference": 10,
+                  "functionReference": 1,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
@@ -177,7 +110,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 38,
     "producer": "ibis-substrait"
   }
 }
