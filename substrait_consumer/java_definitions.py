@@ -17,10 +17,12 @@ jvm_path = java_home_path
 if not os.path.isfile(jvm_path):
     if platform == "darwin":
         jvm_path = java_home_path + "/lib/libjli.dylib"
+        jpype.startJVM("--enable-preview", convertStrings=True, jvmpath=jvm_path)
     elif platform == "linux":
         jvm_path = java_home_path + "/lib/server/libjvm.so"
+        if not jpype.isJVMStarted():
+            jpype.startJVM(convertStrings=True, jvmpath=jvm_path)
 
-jpype.startJVM("--enable-preview", convertStrings=True, jvmpath=jvm_path)
 jpype.addClassPath(isthmus_jars)
 
 ArrayListClass = jpype.JClass("java.util.ArrayList")
