@@ -1,0 +1,2 @@
+ibis-framework[duckdb]>=4.0
+streamlit
