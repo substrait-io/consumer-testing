@@ -1,17 +1,14 @@
 import datetime
-import tempfile
 from typing import List, Optional
 
-import pandas as pd
-import requests
-import streamlit as st
-
 import ibis
+import pandas as pd
+import streamlit as st
 from ibis import _
 
 ONE_HOUR_IN_SECONDS = datetime.timedelta(hours=1).total_seconds()
 
-st.set_page_config(layout='wide')
+st.set_page_config(layout="wide")
 
 
 def support_matrix_df():
@@ -19,7 +16,7 @@ def support_matrix_df():
         ibis.read_csv(
             "https://raw.githubusercontent.com/richtia/consumer-testing/producer_support_matrix/app/consumer_results.csv"
         )
-        .rename({'full_function': 'FullFunction'})
+        .rename({"full_function": "FullFunction"})
         .mutate(
             function_category=_.full_function.split(".")[-2],
         )
@@ -30,16 +27,28 @@ def support_matrix_df():
 def backends_info_df():
     return pd.DataFrame(
         {
-            "DataFusionProducer-DataFusionConsumer": ["DataFusionProducer", "DataFusionConsumer"],
-            "DataFusionProducer-DuckDBConsumer": ["DataFusionProducer", "DuckDBConsumer"],
-            "DuckDBProducer-DataFusionConsumer": ["DuckDBProducer", "DataFusionConsumer"],
+            "DataFusionProducer-DataFusionConsumer": [
+                "DataFusionProducer",
+                "DataFusionConsumer",
+            ],
+            "DataFusionProducer-DuckDBConsumer": [
+                "DataFusionProducer",
+                "DuckDBConsumer",
+            ],
+            "DuckDBProducer-DataFusionConsumer": [
+                "DuckDBProducer",
+                "DataFusionConsumer",
+            ],
             "DuckDBProducer-DuckDBConsumer": ["DuckDBProducer", "DuckDBConsumer"],
             "IbisProducer-DuckDBConsumer": ["IbisProducer", "DuckDBConsumer"],
             "IbisProducer-DataFusionConsumer": ["IbisProducer", "DataFusionConsumer"],
             "IsthmusProducer-DuckDBConsumer": ["IsthmusProducer", "DuckDBConsumer"],
-            "IsthmusProducer-DataFusionConsumer": ["IsthmusProducer", "DataFusionConsumer"],
+            "IsthmusProducer-DataFusionConsumer": [
+                "IsthmusProducer",
+                "DataFusionConsumer",
+            ],
         }.items(),
-        columns=['backend_name', 'categories'],
+        columns=["backend_name", "categories"],
     )
 
 
@@ -51,7 +60,7 @@ def get_all_producers():
     full_list = (
         backend_info_table.select(category=_.categories.unnest())
         .distinct()
-        .order_by('category')['category']
+        .order_by("category")["category"]
         .execute()
         .tolist()
     )
@@ -63,7 +72,7 @@ def get_all_consumers():
     full_list = (
         backend_info_table.select(category=_.categories.unnest())
         .distinct()
-        .order_by('category')['category']
+        .order_by("category")["category"]
         .execute()
         .tolist()
     )
@@ -74,7 +83,7 @@ def get_all_consumers():
 def get_all_function_categories():
     return (
         support_matrix_table.select(_.function_category)
-        .distinct()['function_category']
+        .distinct()["function_category"]
         .execute()
         .tolist()
     )
@@ -92,7 +101,7 @@ def get_backend_names(categories: Optional[List[str]] = None):
 def get_selected_producers():
     producers = get_all_producers()
     selected_categories_names = st.sidebar.multiselect(
-        'Producers',
+        "Producers",
         options=producers,
         default=None,
     )
@@ -104,7 +113,7 @@ def get_selected_producers():
 def get_selected_consumers():
     consumers = get_all_consumers()
     selected_categories_names = st.sidebar.multiselect(
-        'Consumers',
+        "Consumers",
         options=consumers,
         default=None,
     )
@@ -117,7 +126,7 @@ def get_selected_function_categories():
     all_ops_categories = get_all_function_categories()
 
     selected_ops_categories = st.sidebar.multiselect(
-        'Function category',
+        "Function category",
         options=sorted(all_ops_categories),
         default=None,
     )
@@ -153,7 +162,7 @@ table_expr = table_expr[current_producers_consumers + ["index"]]
 
 # Execute query
 df = table_expr.execute()
-df = df.set_index('index')
+df = df.set_index("index")
 
 # Display result
 all_visible_ops_count = len(df.index)
@@ -173,4 +182,3 @@ if all_visible_ops_count:
     st.dataframe(table)
 else:
     st.write("No data")
-

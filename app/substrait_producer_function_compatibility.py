@@ -31,10 +31,10 @@ def support_matrix_df():
 def producer_info_df():
     return pd.DataFrame(
         {
-            "DataFusionProducer": ["string", "sql"],
-            "DuckDBProducer": ["string", "sql"],
-            "IbisProducer": ["string", "expression"],
-            "IsthmusProducer": ["string", "sql"],
+            "DataFusionProducer": ["DataFusionProducer", "sql"],
+            "DuckDBProducer": ["DuckDBProducer", "sql"],
+            "IbisProducer": ["IbisProducer", "expression"],
+            "IsthmusProducer": ["IsthmusProducer", "sql"],
         }.items(),
         columns=["producer_name", "categories"],
     )
@@ -78,7 +78,19 @@ def get_selected_function_categories():
     return selected_ops_categories
 
 
-current_producer_names = get_producer_names()
+def get_selected_producers():
+    producers = get_producer_names()
+    selected_categories_names = st.sidebar.multiselect(
+        "Producers",
+        options=producers,
+        default=None,
+    )
+    if not selected_categories_names:
+        return get_producer_names()
+    return get_producer_names(selected_categories_names)
+
+
+current_producer_names = get_selected_producers()
 current_ops_categories = get_selected_function_categories()
 
 # Start ibis expression
