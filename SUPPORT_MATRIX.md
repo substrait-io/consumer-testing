@@ -1,7 +1,7 @@
 Substrait Producer and Consumer Function Support
 ================================================
 
-# Support Producer Function Support
+# Substrait Producer Function Support
 
 [Substrait Producer x Function](https://consumer-testing-crahxzgvruqwmujgry3r2u.streamlit.app/)
 
@@ -14,7 +14,7 @@ pytest --csv producer_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,st
 ```
 
 
-# Support Producer x Consumer x Function Support
+# Substrait Producer x Consumer x Function Support
 
 [Substrait Producer x Substrait Consumer x Function](https://consumer-testing-qomfxmpyspcrpkatq3uz3g.streamlit.app/)
 
