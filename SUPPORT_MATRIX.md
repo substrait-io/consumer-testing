@@ -11,6 +11,7 @@ Substrait Producer and Consumer Function Support
 ```commandline
 cd substrait_consumer/tests/functional/extension_functions
 pytest --csv producer_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status' -m produce_substrait_snapshot
+python producer_results.py
 ```
 
 
@@ -24,5 +25,6 @@ pytest --csv producer_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,st
 ```commandline
 cd substrait_consumer/tests/functional/extension_functions
 pytest --csv consumer_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status' -m consume_substrait_snapshot
+python consumer_results.py
 ```
 
