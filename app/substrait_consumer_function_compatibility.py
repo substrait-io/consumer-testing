@@ -1,12 +1,9 @@
-import datetime
 from typing import List, Optional
 
 import ibis
 import pandas as pd
 import streamlit as st
 from ibis import _
-
-ONE_HOUR_IN_SECONDS = datetime.timedelta(hours=1).total_seconds()
 
 st.set_page_config(layout="wide")
 

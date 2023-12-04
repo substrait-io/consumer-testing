@@ -1,4 +1,3 @@
-import datetime
 from typing import List, Optional
 
 import ibis
@@ -6,13 +5,7 @@ import pandas as pd
 import streamlit as st
 from ibis import _
 
-ONE_HOUR_IN_SECONDS = datetime.timedelta(hours=1).total_seconds()
-
 st.set_page_config(layout="wide")
-
-ibis.options.verbose = True
-sql_queries = []
-ibis.options.verbose_log = lambda sql: sql_queries.append(sql)
 
 
 def support_matrix_df():
@@ -102,12 +95,6 @@ table_expr = table_expr.order_by(_.index)
 
 # Filter functions by selected categories
 table_expr = table_expr.filter(_.function_category.isin(current_ops_categories))
-
-# Filter operation by compatibility
-supported_producer_count = sum(
-    getattr(table_expr, producer_name).ifelse(1, 0)
-    for producer_name in current_producer_names
-)
 
 # Show only selected producer
 table_expr = table_expr[current_producer_names + ["index"]]
