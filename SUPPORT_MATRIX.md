@@ -5,7 +5,7 @@ Substrait Producer and Consumer Function Support
 
 [Substrait Producer x Function](https://consumer-testing-crahxzgvruqwmujgry3r2u.streamlit.app/)
 
-[Raw table of test results](https://github.com/richtia/consumer-testing/blob/producer_support_matrix/app/producer_results.csv)
+[Raw table of test results](https://github.com/substrait-io/consumer-testing/blob/main/app/producer_results.csv)
 
 ## How to regenerate producer test results
 ```commandline
@@ -24,7 +24,7 @@ python parse_producer_pytest_output.py producer_results.csv
 
 [Substrait Producer x Substrait Consumer x Function](https://consumer-testing-qomfxmpyspcrpkatq3uz3g.streamlit.app/)
 
-[Raw table of test results](https://github.com/richtia/consumer-testing/blob/producer_support_matrix/app/consumer_results.csv)
+[Raw table of test results](https://github.com/substrait-io/consumer-testing/blob/main/app/consumer_results.csv)
 
 ## How to regenerate consumer test results
 ```commandline
