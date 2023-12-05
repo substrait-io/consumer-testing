@@ -10,9 +10,7 @@ st.set_page_config(layout="wide")
 
 def support_matrix_df():
     return (
-        ibis.read_csv(
-            "https://raw.githubusercontent.com/richtia/consumer-testing/producer_support_matrix/app/producer_results.csv"
-        )
+        ibis.read_csv("./producer_results.csv")
         .rename({"full_operation": "FullFunction"})
         .mutate(
             function_category=_.full_operation.split(".")[-2],

@@ -14,9 +14,9 @@ cd substrait_consumer/tests/functional/extension_functions
 # Run the producer tests to create the pytest result output.
 pytest --csv producer_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status' -m produce_substrait_snapshot
 
-# Parse pytest output.  This creates consumer-testing/app/producer_results.csv, which
+# Parse pytest output.  This creates a new csv file with the parsed results, which
 # the streamlit app uses to generate the table.
-python parse_producer_pytest_output.py
+python parse_producer_pytest_output.py producer_results.csv
 ```
 
 
@@ -33,8 +33,8 @@ cd substrait_consumer/tests/functional/extension_functions
 # Run the consumer tests to create the pytest result output.
 pytest --csv consumer_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status' -m consume_substrait_snapshot
 
-# Parse pytest output.  This creates consumer-testing/app/consumer_results.csv, which
+# Parse pytest output.  This creates a new csv file with the parsed results, which
 # the streamlit app uses to generate the table.
-python parse_consumer_pytest_output.py
+python parse_consumer_pytest_output.py consumer_results.csv
 ```
 
