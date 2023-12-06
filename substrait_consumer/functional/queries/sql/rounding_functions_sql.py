@@ -1,5 +1,6 @@
-from substrait_consumer.producers import *
-
+from substrait_consumer.producers.datafusion_producer import DataFusionProducer
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
+from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 SQL_SCALAR = {
     "ceil": (
         """

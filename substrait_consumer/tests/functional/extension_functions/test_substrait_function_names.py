@@ -5,7 +5,7 @@ import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from substrait_consumer.consumers import DuckDBConsumer
+from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.functional import (
     arithmetic_configs, boolean_configs, comparison_configs, datetime_configs, logarithmic_configs, rounding_configs)
 from substrait_consumer.functional.common import check_subtrait_function_names, load_custom_duckdb_table

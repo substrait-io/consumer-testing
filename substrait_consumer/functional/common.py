@@ -10,7 +10,7 @@ from ibis.expr.types.relations import Table
 if TYPE_CHECKING:
     from pytest_snapshot.plugin import Snapshot
 
-from substrait_consumer.producers import DuckDBProducer
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
 SNAPSHOT_DIR = (
     Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
