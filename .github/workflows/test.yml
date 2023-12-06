@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - decouple_producers
+      - main
 
 jobs:
   datafusion_producer:
