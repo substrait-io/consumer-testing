@@ -36,7 +36,7 @@ class DuckDBConsumer(Consumer):
 
         Parameters:
             substrait_query:
-                A substrait plan in json format.
+                A substrait plan as a json formatted string.
 
         Returns:
             A pyarrow table resulting from running the substrait query plan.

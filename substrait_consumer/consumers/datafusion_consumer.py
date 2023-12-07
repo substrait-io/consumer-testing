@@ -49,13 +49,13 @@ class DataFusionConsumer(Consumer):
 
                 self.ctx.register_record_batches("t", [[tables]])
 
-    def run_substrait_query(self, substrait_query: bytes) -> pa.Table:
+    def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """
         Run the substrait plan against Datafusion.
 
         Parameters:
             substrait_query:
-                A substrait plan in bytes.
+                A substrait plan as a json formatted string.
 
         Returns:
             A pyarrow table resulting from running the substrait query plan.
