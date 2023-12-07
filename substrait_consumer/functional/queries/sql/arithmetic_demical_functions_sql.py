@@ -1,4 +1,5 @@
-from substrait_consumer.producers import *
+from substrait_consumer.producers.datafusion_producer import DataFusionProducer
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
 SQL_SCALAR = {
     "add": (

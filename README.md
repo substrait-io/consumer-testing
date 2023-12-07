@@ -303,18 +303,18 @@ pytest --adhoc_producer=IsthmusProducer --consumer=AceroConsumer test_adhoc_expr
 
 
 # How to Add Producers
-Producers should be added to the `substrait_consumer/producers.py` file and provide 
+Producers should be added to the `substrait_consumer/producers` folder and provide 
 methods on how to produce the substrait query plan.  Look at 
-`DuckDBProducer` class for an example implementation.
+`substrait_consumer/producers/duckdb_producer.py` for an example implementation.
 
 In order for the test to use the new producer, the producer class name should also be added
 to the PRODUCERS list in `substrait_consumer/conftest.py`.
 
 
 # How to Add Consumers
-Consumers should be added to the `substrait_consumer/consumers.py` file and provide 
+Consumers should be added to the `substrait_consumer/consumers` folder and provide 
 methods on how to run the substrait query plan against that consumer.  Look at 
-`AceroConsumer` class for an example implementation.
+`substrait_consumer/producers/duckdb_consumer.py` for an example implementation.
 
 In order for the test to use the new consumer, the consumer class name should also be added
 to the CONSUMERS list in `substrait_consumer/conftest.py`.
