@@ -3,7 +3,7 @@ Substrait Producer and Consumer Function Support
 
 # Substrait Producer Function Support Matrix
 
-[Substrait Producer x Function](https://consumer-testing-crahxzgvruqwmujgry3r2u.streamlit.app/)
+[Substrait Producer x Function](https://substrait-function-compatibility.streamlit.app/)
 
 [Raw table of test results](https://github.com/substrait-io/consumer-testing/blob/main/app/producer_results.csv)
 
@@ -22,7 +22,7 @@ python parse_producer_pytest_output.py producer_results.csv
 
 # Substrait Producer x Consumer x Function Support Matrix
 
-[Substrait Producer x Substrait Consumer x Function](https://consumer-testing-qomfxmpyspcrpkatq3uz3g.streamlit.app/)
+[Substrait Producer x Substrait Consumer x Function](https://substrait-consumer-compatibility.streamlit.app/)
 
 [Raw table of test results](https://github.com/substrait-io/consumer-testing/blob/main/app/consumer_results.csv)
 
