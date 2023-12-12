@@ -10,7 +10,9 @@ st.set_page_config(layout="wide")
 
 def support_matrix_df():
     return (
-        ibis.read_csv("./consumer_results.csv")
+        ibis.read_csv(
+            "https://raw.githubusercontent.com/substrait-io/consumer-testing/main/app/consumer_results.csv"
+        )
         .rename({"full_function": "FullFunction"})
         .mutate(
             function_category=_.full_function.split(".")[-2],
