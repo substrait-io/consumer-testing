@@ -12,8 +12,11 @@ if TYPE_CHECKING:
 
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
-SNAPSHOT_DIR = (
+FUNCTION_SNAPSHOT_DIR = (
     Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
+)
+RELATION_SNAPSHOT_DIR = (
+    Path(__file__).parent.parent / "tests" / "functional" / "relations"
 )
 
 
@@ -84,12 +87,15 @@ def generate_snapshot_results(
         duckdb_result_data.extend(column.data)
         duckdb_result_data.extend([' '])
     str_result_data = '\n'.join(map(str, duckdb_result_data))
-    function_group, function_name = test_name.split(":")
-    snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
-    snapshot.assert_match(str_result_data, f"{function_name}_result.txt")
+    group, name = test_name.split(":")
+    if "relation" in group:
+        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / "relation_test_results"
+    else:
+        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / "function_test_results"
+    snapshot.assert_match(str_result_data, f"{name}_result.txt")
 
 
-def substrait_producer_function_test(
+def substrait_producer_sql_test(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
@@ -146,12 +152,15 @@ def substrait_producer_function_test(
                 f"{sql_query}"
             )
 
-    function_group, function_name = test_name.split(":")
-    snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / type(producer).__name__
-    snapshot.assert_match(str(substrait_plan), f"{function_name}_plan.json")
+    group, name = test_name.split(":")
+    if "relation" in group:
+        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / type(producer).__name__
+    else:
+        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / type(producer).__name__
+    snapshot.assert_match(str(substrait_plan), f"{name}_plan.json")
 
 
-def substrait_consumer_function_test(
+def substrait_consumer_sql_test(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
@@ -189,17 +198,19 @@ def substrait_consumer_function_test(
     """
     consumer.setup(db_con, created_tables, file_names)
 
-    function_group, function_name = test_name.split(":")
+    group, name = test_name.split(":")
+    snopshot_dir = RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR
     plan_path = (
-        SNAPSHOT_DIR
-        / function_group
+        snopshot_dir
+        / group
         / type(producer).__name__
-        / f"{function_name}_plan.json"
+        / f"{name}_plan.json"
     )
     if plan_path.is_file():
         substrait_plan = plan_path.read_text()
 
-        snapshot.snapshot_dir = SNAPSHOT_DIR / function_group / "function_test_results"
+        results_dir = "relation_test_results" if "relation" in group else "function_test_results"
+        snapshot.snapshot_dir = snopshot_dir / group / results_dir
         actual_result = consumer.run_substrait_query(substrait_plan)
         actual_result = actual_result.rename_columns(
             list(map(str.lower, actual_result.column_names))
@@ -209,11 +220,11 @@ def substrait_consumer_function_test(
             result_list.extend(column.data)
             result_list.extend([' '])
         str_result = '\n'.join(map(str, result_list))
-        snapshot.assert_match(str_result, f"{function_name}_result.txt")
+        snapshot.assert_match(str_result, f"{name}_result.txt")
 
     else:
         pytest.skip(
-            f"No substrait plan exists for {type(producer).__name__}:{function_name}"
+            f"No substrait plan exists for {type(producer).__name__}:{name}"
         )
 
 

@@ -5,8 +5,8 @@ from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
 from substrait_consumer.functional.common import (
-    generate_snapshot_results, substrait_consumer_function_test,
-    substrait_producer_function_test)
+    generate_snapshot_results, substrait_consumer_sql_test,
+    substrait_producer_sql_test)
 from substrait_consumer.functional.datetime_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
 
@@ -45,7 +45,7 @@ class TestDatetimeFunctions:
         partsupp,
     ) -> None:
         test_name = f"datetime_snapshots:{test_name}"
-        substrait_producer_function_test(
+        substrait_producer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
@@ -71,7 +71,7 @@ class TestDatetimeFunctions:
         partsupp,
     ) -> None:
         test_name = f"datetime_snapshots:{test_name}"
-        substrait_consumer_function_test(
+        substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
