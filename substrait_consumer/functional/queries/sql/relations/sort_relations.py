@@ -6,7 +6,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_AVAILQTY
         FROM '{}'
-        ORDER BY PS_AVAILQTY;
+        ORDER BY PS_AVAILQTY
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -14,7 +15,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST ASC;
+        ORDER BY PS_SUPPLYCOST ASC
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -22,7 +24,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST DESC;
+        ORDER BY PS_SUPPLYCOST DESC
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -30,7 +33,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST ASC;
+        ORDER BY PS_SUPPLYCOST ASC
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -38,7 +42,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST DESC;
+        ORDER BY PS_SUPPLYCOST DESC
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -46,7 +51,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST ASC, PS_AVAILQTY DESC;
+        ORDER BY PS_SUPPLYCOST ASC, PS_AVAILQTY DESC
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -54,7 +60,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST DESC, PS_AVAILQTY ASC;
+        ORDER BY PS_SUPPLYCOST DESC, PS_AVAILQTY ASC
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -62,7 +69,8 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY 1;
+        ORDER BY 1
+        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
