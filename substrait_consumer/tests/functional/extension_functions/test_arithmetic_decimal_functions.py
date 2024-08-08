@@ -8,7 +8,7 @@ from substrait_consumer.functional.arithmetic_decimal_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
 from substrait_consumer.functional.common import (
     generate_snapshot_results, load_custom_duckdb_table,
-    substrait_consumer_function_test, substrait_producer_function_test)
+    substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -48,7 +48,7 @@ class TestArithmeticDecimalFunctions:
         partsupp,
     ) -> None:
         test_name = f"arithmetic_decimal_snapshots:{test_name}"
-        substrait_producer_function_test(
+        substrait_producer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
@@ -74,7 +74,7 @@ class TestArithmeticDecimalFunctions:
         partsupp,
     ) -> None:
         test_name = f"arithmetic_decimal_snapshots:{test_name}"
-        substrait_consumer_function_test(
+        substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,

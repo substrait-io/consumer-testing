@@ -6,7 +6,7 @@ from ibis_substrait.tests.compiler.conftest import *
 
 from substrait_consumer.functional.common import (
     generate_snapshot_results, load_custom_duckdb_table,
-    substrait_consumer_function_test, substrait_producer_function_test)
+    substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.functional.comparison_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
 
@@ -48,7 +48,7 @@ class TestComparisonFunctions:
         nation,
     ) -> None:
         test_name = f"comparison_snapshots:{test_name}"
-        substrait_producer_function_test(
+        substrait_producer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
@@ -76,7 +76,7 @@ class TestComparisonFunctions:
         nation,
     ) -> None:
         test_name = f"comparison_snapshots:{test_name}"
-        substrait_consumer_function_test(
+        substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
