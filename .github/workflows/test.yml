@@ -28,7 +28,7 @@ jobs:
 
       - name: Build & run
         run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer.Dockerfile .)
-  duckdb_producer:
+  duckdb_producer_functions:
     name: Run DuckDB producer tests
     runs-on: ubuntu-latest
     steps:
@@ -38,8 +38,8 @@ jobs:
           submodules: recursive
 
       - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_producer.Dockerfile .)
-  duckdb_consumer:
+        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_producer_functions.Dockerfile .)
+  duckdb_consumer_functions:
     name: Run DuckDB consumer tests
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +49,29 @@ jobs:
           submodules: recursive
 
       - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer.Dockerfile .)
+        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer_functions.Dockerfile .)
+  duckdb_producer_relations:
+    name: Run DuckDB consumer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_producer_relations.Dockerfile .)
+  duckdb_consumer_relations:
+    name: Run DuckDB consumer tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer_relations.Dockerfile .)
   ibis_producer:
     name: Run Ibis producer tests
     runs-on: ubuntu-latest
