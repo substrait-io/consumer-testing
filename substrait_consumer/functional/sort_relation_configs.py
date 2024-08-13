@@ -5,7 +5,7 @@ SORT_RELATION_TESTS = (
     {
         "test_name": "single_col_default_sort",
         "file_names": ["partsupp.parquet"],
-        "sql_query": SORT_RELATIONS["single_col_asc"],
+        "sql_query": SORT_RELATIONS["single_col_default_sort"],
         "ibis_expr": None
     },
     {

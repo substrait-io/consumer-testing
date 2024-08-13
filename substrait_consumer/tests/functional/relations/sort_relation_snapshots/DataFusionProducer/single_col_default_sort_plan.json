@@ -21,7 +21,7 @@
                       "select": {
                         "structItems": [
                           {
-                            "field": 3
+                            "field": 2
                           }
                         ]
                       }
@@ -51,7 +51,7 @@
           }
         },
         "names": [
-          "partsupp.ps_supplycost"
+          "partsupp.ps_availqty"
         ]
       }
     }
