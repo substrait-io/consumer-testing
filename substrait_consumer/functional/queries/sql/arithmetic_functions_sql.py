@@ -78,7 +78,7 @@ SQL_SCALAR = {
     ),
     "negate": (
         """
-        SELECT PS_PARTKEY, -PS_PARTKEY AS NEGATE_KEY
+        SELECT PS_PARTKEY, negate(PS_PARTKEY) AS NEGATE_KEY
         FROM '{}'
         LIMIT 10;
         """,

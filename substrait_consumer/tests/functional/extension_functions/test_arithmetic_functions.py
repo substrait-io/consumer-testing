@@ -12,6 +12,14 @@ from substrait_consumer.functional.common import (
 from substrait_consumer.parametrization import custom_parametrization
 
 
+@pytest.fixture(autouse=False)
+def mark_generate_result_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    func_name = request.node.callspec.id
+    if func_name == "negate":
+        pytest.skip(reason='Catalog Error: Scalar Function with name negate does not exist!')
+
+
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
 class TestArithmeticFunctions:
     """
@@ -94,6 +102,7 @@ class TestArithmeticFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
     @pytest.mark.generate_function_snapshots
+    @pytest.mark.usefixtures('mark_generate_result_tests_as_xfail')
     def test_generate_arithmetic_functions_results(
         self,
         snapshot,
