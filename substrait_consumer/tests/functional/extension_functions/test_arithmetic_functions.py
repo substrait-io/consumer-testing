@@ -13,6 +13,16 @@ from substrait_consumer.parametrization import custom_parametrization
 
 
 @pytest.fixture(autouse=False)
+def mark_producer_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    producer = request.getfixturevalue('producer')
+    func_name = request.node.callspec.id.split('-')[1]
+    if producer.__class__.__name__ == 'DuckDBProducer':
+        if func_name == "negate":
+            pytest.skip(reason='Catalog Error: Scalar Function with name negate does not exist!')
+
+
+@pytest.fixture(autouse=False)
 def mark_generate_result_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     func_name = request.node.callspec.id
@@ -49,6 +59,7 @@ class TestArithmeticFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
     @pytest.mark.produce_substrait_snapshot
+    @pytest.mark.usefixtures('mark_producer_tests_as_xfail')
     def test_producer_arithmetic_functions(
         self,
         snapshot,
