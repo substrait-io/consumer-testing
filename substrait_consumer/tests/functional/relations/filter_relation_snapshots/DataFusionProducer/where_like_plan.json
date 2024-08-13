@@ -1,0 +1,131 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "like"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "fetch": {
+                "input": {
+                  "filter": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "l_orderkey",
+                            "l_partkey",
+                            "l_suppkey",
+                            "l_linenumber",
+                            "l_quantity",
+                            "l_extendedprice",
+                            "l_discount",
+                            "l_tax",
+                            "l_returnflag",
+                            "l_linestatus",
+                            "l_shipdate",
+                            "l_commitdate",
+                            "l_receiptdate",
+                            "l_shipinstruct",
+                            "l_shipmode",
+                            "l_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {},
+                              {
+                                "field": 13
+                              }
+                            ]
+                          }
+                        },
+                        "namedTable": {
+                          "names": [
+                            "lineitem"
+                          ]
+                        }
+                      }
+                    },
+                    "condition": {
+                      "scalarFunction": {
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {
+                                    "field": 1
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "string": "%DELIVER IN PERSON%",
+                                "nullable": true
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "null": {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                "nullable": true
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "count": "20"
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "lineitem.l_shipinstruct",
+          "lineitem.l_orderkey"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 35,
+    "producer": "datafusion"
+  }
+}
