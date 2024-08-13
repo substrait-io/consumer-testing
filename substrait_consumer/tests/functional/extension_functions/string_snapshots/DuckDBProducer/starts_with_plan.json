@@ -1,33 +1,52 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+    },
+    {
+      "extensionUriAnchor": 2,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_boolean.yaml"
+    },
+    {
+      "extensionUriAnchor": 3,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_string.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "gte"
+        "name": "gte:string_string"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "lt"
+        "name": "lt:string_string"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 2,
         "functionAnchor": 3,
-        "name": "and"
+        "name": "and:bool?"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "is_not_null"
+        "name": "is_not_null:string"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 3,
         "functionAnchor": 5,
-        "name": "starts_with"
+        "name": "starts_with:string_string"
       }
     }
   ],
@@ -55,8 +74,7 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 14,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -66,8 +84,7 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 114,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           }
@@ -99,8 +116,7 @@
                                       "scalarFunction": {
                                         "functionReference": 1,
                                         "outputType": {
-                                          "varchar": {
-                                            "length": 1,
+                                          "string": {
                                             "nullability": "NULLABILITY_NULLABLE"
                                           }
                                         },
@@ -133,8 +149,7 @@
                                       "scalarFunction": {
                                         "functionReference": 2,
                                         "outputType": {
-                                          "varchar": {
-                                            "length": 1,
+                                          "string": {
                                             "nullability": "NULLABILITY_NULLABLE"
                                           }
                                         },
@@ -171,8 +186,7 @@
                               "scalarFunction": {
                                 "functionReference": 4,
                                 "outputType": {
-                                  "varchar": {
-                                    "length": 1,
+                                  "string": {
                                     "nullability": "NULLABILITY_NULLABLE"
                                   }
                                 },
@@ -263,7 +277,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

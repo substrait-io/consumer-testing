@@ -1,9 +1,16 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_string.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "upper"
+        "name": "upper:string"
       }
     }
   ],
@@ -31,18 +38,17 @@
                       "struct": {
                         "types": [
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 1,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -59,14 +65,12 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 15,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 15,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -76,8 +80,7 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 78,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           }
@@ -115,8 +118,7 @@
                     "scalarFunction": {
                       "functionReference": 1,
                       "outputType": {
-                        "varchar": {
-                          "length": 78,
+                        "string": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -148,7 +150,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

@@ -1,9 +1,16 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "-"
+        "name": "subtract:i64_i64"
       }
     }
   ],
@@ -27,17 +34,17 @@
                       "struct": {
                         "types": [
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -49,8 +56,7 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 198,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           }
@@ -99,7 +105,7 @@
                     "scalarFunction": {
                       "functionReference": 1,
                       "outputType": {
-                        "i32": {
+                        "i64": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -144,7 +150,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

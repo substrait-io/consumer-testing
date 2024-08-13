@@ -1,9 +1,45 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+    },
+    {
+      "extensionUriAnchor": 2,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_boolean.yaml"
+    },
+    {
+      "extensionUriAnchor": 3,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "factorial"
+        "name": "lte:i32_i32"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 1,
+        "functionAnchor": 2,
+        "name": "is_not_null:i32"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 2,
+        "functionAnchor": 3,
+        "name": "and:bool?"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 3,
+        "functionAnchor": 4,
+        "name": "factorial:i32"
       }
     }
   ],
@@ -18,11 +54,10 @@
                   "read": {
                     "baseSchema": {
                       "names": [
-                        "ps_partkey",
-                        "ps_suppkey",
-                        "ps_availqty",
-                        "ps_supplycost",
-                        "ps_comment"
+                        "n_nationkey",
+                        "n_name",
+                        "n_regionkey",
+                        "n_comment"
                       ],
                       "struct": {
                         "types": [
@@ -32,7 +67,7 @@
                             }
                           },
                           {
-                            "i32": {
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -42,20 +77,79 @@
                             }
                           },
                           {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
-                          },
-                          {
-                            "varchar": {
-                              "length": 198,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           }
                         ],
                         "nullability": "NULLABILITY_REQUIRED"
+                      }
+                    },
+                    "filter": {
+                      "scalarFunction": {
+                        "functionReference": 3,
+                        "outputType": {
+                          "bool": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "value": {
+                              "scalarFunction": {
+                                "functionReference": 1,
+                                "outputType": {
+                                  "i32": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                "arguments": [
+                                  {
+                                    "value": {
+                                      "selection": {
+                                        "directReference": {
+                                          "structField": {}
+                                        },
+                                        "rootReference": {}
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "value": {
+                                      "literal": {
+                                        "i32": 10
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "scalarFunction": {
+                                "functionReference": 2,
+                                "outputType": {
+                                  "i32": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                "arguments": [
+                                  {
+                                    "value": {
+                                      "selection": {
+                                        "directReference": {
+                                          "structField": {}
+                                        },
+                                        "rootReference": {}
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
                       }
                     },
                     "projection": {
@@ -68,7 +162,7 @@
                     },
                     "namedTable": {
                       "names": [
-                        "partsupp"
+                        "nation"
                       ]
                     }
                   }
@@ -84,7 +178,7 @@
                   },
                   {
                     "scalarFunction": {
-                      "functionReference": 1,
+                      "functionReference": 4,
                       "outputType": {
                         "decimal": {
                           "precision": 38,
@@ -108,18 +202,18 @@
                 ]
               }
             },
-            "count": "10"
+            "count": "100"
           }
         },
         "names": [
-          "ps_partkey",
+          "n_nationkey",
           "FACTORIAL_KEY"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

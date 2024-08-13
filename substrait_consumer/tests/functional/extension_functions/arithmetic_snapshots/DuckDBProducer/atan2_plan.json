@@ -1,15 +1,27 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
+    },
+    {
+      "extensionUriAnchor": 2,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_rounding.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "round"
+        "name": "atan2:fp64_fp64"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 2,
         "functionAnchor": 2,
-        "name": "atan2"
+        "name": "round:fp64_i32"
       }
     }
   ],
@@ -46,29 +58,22 @@
                           "struct": {
                             "types": [
                               {
-                                "i32": {
+                                "i64": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
                               {
-                                "i32": {
+                                "i64": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
                               {
-                                "i32": {
+                                "i64": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
                               {
-                                "i32": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "decimal": {
-                                  "scale": 2,
-                                  "precision": 15,
+                                "i64": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
@@ -94,14 +99,19 @@
                                 }
                               },
                               {
-                                "varchar": {
-                                  "length": 1,
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
                               {
-                                "varchar": {
-                                  "length": 1,
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
@@ -121,20 +131,17 @@
                                 }
                               },
                               {
-                                "varchar": {
-                                  "length": 17,
+                                "string": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
                               {
-                                "varchar": {
-                                  "length": 7,
+                                "string": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               },
                               {
-                                "varchar": {
-                                  "length": 43,
+                                "string": {
                                   "nullability": "NULLABILITY_NULLABLE"
                                 }
                               }
@@ -183,7 +190,7 @@
                 "expressions": [
                   {
                     "scalarFunction": {
-                      "functionReference": 1,
+                      "functionReference": 2,
                       "outputType": {
                         "fp64": {
                           "nullability": "NULLABILITY_NULLABLE"
@@ -193,7 +200,7 @@
                         {
                           "value": {
                             "scalarFunction": {
-                              "functionReference": 2,
+                              "functionReference": 1,
                               "outputType": {
                                 "fp64": {
                                   "nullability": "NULLABILITY_NULLABLE"
@@ -247,7 +254,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

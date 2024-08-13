@@ -14,12 +14,6 @@ SCALAR_FUNCTIONS = (
         "ibis_expr": None,
     },
     {
-        "test_name": "add_intervals",
-        "file_names": ["lineitem.parquet"],
-        "sql_query": SQL_SCALAR["add_intervals"],
-        "ibis_expr": None,
-    },
-    {
         "test_name": "subtract",
         "file_names": ["lineitem.parquet"],
         "sql_query": SQL_SCALAR["subtract"],
@@ -47,6 +41,12 @@ SCALAR_FUNCTIONS = (
         "test_name": "gte",
         "file_names": ["lineitem.parquet"],
         "sql_query": SQL_SCALAR["gte"],
+        "ibis_expr": None,
+    },
+    {
+        "test_name": "add_intervals",
+        "file_names": ["lineitem.parquet"],
+        "sql_query": SQL_SCALAR["add_intervals"],
         "ibis_expr": None,
     },
 )

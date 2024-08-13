@@ -1,9 +1,16 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_string.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "char_length"
+        "name": "char_length:string"
       }
     }
   ],
@@ -29,8 +36,7 @@
                         }
                       },
                       {
-                        "varchar": {
-                          "length": 14,
+                        "string": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -40,8 +46,7 @@
                         }
                       },
                       {
-                        "varchar": {
-                          "length": 114,
+                        "string": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       }
@@ -108,7 +113,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

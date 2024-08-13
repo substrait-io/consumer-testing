@@ -36,7 +36,7 @@ SCALAR_FUNCTIONS = (
     },
     {
         "test_name": "factorial",
-        "file_names": ["partsupp.parquet"],
+        "file_names": ["nation.parquet"],
         "sql_query": SQL_SCALAR["factorial"],
         "ibis_expr": None,
     },
