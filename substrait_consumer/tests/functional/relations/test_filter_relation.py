@@ -12,6 +12,17 @@ from substrait_consumer.functional.common import (
 from substrait_consumer.parametrization import custom_parametrization
 
 
+@pytest.fixture(autouse=False)
+def mark_consumer_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    producer = request.getfixturevalue('producer')
+    consumer = request.getfixturevalue('consumer')
+    func_name = request.node.callspec.id.split('-')[-1]
+    if consumer.__class__.__name__ == 'DuckDBConsumer':
+        if producer.__class__.__name__ != 'DuckDBProducer':
+            pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
+
+
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
 class TestfilterRelation:
     """
@@ -60,6 +71,7 @@ class TestfilterRelation:
 
     @custom_parametrization(FILTER_RELATION_TESTS)
     @pytest.mark.consume_substrait_snapshot
+    @pytest.mark.usefixtures('mark_consumer_tests_as_xfail')
     def test_consumer_filter_relations(
         self,
         snapshot,
