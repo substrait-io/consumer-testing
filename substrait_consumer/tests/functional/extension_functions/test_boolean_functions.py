@@ -51,7 +51,6 @@ class TestBooleanFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
     @pytest.mark.produce_substrait_snapshot
-    @pytest.mark.usefixtures('mark_consumer_tests_as_xfail')
     def test_producer_boolean_functions(
         self,
         snapshot,
@@ -76,6 +75,7 @@ class TestBooleanFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
     @pytest.mark.consume_substrait_snapshot
+    @pytest.mark.usefixtures('mark_consumer_tests_as_xfail')
     def test_consumer_boolean_functions(
         self,
         snapshot,
