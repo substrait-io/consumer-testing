@@ -12,7 +12,7 @@ from substrait_consumer.functional.string_configs import (
 from substrait_consumer.parametrization import custom_parametrization
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture
 def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')

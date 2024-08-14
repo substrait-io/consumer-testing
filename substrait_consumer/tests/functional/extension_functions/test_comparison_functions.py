@@ -11,7 +11,7 @@ from substrait_consumer.functional.comparison_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture
 def mark_producer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
@@ -21,7 +21,7 @@ def mark_producer_tests_as_xfail(request):
             pytest.skip(reason='INTERNAL Error: DUMMY_SCAN')
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture
 def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')

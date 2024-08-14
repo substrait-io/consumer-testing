@@ -11,7 +11,7 @@ from substrait_consumer.functional.logarithmic_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture
 def mark_producer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
@@ -21,7 +21,7 @@ def mark_producer_tests_as_xfail(request):
             pytest.skip(reason='Catalog Error: Scalar Function with name logb does not exist!')
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture
 def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
@@ -31,7 +31,7 @@ def mark_consumer_tests_as_xfail(request):
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
 
 
-@pytest.fixture(autouse=False)
+@pytest.fixture
 def mark_generate_result_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     func_name = request.node.callspec.id
