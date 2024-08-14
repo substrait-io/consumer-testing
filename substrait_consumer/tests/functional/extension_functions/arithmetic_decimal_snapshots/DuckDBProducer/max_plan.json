@@ -1,9 +1,16 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "max"
+        "name": "max:decimal"
       }
     }
   ],
@@ -38,29 +45,22 @@
                       "struct": {
                         "types": [
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
-                          },
-                          {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -86,14 +86,19 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 1,
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 1,
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -113,20 +118,17 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 17,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 7,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 43,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           }
@@ -201,7 +203,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

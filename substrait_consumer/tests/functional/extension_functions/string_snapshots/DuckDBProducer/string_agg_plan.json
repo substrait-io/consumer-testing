@@ -11,90 +11,67 @@
     {
       "root": {
         "input": {
-          "project": {
+          "sort": {
             "input": {
-              "aggregate": {
+              "project": {
                 "input": {
-                  "read": {
-                    "baseSchema": {
-                      "names": [
-                        "n_nationkey",
-                        "n_name",
-                        "n_regionkey",
-                        "n_comment"
-                      ],
-                      "struct": {
-                        "types": [
-                          {
-                            "i32": {
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
-                          },
-                          {
-                            "varchar": {
-                              "length": 14,
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
-                          },
-                          {
-                            "i32": {
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
-                          },
-                          {
-                            "varchar": {
-                              "length": 114,
-                              "nullability": "NULLABILITY_NULLABLE"
-                            }
+                  "aggregate": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "n_nationkey",
+                            "n_name",
+                            "n_regionkey",
+                            "n_comment"
+                          ],
+                          "struct": {
+                            "types": [
+                              {
+                                "i32": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "i32": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            ],
+                            "nullability": "NULLABILITY_REQUIRED"
                           }
-                        ],
-                        "nullability": "NULLABILITY_REQUIRED"
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {
+                                "field": 1
+                              }
+                            ]
+                          },
+                          "maintainSingularStruct": true
+                        },
+                        "namedTable": {
+                          "names": [
+                            "nation"
+                          ]
+                        }
                       }
                     },
-                    "projection": {
-                      "select": {
-                        "structItems": [
-                          {
-                            "field": 1
-                          }
-                        ]
-                      },
-                      "maintainSingularStruct": true
-                    },
-                    "namedTable": {
-                      "names": [
-                        "nation"
-                      ]
-                    }
-                  }
-                },
-                "groupings": [
-                  {
-                    "groupingExpressions": [
+                    "groupings": [
                       {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          },
-                          "rootReference": {}
-                        }
-                      }
-                    ]
-                  }
-                ],
-                "measures": [
-                  {
-                    "measure": {
-                      "functionReference": 1,
-                      "outputType": {
-                        "varchar": {
-                          "length": 114,
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "value": {
+                        "groupingExpressions": [
+                          {
                             "selection": {
                               "directReference": {
                                 "structField": {}
@@ -102,31 +79,68 @@
                               "rootReference": {}
                             }
                           }
+                        ]
+                      }
+                    ],
+                    "measures": [
+                      {
+                        "measure": {
+                          "functionReference": 1,
+                          "outputType": {
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
                         }
-                      ]
+                      }
+                    ]
+                  }
+                },
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
+                      },
+                      "rootReference": {}
+                    }
+                  },
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 1
+                        }
+                      },
+                      "rootReference": {}
                     }
                   }
                 ]
               }
             },
-            "expressions": [
+            "sorts": [
               {
-                "selection": {
-                  "directReference": {
-                    "structField": {}
-                  },
-                  "rootReference": {}
-                }
-              },
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {
-                      "field": 1
-                    }
-                  },
-                  "rootReference": {}
-                }
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    },
+                    "rootReference": {}
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
               }
             ]
           }
@@ -139,7 +153,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

@@ -184,6 +184,7 @@ SQL_AGGREGATE = {
         SELECT N_NAME, string_agg(N_NAME, ',')
         FROM '{}'
         GROUP BY N_NAME
+        ORDER BY N_NAME
         """,
         [DuckDBProducer],
     ),

@@ -27,17 +27,17 @@
                       "struct": {
                         "types": [
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           {
-                            "i32": {
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
@@ -49,8 +49,7 @@
                             }
                           },
                           {
-                            "varchar": {
-                              "length": 198,
+                            "string": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
                           }
@@ -125,7 +124,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

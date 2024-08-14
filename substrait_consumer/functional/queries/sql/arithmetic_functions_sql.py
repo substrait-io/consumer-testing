@@ -45,9 +45,9 @@ SQL_SCALAR = {
     ),
     "factorial": (
         """
-        SELECT PS_PARTKEY, factorial(PS_PARTKEY) AS FACTORIAL_KEY
+        SELECT N_NATIONKEY, factorial(N_NATIONKEY) AS FACTORIAL_KEY
         FROM '{}'
-        WHERE PS_PARTKEY <= 10
+        WHERE N_NATIONKEY <= 10
         LIMIT 100;
         """,
         [DataFusionProducer, DuckDBProducer],

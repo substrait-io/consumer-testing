@@ -19,12 +19,6 @@ SQL_SCALAR = {
         """,
         [DuckDBProducer],
     ),
-    "add_intervals": (
-        """
-        SELECT INTERVAL 1 HOUR + INTERVAL 5 HOUR
-        """,
-        [DuckDBProducer],
-    ),
     "subtract": (
         """
         SELECT L_SHIPDATE, L_SHIPDATE - INTERVAL 5 DAY
@@ -64,5 +58,11 @@ SQL_SCALAR = {
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
+    ),
+    "add_intervals": (
+        """
+        SELECT INTERVAL 1 HOUR + INTERVAL 5 HOUR
+        """,
+        [DuckDBProducer],
     ),
 }

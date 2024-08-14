@@ -1,27 +1,41 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+    },
+    {
+      "extensionUriAnchor": 2,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_boolean.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "equal"
+        "name": "equal:i64_i64"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "is_not_null"
+        "name": "is_not_null:i64"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 2,
         "functionAnchor": 3,
-        "name": "and"
+        "name": "and:bool?"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "lt"
+        "name": "lt:i64_i64"
       }
     }
   ],
@@ -267,7 +281,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

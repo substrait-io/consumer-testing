@@ -11,6 +11,34 @@ from substrait_consumer.functional.logarithmic_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
 
 
+@pytest.fixture
+def mark_producer_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    producer = request.getfixturevalue('producer')
+    func_name = request.node.callspec.id.split('-')[1]
+    if producer.__class__.__name__ == 'DuckDBProducer':
+        if func_name == "logb":
+            pytest.skip(reason='Catalog Error: Scalar Function with name logb does not exist!')
+
+
+@pytest.fixture
+def mark_consumer_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    producer = request.getfixturevalue('producer')
+    consumer = request.getfixturevalue('consumer')
+    if consumer.__class__.__name__ == 'DuckDBConsumer':
+        if producer.__class__.__name__ != 'DuckDBProducer':
+            pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
+
+
+@pytest.fixture
+def mark_generate_result_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    func_name = request.node.callspec.id
+    if func_name == "logb":
+        pytest.skip(reason='Catalog Error: Scalar Function with name logb does not exist!')
+
+
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
 class TestLogarithmicFunctions:
     """
@@ -34,6 +62,7 @@ class TestLogarithmicFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.produce_substrait_snapshot
+    @pytest.mark.usefixtures('mark_producer_tests_as_xfail')
     def test_producer_logarithmic_functions(
         self,
         snapshot,
@@ -59,6 +88,7 @@ class TestLogarithmicFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.consume_substrait_snapshot
+    @pytest.mark.usefixtures('mark_consumer_tests_as_xfail')
     def test_consumer_logarithmic_functions(
         self,
         snapshot,
@@ -85,6 +115,7 @@ class TestLogarithmicFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.generate_function_snapshots
+    @pytest.mark.usefixtures('mark_generate_result_tests_as_xfail')
     def test_generate_logarithmic_functions_results(
         self,
         snapshot,

@@ -1,27 +1,41 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+    },
+    {
+      "extensionUriAnchor": 2,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_boolean.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "gte"
+        "name": "gte:i64_i64"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 2,
-        "name": "lte"
+        "name": "lte:i64_i64"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 2,
         "functionAnchor": 3,
-        "name": "and"
+        "name": "and:bool?"
       }
     },
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 4,
-        "name": "is_not_null"
+        "name": "is_not_null:i64"
       }
     }
   ],
@@ -29,177 +43,194 @@
     {
       "root": {
         "input": {
-          "project": {
+          "sort": {
             "input": {
-              "read": {
-                "baseSchema": {
-                  "names": [
-                    "a",
-                    "b",
-                    "c",
-                    "d"
-                  ],
-                  "struct": {
-                    "types": [
-                      {
-                        "i64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "i64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      {
-                        "bool": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      }
-                    ],
-                    "nullability": "NULLABILITY_REQUIRED"
-                  }
-                },
-                "filter": {
-                  "scalarFunction": {
-                    "functionReference": 3,
-                    "outputType": {
-                      "bool": {
-                        "nullability": "NULLABILITY_NULLABLE"
+              "project": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "a",
+                        "b",
+                        "c",
+                        "d"
+                      ],
+                      "struct": {
+                        "types": [
+                          {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "bool": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          {
+                            "bool": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }
+                        ],
+                        "nullability": "NULLABILITY_REQUIRED"
                       }
                     },
-                    "arguments": [
-                      {
-                        "value": {
-                          "scalarFunction": {
-                            "functionReference": 3,
-                            "outputType": {
-                              "bool": {
-                                "nullability": "NULLABILITY_NULLABLE"
-                              }
-                            },
-                            "arguments": [
-                              {
-                                "value": {
-                                  "scalarFunction": {
-                                    "functionReference": 1,
-                                    "outputType": {
-                                      "i64": {
-                                        "nullability": "NULLABILITY_NULLABLE"
-                                      }
-                                    },
-                                    "arguments": [
-                                      {
-                                        "value": {
-                                          "selection": {
-                                            "directReference": {
-                                              "structField": {}
-                                            },
-                                            "rootReference": {}
-                                          }
-                                        }
-                                      },
-                                      {
-                                        "value": {
-                                          "literal": {
-                                            "i64": "1"
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                }
-                              },
-                              {
-                                "value": {
-                                  "scalarFunction": {
-                                    "functionReference": 2,
-                                    "outputType": {
-                                      "i64": {
-                                        "nullability": "NULLABILITY_NULLABLE"
-                                      }
-                                    },
-                                    "arguments": [
-                                      {
-                                        "value": {
-                                          "selection": {
-                                            "directReference": {
-                                              "structField": {}
-                                            },
-                                            "rootReference": {}
-                                          }
-                                        }
-                                      },
-                                      {
-                                        "value": {
-                                          "literal": {
-                                            "i64": "5"
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                }
-                              }
-                            ]
+                    "filter": {
+                      "scalarFunction": {
+                        "functionReference": 3,
+                        "outputType": {
+                          "bool": {
+                            "nullability": "NULLABILITY_NULLABLE"
                           }
-                        }
-                      },
-                      {
-                        "value": {
-                          "scalarFunction": {
-                            "functionReference": 4,
-                            "outputType": {
-                              "i64": {
-                                "nullability": "NULLABILITY_NULLABLE"
-                              }
-                            },
-                            "arguments": [
-                              {
-                                "value": {
-                                  "selection": {
-                                    "directReference": {
-                                      "structField": {}
-                                    },
-                                    "rootReference": {}
+                        },
+                        "arguments": [
+                          {
+                            "value": {
+                              "scalarFunction": {
+                                "functionReference": 3,
+                                "outputType": {
+                                  "bool": {
+                                    "nullability": "NULLABILITY_NULLABLE"
                                   }
-                                }
+                                },
+                                "arguments": [
+                                  {
+                                    "value": {
+                                      "scalarFunction": {
+                                        "functionReference": 1,
+                                        "outputType": {
+                                          "i64": {
+                                            "nullability": "NULLABILITY_NULLABLE"
+                                          }
+                                        },
+                                        "arguments": [
+                                          {
+                                            "value": {
+                                              "selection": {
+                                                "directReference": {
+                                                  "structField": {}
+                                                },
+                                                "rootReference": {}
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": {
+                                              "literal": {
+                                                "i64": "1"
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "value": {
+                                      "scalarFunction": {
+                                        "functionReference": 2,
+                                        "outputType": {
+                                          "i64": {
+                                            "nullability": "NULLABILITY_NULLABLE"
+                                          }
+                                        },
+                                        "arguments": [
+                                          {
+                                            "value": {
+                                              "selection": {
+                                                "directReference": {
+                                                  "structField": {}
+                                                },
+                                                "rootReference": {}
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": {
+                                              "literal": {
+                                                "i64": "5"
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
                               }
-                            ]
+                            }
+                          },
+                          {
+                            "value": {
+                              "scalarFunction": {
+                                "functionReference": 4,
+                                "outputType": {
+                                  "i64": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                "arguments": [
+                                  {
+                                    "value": {
+                                      "selection": {
+                                        "directReference": {
+                                          "structField": {}
+                                        },
+                                        "rootReference": {}
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
                           }
-                        }
+                        ]
                       }
-                    ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {}
+                        ]
+                      },
+                      "maintainSingularStruct": true
+                    },
+                    "namedTable": {
+                      "names": [
+                        "t"
+                      ]
+                    }
                   }
                 },
-                "projection": {
-                  "select": {
-                    "structItems": [
-                      {}
-                    ]
-                  },
-                  "maintainSingularStruct": true
-                },
-                "namedTable": {
-                  "names": [
-                    "t"
-                  ]
-                }
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
+                      },
+                      "rootReference": {}
+                    }
+                  }
+                ]
               }
             },
-            "expressions": [
+            "sorts": [
               {
-                "selection": {
-                  "directReference": {
-                    "structField": {}
-                  },
-                  "rootReference": {}
-                }
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    },
+                    "rootReference": {}
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
               }
             ]
           }
@@ -211,7 +242,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

@@ -29,8 +29,7 @@
                         }
                       },
                       {
-                        "varchar": {
-                          "length": 14,
+                        "string": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -40,8 +39,7 @@
                         }
                       },
                       {
-                        "varchar": {
-                          "length": 114,
+                        "string": {
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       }
@@ -82,8 +80,7 @@
                 "scalarFunction": {
                   "functionReference": 1,
                   "outputType": {
-                    "varchar": {
-                      "length": 114,
+                    "string": {
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -124,7 +121,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }

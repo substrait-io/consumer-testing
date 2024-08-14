@@ -96,15 +96,16 @@ SQL_SCALAR = {
         """,
         [DuckDBProducer],
     ),
-    "coalesce": (
-        """
-        SELECT coalesce(NULL,NULL,'test_string')
-        """,
-        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
-    ),
     "between": (
         """
         SELECT a FROM 't' WHERE a BETWEEN 1 AND 5
+        ORDER BY a
+        """,
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
+    ),
+    "coalesce": (
+        """
+        SELECT coalesce(NULL,NULL,'test_string')
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),

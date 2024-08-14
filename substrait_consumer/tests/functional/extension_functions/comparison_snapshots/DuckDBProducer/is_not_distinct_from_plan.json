@@ -1,9 +1,16 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "is_not_distinct_from"
+        "name": "is_not_distinct_from:i64_i64"
       }
     }
   ],
@@ -114,7 +121,7 @@
     }
   ],
   "version": {
-    "minorNumber": 24,
+    "minorNumber": 48,
     "producer": "DuckDB"
   }
 }
