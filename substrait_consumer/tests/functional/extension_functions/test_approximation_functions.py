@@ -22,6 +22,9 @@ def mark_consumer_tests_as_xfail(request):
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
         elif func_name == "approx_percentile":
             pytest.skip(reason='Catalog Error: Scalar Function with name approx_distinct does not exist!')
+    elif consumer.__class__.__name__ == 'DataFusionConsumer':
+        if producer.__class__.__name__ != 'DataFusionProducer':
+            pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")

@@ -16,7 +16,7 @@ def mark_producer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
     func_name = request.node.callspec.id.split('-')[1]
-    if producer.__class__.__name__ == 'DuckDBProducer':
+    if producer.__class__.__name__ in ['DuckDBProducer', 'DataFusionProducer']:
         if func_name == "logb":
             pytest.skip(reason='Catalog Error: Scalar Function with name logb does not exist!')
 

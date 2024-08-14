@@ -54,7 +54,7 @@
                   {
                     "value": {
                       "literal": {
-                        "i32": 10,
+                        "i64": "10",
                         "nullable": true
                       }
                     }

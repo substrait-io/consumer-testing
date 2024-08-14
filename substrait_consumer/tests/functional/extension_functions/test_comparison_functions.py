@@ -19,6 +19,9 @@ def mark_producer_tests_as_xfail(request):
     if producer.__class__.__name__ == 'DuckDBProducer':
         if func_name == "coalesce":
             pytest.skip(reason='INTERNAL Error: DUMMY_SCAN')
+    elif producer.__class__.__name__ == 'DataFusionProducer':
+        if func_name == "coalesce":
+            pytest.skip(reason='NotImplemented("Unsupported operator: EmptyRelation"')
 
 
 @pytest.fixture

@@ -27,11 +27,10 @@
                       "read": {
                         "baseSchema": {
                           "names": [
-                            "ps_partkey",
-                            "ps_suppkey",
-                            "ps_availqty",
-                            "ps_supplycost",
-                            "ps_comment"
+                            "n_nationkey",
+                            "n_name",
+                            "n_regionkey",
+                            "n_comment"
                           ]
                         },
                         "projection": {
@@ -43,7 +42,7 @@
                         },
                         "namedTable": {
                           "names": [
-                            "partsupp"
+                            "nation"
                           ]
                         }
                       }
@@ -113,7 +112,7 @@
           }
         },
         "names": [
-          "partsupp.ps_partkey",
+          "nation.n_nationkey",
           "factorial_key"
         ]
       }

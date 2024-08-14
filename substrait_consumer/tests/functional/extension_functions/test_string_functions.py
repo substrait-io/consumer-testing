@@ -13,6 +13,16 @@ from substrait_consumer.parametrization import custom_parametrization
 
 
 @pytest.fixture
+def mark_producer_tests_as_xfail(request):
+    """Marks a subset of tests as expected to be fail."""
+    producer = request.getfixturevalue('producer')
+    func_name = request.node.callspec.id.split('-')[1]
+    if producer.__class__.__name__ == 'DataFusionProducer':
+        if func_name == "trim":
+            pytest.skip(reason='DataFusion error: SQL(ParserError("Expected ), found: ,")')
+
+
+@pytest.fixture
 def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
@@ -45,6 +55,7 @@ class TestStringFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
     @pytest.mark.produce_substrait_snapshot
+    @pytest.mark.usefixtures('mark_producer_tests_as_xfail')
     def test_producer_string_functions(
         self,
         snapshot,

@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  datafusion_producer:
-    name: Run DataFusion producer tests
+  datafusion_producer_functions:
+    name: Run DataFusion producer function tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,9 +16,9 @@ jobs:
           submodules: recursive
 
       - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_producer.Dockerfile .)
-  datafusion_consumer:
-    name: Run DataFusion consumer tests
+        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_producer_functions.Dockerfile .)
+  datafusion_consumer_functions:
+    name: Run DataFusion consumer function tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,7 +27,29 @@ jobs:
           submodules: recursive
 
       - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer.Dockerfile .)
+        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer_functions.Dockerfile .)
+  datafusion_producer_relations:
+    name: Run DataFusion producer relation tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_producer_relations.Dockerfile .)
+  datafusion_consumer_relations:
+    name: Run DataFusion consumer relation tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer_relations.Dockerfile .)
   duckdb_producer_functions:
     name: Run DuckDB producer function tests
     runs-on: ubuntu-latest
