@@ -64,8 +64,8 @@ class DataFusionProducer(Producer):
                 table_name = table_name.translate(
                     str.maketrans("", "", string.punctuation)
                 )
-                if f"{self.__class__.__name__}{table_name}" not in created_tables:
-                    created_tables.add(f"{self.__class__.__name__}{table_name}")
+                if f"{table_name}" not in created_tables:
+                    created_tables.add(f"{table_name}")
                     self._ctx.register_parquet(f"{table_name}", file_path)
         else:
             if not self._ctx.table_exist("t"):
@@ -83,9 +83,7 @@ class DataFusionProducer(Producer):
     def format_sql(self, created_tables, sql_query, file_names):
         self.register_tables(created_tables, file_names)
         if len(file_names) > 0:
-            table_names = load_tables_from_parquet(
-                self._db_connection, created_tables, file_names
-            )
+            table_names = [Path(f).stem for f in file_names]
             sql_query = sql_query.format(*table_names)
         return sql_query
 
