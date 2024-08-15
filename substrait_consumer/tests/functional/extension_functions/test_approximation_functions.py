@@ -25,6 +25,8 @@ def mark_consumer_tests_as_xfail(request):
     elif consumer.__class__.__name__ == 'DataFusionConsumer':
         if producer.__class__.__name__ != 'DataFusionProducer':
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
+        elif func_name == "approx_distinct":
+            pytest.skip(reason='pyarrow.lib.ArrowInvalid: Schema at index 0 was different')
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
