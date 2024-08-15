@@ -33,7 +33,7 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY PS_SUPPLYCOST ASC
+        ORDER BY PS_SUPPLYCOST ASC, PS_AVAILQTY
         LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
@@ -69,7 +69,7 @@ SORT_RELATIONS = {
         """
         SELECT PS_SUPPLYCOST, PS_AVAILQTY
         FROM '{}'
-        ORDER BY 1
+        ORDER BY 1, 2
         LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
