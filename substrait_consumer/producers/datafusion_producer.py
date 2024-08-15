@@ -64,8 +64,8 @@ class DataFusionProducer(Producer):
                 table_name = table_name.translate(
                     str.maketrans("", "", string.punctuation)
                 )
-                if f"{table_name}" not in created_tables:
-                    created_tables.add(f"{table_name}")
+                if f"{self.__class__.__name__}{table_name}" not in created_tables:
+                    created_tables.add(f"{self.__class__.__name__}{table_name}")
                     self._ctx.register_parquet(f"{table_name}", file_path)
         else:
             if not self._ctx.table_exist("t"):
