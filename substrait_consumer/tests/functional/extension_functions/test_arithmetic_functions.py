@@ -27,9 +27,19 @@ def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
     consumer = request.getfixturevalue('consumer')
+    func_name = request.node.callspec.id.split('-')[-1]
     if consumer.__class__.__name__ == 'DuckDBConsumer':
         if producer.__class__.__name__ != 'DuckDBProducer':
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
+    elif consumer.__class__.__name__ == 'DataFusionConsumer':
+        if producer.__class__.__name__ != 'DataFusionProducer':
+            pytest.skip(reason=f'Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}')
+        elif func_name in ["count", "count_star"]:
+            pytest.skip(reason='pyarrow.lib.ArrowInvalid: Schema at index 0 was different')
+        elif func_name in ["divide", "power"]:
+            pytest.skip(reason='Results mismatch. Row vs Column output')
+        elif func_name in ["median"]:
+            pytest.skip(reason='Results mismatch. Rounding Error')
 
 
 @pytest.fixture

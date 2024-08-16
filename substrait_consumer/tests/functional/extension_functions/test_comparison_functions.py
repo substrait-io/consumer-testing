@@ -19,6 +19,9 @@ def mark_producer_tests_as_xfail(request):
     if producer.__class__.__name__ == 'DuckDBProducer':
         if func_name == "coalesce":
             pytest.skip(reason='INTERNAL Error: DUMMY_SCAN')
+    elif producer.__class__.__name__ == 'DataFusionProducer':
+        if func_name == "coalesce":
+            pytest.skip(reason='NotImplemented("Unsupported operator: EmptyRelation"')
 
 
 @pytest.fixture
@@ -29,6 +32,9 @@ def mark_consumer_tests_as_xfail(request):
     if consumer.__class__.__name__ == 'DuckDBConsumer':
         if producer.__class__.__name__ != 'DuckDBProducer':
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
+    elif consumer.__class__.__name__ == 'DataFusionConsumer':
+        if producer.__class__.__name__ != 'DataFusionProducer':
+            pytest.skip(reason=f'Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}')
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")

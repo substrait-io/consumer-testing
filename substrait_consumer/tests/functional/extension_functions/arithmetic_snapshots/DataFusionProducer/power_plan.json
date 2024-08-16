@@ -55,18 +55,9 @@
                   "arguments": [
                     {
                       "value": {
-                        "cast": {
-                          "type": {
-                            "i64": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          },
-                          "input": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              }
-                            }
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
                           }
                         }
                       }

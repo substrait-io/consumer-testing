@@ -67,6 +67,7 @@ FILTER_RELATIONS = {
         SELECT L_SHIPINSTRUCT, L_ORDERKEY
         FROM '{}'
         WHERE L_SHIPINSTRUCT LIKE '%DELIVER IN PERSON%'
+        ORDER BY L_ORDERKEY
         LIMIT 20;
         """,
         [DuckDBProducer, DataFusionProducer],

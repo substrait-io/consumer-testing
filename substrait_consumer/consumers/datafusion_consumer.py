@@ -22,7 +22,7 @@ class DataFusionConsumer(Consumer):
     """
 
     def __init__(self):
-        self.ctx = SessionContext()
+        self._ctx = SessionContext()
 
     def setup(self, db_connection, created_tables, file_names: Iterable[str]):
         if len(file_names) > 0:
@@ -32,11 +32,11 @@ class DataFusionConsumer(Consumer):
                 table_name = table_name.translate(
                     str.maketrans("", "", string.punctuation)
                 )
-                if f"{self.__class__.__name__}{table_name}" not in created_tables:
-                    created_tables.add(f"{self.__class__.__name__}{table_name}")
-                    self.ctx.register_parquet(f"{table_name}", file_path)
+                if not self._ctx.table_exist(table_name):
+                    created_tables.add(table_name)
+                    self._ctx.register_parquet(table_name, file_path)
         else:
-            if not self.ctx.table_exist("t"):
+            if not self._ctx.table_exist("t"):
                 tables = pa.RecordBatch.from_arrays(
                     [
                         pa.array(COLUMN_A),
@@ -47,7 +47,7 @@ class DataFusionConsumer(Consumer):
                     names=["a", "b", "c", "d"],
                 )
 
-                self.ctx.register_record_batches("t", [[tables]])
+                self._ctx.register_record_batches("t", [[tables]])
 
     def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """
@@ -65,9 +65,9 @@ class DataFusionConsumer(Consumer):
         plan_bytes = plan_proto.SerializeToString()
         substrait_plan = ds.substrait.serde.deserialize_bytes(plan_bytes)
         logical_plan = ds.substrait.consumer.from_substrait_plan(
-            self.ctx, substrait_plan
+            self._ctx, substrait_plan
         )
 
         # Create a DataFrame from a deserialized logical plan
-        df_result = self.ctx.create_dataframe_from_logical_plan(logical_plan)
+        df_result = self._ctx.create_dataframe_from_logical_plan(logical_plan)
         return df_result.to_arrow_table()

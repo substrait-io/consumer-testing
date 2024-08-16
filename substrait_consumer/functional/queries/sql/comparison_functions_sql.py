@@ -32,6 +32,7 @@ SQL_SCALAR = {
         SELECT PS_AVAILQTY
         FROM '{}'
         WHERE PS_AVAILQTY < 10
+        ORDER BY PS_AVAILQTY
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
@@ -40,6 +41,7 @@ SQL_SCALAR = {
         SELECT PS_AVAILQTY
         FROM '{}'
         WHERE PS_AVAILQTY <= 10
+        ORDER BY PS_AVAILQTY
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
@@ -48,6 +50,7 @@ SQL_SCALAR = {
         SELECT PS_AVAILQTY
         FROM '{}'
         WHERE PS_AVAILQTY > 9990
+        ORDER BY PS_AVAILQTY
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
@@ -56,6 +59,7 @@ SQL_SCALAR = {
         SELECT PS_AVAILQTY
         FROM '{}'
         WHERE PS_AVAILQTY >= 9990
+        ORDER BY PS_AVAILQTY
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
