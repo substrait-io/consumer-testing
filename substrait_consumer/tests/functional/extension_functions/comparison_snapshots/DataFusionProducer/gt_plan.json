@@ -11,57 +11,73 @@
     {
       "root": {
         "input": {
-          "filter": {
+          "sort": {
             "input": {
-              "read": {
-                "baseSchema": {
-                  "names": [
-                    "ps_partkey",
-                    "ps_suppkey",
-                    "ps_availqty",
-                    "ps_supplycost",
-                    "ps_comment"
-                  ]
+              "filter": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "ps_partkey",
+                        "ps_suppkey",
+                        "ps_availqty",
+                        "ps_supplycost",
+                        "ps_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {
+                            "field": 2
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "partsupp"
+                      ]
+                    }
+                  }
                 },
-                "projection": {
-                  "select": {
-                    "structItems": [
+                "condition": {
+                  "scalarFunction": {
+                    "arguments": [
                       {
-                        "field": 2
+                        "value": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {}
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "value": {
+                          "literal": {
+                            "i64": "9990",
+                            "nullable": true
+                          }
+                        }
                       }
                     ]
                   }
-                },
-                "namedTable": {
-                  "names": [
-                    "partsupp"
-                  ]
                 }
               }
             },
-            "condition": {
-              "scalarFunction": {
-                "arguments": [
-                  {
-                    "value": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {}
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "value": {
-                      "literal": {
-                        "i64": "9990",
-                        "nullable": true
-                      }
+            "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
                     }
                   }
-                ]
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
               }
-            }
+            ]
           }
         },
         "names": [

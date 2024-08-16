@@ -18,16 +18,16 @@
     {
       "root": {
         "input": {
-          "project": {
-            "common": {
-              "emit": {
-                "outputMapping": [
-                  5
-                ]
-              }
-            },
+          "filter": {
             "input": {
-              "filter": {
+              "project": {
+                "common": {
+                  "emit": {
+                    "outputMapping": [
+                      5
+                    ]
+                  }
+                },
                 "input": {
                   "read": {
                     "common": {
@@ -81,51 +81,49 @@
                     }
                   }
                 },
-                "condition": {
-                  "scalarFunction": {
-                    "functionReference": 1,
-                    "outputType": {
-                      "bool": {
-                        "nullability": "NULLABILITY_NULLABLE"
-                      }
-                    },
-                    "arguments": [
-                      {
-                        "value": {
-                          "selection": {
-                            "directReference": {
-                              "structField": {
-                                "field": 2
-                              }
-                            },
-                            "rootReference": {}
-                          }
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 2
                         }
                       },
-                      {
-                        "value": {
-                          "literal": {
-                            "i8": 10
-                          }
-                        }
-                      }
-                    ]
+                      "rootReference": {}
+                    }
                   }
-                }
+                ]
               }
             },
-            "expressions": [
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {
-                      "field": 2
+            "condition": {
+              "scalarFunction": {
+                "functionReference": 1,
+                "outputType": {
+                  "bool": {
+                    "nullability": "NULLABILITY_NULLABLE"
+                  }
+                },
+                "arguments": [
+                  {
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        },
+                        "rootReference": {}
+                      }
                     }
                   },
-                  "rootReference": {}
-                }
+                  {
+                    "value": {
+                      "literal": {
+                        "i8": 10
+                      }
+                    }
+                  }
+                ]
               }
-            ]
+            }
           }
         },
         "names": [
@@ -135,7 +133,7 @@
     }
   ],
   "version": {
-    "minorNumber": 38,
+    "minorNumber": 52,
     "producer": "ibis-substrait"
   }
 }
