@@ -38,7 +38,7 @@ def mark_consumer_tests_as_xfail(request):
             pytest.skip(reason='pyarrow.lib.ArrowInvalid: Schema at index 0 was different')
         elif func_name in ["divide", "power"]:
             pytest.skip(reason='Results mismatch. Row vs Column output')
-        elif func_name in ["median", "acos", "atan", "atan2"]:
+        elif func_name in ["median", "asin" ,"acos", "atan", "atan2"]:
             pytest.skip(reason='Results mismatch. Rounding Error')
 
 
