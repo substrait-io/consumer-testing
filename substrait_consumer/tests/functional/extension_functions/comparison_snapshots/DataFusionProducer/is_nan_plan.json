@@ -52,7 +52,7 @@
                         "cast": {
                           "type": {
                             "fp32": {
-                              "nullability": "NULLABILITY_REQUIRED"
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           "input": {
@@ -72,14 +72,14 @@
           }
         },
         "names": [
-          "t.a",
+          "a",
           "isnan_a"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

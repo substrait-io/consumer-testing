@@ -24,11 +24,7 @@
                   ]
                 },
                 "projection": {
-                  "select": {
-                    "structItems": [
-                      {}
-                    ]
-                  }
+                  "select": {}
                 },
                 "namedTable": {
                   "names": [
@@ -48,9 +44,7 @@
                     {
                       "value": {
                         "literal": {
-                          "i8": 1,
-                          "nullable": true,
-                          "typeVariationReference": 1
+                          "i64": "1"
                         }
                       }
                     }
@@ -61,13 +55,13 @@
           }
         },
         "names": [
-          "COUNT(*)"
+          "count(*)"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

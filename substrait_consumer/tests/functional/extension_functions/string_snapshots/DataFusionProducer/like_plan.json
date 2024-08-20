@@ -53,8 +53,7 @@
                   {
                     "value": {
                       "literal": {
-                        "string": "ALGERIA",
-                        "nullable": true
+                        "string": "ALGERIA"
                       }
                     }
                   },
@@ -76,13 +75,13 @@
           }
         },
         "names": [
-          "nation.n_name"
+          "n_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

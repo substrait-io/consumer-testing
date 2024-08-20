@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "name": "gt"
+        "name": "lt"
       }
     }
   ],
@@ -64,7 +64,9 @@
                             "value": {
                               "selection": {
                                 "directReference": {
-                                  "structField": {}
+                                  "structField": {
+                                    "field": 1
+                                  }
                                 }
                               }
                             }
@@ -73,9 +75,7 @@
                             "value": {
                               "selection": {
                                 "directReference": {
-                                  "structField": {
-                                    "field": 1
-                                  }
+                                  "structField": {}
                                 }
                               }
                             }
@@ -115,14 +115,14 @@
           }
         },
         "names": [
-          "lineitem.l_discount",
-          "lineitem.l_tax"
+          "l_discount",
+          "l_tax"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

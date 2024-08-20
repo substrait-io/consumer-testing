@@ -61,8 +61,7 @@
                     {
                       "value": {
                         "literal": {
-                          "i64": "2",
-                          "nullable": true
+                          "i64": "2"
                         }
                       }
                     }
@@ -73,14 +72,14 @@
           }
         },
         "names": [
-          "nation.n_name",
+          "n_name",
           "repeated_n_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

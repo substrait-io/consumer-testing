@@ -69,8 +69,7 @@
                     {
                       "value": {
                         "literal": {
-                          "string": "YEAR",
-                          "nullable": true
+                          "string": "YEAR"
                         }
                       }
                     },
@@ -90,14 +89,14 @@
           }
         },
         "names": [
-          "lineitem.l_shipdate",
+          "l_shipdate",
           "date_part(Utf8(\"YEAR\"),lineitem.l_shipdate)"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

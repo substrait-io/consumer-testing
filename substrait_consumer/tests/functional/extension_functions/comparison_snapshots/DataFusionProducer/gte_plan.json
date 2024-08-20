@@ -56,8 +56,7 @@
                       {
                         "value": {
                           "literal": {
-                            "i64": "9990",
-                            "nullable": true
+                            "i64": "9990"
                           }
                         }
                       }
@@ -81,13 +80,13 @@
           }
         },
         "names": [
-          "partsupp.ps_availqty"
+          "ps_availqty"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

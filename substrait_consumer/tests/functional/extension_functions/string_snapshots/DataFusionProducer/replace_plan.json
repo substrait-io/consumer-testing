@@ -61,16 +61,14 @@
                     {
                       "value": {
                         "literal": {
-                          "string": "A",
-                          "nullable": true
+                          "string": "A"
                         }
                       }
                     },
                     {
                       "value": {
                         "literal": {
-                          "string": "a",
-                          "nullable": true
+                          "string": "a"
                         }
                       }
                     }
@@ -81,14 +79,14 @@
           }
         },
         "names": [
-          "nation.n_name",
+          "n_name",
           "replace_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

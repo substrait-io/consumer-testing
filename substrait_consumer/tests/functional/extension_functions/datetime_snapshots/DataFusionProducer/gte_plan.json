@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "name": "gte"
+        "name": "lte"
       }
     }
   ],
@@ -82,7 +82,9 @@
                       "value": {
                         "selection": {
                           "directReference": {
-                            "structField": {}
+                            "structField": {
+                              "field": 1
+                            }
                           }
                         }
                       }
@@ -91,9 +93,7 @@
                       "value": {
                         "selection": {
                           "directReference": {
-                            "structField": {
-                              "field": 1
-                            }
+                            "structField": {}
                           }
                         }
                       }
@@ -105,15 +105,15 @@
           }
         },
         "names": [
-          "lineitem.l_commitdate",
-          "lineitem.l_receiptdate",
+          "l_commitdate",
+          "l_receiptdate",
           "lineitem.l_commitdate >= lineitem.l_receiptdate"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

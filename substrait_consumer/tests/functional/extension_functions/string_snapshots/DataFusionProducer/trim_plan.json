@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "name": "character_length"
+        "name": "btrim"
       }
     }
   ],
@@ -57,6 +57,14 @@
                           }
                         }
                       }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "string": "A",
+                          "nullable": true
+                        }
+                      }
                     }
                   ]
                 }
@@ -65,14 +73,14 @@
           }
         },
         "names": [
-          "n_name",
-          "char_length_n_name"
+          "nation.n_name",
+          "trim_n_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 51,
+    "minorNumber": 48,
     "producer": "datafusion"
   }
 }

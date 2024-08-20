@@ -29,7 +29,7 @@ def mark_consumer_tests_as_xfail(request):
 class TestSortRelation:
     """
     Test Class verifying different consumers are able to run substrait plans
-    that include substrait arithmetic functions.
+    that include substrait sort relations.
     """
 
     @staticmethod

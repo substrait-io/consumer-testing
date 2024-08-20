@@ -75,14 +75,14 @@
           }
         },
         "names": [
-          "orders.o_comment",
+          "o_comment",
           "uppercase_o_comment"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

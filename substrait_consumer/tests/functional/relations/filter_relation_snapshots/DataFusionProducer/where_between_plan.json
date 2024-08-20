@@ -84,8 +84,7 @@
                               {
                                 "value": {
                                   "literal": {
-                                    "i64": "20",
-                                    "nullable": true
+                                    "i64": "20"
                                   }
                                 }
                               }
@@ -110,8 +109,7 @@
                               {
                                 "value": {
                                   "literal": {
-                                    "i64": "50",
-                                    "nullable": true
+                                    "i64": "50"
                                   }
                                 }
                               }
@@ -128,13 +126,13 @@
           }
         },
         "names": [
-          "lineitem.l_orderkey"
+          "l_orderkey"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }
