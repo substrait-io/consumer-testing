@@ -65,14 +65,14 @@
           }
         },
         "names": [
-          "nation.n_name",
+          "n_name",
           "lowercase_n_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

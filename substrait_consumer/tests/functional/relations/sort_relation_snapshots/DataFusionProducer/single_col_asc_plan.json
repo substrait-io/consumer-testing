@@ -51,13 +51,13 @@
           }
         },
         "names": [
-          "partsupp.ps_supplycost"
+          "ps_supplycost"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

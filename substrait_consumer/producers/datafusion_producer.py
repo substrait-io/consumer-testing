@@ -1,6 +1,6 @@
 import string
 from pathlib import Path
-from .producer import Producer, load_tables_from_parquet
+from .producer import Producer
 import substrait.gen.proto.plan_pb2 as plan_pb2
 from datafusion import SessionContext
 from datafusion import substrait as ss
@@ -39,7 +39,7 @@ class DataFusionProducer(Producer):
         """
         substrait_proto = plan_pb2.Plan()
 
-        substrait_plan = ss.substrait.serde.serialize_to_plan(sql_query, self._ctx)
+        substrait_plan = ss.serde.serialize_to_plan(sql_query, self._ctx)
         substrait_plan_bytes = substrait_plan.encode()
         substrait_proto.ParseFromString(substrait_plan_bytes)
 

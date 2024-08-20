@@ -71,7 +71,7 @@
                         "cast": {
                           "type": {
                             "fp64": {
-                              "nullability": "NULLABILITY_REQUIRED"
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           "input": {
@@ -87,8 +87,7 @@
                     {
                       "value": {
                         "literal": {
-                          "i64": "1",
-                          "nullable": true
+                          "i64": "1"
                         }
                       }
                     }
@@ -99,14 +98,14 @@
           }
         },
         "names": [
-          "lineitem.l_extendedprice",
+          "l_extendedprice",
           "round_extendedprice"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

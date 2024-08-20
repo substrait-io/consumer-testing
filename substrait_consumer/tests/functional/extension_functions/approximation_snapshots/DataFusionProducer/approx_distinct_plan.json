@@ -74,13 +74,13 @@
           }
         },
         "names": [
-          "APPROX_DISTINCT(lineitem.l_comment)"
+          "approx_distinct(lineitem.l_comment)"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

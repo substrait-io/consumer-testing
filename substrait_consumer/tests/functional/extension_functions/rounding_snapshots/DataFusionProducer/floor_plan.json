@@ -60,7 +60,7 @@
                         "cast": {
                           "type": {
                             "fp64": {
-                              "nullability": "NULLABILITY_REQUIRED"
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           "input": {
@@ -80,14 +80,14 @@
           }
         },
         "names": [
-          "partsupp.ps_supplycost",
+          "ps_supplycost",
           "floor_supplycost"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

@@ -51,13 +51,13 @@
           }
         },
         "names": [
-          "partsupp.ps_availqty"
+          "ps_availqty"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

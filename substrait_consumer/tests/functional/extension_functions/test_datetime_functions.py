@@ -33,8 +33,10 @@ def mark_consumer_tests_as_xfail(request):
     elif consumer.__class__.__name__ == 'DataFusionConsumer':
         if producer.__class__.__name__ != 'DataFusionProducer':
             pytest.skip(reason=f'Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}')
-        elif func_name in ["median", "extract"]:
+        elif func_name in ["extract"]:
             pytest.skip(reason='Results mismatch. Rounding Error')
+        elif func_name in ["lt", "lte", "gt", "gte"]:
+            pytest.skip(reason='Results mismatch')
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")

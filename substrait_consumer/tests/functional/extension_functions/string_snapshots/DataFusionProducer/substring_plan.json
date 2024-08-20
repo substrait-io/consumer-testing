@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "name": "substr"
+        "name": "substring"
       }
     }
   ],
@@ -61,16 +61,14 @@
                     {
                       "value": {
                         "literal": {
-                          "i64": "1",
-                          "nullable": true
+                          "i64": "1"
                         }
                       }
                     },
                     {
                       "value": {
                         "literal": {
-                          "i64": "3",
-                          "nullable": true
+                          "i64": "3"
                         }
                       }
                     }
@@ -81,14 +79,14 @@
           }
         },
         "names": [
-          "nation.n_name",
+          "n_name",
           "substr_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

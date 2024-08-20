@@ -49,9 +49,7 @@
                         "value": {
                           "selection": {
                             "directReference": {
-                              "structField": {
-                                "field": 1
-                              }
+                              "structField": {}
                             }
                           }
                         }
@@ -60,7 +58,9 @@
                         "value": {
                           "selection": {
                             "directReference": {
-                              "structField": {}
+                              "structField": {
+                                "field": 1
+                              }
                             }
                           }
                         }
@@ -91,14 +91,14 @@
           }
         },
         "names": [
-          "partsupp.ps_availqty",
-          "partsupp.ps_partkey"
+          "ps_availqty",
+          "ps_partkey"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

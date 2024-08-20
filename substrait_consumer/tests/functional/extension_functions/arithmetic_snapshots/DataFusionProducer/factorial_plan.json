@@ -63,8 +63,7 @@
                           {
                             "value": {
                               "literal": {
-                                "i32": 10,
-                                "nullable": true
+                                "i32": 10
                               }
                             }
                           }
@@ -92,7 +91,7 @@
                         "cast": {
                           "type": {
                             "i64": {
-                              "nullability": "NULLABILITY_REQUIRED"
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           "input": {
@@ -112,14 +111,14 @@
           }
         },
         "names": [
-          "nation.n_nationkey",
+          "n_nationkey",
           "factorial_key"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

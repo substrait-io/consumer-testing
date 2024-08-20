@@ -82,9 +82,7 @@
                             {
                               "value": {
                                 "literal": {
-                                  "i8": 1,
-                                  "nullable": true,
-                                  "typeVariationReference": 1
+                                  "i64": "1"
                                 }
                               }
                             }
@@ -112,8 +110,7 @@
                       {
                         "value": {
                           "literal": {
-                            "i64": "12100",
-                            "nullable": true
+                            "i64": "12100"
                           }
                         }
                       }
@@ -137,14 +134,14 @@
           }
         },
         "names": [
-          "lineitem.l_quantity",
-          "COUNT(*)"
+          "l_quantity",
+          "count(*)"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

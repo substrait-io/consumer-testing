@@ -92,7 +92,7 @@
                         "cast": {
                           "type": {
                             "fp64": {
-                              "nullability": "NULLABILITY_REQUIRED"
+                              "nullability": "NULLABILITY_NULLABLE"
                             }
                           },
                           "input": {
@@ -108,8 +108,7 @@
                     {
                       "value": {
                         "literal": {
-                          "i64": "2",
-                          "nullable": true
+                          "i64": "2"
                         }
                       }
                     }
@@ -126,7 +125,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

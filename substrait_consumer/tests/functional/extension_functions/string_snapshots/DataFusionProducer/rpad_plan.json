@@ -61,16 +61,14 @@
                     {
                       "value": {
                         "literal": {
-                          "i64": "10",
-                          "nullable": true
+                          "i64": "10"
                         }
                       }
                     },
                     {
                       "value": {
                         "literal": {
-                          "string": " ",
-                          "nullable": true
+                          "string": " "
                         }
                       }
                     }
@@ -81,14 +79,14 @@
           }
         },
         "names": [
-          "nation.n_name",
+          "n_name",
           "rpad_n_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

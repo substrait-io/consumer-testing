@@ -92,15 +92,15 @@
           }
         },
         "names": [
-          "partsupp.ps_partkey",
-          "partsupp.ps_suppkey",
+          "ps_partkey",
+          "ps_suppkey",
           "subtract_key"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

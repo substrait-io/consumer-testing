@@ -14,7 +14,7 @@ RUN apt-get update -y \
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 RUN export JAVA_HOME
 RUN apt install -y pip
-RUN pip install --upgrade pip setuptools pytest pytest-snapshot substrait pyarrow protobuf duckdb filelock datafusion==32.0.0 ibis_substrait JPype1
+RUN pip install --upgrade pip setuptools pytest pytest-snapshot substrait pyarrow protobuf duckdb filelock datafusion==40.1.0 ibis_substrait JPype1
 
 WORKDIR /consumer-testing
 COPY . .

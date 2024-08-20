@@ -65,8 +65,7 @@
                     {
                       "value": {
                         "literal": {
-                          "i64": "10",
-                          "nullable": true
+                          "i64": "10"
                         }
                       }
                     }
@@ -77,14 +76,14 @@
           }
         },
         "names": [
-          "partsupp.ps_partkey",
+          "ps_partkey",
           "multiply_key"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

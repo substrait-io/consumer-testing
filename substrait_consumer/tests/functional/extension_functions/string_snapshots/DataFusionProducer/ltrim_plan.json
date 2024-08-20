@@ -61,8 +61,7 @@
                     {
                       "value": {
                         "literal": {
-                          "string": "A",
-                          "nullable": true
+                          "string": "A"
                         }
                       }
                     }
@@ -73,14 +72,14 @@
           }
         },
         "names": [
-          "nation.n_name",
+          "n_name",
           "ltrim_n_name"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

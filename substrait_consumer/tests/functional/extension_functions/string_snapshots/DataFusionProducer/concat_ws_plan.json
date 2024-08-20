@@ -48,8 +48,7 @@
                     {
                       "value": {
                         "literal": {
-                          "string": ".",
-                          "nullable": true
+                          "string": "."
                         }
                       }
                     },
@@ -86,7 +85,7 @@
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }

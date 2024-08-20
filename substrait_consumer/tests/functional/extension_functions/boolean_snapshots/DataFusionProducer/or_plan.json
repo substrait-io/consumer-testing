@@ -63,8 +63,7 @@
                           {
                             "value": {
                               "literal": {
-                                "i64": "5",
-                                "nullable": true
+                                "i64": "5"
                               }
                             }
                           }
@@ -88,8 +87,7 @@
                           {
                             "value": {
                               "literal": {
-                                "i64": "7",
-                                "nullable": true
+                                "i64": "7"
                               }
                             }
                           }
@@ -103,13 +101,13 @@
           }
         },
         "names": [
-          "t.a"
+          "a"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 35,
+    "minorNumber": 51,
     "producer": "datafusion"
   }
 }
