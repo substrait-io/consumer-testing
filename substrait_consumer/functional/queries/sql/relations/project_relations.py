@@ -38,7 +38,6 @@ PROJECT_RELATIONS = {
                WHERE C_CUSTKEY = O_CUSTKEY) 
                  AS total_price
            FROM {}
-           ORDER BY C_CUSTKEY
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
