@@ -27,9 +27,9 @@ PROJECT_RELATION_TESTS = (
         "ibis_expr": None
     },
     {
-        "test_name": "subqeury_in_project",
+        "test_name": "subquery_in_project",
         "file_names": ["orders.parquet", "customer.parquet"],
-        "sql_query": PROJECT_RELATIONS["subqeury_in_project"],
+        "sql_query": PROJECT_RELATIONS["subquery_in_project"],
         "ibis_expr": None
     },
     {

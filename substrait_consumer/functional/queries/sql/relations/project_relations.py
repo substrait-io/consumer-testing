@@ -39,7 +39,7 @@ PROJECT_RELATIONS = {
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
-    "subqeury_in_project": (
+    "subquery_in_project": (
         """
         SELECT C_CUSTKEY,
            (SELECT SUM(O_TOTALPRICE) 
