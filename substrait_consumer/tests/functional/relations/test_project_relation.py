@@ -14,7 +14,7 @@ from substrait_consumer.functional.common import (
 from substrait_consumer.parametrization import custom_parametrization
 
 
-DATA_DIR = Path(__file__).parent.parent.parent.parent / "data" / "tpch_parquet"
+DATA_DIR = Path(__file__).parent.parent.parent.parent / "data"
 
 
 @pytest.fixture
