@@ -1,0 +1,176 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "multiply"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "gt"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "fetch": {
+            "input": {
+              "sort": {
+                "input": {
+                  "project": {
+                    "input": {
+                      "filter": {
+                        "input": {
+                          "read": {
+                            "baseSchema": {
+                              "names": [
+                                "l_orderkey",
+                                "l_partkey",
+                                "l_suppkey",
+                                "l_linenumber",
+                                "l_quantity",
+                                "l_extendedprice",
+                                "l_discount",
+                                "l_tax",
+                                "l_returnflag",
+                                "l_linestatus",
+                                "l_shipdate",
+                                "l_commitdate",
+                                "l_receiptdate",
+                                "l_shipinstruct",
+                                "l_shipmode",
+                                "l_comment"
+                              ]
+                            },
+                            "projection": {
+                              "select": {
+                                "structItems": [
+                                  {
+                                    "field": 4
+                                  },
+                                  {
+                                    "field": 5
+                                  }
+                                ]
+                              }
+                            },
+                            "namedTable": {
+                              "names": [
+                                "lineitem"
+                              ]
+                            }
+                          }
+                        },
+                        "condition": {
+                          "scalarFunction": {
+                            "functionReference": 1,
+                            "arguments": [
+                              {
+                                "value": {
+                                  "selection": {
+                                    "directReference": {
+                                      "structField": {}
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "value": {
+                                  "literal": {
+                                    "decimal": {
+                                      "value": "6AMAAAAAAAAAAAAAAAAAAA==",
+                                      "precision": 15,
+                                      "scale": 2
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "expressions": [
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      },
+                      {
+                        "scalarFunction": {
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {
+                                      "field": 1
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "value": {
+                                "literal": {
+                                  "decimal": {
+                                    "value": "CgAAAAAAAAAAAAAAAAAAAA==",
+                                    "precision": 20
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "sorts": [
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        }
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  },
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 1
+                          }
+                        }
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  }
+                ]
+              }
+            },
+            "count": "10"
+          }
+        },
+        "names": [
+          "l_quantity",
+          "multi_price"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}
