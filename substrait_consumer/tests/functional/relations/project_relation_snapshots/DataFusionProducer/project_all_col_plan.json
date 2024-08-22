@@ -1,0 +1,91 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "fetch": {
+            "input": {
+              "sort": {
+                "input": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "r_regionkey",
+                        "r_name",
+                        "r_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {},
+                          {
+                            "field": 1
+                          },
+                          {
+                            "field": 2
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "region"
+                      ]
+                    }
+                  }
+                },
+                "sorts": [
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        }
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  },
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 1
+                          }
+                        }
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  },
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 2
+                          }
+                        }
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  }
+                ]
+              }
+            },
+            "count": "10"
+          }
+        },
+        "names": [
+          "r_regionkey",
+          "r_name",
+          "r_comment"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

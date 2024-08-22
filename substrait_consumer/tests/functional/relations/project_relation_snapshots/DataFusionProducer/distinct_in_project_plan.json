@@ -1,0 +1,91 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "fetch": {
+            "input": {
+              "sort": {
+                "input": {
+                  "aggregate": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "l_orderkey",
+                            "l_partkey",
+                            "l_suppkey",
+                            "l_linenumber",
+                            "l_quantity",
+                            "l_extendedprice",
+                            "l_discount",
+                            "l_tax",
+                            "l_returnflag",
+                            "l_linestatus",
+                            "l_shipdate",
+                            "l_commitdate",
+                            "l_receiptdate",
+                            "l_shipinstruct",
+                            "l_shipmode",
+                            "l_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {
+                                "field": 7
+                              }
+                            ]
+                          }
+                        },
+                        "namedTable": {
+                          "names": [
+                            "lineitem"
+                          ]
+                        }
+                      }
+                    },
+                    "groupings": [
+                      {
+                        "groupingExpressions": [
+                          {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "sorts": [
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        }
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  }
+                ]
+              }
+            },
+            "count": "10"
+          }
+        },
+        "names": [
+          "l_tax"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

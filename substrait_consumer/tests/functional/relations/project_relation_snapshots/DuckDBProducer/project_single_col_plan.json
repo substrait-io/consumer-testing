@@ -1,0 +1,183 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "fetch": {
+            "input": {
+              "sort": {
+                "input": {
+                  "project": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "l_orderkey",
+                            "l_partkey",
+                            "l_suppkey",
+                            "l_linenumber",
+                            "l_quantity",
+                            "l_extendedprice",
+                            "l_discount",
+                            "l_tax",
+                            "l_returnflag",
+                            "l_linestatus",
+                            "l_shipdate",
+                            "l_commitdate",
+                            "l_receiptdate",
+                            "l_shipinstruct",
+                            "l_shipmode",
+                            "l_comment"
+                          ],
+                          "struct": {
+                            "types": [
+                              {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "date": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "date": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "date": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            ],
+                            "nullability": "NULLABILITY_REQUIRED"
+                          }
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {
+                                "field": 6
+                              }
+                            ]
+                          },
+                          "maintainSingularStruct": true
+                        },
+                        "namedTable": {
+                          "names": [
+                            "lineitem"
+                          ]
+                        }
+                      }
+                    },
+                    "expressions": [
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          },
+                          "rootReference": {}
+                        }
+                      }
+                    ]
+                  }
+                },
+                "sorts": [
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        },
+                        "rootReference": {}
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  }
+                ]
+              }
+            },
+            "count": "20"
+          }
+        },
+        "names": [
+          "l_discount"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 48,
+    "producer": "DuckDB"
+  }
+}

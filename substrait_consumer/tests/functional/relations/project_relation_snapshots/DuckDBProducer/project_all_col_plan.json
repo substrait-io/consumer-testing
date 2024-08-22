@@ -1,0 +1,149 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "fetch": {
+            "input": {
+              "sort": {
+                "input": {
+                  "project": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "r_regionkey",
+                            "r_name",
+                            "r_comment"
+                          ],
+                          "struct": {
+                            "types": [
+                              {
+                                "i32": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            ],
+                            "nullability": "NULLABILITY_REQUIRED"
+                          }
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {},
+                              {
+                                "field": 1
+                              },
+                              {
+                                "field": 2
+                              }
+                            ]
+                          },
+                          "maintainSingularStruct": true
+                        },
+                        "namedTable": {
+                          "names": [
+                            "region"
+                          ]
+                        }
+                      }
+                    },
+                    "expressions": [
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          },
+                          "rootReference": {}
+                        }
+                      },
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 1
+                            }
+                          },
+                          "rootReference": {}
+                        }
+                      },
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 2
+                            }
+                          },
+                          "rootReference": {}
+                        }
+                      }
+                    ]
+                  }
+                },
+                "sorts": [
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {}
+                        },
+                        "rootReference": {}
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  },
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 1
+                          }
+                        },
+                        "rootReference": {}
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  },
+                  {
+                    "expr": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 2
+                          }
+                        },
+                        "rootReference": {}
+                      }
+                    },
+                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                  }
+                ]
+              }
+            },
+            "count": "10"
+          }
+        },
+        "names": [
+          "r_regionkey",
+          "r_name",
+          "r_comment"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 48,
+    "producer": "DuckDB"
+  }
+}
