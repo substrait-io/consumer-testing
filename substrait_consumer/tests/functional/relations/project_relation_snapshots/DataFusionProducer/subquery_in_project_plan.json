@@ -46,7 +46,7 @@
                         },
                         "namedTable": {
                           "names": [
-                            "customer"
+                            "customer_small"
                           ]
                         }
                       }
@@ -84,7 +84,7 @@
                                 },
                                 "namedTable": {
                                   "names": [
-                                    "orders"
+                                    "orders_small"
                                   ]
                                 }
                               }

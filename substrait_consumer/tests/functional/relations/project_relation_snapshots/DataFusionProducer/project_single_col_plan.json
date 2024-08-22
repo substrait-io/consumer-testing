@@ -78,7 +78,7 @@
             },
             "namedTable": {
               "names": [
-                "lineitem"
+                "lineitem_small"
               ]
             }
           }

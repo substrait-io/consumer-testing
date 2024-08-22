@@ -103,7 +103,7 @@
                             },
                             "namedTable": {
                               "names": [
-                                "customer"
+                                "customersmall"
                               ]
                             }
                           }
@@ -194,7 +194,7 @@
                                     },
                                     "namedTable": {
                                       "names": [
-                                        "orders"
+                                        "orderssmall"
                                       ]
                                     }
                                   }
