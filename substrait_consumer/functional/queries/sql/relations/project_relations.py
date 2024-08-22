@@ -4,10 +4,8 @@ from substrait_consumer.producers.datafusion_producer import DataFusionProducer
 PROJECT_RELATIONS = {
     "project_single_col": (
         """
-        SELECT L_DISCOUNT
+        SELECT *
         FROM '{}'
-        ORDER BY L_DISCOUNT
-        LIMIT 20;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -15,8 +13,6 @@ PROJECT_RELATIONS = {
         """
         SELECT L_DISCOUNT, L_TAX
         FROM '{}'
-        ORDER BY L_DISCOUNT, L_TAX
-        LIMIT 20;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -24,8 +20,6 @@ PROJECT_RELATIONS = {
         """
         SELECT *
         FROM '{}'
-        ORDER BY R_REGIONKEY, R_NAME, R_COMMENT
-        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -33,9 +27,6 @@ PROJECT_RELATIONS = {
         """
         SELECT L_QUANTITY, L_EXTENDEDPRICE*10 AS MULTI_PRICE
         FROM '{}'
-        WHERE L_QUANTITY > 10
-        ORDER BY L_QUANTITY, MULTI_PRICE
-        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
@@ -48,16 +39,13 @@ PROJECT_RELATIONS = {
                  AS total_price
            FROM {}
            ORDER BY C_CUSTKEY
-           LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),
     "distinct_in_project": (
         """
-        SELECT DISTINCT L_TAX
+        SELECT DISTINCT L_LINESTATUS
         FROM '{}'
-        ORDER BY L_TAX
-        LIMIT 10;
         """,
         [DuckDBProducer, DataFusionProducer],
     ),

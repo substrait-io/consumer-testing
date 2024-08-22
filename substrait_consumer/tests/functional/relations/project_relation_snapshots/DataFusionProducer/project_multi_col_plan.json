@@ -3,77 +3,44 @@
     {
       "root": {
         "input": {
-          "fetch": {
-            "input": {
-              "sort": {
-                "input": {
-                  "read": {
-                    "baseSchema": {
-                      "names": [
-                        "l_orderkey",
-                        "l_partkey",
-                        "l_suppkey",
-                        "l_linenumber",
-                        "l_quantity",
-                        "l_extendedprice",
-                        "l_discount",
-                        "l_tax",
-                        "l_returnflag",
-                        "l_linestatus",
-                        "l_shipdate",
-                        "l_commitdate",
-                        "l_receiptdate",
-                        "l_shipinstruct",
-                        "l_shipmode",
-                        "l_comment"
-                      ]
-                    },
-                    "projection": {
-                      "select": {
-                        "structItems": [
-                          {
-                            "field": 6
-                          },
-                          {
-                            "field": 7
-                          }
-                        ]
-                      }
-                    },
-                    "namedTable": {
-                      "names": [
-                        "lineitem"
-                      ]
-                    }
-                  }
-                },
-                "sorts": [
+          "read": {
+            "baseSchema": {
+              "names": [
+                "l_orderkey",
+                "l_partkey",
+                "l_suppkey",
+                "l_linenumber",
+                "l_quantity",
+                "l_extendedprice",
+                "l_discount",
+                "l_tax",
+                "l_returnflag",
+                "l_linestatus",
+                "l_shipdate",
+                "l_commitdate",
+                "l_receiptdate",
+                "l_shipinstruct",
+                "l_shipmode",
+                "l_comment"
+              ]
+            },
+            "projection": {
+              "select": {
+                "structItems": [
                   {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {}
-                        }
-                      }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                    "field": 6
                   },
                   {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {
-                            "field": 1
-                          }
-                        }
-                      }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                    "field": 7
                   }
                 ]
               }
             },
-            "count": "20"
+            "namedTable": {
+              "names": [
+                "lineitem"
+              ]
+            }
           }
         },
         "names": [

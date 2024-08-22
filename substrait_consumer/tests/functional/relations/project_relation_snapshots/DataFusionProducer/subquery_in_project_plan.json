@@ -18,199 +18,194 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "sort": {
             "input": {
-              "sort": {
+              "project": {
                 "input": {
-                  "project": {
-                    "input": {
-                      "join": {
-                        "left": {
-                          "read": {
-                            "baseSchema": {
-                              "names": [
-                                "c_custkey",
-                                "c_name",
-                                "c_address",
-                                "c_nationkey",
-                                "c_phone",
-                                "c_acctbal",
-                                "c_mktsegment",
-                                "c_comment"
-                              ]
-                            },
-                            "projection": {
-                              "select": {
-                                "structItems": [
-                                  {}
-                                ]
-                              }
-                            },
-                            "namedTable": {
-                              "names": [
-                                "customer"
-                              ]
-                            }
+                  "join": {
+                    "left": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "c_custkey",
+                            "c_name",
+                            "c_address",
+                            "c_nationkey",
+                            "c_phone",
+                            "c_acctbal",
+                            "c_mktsegment",
+                            "c_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {}
+                            ]
                           }
                         },
-                        "right": {
-                          "project": {
+                        "namedTable": {
+                          "names": [
+                            "customer"
+                          ]
+                        }
+                      }
+                    },
+                    "right": {
+                      "project": {
+                        "input": {
+                          "aggregate": {
                             "input": {
-                              "aggregate": {
-                                "input": {
-                                  "read": {
-                                    "baseSchema": {
-                                      "names": [
-                                        "o_orderkey",
-                                        "o_custkey",
-                                        "o_orderstatus",
-                                        "o_totalprice",
-                                        "o_orderdate",
-                                        "o_orderpriority",
-                                        "o_clerk",
-                                        "o_shippriority",
-                                        "o_comment"
-                                      ]
-                                    },
-                                    "projection": {
-                                      "select": {
-                                        "structItems": [
-                                          {
-                                            "field": 1
-                                          },
-                                          {
-                                            "field": 3
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    "namedTable": {
-                                      "names": [
-                                        "orders"
-                                      ]
-                                    }
-                                  }
+                              "read": {
+                                "baseSchema": {
+                                  "names": [
+                                    "o_orderkey",
+                                    "o_custkey",
+                                    "o_orderstatus",
+                                    "o_totalprice",
+                                    "o_orderdate",
+                                    "o_orderpriority",
+                                    "o_clerk",
+                                    "o_shippriority",
+                                    "o_comment"
+                                  ]
                                 },
-                                "groupings": [
-                                  {
-                                    "groupingExpressions": [
+                                "projection": {
+                                  "select": {
+                                    "structItems": [
                                       {
-                                        "selection": {
-                                          "directReference": {
-                                            "structField": {}
-                                          }
-                                        }
+                                        "field": 1
+                                      },
+                                      {
+                                        "field": 3
                                       }
                                     ]
                                   }
-                                ],
-                                "measures": [
+                                },
+                                "namedTable": {
+                                  "names": [
+                                    "orders"
+                                  ]
+                                }
+                              }
+                            },
+                            "groupings": [
+                              {
+                                "groupingExpressions": [
                                   {
-                                    "measure": {
-                                      "invocation": "AGGREGATION_INVOCATION_ALL",
-                                      "arguments": [
-                                        {
-                                          "value": {
-                                            "selection": {
-                                              "directReference": {
-                                                "structField": {
-                                                  "field": 1
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
+                                    "selection": {
+                                      "directReference": {
+                                        "structField": {}
+                                      }
                                     }
                                   }
                                 ]
                               }
-                            },
-                            "expressions": [
+                            ],
+                            "measures": [
                               {
-                                "selection": {
-                                  "directReference": {
-                                    "structField": {
-                                      "field": 1
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "selection": {
-                                  "directReference": {
-                                    "structField": {}
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        "expression": {
-                          "scalarFunction": {
-                            "functionReference": 1,
-                            "arguments": [
-                              {
-                                "value": {
-                                  "selection": {
-                                    "directReference": {
-                                      "structField": {}
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "value": {
-                                  "selection": {
-                                    "directReference": {
-                                      "structField": {
-                                        "field": 2
+                                "measure": {
+                                  "invocation": "AGGREGATION_INVOCATION_ALL",
+                                  "arguments": [
+                                    {
+                                      "value": {
+                                        "selection": {
+                                          "directReference": {
+                                            "structField": {
+                                              "field": 1
+                                            }
+                                          }
+                                        }
                                       }
                                     }
-                                  }
+                                  ]
                                 }
                               }
                             ]
                           }
                         },
-                        "type": "JOIN_TYPE_LEFT"
-                      }
-                    },
-                    "expressions": [
-                      {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          }
-                        }
-                      },
-                      {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 1
+                        "expressions": [
+                          {
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                  "field": 1
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
                             }
                           }
-                        }
-                      }
-                    ]
-                  }
-                },
-                "sorts": [
-                  {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {}
-                        }
+                        ]
                       }
                     },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                    "expression": {
+                      "scalarFunction": {
+                        "functionReference": 1,
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {
+                                    "field": 2
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "type": "JOIN_TYPE_LEFT"
+                  }
+                },
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
+                      }
+                    }
+                  },
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 1
+                        }
+                      }
+                    }
                   }
                 ]
               }
             },
-            "count": "10"
+            "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    }
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              }
+            ]
           }
         },
         "names": [

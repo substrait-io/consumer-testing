@@ -3,197 +3,162 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "sort": {
-                "input": {
-                  "project": {
-                    "input": {
-                      "read": {
-                        "baseSchema": {
-                          "names": [
-                            "l_orderkey",
-                            "l_partkey",
-                            "l_suppkey",
-                            "l_linenumber",
-                            "l_quantity",
-                            "l_extendedprice",
-                            "l_discount",
-                            "l_tax",
-                            "l_returnflag",
-                            "l_linestatus",
-                            "l_shipdate",
-                            "l_commitdate",
-                            "l_receiptdate",
-                            "l_shipinstruct",
-                            "l_shipmode",
-                            "l_comment"
-                          ],
-                          "struct": {
-                            "types": [
-                              {
-                                "i64": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "i64": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "i64": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "i64": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "decimal": {
-                                  "scale": 2,
-                                  "precision": 15,
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "decimal": {
-                                  "scale": 2,
-                                  "precision": 15,
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "decimal": {
-                                  "scale": 2,
-                                  "precision": 15,
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "decimal": {
-                                  "scale": 2,
-                                  "precision": 15,
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "date": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "date": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "date": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              }
-                            ],
-                            "nullability": "NULLABILITY_REQUIRED"
-                          }
-                        },
-                        "projection": {
-                          "select": {
-                            "structItems": [
-                              {
-                                "field": 6
-                              },
-                              {
-                                "field": 7
-                              }
-                            ]
-                          },
-                          "maintainSingularStruct": true
-                        },
-                        "namedTable": {
-                          "names": [
-                            "lineitem"
-                          ]
-                        }
-                      }
-                    },
-                    "expressions": [
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "l_orderkey",
+                    "l_partkey",
+                    "l_suppkey",
+                    "l_linenumber",
+                    "l_quantity",
+                    "l_extendedprice",
+                    "l_discount",
+                    "l_tax",
+                    "l_returnflag",
+                    "l_linestatus",
+                    "l_shipdate",
+                    "l_commitdate",
+                    "l_receiptdate",
+                    "l_shipinstruct",
+                    "l_shipmode",
+                    "l_comment"
+                  ],
+                  "struct": {
+                    "types": [
                       {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          },
-                          "rootReference": {}
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
                       {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 1
-                            }
-                          },
-                          "rootReference": {}
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "date": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "date": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "date": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
                         }
                       }
-                    ]
+                    ],
+                    "nullability": "NULLABILITY_REQUIRED"
                   }
                 },
-                "sorts": [
-                  {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {}
-                        },
-                        "rootReference": {}
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {
+                        "field": 6
+                      },
+                      {
+                        "field": 7
                       }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                    ]
                   },
-                  {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {
-                            "field": 1
-                          }
-                        },
-                        "rootReference": {}
-                      }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
-                  }
-                ]
+                  "maintainSingularStruct": true
+                },
+                "namedTable": {
+                  "names": [
+                    "lineitem"
+                  ]
+                }
               }
             },
-            "count": "20"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  },
+                  "rootReference": {}
+                }
+              }
+            ]
           }
         },
         "names": [

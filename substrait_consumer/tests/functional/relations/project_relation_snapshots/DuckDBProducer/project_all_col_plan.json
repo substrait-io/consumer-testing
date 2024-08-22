@@ -3,135 +3,87 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "sort": {
-                "input": {
-                  "project": {
-                    "input": {
-                      "read": {
-                        "baseSchema": {
-                          "names": [
-                            "r_regionkey",
-                            "r_name",
-                            "r_comment"
-                          ],
-                          "struct": {
-                            "types": [
-                              {
-                                "i32": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              {
-                                "string": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              }
-                            ],
-                            "nullability": "NULLABILITY_REQUIRED"
-                          }
-                        },
-                        "projection": {
-                          "select": {
-                            "structItems": [
-                              {},
-                              {
-                                "field": 1
-                              },
-                              {
-                                "field": 2
-                              }
-                            ]
-                          },
-                          "maintainSingularStruct": true
-                        },
-                        "namedTable": {
-                          "names": [
-                            "region"
-                          ]
-                        }
-                      }
-                    },
-                    "expressions": [
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "r_regionkey",
+                    "r_name",
+                    "r_comment"
+                  ],
+                  "struct": {
+                    "types": [
                       {
-                        "selection": {
-                          "directReference": {
-                            "structField": {}
-                          },
-                          "rootReference": {}
+                        "i32": {
+                          "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
                       {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 1
-                            }
-                          },
-                          "rootReference": {}
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
                       {
-                        "selection": {
-                          "directReference": {
-                            "structField": {
-                              "field": 2
-                            }
-                          },
-                          "rootReference": {}
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
                         }
                       }
-                    ]
+                    ],
+                    "nullability": "NULLABILITY_REQUIRED"
                   }
                 },
-                "sorts": [
-                  {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {}
-                        },
-                        "rootReference": {}
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {},
+                      {
+                        "field": 1
+                      },
+                      {
+                        "field": 2
                       }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+                    ]
                   },
-                  {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {
-                            "field": 1
-                          }
-                        },
-                        "rootReference": {}
-                      }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
-                  },
-                  {
-                    "expr": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {
-                            "field": 2
-                          }
-                        },
-                        "rootReference": {}
-                      }
-                    },
-                    "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
-                  }
-                ]
+                  "maintainSingularStruct": true
+                },
+                "namedTable": {
+                  "names": [
+                    "region"
+                  ]
+                }
               }
             },
-            "count": "10"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 2
+                    }
+                  },
+                  "rootReference": {}
+                }
+              }
+            ]
           }
         },
         "names": [

@@ -31,8 +31,6 @@ def mark_consumer_tests_as_xfail(request):
     if consumer.__class__.__name__ == 'DuckDBConsumer':
         if producer.__class__.__name__ != 'DuckDBProducer':
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
-        elif test_name == "count_distinct_in_project":
-            pytest.skip(reason='Results Mismatch')
     elif consumer.__class__.__name__ == 'DataFusionConsumer':
         if producer.__class__.__name__ != 'DataFusionProducer':
             pytest.skip(reason=f'Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}')
@@ -40,7 +38,7 @@ def mark_consumer_tests_as_xfail(request):
             pytest.skip(reason='pyarrow.lib.ArrowInvalid: Schema at index 0 was different')
 
 
-@pytest.mark.usefixtures("prepare_tpch_parquet_data")
+@pytest.mark.usefixtures("prepare_small_tpch_parquet_data")
 class TestProjectRelation:
     """
     Test Class verifying different consumers are able to run substrait plans
