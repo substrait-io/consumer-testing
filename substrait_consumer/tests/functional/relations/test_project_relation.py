@@ -1,6 +1,8 @@
+from pathlib import Path
 from typing import Callable, Iterable
 
 import duckdb
+import shutil
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
@@ -10,6 +12,9 @@ from substrait_consumer.functional.common import (
     generate_snapshot_results,
     substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
+
+
+DATA_DIR = Path(__file__).parent.parent.parent.parent / "data" / "tpch_parquet"
 
 
 @pytest.fixture
@@ -57,6 +62,7 @@ class TestProjectRelation:
 
         yield
 
+        shutil.rmtree(DATA_DIR)
         cls.db_connection.close()
 
     @custom_parametrization(PROJECT_RELATION_TESTS)
