@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import Callable, Iterable
 
 import duckdb
-import shutil
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
@@ -62,7 +61,6 @@ class TestProjectRelation:
 
         yield
 
-        shutil.rmtree(DATA_DIR)
         cls.db_connection.close()
 
     @custom_parametrization(PROJECT_RELATION_TESTS)

@@ -45,7 +45,7 @@ def prepare_small_tpch_parquet_data(scale_factor=0.0001):
     lock_file = data_path / "data.json"
     with FileLock(str(lock_file) + ".lock"):
         con = duckdb.connect()
-        con.execute(f"CALL dbgen(sf={scale_factor})")
+        con.execute(f"CALL dbgen(sf={scale_factor}, suffix=_small)")
         con.execute(f"EXPORT DATABASE '{data_path}' (FORMAT PARQUET);")
 
 
