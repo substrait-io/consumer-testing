@@ -1,0 +1,46 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "read": {
+            "baseSchema": {
+              "names": [
+                "r_regionkey",
+                "r_name",
+                "r_comment"
+              ]
+            },
+            "projection": {
+              "select": {
+                "structItems": [
+                  {},
+                  {
+                    "field": 1
+                  },
+                  {
+                    "field": 2
+                  }
+                ]
+              }
+            },
+            "namedTable": {
+              "names": [
+                "region_small"
+              ]
+            }
+          }
+        },
+        "names": [
+          "r_regionkey",
+          "r_name",
+          "r_comment"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

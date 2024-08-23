@@ -14,20 +14,43 @@ from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 
 
 @pytest.fixture(scope="session")
-def prepare_tpch_parquet_data(scale_factor=0.1):
+def prepare_tpch_parquet_data():
     """
-    Generate TPCH data to be used for testing. Data is generated in tests/data/tpch_parquet
+    Generate TPCH data to be used for testing.
 
     Parameters:
         scale_factor:
             Scale factor for TPCH data generation.
+    """
+    prepare_tpch(scale_factor=0.1)
+
+
+@pytest.fixture(scope="session")
+def prepare_small_tpch_parquet_data():
+    """
+    Generate a small set of TPCH data with to be used for testing.
+    """
+    prepare_tpch(scale_factor=0.0001, suffix="_small")
+
+
+def prepare_tpch(scale_factor, suffix=None):
+    """
+    Common function to generate TPCH data to be used for testing. Data is generated in
+    tests/data/tpch_parquet.
+
+    Parameters:
+        scale_factor: Scale factor of the TPCH data to be generated.
+        suffix: suffix to be added to the parquet file names.
     """
     data_path = Path(__file__).parent / "data" / "tpch_parquet"
     data_path.mkdir(parents=True, exist_ok=True)
     lock_file = data_path / "data.json"
     with FileLock(str(lock_file) + ".lock"):
         con = duckdb.connect()
-        con.execute(f"CALL dbgen(sf={scale_factor})")
+        if suffix:
+            con.execute(f"CALL dbgen(sf={scale_factor}, suffix={suffix})")
+        else:
+            con.execute(f"CALL dbgen(sf={scale_factor})")
         con.execute(f"EXPORT DATABASE '{data_path}' (FORMAT PARQUET);")
 
 

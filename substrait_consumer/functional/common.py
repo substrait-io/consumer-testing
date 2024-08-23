@@ -105,6 +105,7 @@ def substrait_producer_sql_test(
     ibis_expr: Callable[[Table], Table],
     producer,
     *args,
+    validate=False,
 ):
     """
     Verify the substrait plan produced for the specified function matches up with the
@@ -145,7 +146,7 @@ def substrait_producer_sql_test(
             pytest.xfail("ibis expression currently undefined")
     else:
         if type(producer) in supported_producers:
-            substrait_plan = producer.produce_substrait(sql_query)
+            substrait_plan = producer.produce_substrait(sql_query, validate)
         else:
             pytest.xfail(
                 f"{type(producer).__name__} does not support the following SQL: "
