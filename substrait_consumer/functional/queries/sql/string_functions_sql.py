@@ -68,7 +68,7 @@ SQL_SCALAR = {
         FROM '{}'
         WHERE contains(N_NAME, 'IA');
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "strpos": (
         """
