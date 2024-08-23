@@ -1,4 +1,5 @@
 import json
+import substrait_validator as sv
 from .producer import Producer, load_tables_from_parquet
 
 import duckdb
@@ -20,7 +21,7 @@ class DuckDBProducer(Producer):
     def set_db_connection(self, db_connection):
         self._db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
+    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 
@@ -30,6 +31,9 @@ class DuckDBProducer(Producer):
         Returns:
             Substrait query plan in json format.
         """
+        if validate:
+            proto_bytes = self._db_connection.get_substrait(sql_query).fetchone()[0]
+            sv.check_plan_valid(proto_bytes)
         duckdb_substrait_plan = self._db_connection.get_substrait_json(sql_query)
         proto_bytes = duckdb_substrait_plan.fetchone()[0]
         python_json = json.loads(proto_bytes)
