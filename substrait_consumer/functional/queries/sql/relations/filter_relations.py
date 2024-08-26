@@ -1,5 +1,6 @@
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.datafusion_producer import DataFusionProducer
+from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 
 FILTER_RELATIONS = {
     "where_equal_multi_col": (
@@ -10,7 +11,7 @@ FILTER_RELATIONS = {
         ORDER BY L_DISCOUNT
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_not_equal_multi_col": (
         """
@@ -20,7 +21,7 @@ FILTER_RELATIONS = {
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_gt_multi_col": (
         """
@@ -30,7 +31,7 @@ FILTER_RELATIONS = {
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_gte_multi_col": (
         """
@@ -40,7 +41,7 @@ FILTER_RELATIONS = {
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_lt_multi_col": (
         """
@@ -50,7 +51,7 @@ FILTER_RELATIONS = {
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_lte_multi_col": (
         """
@@ -60,7 +61,7 @@ FILTER_RELATIONS = {
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_like": (
         """
@@ -70,7 +71,7 @@ FILTER_RELATIONS = {
         ORDER BY L_ORDERKEY
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_between": (
         """
@@ -79,7 +80,7 @@ FILTER_RELATIONS = {
         WHERE L_ORDERKEY BETWEEN 20 AND 50
         LIMIT 20;
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_in": (
         """
@@ -87,7 +88,7 @@ FILTER_RELATIONS = {
         FROM '{}'
         WHERE L_ORDERKEY IN (1, 2, 3)
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_or": (
         """
@@ -95,7 +96,7 @@ FILTER_RELATIONS = {
         FROM '{}'
         WHERE L_ORDERKEY = 2 OR L_ORDERKEY = 3
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "where_and": (
         """
@@ -103,7 +104,7 @@ FILTER_RELATIONS = {
         FROM '{}'
         WHERE L_ORDERKEY = 2 AND L_SHIPINSTRUCT = 'TAKE BACK RETURN'
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "having": (
         """
@@ -113,6 +114,6 @@ FILTER_RELATIONS = {
         HAVING COUNT(*) > 12100
         ORDER BY L_QUANTITY
         """,
-        [DuckDBProducer, DataFusionProducer],
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
 }

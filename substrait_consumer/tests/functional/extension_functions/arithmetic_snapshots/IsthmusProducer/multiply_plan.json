@@ -6,7 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
-      "name": "multiply:i32_i32"
+      "name": "multiply:i64_i64"
     }
   }],
   "relations": [{
@@ -18,96 +18,98 @@
             }
           },
           "input": {
-            "sort": {
+            "project": {
               "common": {
-                "direct": {
+                "emit": {
+                  "outputMapping": [5, 6]
                 }
               },
               "input": {
-                "project": {
+                "read": {
                   "common": {
-                    "emit": {
-                      "outputMapping": [5, 6]
+                    "direct": {
                     }
                   },
-                  "input": {
-                    "read": {
-                      "common": {
-                        "direct": {
-                        }
-                      },
-                      "baseSchema": {
-                        "names": ["PS_PARTKEY", "PS_SUPPKEY", "PS_AVAILQTY", "PS_SUPPLYCOST", "PS_COMMENT"],
-                        "struct": {
-                          "types": [{
-                            "i32": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "i32": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "i32": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "string": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }],
+                  "baseSchema": {
+                    "names": ["PS_PARTKEY", "PS_SUPPKEY", "PS_AVAILQTY", "PS_SUPPLYCOST", "PS_COMMENT"],
+                    "struct": {
+                      "types": [{
+                        "i64": {
                           "nullability": "NULLABILITY_REQUIRED"
                         }
-                      },
-                      "namedTable": {
-                        "names": ["PARTSUPP"]
-                      }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
-                  "expressions": [{
-                    "selection": {
-                      "directReference": {
-                        "structField": {
+                  "namedTable": {
+                    "names": ["PARTSUPP"]
+                  }
+                }
+              },
+              "expressions": [{
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "scalarFunction": {
+                  "outputType": {
+                    "i64": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                          }
+                        },
+                        "rootReference": {
                         }
-                      },
-                      "rootReference": {
                       }
                     }
                   }, {
-                    "scalarFunction": {
-                      "outputType": {
-                        "i32": {
-                          "nullability": "NULLABILITY_REQUIRED"
-                        }
-                      },
-                      "arguments": [{
-                        "value": {
-                          "selection": {
-                            "directReference": {
-                              "structField": {
-                              }
-                            },
-                            "rootReference": {
-                            }
+                    "value": {
+                      "cast": {
+                        "type": {
+                          "i64": {
+                            "nullability": "NULLABILITY_REQUIRED"
                           }
-                        }
-                      }, {
-                        "value": {
+                        },
+                        "input": {
                           "literal": {
                             "i32": 10
                           }
-                        }
-                      }]
+                        },
+                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                      }
                     }
                   }]
                 }
-              }
+              }]
             }
           },
           "count": "10"

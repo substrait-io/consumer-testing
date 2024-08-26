@@ -68,7 +68,8 @@ class TestSortRelation:
             sql_query,
             ibis_expr,
             producer,
-            partsupp
+            partsupp,
+            validate=True
         )
 
     @custom_parametrization(SORT_RELATION_TESTS)

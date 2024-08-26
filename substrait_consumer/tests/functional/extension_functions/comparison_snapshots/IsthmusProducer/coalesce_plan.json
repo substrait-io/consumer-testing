@@ -46,7 +46,8 @@
                 "literal": {
                   "fixedChar": "test_string"
                 }
-              }
+              },
+              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
             }
           }]
         }

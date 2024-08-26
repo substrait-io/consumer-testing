@@ -1,4 +1,5 @@
 from pathlib import Path
+import substrait_validator as sv
 
 import jpype.imports
 
@@ -8,7 +9,7 @@ REPO_DIR = Path(__file__).parent.parent
 schema_file = Path.joinpath(REPO_DIR, "substrait_consumer/data/tpch_parquet/schema.sql")
 
 
-def produce_isthmus_substrait(sql_string, schema_list):
+def produce_isthmus_substrait(sql_string, schema_list, validate=False):
     """
     Produce the substrait plan using Isthmus.
 
@@ -17,6 +18,8 @@ def produce_isthmus_substrait(sql_string, schema_list):
             SQL query.
         schema_list:
             List of schemas.
+        validate:
+            Validate the Substrait plan.
 
     Returns:
         Substrait plan in json format.
@@ -29,6 +32,10 @@ def produce_isthmus_substrait(sql_string, schema_list):
     java_sql_string = jpype.java.lang.String(sql_string)
     plan = sql_to_substrait.execute(java_sql_string, schema_list)
     json_plan = json_formatter.printer().print_(plan)
+    if validate:
+        config = sv.Config()
+        config.override_diagnostic_level(1002, "warning", "info")
+        sv.check_plan_valid(json_plan, config)
     return json_plan
 
 

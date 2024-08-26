@@ -101,7 +101,8 @@
                               "literal": {
                                 "i32": 9990
                               }
-                            }
+                            },
+                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                           }
                         }
                       }]

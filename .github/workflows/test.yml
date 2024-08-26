@@ -105,8 +105,8 @@ jobs:
 
       - name: Build & run
         run: docker run --rm $(docker build -q --file ./ci/docker/ibis_producer.Dockerfile .)
-  isthmus_producer:
-    name: Run Isthmus producer tests
+  isthmus_producer_functions:
+    name: Run Isthmus producer function tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -115,4 +115,15 @@ jobs:
           submodules: recursive
 
       - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/isthmus_producer.Dockerfile .)
+        run: docker run --rm $(docker build -q --file ./ci/docker/isthmus_producer_functions.Dockerfile .)
+  isthmus_producer_relations:
+    name: Run Isthmus producer function tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build & run
+        run: docker run --rm $(docker build -q --file ./ci/docker/isthmus_producer_relations.Dockerfile .)

@@ -42,7 +42,6 @@ def load_tables_from_parquet(
     table_names = []
     for file_name, file_path in zip(file_names, parquet_file_paths):
         table_name = Path(file_name).stem
-        table_name = table_name.translate(str.maketrans("", "", string.punctuation))
         if table_name not in created_tables:
             create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
             db_connection.execute(create_table_sql)

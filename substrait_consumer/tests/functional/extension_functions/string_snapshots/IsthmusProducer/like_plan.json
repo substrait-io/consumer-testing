@@ -89,7 +89,8 @@
                           "literal": {
                             "fixedChar": "ALGERIA"
                           }
-                        }
+                        },
+                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                       }
                     }
                   }]
