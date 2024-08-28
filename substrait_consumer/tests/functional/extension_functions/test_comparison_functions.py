@@ -22,6 +22,10 @@ def mark_producer_tests_as_xfail(request):
     elif producer.__class__.__name__ == 'DataFusionProducer':
         if func_name == "coalesce":
             pytest.skip(reason='NotImplemented("Unsupported operator: EmptyRelation"')
+    elif producer.__class__.__name__ == 'IsthmusProducer':
+        if func_name == "is_not_distinct_from":
+            pytest.skip(reason='java.lang.java.lang.IllegalArgumentException: java.lang.IllegalArgumentException: '
+                               'Unable to convert call IS TRUE(boolean?)')
 
 
 @pytest.fixture

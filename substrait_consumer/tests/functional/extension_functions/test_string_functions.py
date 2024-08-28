@@ -20,6 +20,9 @@ def mark_producer_tests_as_xfail(request):
     if producer.__class__.__name__ == 'DataFusionProducer':
         if func_name == "trim":
             pytest.skip(reason='DataFusion error: SQL(ParserError("Expected ), found: ,")')
+    elif producer.__class__.__name__ == 'IsthmusProducer':
+        if func_name == "concat":
+            pytest.skip(reason='No match found for function signature CONCAT(<CHARACTER>, <CHARACTER>)')
 
 
 @pytest.fixture

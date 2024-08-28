@@ -23,18 +23,20 @@ class IsthmusProducer(Producer):
     def set_db_connection(self, db_connection):
         self._db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
+    def produce_substrait(self, sql_query: str, validate=False, ibis_expr: str=None) -> str:
         """
         Produce the Isthmus substrait plan using the given SQL query.
 
         Parameters:
             sql_query:
                 SQL query.
+            validate:
+                Validate the Substrait plan.
         Returns:
             Substrait query plan in json format.
         """
         schema_list = get_schema(self.file_names)
-        substrait_plan_str = produce_isthmus_substrait(sql_query, schema_list)
+        substrait_plan_str = produce_isthmus_substrait(sql_query, schema_list, validate)
 
         return substrait_plan_str
 

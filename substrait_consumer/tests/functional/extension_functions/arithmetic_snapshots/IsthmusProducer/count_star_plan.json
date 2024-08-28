@@ -27,15 +27,15 @@
                 "names": ["PS_PARTKEY", "PS_SUPPKEY", "PS_AVAILQTY", "PS_SUPPLYCOST", "PS_COMMENT"],
                 "struct": {
                   "types": [{
-                    "i32": {
+                    "i64": {
                       "nullability": "NULLABILITY_REQUIRED"
                     }
                   }, {
-                    "i32": {
+                    "i64": {
                       "nullability": "NULLABILITY_REQUIRED"
                     }
                   }, {
-                    "i32": {
+                    "i64": {
                       "nullability": "NULLABILITY_REQUIRED"
                     }
                   }, {

@@ -71,7 +71,8 @@ class TestfilterRelation:
             sql_query,
             ibis_expr,
             producer,
-            partsupp
+            partsupp,
+            validate=True
         )
 
     @custom_parametrization(FILTER_RELATION_TESTS)

@@ -1,0 +1,97 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "fetch": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "sort": {
+              "common": {
+                "direct": {
+                }
+              },
+              "input": {
+                "project": {
+                  "common": {
+                    "emit": {
+                      "outputMapping": [5]
+                    }
+                  },
+                  "input": {
+                    "read": {
+                      "common": {
+                        "direct": {
+                        }
+                      },
+                      "baseSchema": {
+                        "names": ["PS_PARTKEY", "PS_SUPPKEY", "PS_AVAILQTY", "PS_SUPPLYCOST", "PS_COMMENT"],
+                        "struct": {
+                          "types": [{
+                            "i64": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "i64": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "i64": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }],
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      },
+                      "namedTable": {
+                        "names": ["PARTSUPP"]
+                      }
+                    }
+                  },
+                  "expressions": [{
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 3
+                        }
+                      },
+                      "rootReference": {
+                      }
+                    }
+                  }]
+                }
+              },
+              "sorts": [{
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              }]
+            }
+          },
+          "count": "10"
+        }
+      },
+      "names": ["PS_SUPPLYCOST"]
+    }
+  }]
+}
