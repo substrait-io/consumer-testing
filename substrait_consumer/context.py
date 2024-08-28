@@ -35,6 +35,7 @@ def produce_isthmus_substrait(sql_string, schema_list, validate=False):
     if validate:
         config = sv.Config()
         config.override_diagnostic_level(1002, "warning", "info")
+        config.override_diagnostic_level(2001, "warning", "info")
         sv.check_plan_valid(json_plan, config)
     return json_plan
 
