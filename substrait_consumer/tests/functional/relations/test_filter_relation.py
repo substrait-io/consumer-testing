@@ -72,7 +72,7 @@ class TestfilterRelation:
             ibis_expr,
             producer,
             partsupp,
-            validate=False
+            validate=True
         )
 
     @custom_parametrization(FILTER_RELATION_TESTS)

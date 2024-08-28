@@ -57,6 +57,8 @@ def get_schema(file_names):
         text_schema_file = open(schema_file)
         schema_string = text_schema_file.read().replace("\n", " ").split(";")[:-1]
         for create_table in schema_string:
+            if "small" not in file_names[0]:
+                create_table = create_table.replace("_small", "")
             java_obj = jpype.JObject @ jpype.JString(create_table)
             arr.add(java_obj)
     java_obj = jpype.JObject @ jpype.JString(
