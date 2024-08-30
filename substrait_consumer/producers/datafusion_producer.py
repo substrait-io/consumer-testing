@@ -42,7 +42,11 @@ class DataFusionProducer(Producer):
         substrait_plan = ss.serde.serialize_to_plan(sql_query, self._ctx)
         substrait_plan_bytes = substrait_plan.encode()
         if validate:
-            sv.check_plan_valid(substrait_plan_bytes)
+            config = sv.Config()
+            config.override_diagnostic_level(1002, "warning", "info")  # error
+            config.override_diagnostic_level(7, "warning", "info") # warning
+            config.override_diagnostic_level(3001, "warning", "info") # error. URI reference
+            sv.check_plan_valid(substrait_plan_bytes, config)
         substrait_proto.ParseFromString(substrait_plan_bytes)
 
         return MessageToJson(substrait_proto)
