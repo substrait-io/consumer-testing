@@ -64,7 +64,6 @@ class DuckDBConsumer(Consumer):
         table_names = []
         for file_name, file_path in zip(file_names, parquet_file_paths):
             table_name = Path(file_name).stem
-            table_name = table_name.translate(str.maketrans("", "", string.punctuation))
             if f"{self.__class__.__name__}{table_name}" not in created_tables:
                 create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
                 self.db_connection.execute(create_table_sql)
