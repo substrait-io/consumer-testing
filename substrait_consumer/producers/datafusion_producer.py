@@ -43,9 +43,13 @@ class DataFusionProducer(Producer):
         substrait_plan_bytes = substrait_plan.encode()
         if validate:
             config = sv.Config()
-            config.override_diagnostic_level(1002, "warning", "info")  # error
+            # Error: missing required protobuf field: struct
+            config.override_diagnostic_level(1002, "error", "info")
+            # Warning: cannot automatically determine whether plan version
+            # is compatible with the Substrait version
             config.override_diagnostic_level(7, "warning", "info") # warning
-            config.override_diagnostic_level(3001, "warning", "info") # error. URI reference
+            # Error: URI reference
+            config.override_diagnostic_level(3001, "error", "info")
             sv.check_plan_valid(substrait_plan_bytes, config)
         substrait_proto.ParseFromString(substrait_plan_bytes)
 
