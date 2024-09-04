@@ -1,0 +1,122 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "sort": {
+            "input": {
+              "aggregate": {
+                "input": {
+                  "set": {
+                    "inputs": [
+                      {
+                        "read": {
+                          "baseSchema": {
+                            "names": [
+                              "c_custkey",
+                              "c_name",
+                              "c_address",
+                              "c_nationkey",
+                              "c_phone",
+                              "c_acctbal",
+                              "c_mktsegment",
+                              "c_comment"
+                            ]
+                          },
+                          "projection": {
+                            "select": {
+                              "structItems": [
+                                {
+                                  "field": 3
+                                }
+                              ]
+                            }
+                          },
+                          "namedTable": {
+                            "names": [
+                              "customer_small"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "project": {
+                          "input": {
+                            "read": {
+                              "baseSchema": {
+                                "names": [
+                                  "n_nationkey",
+                                  "n_name",
+                                  "n_regionkey",
+                                  "n_comment"
+                                ]
+                              },
+                              "projection": {
+                                "select": {
+                                  "structItems": [
+                                    {}
+                                  ]
+                                }
+                              },
+                              "namedTable": {
+                                "names": [
+                                  "nation_small"
+                                ]
+                              }
+                            }
+                          },
+                          "expressions": [
+                            {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "op": "SET_OP_UNION_ALL"
+                  }
+                },
+                "groupings": [
+                  {
+                    "groupingExpressions": [
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    }
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              }
+            ]
+          }
+        },
+        "names": [
+          "c_nationkey"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

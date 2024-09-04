@@ -33,7 +33,14 @@ class DuckDBProducer(Producer):
         """
         if validate:
             proto_bytes = self._db_connection.get_substrait(sql_query).fetchone()[0]
-            sv.check_plan_valid(proto_bytes)
+            config = sv.Config()
+            # Warning: cannot automatically determine whether plan version
+            # is compatible with the Substrait version
+            config.override_diagnostic_level(7, "warning", "info")  # warning
+            # Warning: did not attempt to resolve YAML: configured recursion
+            # limit for URI resolution has been reached
+            config.override_diagnostic_level(2001, "warning", "info")
+            sv.check_plan_valid(proto_bytes, config)
         duckdb_substrait_plan = self._db_connection.get_substrait_json(sql_query)
         proto_bytes = duckdb_substrait_plan.fetchone()[0]
         python_json = json.loads(proto_bytes)
