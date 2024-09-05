@@ -1,6 +1,7 @@
 import json
 import substrait_validator as sv
 from .producer import Producer, load_tables_from_parquet
+from substrait_consumer.common import SubstraitUtils
 
 import duckdb
 
@@ -48,10 +49,14 @@ class DuckDBProducer(Producer):
 
     def format_sql(self, created_tables, sql_query, file_names):
         if len(file_names) > 0:
-            table_names = load_tables_from_parquet(
-                self._db_connection, created_tables, file_names
-            )
-            sql_query = sql_query.format(*table_names)
+            if "read_parquet" in sql_query:
+                parquet_file_path = SubstraitUtils.get_full_path(file_names)
+                sql_query = sql_query.format(parquet_file_path[0])
+            else:
+                table_names = load_tables_from_parquet(
+                    self._db_connection, created_tables, file_names
+                )
+                sql_query = sql_query.format(*table_names)
         return sql_query
 
     def name(self):
