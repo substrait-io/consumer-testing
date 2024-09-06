@@ -53,6 +53,7 @@ AGGREGATE_RELATIONS = {
         SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER
         FROM '{}'
         GROUP BY L_LINENUMBER
+        ORDER BY L_LINENUMBER
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),

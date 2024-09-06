@@ -12,197 +12,219 @@
   "relations": [{
     "root": {
       "input": {
-        "project": {
+        "sort": {
           "common": {
-            "emit": {
-              "outputMapping": [2, 3]
+            "direct": {
             }
           },
           "input": {
-            "aggregate": {
+            "project": {
               "common": {
-                "direct": {
+                "emit": {
+                  "outputMapping": [2, 3]
                 }
               },
               "input": {
-                "project": {
+                "aggregate": {
                   "common": {
-                    "emit": {
-                      "outputMapping": [16, 17]
+                    "direct": {
                     }
                   },
                   "input": {
-                    "read": {
+                    "project": {
                       "common": {
-                        "direct": {
+                        "emit": {
+                          "outputMapping": [16, 17]
                         }
                       },
-                      "baseSchema": {
-                        "names": ["L_ORDERKEY", "L_PARTKEY", "L_SUPPKEY", "L_LINENUMBER", "L_QUANTITY", "L_EXTENDEDPRICE", "L_DISCOUNT", "L_TAX", "L_RETURNFLAG", "L_LINESTATUS", "L_SHIPDATE", "L_COMMITDATE", "L_RECEIPTDATE", "L_SHIPINSTRUCT", "L_SHIPMODE", "L_COMMENT"],
-                        "struct": {
-                          "types": [{
-                            "i64": {
+                      "input": {
+                        "read": {
+                          "common": {
+                            "direct": {
+                            }
+                          },
+                          "baseSchema": {
+                            "names": ["L_ORDERKEY", "L_PARTKEY", "L_SUPPKEY", "L_LINENUMBER", "L_QUANTITY", "L_EXTENDEDPRICE", "L_DISCOUNT", "L_TAX", "L_RETURNFLAG", "L_LINESTATUS", "L_SHIPDATE", "L_COMMITDATE", "L_RECEIPTDATE", "L_SHIPINSTRUCT", "L_SHIPMODE", "L_COMMENT"],
+                            "struct": {
+                              "types": [{
+                                "i64": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "i64": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "i64": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "i64": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "date": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "date": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "date": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }],
                               "nullability": "NULLABILITY_REQUIRED"
                             }
-                          }, {
-                            "i64": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "i64": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "i64": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 15,
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "string": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "string": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "date": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "date": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "date": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "string": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "string": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }, {
-                            "string": {
-                              "nullability": "NULLABILITY_REQUIRED"
-                            }
-                          }],
-                          "nullability": "NULLABILITY_REQUIRED"
+                          },
+                          "namedTable": {
+                            "names": ["LINEITEM_SMALL"]
+                          }
                         }
                       },
-                      "namedTable": {
-                        "names": ["LINEITEM_SMALL"]
-                      }
+                      "expressions": [{
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 3
+                            }
+                          },
+                          "rootReference": {
+                          }
+                        }
+                      }, {
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 5
+                            }
+                          },
+                          "rootReference": {
+                          }
+                        }
+                      }]
                     }
                   },
-                  "expressions": [{
-                    "selection": {
-                      "directReference": {
-                        "structField": {
-                          "field": 3
-                        }
-                      },
-                      "rootReference": {
-                      }
-                    }
-                  }, {
-                    "selection": {
-                      "directReference": {
-                        "structField": {
-                          "field": 5
-                        }
-                      },
-                      "rootReference": {
-                      }
-                    }
-                  }]
-                }
-              },
-              "groupings": [{
-                "groupingExpressions": [{
-                  "selection": {
-                    "directReference": {
-                      "structField": {
-                      }
-                    },
-                    "rootReference": {
-                    }
-                  }
-                }]
-              }],
-              "measures": [{
-                "measure": {
-                  "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
-                  "outputType": {
-                    "decimal": {
-                      "scale": 2,
-                      "precision": 15,
-                      "nullability": "NULLABILITY_NULLABLE"
-                    }
-                  },
-                  "invocation": "AGGREGATION_INVOCATION_ALL",
-                  "arguments": [{
-                    "value": {
+                  "groupings": [{
+                    "groupingExpressions": [{
                       "selection": {
                         "directReference": {
                           "structField": {
-                            "field": 1
                           }
                         },
                         "rootReference": {
                         }
                       }
+                    }]
+                  }],
+                  "measures": [{
+                    "measure": {
+                      "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
+                      "outputType": {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      "invocation": "AGGREGATION_INVOCATION_ALL",
+                      "arguments": [{
+                        "value": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {
+                                "field": 1
+                              }
+                            },
+                            "rootReference": {
+                            }
+                          }
+                        }
+                      }]
                     }
                   }]
+                }
+              },
+              "expressions": [{
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                    }
+                  },
+                  "rootReference": {
+                  }
                 }
               }]
             }
           },
-          "expressions": [{
-            "selection": {
-              "directReference": {
-                "structField": {
-                  "field": 1
+          "sorts": [{
+            "expr": {
+              "selection": {
+                "directReference": {
+                  "structField": {
+                    "field": 1
+                  }
+                },
+                "rootReference": {
                 }
-              },
-              "rootReference": {
               }
-            }
-          }, {
-            "selection": {
-              "directReference": {
-                "structField": {
-                }
-              },
-              "rootReference": {
-              }
-            }
+            },
+            "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
           }]
         }
       },
