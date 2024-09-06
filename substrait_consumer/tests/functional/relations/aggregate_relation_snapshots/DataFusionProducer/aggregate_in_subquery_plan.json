@@ -1,0 +1,173 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "avg"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "lte"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "join": {
+                "left": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "o_orderkey",
+                        "o_custkey",
+                        "o_orderstatus",
+                        "o_totalprice",
+                        "o_orderdate",
+                        "o_orderpriority",
+                        "o_clerk",
+                        "o_shippriority",
+                        "o_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {
+                            "field": 3
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "orders_small"
+                      ]
+                    }
+                  }
+                },
+                "right": {
+                  "aggregate": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "o_orderkey",
+                            "o_custkey",
+                            "o_orderstatus",
+                            "o_totalprice",
+                            "o_orderdate",
+                            "o_orderpriority",
+                            "o_clerk",
+                            "o_shippriority",
+                            "o_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {
+                                "field": 3
+                              }
+                            ]
+                          }
+                        },
+                        "namedTable": {
+                          "names": [
+                            "orders_small"
+                          ]
+                        }
+                      }
+                    },
+                    "groupings": [
+                      {}
+                    ],
+                    "measures": [
+                      {
+                        "measure": {
+                          "invocation": "AGGREGATION_INVOCATION_ALL",
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "expression": {
+                  "scalarFunction": {
+                    "functionReference": 1,
+                    "arguments": [
+                      {
+                        "value": {
+                          "cast": {
+                            "type": {
+                              "decimal": {
+                                "scale": 6,
+                                "precision": 19,
+                                "nullability": "NULLABILITY_NULLABLE"
+                              }
+                            },
+                            "input": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "value": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {
+                                "field": 1
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "type": "JOIN_TYPE_INNER"
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "o_totalprice"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

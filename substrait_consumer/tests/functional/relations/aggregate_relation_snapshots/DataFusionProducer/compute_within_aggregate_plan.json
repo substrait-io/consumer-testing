@@ -1,0 +1,105 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "multiply"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "avg"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "aggregate": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "o_orderkey",
+                    "o_custkey",
+                    "o_orderstatus",
+                    "o_totalprice",
+                    "o_orderdate",
+                    "o_orderpriority",
+                    "o_clerk",
+                    "o_shippriority",
+                    "o_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {
+                        "field": 3
+                      }
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "orders_small"
+                  ]
+                }
+              }
+            },
+            "groupings": [
+              {}
+            ],
+            "measures": [
+              {
+                "measure": {
+                  "functionReference": 1,
+                  "invocation": "AGGREGATION_INVOCATION_ALL",
+                  "arguments": [
+                    {
+                      "value": {
+                        "scalarFunction": {
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "value": {
+                                "literal": {
+                                  "decimal": {
+                                    "value": "CgAAAAAAAAAAAAAAAAAAAA==",
+                                    "precision": 20
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "avg(orders_small.o_totalprice * Int64(10))"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}
