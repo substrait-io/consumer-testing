@@ -51,6 +51,12 @@ AGGREGATE_RELATION_TESTS = (
         "ibis_expr": None
     },
     {
+        "test_name": "aggregate_with_group_by_rollup",
+        "file_names": ['lineitem_small.parquet'],
+        "sql_query": AGGREGATE_RELATIONS["aggregate_with_group_by_rollup"],
+        "ibis_expr": None
+    },
+    {
         "test_name": "aggregate_with_grouping_set",
         "file_names": ['lineitem_small.parquet'],
         "sql_query": AGGREGATE_RELATIONS["aggregate_with_grouping_set"],
