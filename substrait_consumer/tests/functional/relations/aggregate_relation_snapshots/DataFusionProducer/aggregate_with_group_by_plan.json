@@ -39,7 +39,6 @@
                     "projection": {
                       "select": {
                         "structItems": [
-                          {},
                           {
                             "field": 3
                           },
@@ -62,19 +61,6 @@
                       {
                         "selection": {
                           "directReference": {
-                            "structField": {
-                              "field": 1
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "groupingExpressions": [
-                      {
-                        "selection": {
-                          "directReference": {
                             "structField": {}
                           }
                         }
@@ -92,7 +78,7 @@
                             "selection": {
                               "directReference": {
                                 "structField": {
-                                  "field": 2
+                                  "field": 1
                                 }
                               }
                             }
@@ -109,7 +95,7 @@
                 "selection": {
                   "directReference": {
                     "structField": {
-                      "field": 2
+                      "field": 1
                     }
                   }
                 }
@@ -120,23 +106,13 @@
                     "structField": {}
                   }
                 }
-              },
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {
-                      "field": 1
-                    }
-                  }
-                }
               }
             ]
           }
         },
         "names": [
           "sum(lineitem_small.l_extendedprice)",
-          "l_linenumber",
-          "l_orderkey"
+          "l_linenumber"
         ]
       }
     }

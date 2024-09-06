@@ -15,7 +15,7 @@
         "project": {
           "common": {
             "emit": {
-              "outputMapping": [3, 4, 5]
+              "outputMapping": [2, 3]
             }
           },
           "input": {
@@ -28,7 +28,7 @@
                 "project": {
                   "common": {
                     "emit": {
-                      "outputMapping": [16, 17, 18]
+                      "outputMapping": [16, 17]
                     }
                   },
                   "input": {
@@ -135,15 +135,6 @@
                     "selection": {
                       "directReference": {
                         "structField": {
-                        }
-                      },
-                      "rootReference": {
-                      }
-                    }
-                  }, {
-                    "selection": {
-                      "directReference": {
-                        "structField": {
                           "field": 5
                         }
                       },
@@ -158,18 +149,6 @@
                   "selection": {
                     "directReference": {
                       "structField": {
-                      }
-                    },
-                    "rootReference": {
-                    }
-                  }
-                }]
-              }, {
-                "groupingExpressions": [{
-                  "selection": {
-                    "directReference": {
-                      "structField": {
-                        "field": 1
                       }
                     },
                     "rootReference": {
@@ -193,7 +172,7 @@
                       "selection": {
                         "directReference": {
                           "structField": {
-                            "field": 2
+                            "field": 1
                           }
                         },
                         "rootReference": {
@@ -209,26 +188,16 @@
             "selection": {
               "directReference": {
                 "structField": {
-                  "field": 2
-                }
-              },
-              "rootReference": {
-              }
-            }
-          }, {
-            "selection": {
-              "directReference": {
-                "structField": {
-                }
-              },
-              "rootReference": {
-              }
-            }
-          }, {
-            "selection": {
-              "directReference": {
-                "structField": {
                   "field": 1
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }, {
+            "selection": {
+              "directReference": {
+                "structField": {
                 }
               },
               "rootReference": {
@@ -237,7 +206,7 @@
           }]
         }
       },
-      "names": ["EXPR$0", "L_LINENUMBER", "L_ORDERKEY"]
+      "names": ["EXPR$0", "L_LINENUMBER"]
     }
   }]
 }
