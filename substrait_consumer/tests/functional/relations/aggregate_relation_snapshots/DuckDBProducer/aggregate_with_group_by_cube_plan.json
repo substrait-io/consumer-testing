@@ -258,6 +258,19 @@
                   }
                 },
                 "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              },
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                        "field": 2
+                      }
+                    },
+                    "rootReference": {}
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
               }
             ]
           }

@@ -56,6 +56,16 @@ AGGREGATE_RELATIONS = {
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
+    "aggregate_with_group_by_cube": (
+        """
+    
+        SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER, L_ORDERKEY
+        FROM '{}'
+        GROUP BY CUBE(L_LINENUMBER, L_ORDERKEY)
+        ORDER BY L_LINENUMBER, L_ORDERKEY
+        """,
+        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
+    ),
     "aggregate_with_grouping_set": (
         """
     
