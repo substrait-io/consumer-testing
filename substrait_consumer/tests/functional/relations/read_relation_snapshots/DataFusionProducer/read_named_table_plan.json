@@ -1,0 +1,40 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "read": {
+            "baseSchema": {
+              "names": [
+                "ps_partkey",
+                "ps_suppkey",
+                "ps_availqty",
+                "ps_supplycost",
+                "ps_comment"
+              ]
+            },
+            "projection": {
+              "select": {
+                "structItems": [
+                  {}
+                ]
+              }
+            },
+            "namedTable": {
+              "names": [
+                "partsupp_small"
+              ]
+            }
+          }
+        },
+        "names": [
+          "ps_partkey"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "read": {
+          "common": {
+            "direct": {
+            }
+          },
+          "baseSchema": {
+            "names": ["EXPR$0"],
+            "struct": {
+              "types": [{
+                "i32": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }],
+              "nullability": "NULLABILITY_REQUIRED"
+            }
+          },
+          "virtualTable": {
+            "values": [{
+              "fields": [{
+                "i32": 10
+              }]
+            }]
+          }
+        }
+      },
+      "names": ["EXPR$0"]
+    }
+  }]
+}
