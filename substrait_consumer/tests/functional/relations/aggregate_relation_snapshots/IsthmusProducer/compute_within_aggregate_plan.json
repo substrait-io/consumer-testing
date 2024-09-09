@@ -1,0 +1,166 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_arithmetic_decimal.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "name": "multiply:dec_dec"
+    }
+  }, {
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 1,
+      "name": "avg:dec"
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "aggregate": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "project": {
+              "common": {
+                "emit": {
+                  "outputMapping": [9]
+                }
+              },
+              "input": {
+                "read": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "baseSchema": {
+                    "names": ["O_ORDERKEY", "O_CUSTKEY", "O_ORDERSTATUS", "O_TOTALPRICE", "O_ORDERDATE", "O_ORDERPRIORITY", "O_CLERK", "O_SHIPPRIORITY", "O_COMMENT"],
+                    "struct": {
+                      "types": [{
+                        "i64": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "date": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "i32": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "namedTable": {
+                    "names": ["ORDERS_SMALL"]
+                  }
+                }
+              },
+              "expressions": [{
+                "scalarFunction": {
+                  "outputType": {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 19,
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 3
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }
+                  }, {
+                    "value": {
+                      "cast": {
+                        "type": {
+                          "decimal": {
+                            "scale": 2,
+                            "precision": 15,
+                            "nullability": "NULLABILITY_REQUIRED"
+                          }
+                        },
+                        "input": {
+                          "literal": {
+                            "i32": 10
+                          }
+                        },
+                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                      }
+                    }
+                  }]
+                }
+              }]
+            }
+          },
+          "groupings": [{
+          }],
+          "measures": [{
+            "measure": {
+              "functionReference": 1,
+              "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
+              "outputType": {
+                "decimal": {
+                  "scale": 2,
+                  "precision": 19,
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              },
+              "invocation": "AGGREGATION_INVOCATION_ALL",
+              "arguments": [{
+                "value": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                }
+              }]
+            }
+          }]
+        }
+      },
+      "names": ["EXPR$0"]
+    }
+  }]
+}
