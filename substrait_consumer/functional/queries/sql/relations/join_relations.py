@@ -190,7 +190,7 @@ JOIN_RELATIONS = {
                     WHERE o.O_CUSTKEY = c.C_CUSTKEY
                 ) THEN 'Marked'
                 ELSE 'Not Marked'
-            END
+            END AS mark_status
         FROM
             '{}' c;
         """,
@@ -208,7 +208,7 @@ JOIN_RELATIONS = {
                     WHERE c.C_CUSTKEY = o.O_CUSTKEY
                 ) THEN 'Marked'
                 ELSE 'Not Marked'
-            END
+            END AS mark_status
         FROM
             '{}' o;
         """,
