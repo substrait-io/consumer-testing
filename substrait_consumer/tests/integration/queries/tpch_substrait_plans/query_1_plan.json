@@ -12,50 +12,49 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
-      "functionAnchor": 0,
       "name": "lte:date_date"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "subtract:date_day"
+      "name": "subtract:date_iday"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "multiply:opt_decimal_decimal"
+      "name": "multiply:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "subtract:opt_decimal_decimal"
+      "name": "subtract:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 4,
-      "name": "add:opt_decimal_decimal"
+      "name": "add:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 5,
-      "name": "sum:opt_decimal"
+      "name": "sum:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 6,
-      "name": "avg:opt_decimal"
+      "name": "avg:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 7,
-      "name": "count:opt"
+      "name": "count:"
     }
   }],
   "relations": [{
@@ -75,7 +74,9 @@
               "input": {
                 "project": {
                   "common": {
-
+                    "emit": {
+                      "outputMapping": [16, 17, 18, 19, 20, 21, 22]
+                    }
                   },
                   "input": {
                     "filter": {
@@ -94,120 +95,90 @@
                             "struct": {
                               "types": [{
                                 "i64": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "i64": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "i64": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "i32": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              }, {
-                                "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                "i64": {
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "decimal": {
-                                  "scale": 0,
-                                  "precision": 19,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
-                                  "length": 1,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
-                                  "length": 1,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              }, {
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
                                 "date": {
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
-                                  "length": 25,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "fixedChar": {
-                                  "length": 10,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }, {
-                                "varchar": {
-                                  "length": 44,
-                                  "typeVariationReference": 0,
-                                  "nullability": "NULLABILITY_NULLABLE"
+                                "string": {
+                                  "nullability": "NULLABILITY_REQUIRED"
                                 }
                               }],
-                              "typeVariationReference": 0,
                               "nullability": "NULLABILITY_REQUIRED"
                             }
                           },
-                          "local_files": {
-                            "items": [
-                              {
-                                "uri_file": "file://FILENAME_PLACEHOLDER_0",
-                                "parquet": {}
-                              }
-                            ]
+                          "namedTable": {
+                            "names": ["LINEITEM"]
                           }
                         }
                       },
                       "condition": {
                         "scalarFunction": {
-                          "functionReference": 0,
-                          "args": [],
                           "outputType": {
                             "bool": {
-                              "typeVariationReference": 0,
-                              "nullability": "NULLABILITY_NULLABLE"
+                              "nullability": "NULLABILITY_REQUIRED"
                             }
                           },
                           "arguments": [{
@@ -226,31 +197,23 @@
                             "value": {
                               "scalarFunction": {
                                 "functionReference": 1,
-                                "args": [],
                                 "outputType": {
                                   "date": {
-                                    "typeVariationReference": 0,
                                     "nullability": "NULLABILITY_REQUIRED"
                                   }
                                 },
                                 "arguments": [{
                                   "value": {
                                     "literal": {
-                                      "date": 10561,
-                                      "nullable": false,
-                                      "typeVariationReference": 0
+                                      "date": 10561
                                     }
                                   }
                                 }, {
                                   "value": {
                                     "literal": {
                                       "intervalDayToSecond": {
-                                        "days": 120,
-                                        "seconds": 0,
-                                        "microseconds": 0
-                                      },
-                                      "nullable": false,
-                                      "typeVariationReference": 0
+                                        "seconds": 10368
+                                      }
                                     }
                                   }
                                 }]
@@ -304,13 +267,11 @@
                   }, {
                     "scalarFunction": {
                       "functionReference": 2,
-                      "args": [],
                       "outputType": {
                         "decimal": {
-                          "scale": 0,
+                          "scale": 4,
                           "precision": 19,
-                          "typeVariationReference": 0,
-                          "nullability": "NULLABILITY_NULLABLE"
+                          "nullability": "NULLABILITY_REQUIRED"
                         }
                       },
                       "arguments": [{
@@ -329,13 +290,11 @@
                         "value": {
                           "scalarFunction": {
                             "functionReference": 3,
-                            "args": [],
                             "outputType": {
                               "decimal": {
-                                "scale": 0,
-                                "precision": 19,
-                                "typeVariationReference": 0,
-                                "nullability": "NULLABILITY_NULLABLE"
+                                "scale": 2,
+                                "precision": 16,
+                                "nullability": "NULLABILITY_REQUIRED"
                               }
                             },
                             "arguments": [{
@@ -343,20 +302,17 @@
                                 "cast": {
                                   "type": {
                                     "decimal": {
-                                      "scale": 0,
-                                      "precision": 19,
-                                      "typeVariationReference": 0,
-                                      "nullability": "NULLABILITY_NULLABLE"
+                                      "scale": 2,
+                                      "precision": 15,
+                                      "nullability": "NULLABILITY_REQUIRED"
                                     }
                                   },
                                   "input": {
                                     "literal": {
-                                      "i32": 1,
-                                      "nullable": false,
-                                      "typeVariationReference": 0
+                                      "i32": 1
                                     }
                                   },
-                                  "failureBehavior": "FAILURE_BEHAVIOR_UNSPECIFIED"
+                                  "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                                 }
                               }
                             }, {
@@ -379,26 +335,22 @@
                   }, {
                     "scalarFunction": {
                       "functionReference": 2,
-                      "args": [],
                       "outputType": {
                         "decimal": {
-                          "scale": 0,
+                          "scale": 6,
                           "precision": 19,
-                          "typeVariationReference": 0,
-                          "nullability": "NULLABILITY_NULLABLE"
+                          "nullability": "NULLABILITY_REQUIRED"
                         }
                       },
                       "arguments": [{
                         "value": {
                           "scalarFunction": {
                             "functionReference": 2,
-                            "args": [],
                             "outputType": {
                               "decimal": {
-                                "scale": 0,
+                                "scale": 4,
                                 "precision": 19,
-                                "typeVariationReference": 0,
-                                "nullability": "NULLABILITY_NULLABLE"
+                                "nullability": "NULLABILITY_REQUIRED"
                               }
                             },
                             "arguments": [{
@@ -417,13 +369,11 @@
                               "value": {
                                 "scalarFunction": {
                                   "functionReference": 3,
-                                  "args": [],
                                   "outputType": {
                                     "decimal": {
-                                      "scale": 0,
-                                      "precision": 19,
-                                      "typeVariationReference": 0,
-                                      "nullability": "NULLABILITY_NULLABLE"
+                                      "scale": 2,
+                                      "precision": 16,
+                                      "nullability": "NULLABILITY_REQUIRED"
                                     }
                                   },
                                   "arguments": [{
@@ -431,20 +381,17 @@
                                       "cast": {
                                         "type": {
                                           "decimal": {
-                                            "scale": 0,
-                                            "precision": 19,
-                                            "typeVariationReference": 0,
-                                            "nullability": "NULLABILITY_NULLABLE"
+                                            "scale": 2,
+                                            "precision": 15,
+                                            "nullability": "NULLABILITY_REQUIRED"
                                           }
                                         },
                                         "input": {
                                           "literal": {
-                                            "i32": 1,
-                                            "nullable": false,
-                                            "typeVariationReference": 0
+                                            "i32": 1
                                           }
                                         },
-                                        "failureBehavior": "FAILURE_BEHAVIOR_UNSPECIFIED"
+                                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                                       }
                                     }
                                   }, {
@@ -469,13 +416,11 @@
                         "value": {
                           "scalarFunction": {
                             "functionReference": 4,
-                            "args": [],
                             "outputType": {
                               "decimal": {
-                                "scale": 0,
-                                "precision": 19,
-                                "typeVariationReference": 0,
-                                "nullability": "NULLABILITY_NULLABLE"
+                                "scale": 2,
+                                "precision": 16,
+                                "nullability": "NULLABILITY_REQUIRED"
                               }
                             },
                             "arguments": [{
@@ -483,20 +428,17 @@
                                 "cast": {
                                   "type": {
                                     "decimal": {
-                                      "scale": 0,
-                                      "precision": 19,
-                                      "typeVariationReference": 0,
-                                      "nullability": "NULLABILITY_NULLABLE"
+                                      "scale": 2,
+                                      "precision": 15,
+                                      "nullability": "NULLABILITY_REQUIRED"
                                     }
                                   },
                                   "input": {
                                     "literal": {
-                                      "i32": 1,
-                                      "nullable": false,
-                                      "typeVariationReference": 0
+                                      "i32": 1
                                     }
                                   },
-                                  "failureBehavior": "FAILURE_BEHAVIOR_UNSPECIFIED"
+                                  "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                                 }
                               }
                             }, {
@@ -534,7 +476,6 @@
                   "selection": {
                     "directReference": {
                       "structField": {
-                        "field": 0
                       }
                     },
                     "rootReference": {
@@ -555,14 +496,11 @@
               "measures": [{
                 "measure": {
                   "functionReference": 5,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
-                      "precision": 19,
-                      "typeVariationReference": 0,
+                      "scale": 2,
+                      "precision": 15,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -584,14 +522,11 @@
               }, {
                 "measure": {
                   "functionReference": 5,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
-                      "precision": 19,
-                      "typeVariationReference": 0,
+                      "scale": 2,
+                      "precision": 15,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -613,14 +548,11 @@
               }, {
                 "measure": {
                   "functionReference": 5,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
+                      "scale": 4,
                       "precision": 19,
-                      "typeVariationReference": 0,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -642,14 +574,11 @@
               }, {
                 "measure": {
                   "functionReference": 5,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
+                      "scale": 6,
                       "precision": 19,
-                      "typeVariationReference": 0,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -671,14 +600,11 @@
               }, {
                 "measure": {
                   "functionReference": 6,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
-                      "precision": 19,
-                      "typeVariationReference": 0,
+                      "scale": 2,
+                      "precision": 15,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -700,14 +626,11 @@
               }, {
                 "measure": {
                   "functionReference": 6,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
-                      "precision": 19,
-                      "typeVariationReference": 0,
+                      "scale": 2,
+                      "precision": 15,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -729,14 +652,11 @@
               }, {
                 "measure": {
                   "functionReference": 6,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
-                      "scale": 0,
-                      "precision": 19,
-                      "typeVariationReference": 0,
+                      "scale": 2,
+                      "precision": 15,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
                   },
@@ -758,17 +678,13 @@
               }, {
                 "measure": {
                   "functionReference": 7,
-                  "args": [],
-                  "sorts": [],
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "i64": {
-                      "typeVariationReference": 0,
                       "nullability": "NULLABILITY_REQUIRED"
                     }
                   },
-                  "invocation": "AGGREGATION_INVOCATION_ALL",
-                  "arguments": []
+                  "invocation": "AGGREGATION_INVOCATION_ALL"
                 }
               }]
             }
@@ -778,7 +694,6 @@
               "selection": {
                 "directReference": {
                   "structField": {
-                    "field": 0
                   }
                 },
                 "rootReference": {
@@ -804,6 +719,5 @@
       },
       "names": ["L_RETURNFLAG", "L_LINESTATUS", "SUM_QTY", "SUM_BASE_PRICE", "SUM_DISC_PRICE", "SUM_CHARGE", "AVG_QTY", "AVG_PRICE", "AVG_DISC", "COUNT_ORDER"]
     }
-  }],
-  "expectedTypeUrls": []
+  }]
 }
