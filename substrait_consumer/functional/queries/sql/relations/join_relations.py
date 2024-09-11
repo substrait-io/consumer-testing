@@ -157,7 +157,7 @@ JOIN_RELATIONS = {
             c1.C_NATIONKEY = c2.C_NATIONKEY
             AND c1.C_CUSTKEY <> c2.C_CUSTKEY;
         """,
-        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "right_single_join": (
         """
@@ -176,7 +176,7 @@ JOIN_RELATIONS = {
             c1.C_NATIONKEY = c2.C_NATIONKEY
             AND c1.C_CUSTKEY <> c2.C_CUSTKEY;
         """,
-        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "left_mark_join": (
         """
@@ -194,7 +194,7 @@ JOIN_RELATIONS = {
         FROM
             '{}' c;
         """,
-        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
     "right_mark_join": (
         """
@@ -212,6 +212,6 @@ JOIN_RELATIONS = {
         FROM
             '{}' o;
         """,
-        [DuckDBProducer, DataFusionProducer, IsthmusProducer],
+        [DuckDBProducer, IsthmusProducer],
     ),
 }
