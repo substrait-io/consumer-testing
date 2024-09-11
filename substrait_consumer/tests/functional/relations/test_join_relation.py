@@ -26,6 +26,13 @@ def mark_producer_tests_as_xfail(request):
             pytest.skip(reason='INTERNAL Error: Unsupported join comparison: !=')
         elif test_case_name in ["left_mark_join", "right_mark_join"]:
             pytest.skip(reason='INTERNAL Error: Unsupported join type MARK')
+    elif producer.__class__.__name__ == 'DataFusionProducer':
+        if test_case_name in ["left_mark_join", "right_mark_join", "left_single_join", "right_single_join"]:
+            pytest.skip(reason='Unsuppported join type')
+    elif producer.__class__.__name__ == 'IsthmusProducer':
+        if test_case_name in ["left_mark_join", "right_mark_join", "left_single_join", "right_single_join"]:
+            pytest.skip(reason='Unsuppported join type')
+
 
 @pytest.fixture
 def mark_consumer_tests_as_xfail(request):
