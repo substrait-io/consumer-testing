@@ -5,7 +5,7 @@ TPCH_QUERY_TESTS = (
         "test_name": "test_tpch_sql_1",
         "file_names": ["lineitem.parquet"],
         "sql_query": get_sql("q1.sql"),
-        "substrait_query": get_substrait_plan("query_1_plan.json"),
+        "substrait_query": get_substrait_plan("query_01_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_2",
@@ -21,7 +21,7 @@ TPCH_QUERY_TESTS = (
             "region.parquet",
         ],
         "sql_query": get_sql("q2.sql"),
-        "substrait_query": get_substrait_plan("query_2_plan.json"),
+        "substrait_query": get_substrait_plan("query_02_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_3",
@@ -31,13 +31,13 @@ TPCH_QUERY_TESTS = (
             "orders.parquet",
         ],
         "sql_query": get_sql("q3.sql"),
-        "substrait_query": get_substrait_plan("query_3_plan.json"),
+        "substrait_query": get_substrait_plan("query_03_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_4",
         "file_names": ["orders.parquet", "lineitem.parquet"],
         "sql_query": get_sql("q4.sql"),
-        "substrait_query": get_substrait_plan("query_4_plan.json"),
+        "substrait_query": get_substrait_plan("query_04_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_5",
@@ -50,13 +50,13 @@ TPCH_QUERY_TESTS = (
             "region.parquet",
         ],
         "sql_query": get_sql("q5.sql"),
-        "substrait_query": get_substrait_plan("query_5_plan.json"),
+        "substrait_query": get_substrait_plan("query_05_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_6",
         "file_names": ["lineitem.parquet"],
         "sql_query": get_sql("q6.sql"),
-        "substrait_query": get_substrait_plan("query_6_plan.json"),
+        "substrait_query": get_substrait_plan("query_06_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_7",
@@ -69,7 +69,7 @@ TPCH_QUERY_TESTS = (
             "nation.parquet",
         ],
         "sql_query": get_sql("q7.sql"),
-        "substrait_query": get_substrait_plan("query_7_plan.json"),
+        "substrait_query": get_substrait_plan("query_07_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_8",
@@ -84,7 +84,7 @@ TPCH_QUERY_TESTS = (
             "region.parquet",
         ],
         "sql_query": get_sql("q8.sql"),
-        "substrait_query": get_substrait_plan("query_8_plan.json"),
+        "substrait_query": get_substrait_plan("query_08_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_9",
@@ -97,7 +97,7 @@ TPCH_QUERY_TESTS = (
             "nation.parquet",
         ],
         "sql_query": get_sql("q9.sql"),
-        "substrait_query": get_substrait_plan("query_9_plan.json"),
+        "substrait_query": get_substrait_plan("query_09_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_10",

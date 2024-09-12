@@ -1,10 +1,17 @@
+from pathlib import Path
+
 import duckdb
 import pytest
 import substrait_validator as sv
 
-from substrait_consumer.consumers import DuckDBConsumer
+from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from .queries.tpch_test_cases import TPCH_QUERY_TESTS
+
+PLAN_SNAPSHOT_DIR = (
+    Path(__file__).parent / "queries" / "tpch_substrait_plans"
+)
 
 
 class TestTpchPlansValid:
@@ -27,6 +34,28 @@ class TestTpchPlansValid:
         cls.db_connection.close()
 
     @custom_parametrization(TPCH_QUERY_TESTS)
+    def test_isthmus_substrait_plan_generation(
+        self,
+        snapshot,
+        test_name: str,
+        file_names: list,
+        sql_query: str,
+        substrait_query: str,
+        sort_results: bool = False,
+    ) -> None:
+        """
+        Generate the substrait plans using Isthmus.
+        """
+        producer = IsthmusProducer()
+        producer.set_db_connection(self.db_connection)
+        sql_query = producer.format_sql(self.created_tables, sql_query, file_names)
+        substrait_query = producer.produce_substrait(sql_query)
+
+        snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
+        tpch_num = test_name.split("_")[-1].zfill(2)
+        snapshot.assert_match(str(substrait_query), f"query_{tpch_num}_plan.json")
+
+    @custom_parametrization(TPCH_QUERY_TESTS)
     def test_isthmus_substrait_plans_valid(
         self,
         test_name: str,
@@ -44,14 +73,13 @@ class TestTpchPlansValid:
         """
         config = sv.Config()
         # Isthmus plan overrides
-        # not yet implemented: typecast validation rules are not yet implemented
+        # ValueError: Error at plan: missing required protobuf field: version (code 1002)
+        config.override_diagnostic_level(1002, "error", "info")
+        # ValueError: Warning at plan.extension_uris[0].uri: did not attempt to resolve YAML:
+        # configured recursion limit for URI resolution has been reached
+        config.override_diagnostic_level(2001, "warning", "info")
+        # Warning. not yet implemented: matching function calls with their definitions
         config.override_diagnostic_level(1, "warning", "info")
-        # function definition unavailable: cannot check validity of call
-        config.override_diagnostic_level(6003, "warning", "info")
-        # relative URL without a base
-        config.override_diagnostic_level(2002, "warning", "info")
-        # use of anchor zero is discouraged
-        config.override_diagnostic_level(3005, "warning", "info")
 
         sv.check_plan_valid(substrait_query, config)
 

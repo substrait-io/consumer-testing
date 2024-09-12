@@ -68,9 +68,10 @@ class TestAceroConsumer:
         """
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
-        substrait_query = self.utils.format_substrait_query(substrait_query, file_names)
+        consumer = AceroConsumer()
+        consumer.setup(self.db_connection, self.created_tables, file_names)
 
-        subtrait_query_result_tb = self.acero_consumer.run_substrait_query(
+        subtrait_query_result_tb = consumer.run_substrait_query(
             substrait_query
         )
 
