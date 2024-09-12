@@ -52,7 +52,7 @@ class TestTpchPlansValid:
         substrait_query = producer.produce_substrait(sql_query)
 
         snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
-        tpch_num = test_name.split("_")[-1]
+        tpch_num = test_name.split("_")[-1].zfill(2)
         snapshot.assert_match(str(substrait_query), f"query_{tpch_num}_plan.json")
 
     @custom_parametrization(TPCH_QUERY_TESTS)
