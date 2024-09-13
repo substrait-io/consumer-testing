@@ -21,15 +21,15 @@ DDL_RELATION_TESTS = (
         "ibis_expr": None
     },
     {
-        "test_name": "alter_columnn",
+        "test_name": "alter_column",
         "file_names": ["customer.parquet"],
-        "sql_query": DDL_RELATIONS["alter_columnn"],
+        "sql_query": DDL_RELATIONS["alter_column"],
         "ibis_expr": None
     },
     {
-        "test_name": "drop_columnn",
+        "test_name": "drop_column",
         "file_names": ["customer.parquet"],
-        "sql_query": DDL_RELATIONS["drop_columnn"],
+        "sql_query": DDL_RELATIONS["drop_column"],
         "ibis_expr": None
     },
     {

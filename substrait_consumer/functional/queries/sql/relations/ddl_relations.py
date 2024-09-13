@@ -26,14 +26,14 @@ DDL_RELATIONS = {
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
-    "alter_columnn": (
+    "alter_column": (
         """
         ALTER TABLE '{}'
         RENAME COLUMN c_address TO c_street_address;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
-    "drop_columnn": (
+    "drop_column": (
         """
         ALTER TABLE '{}'
         DROP COLUMN c_address;
