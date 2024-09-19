@@ -148,7 +148,7 @@
                     },
                     "namedTable": {
                       "names": [
-                        "lineitemsmall"
+                        "lineitem_small"
                       ]
                     }
                   }
@@ -165,6 +165,7 @@
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
+                      "invocation": "AGGREGATION_INVOCATION_DISTINCT",
                       "arguments": [
                         {
                           "value": {
@@ -201,7 +202,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

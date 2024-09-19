@@ -2,7 +2,7 @@
   "extensionUris": [
     {
       "extensionUriAnchor": 1,
-      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/"
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_aggregate_generic.yaml"
     }
   ],
   "extensions": [
@@ -10,7 +10,7 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "sum:decimal"
+        "name": "count"
       }
     }
   ],
@@ -141,11 +141,9 @@
                         "projection": {
                           "select": {
                             "structItems": [
+                              {},
                               {
                                 "field": 3
-                              },
-                              {
-                                "field": 5
                               }
                             ]
                           },
@@ -168,6 +166,16 @@
                               },
                               "rootReference": {}
                             }
+                          },
+                          {
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                  "field": 1
+                                }
+                              },
+                              "rootReference": {}
+                            }
                           }
                         ]
                       }
@@ -177,32 +185,24 @@
                         "measure": {
                           "functionReference": 1,
                           "outputType": {
-                            "decimal": {
-                              "scale": 2,
-                              "precision": 38,
+                            "i64": {
                               "nullability": "NULLABILITY_NULLABLE"
                             }
-                          },
-                          "arguments": [
-                            {
-                              "value": {
-                                "selection": {
-                                  "directReference": {
-                                    "structField": {
-                                      "field": 1
-                                    }
-                                  },
-                                  "rootReference": {}
-                                }
-                              }
-                            }
-                          ]
+                          }
                         }
                       }
                     ]
                   }
                 },
                 "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
+                      },
+                      "rootReference": {}
+                    }
+                  },
                   {
                     "selection": {
                       "directReference": {
@@ -216,7 +216,9 @@
                   {
                     "selection": {
                       "directReference": {
-                        "structField": {}
+                        "structField": {
+                          "field": 2
+                        }
                       },
                       "rootReference": {}
                     }
@@ -225,6 +227,17 @@
               }
             },
             "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    },
+                    "rootReference": {}
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              },
               {
                 "expr": {
                   "selection": {
@@ -242,14 +255,15 @@
           }
         },
         "names": [
-          "sum(l_extendedprice)",
-          "l_linenumber"
+          "l_orderkey",
+          "l_linenumber",
+          "count_star()"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

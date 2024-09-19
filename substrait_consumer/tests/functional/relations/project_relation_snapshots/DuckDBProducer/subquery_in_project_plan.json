@@ -101,7 +101,7 @@
                         },
                         "namedTable": {
                           "names": [
-                            "customersmall"
+                            "customer_small"
                           ]
                         }
                       }
@@ -192,7 +192,7 @@
                                 },
                                 "namedTable": {
                                   "names": [
-                                    "orderssmall"
+                                    "orders_small"
                                   ]
                                 }
                               }
@@ -362,7 +362,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

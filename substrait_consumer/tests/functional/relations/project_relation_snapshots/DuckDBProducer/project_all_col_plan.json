@@ -49,7 +49,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "regionsmall"
+                    "region_small"
                   ]
                 }
               }
@@ -95,7 +95,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

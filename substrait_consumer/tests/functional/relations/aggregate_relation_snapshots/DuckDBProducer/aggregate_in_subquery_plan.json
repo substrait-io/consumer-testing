@@ -124,137 +124,132 @@
                     "right": {
                       "aggregate": {
                         "input": {
-                          "fetch": {
+                          "project": {
                             "input": {
-                              "project": {
+                              "aggregate": {
                                 "input": {
-                                  "aggregate": {
-                                    "input": {
-                                      "read": {
-                                        "baseSchema": {
-                                          "names": [
-                                            "o_orderkey",
-                                            "o_custkey",
-                                            "o_orderstatus",
-                                            "o_totalprice",
-                                            "o_orderdate",
-                                            "o_orderpriority",
-                                            "o_clerk",
-                                            "o_shippriority",
-                                            "o_comment"
-                                          ],
-                                          "struct": {
-                                            "types": [
-                                              {
-                                                "i64": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "i64": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "decimal": {
-                                                  "scale": 2,
-                                                  "precision": 15,
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "date": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "i32": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              },
-                                              {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_NULLABLE"
-                                                }
-                                              }
-                                            ],
-                                            "nullability": "NULLABILITY_REQUIRED"
-                                          }
-                                        },
-                                        "projection": {
-                                          "select": {
-                                            "structItems": [
-                                              {
-                                                "field": 3
-                                              }
-                                            ]
-                                          },
-                                          "maintainSingularStruct": true
-                                        },
-                                        "namedTable": {
-                                          "names": [
-                                            "orders_small"
-                                          ]
-                                        }
-                                      }
-                                    },
-                                    "groupings": [
-                                      {}
-                                    ],
-                                    "measures": [
-                                      {
-                                        "measure": {
-                                          "functionReference": 1,
-                                          "outputType": {
-                                            "fp64": {
+                                  "read": {
+                                    "baseSchema": {
+                                      "names": [
+                                        "o_orderkey",
+                                        "o_custkey",
+                                        "o_orderstatus",
+                                        "o_totalprice",
+                                        "o_orderdate",
+                                        "o_orderpriority",
+                                        "o_clerk",
+                                        "o_shippriority",
+                                        "o_comment"
+                                      ],
+                                      "struct": {
+                                        "types": [
+                                          {
+                                            "i64": {
                                               "nullability": "NULLABILITY_NULLABLE"
                                             }
                                           },
-                                          "arguments": [
-                                            {
-                                              "value": {
-                                                "selection": {
-                                                  "directReference": {
-                                                    "structField": {}
-                                                  },
-                                                  "rootReference": {}
-                                                }
-                                              }
+                                          {
+                                            "i64": {
+                                              "nullability": "NULLABILITY_NULLABLE"
                                             }
-                                          ]
-                                        }
+                                          },
+                                          {
+                                            "string": {
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          },
+                                          {
+                                            "decimal": {
+                                              "scale": 2,
+                                              "precision": 15,
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          },
+                                          {
+                                            "date": {
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          },
+                                          {
+                                            "string": {
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          },
+                                          {
+                                            "string": {
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          },
+                                          {
+                                            "i32": {
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          },
+                                          {
+                                            "string": {
+                                              "nullability": "NULLABILITY_NULLABLE"
+                                            }
+                                          }
+                                        ],
+                                        "nullability": "NULLABILITY_REQUIRED"
                                       }
-                                    ]
+                                    },
+                                    "projection": {
+                                      "select": {
+                                        "structItems": [
+                                          {
+                                            "field": 3
+                                          }
+                                        ]
+                                      },
+                                      "maintainSingularStruct": true
+                                    },
+                                    "namedTable": {
+                                      "names": [
+                                        "orders_small"
+                                      ]
+                                    }
                                   }
                                 },
-                                "expressions": [
+                                "groupings": [
+                                  {}
+                                ],
+                                "measures": [
                                   {
-                                    "selection": {
-                                      "directReference": {
-                                        "structField": {}
+                                    "measure": {
+                                      "functionReference": 1,
+                                      "outputType": {
+                                        "fp64": {
+                                          "nullability": "NULLABILITY_NULLABLE"
+                                        }
                                       },
-                                      "rootReference": {}
+                                      "arguments": [
+                                        {
+                                          "value": {
+                                            "selection": {
+                                              "directReference": {
+                                                "structField": {}
+                                              },
+                                              "rootReference": {}
+                                            }
+                                          }
+                                        }
+                                      ]
                                     }
                                   }
                                 ]
                               }
                             },
-                            "count": "1"
+                            "expressions": [
+                              {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            ]
                           }
                         },
                         "groupings": [
@@ -373,7 +368,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }
