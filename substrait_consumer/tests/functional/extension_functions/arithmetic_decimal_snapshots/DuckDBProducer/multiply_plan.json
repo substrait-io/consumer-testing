@@ -24,9 +24,9 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "project": {
+              "fetch": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -162,88 +162,88 @@
                     }
                   }
                 },
-                "expressions": [
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {}
-                      },
-                      "rootReference": {}
-                    }
-                  },
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {
-                          "field": 1
-                        }
-                      },
-                      "rootReference": {}
-                    }
-                  },
-                  {
-                    "scalarFunction": {
-                      "functionReference": 2,
-                      "outputType": {
-                        "decimal": {
-                          "scale": 2,
-                          "precision": 18,
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "value": {
-                            "scalarFunction": {
-                              "functionReference": 1,
-                              "outputType": {
-                                "decimal": {
-                                  "scale": 4,
-                                  "precision": 18,
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              "arguments": [
-                                {
-                                  "value": {
-                                    "selection": {
-                                      "directReference": {
-                                        "structField": {}
-                                      },
-                                      "rootReference": {}
-                                    }
-                                  }
-                                },
-                                {
-                                  "value": {
-                                    "selection": {
-                                      "directReference": {
-                                        "structField": {
-                                          "field": 1
-                                        }
-                                      },
-                                      "rootReference": {}
-                                    }
-                                  }
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "value": {
-                            "literal": {
-                              "i32": 2
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "count": "10"
               }
             },
-            "count": "10"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "scalarFunction": {
+                  "functionReference": 2,
+                  "outputType": {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 18,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [
+                    {
+                      "value": {
+                        "scalarFunction": {
+                          "functionReference": 1,
+                          "outputType": {
+                            "decimal": {
+                              "scale": 4,
+                              "precision": 18,
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          "arguments": [
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            },
+                            {
+                              "value": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {
+                                      "field": 1
+                                    }
+                                  },
+                                  "rootReference": {}
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i32": 2
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         "names": [
@@ -255,7 +255,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }
