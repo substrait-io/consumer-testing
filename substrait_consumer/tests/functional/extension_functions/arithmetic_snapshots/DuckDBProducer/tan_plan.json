@@ -29,9 +29,9 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "project": {
+              "fetch": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -92,63 +92,63 @@
                     }
                   }
                 },
-                "expressions": [
-                  {
-                    "scalarFunction": {
-                      "functionReference": 2,
-                      "outputType": {
-                        "fp64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "value": {
-                            "scalarFunction": {
-                              "functionReference": 1,
-                              "outputType": {
-                                "fp64": {
-                                  "nullability": "NULLABILITY_NULLABLE"
-                                }
-                              },
-                              "arguments": [
-                                {
-                                  "value": {
-                                    "cast": {
-                                      "type": {
-                                        "fp64": {
-                                          "nullability": "NULLABILITY_NULLABLE"
-                                        }
+                "count": "10"
+              }
+            },
+            "expressions": [
+              {
+                "scalarFunction": {
+                  "functionReference": 2,
+                  "outputType": {
+                    "fp64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [
+                    {
+                      "value": {
+                        "scalarFunction": {
+                          "functionReference": 1,
+                          "outputType": {
+                            "fp64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          },
+                          "arguments": [
+                            {
+                              "value": {
+                                "cast": {
+                                  "type": {
+                                    "fp64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  },
+                                  "input": {
+                                    "selection": {
+                                      "directReference": {
+                                        "structField": {}
                                       },
-                                      "input": {
-                                        "selection": {
-                                          "directReference": {
-                                            "structField": {}
-                                          },
-                                          "rootReference": {}
-                                        }
-                                      }
+                                      "rootReference": {}
                                     }
                                   }
                                 }
-                              ]
+                              }
                             }
-                          }
-                        },
-                        {
-                          "value": {
-                            "literal": {
-                              "i32": 2
-                            }
-                          }
+                          ]
                         }
-                      ]
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i32": 2
+                        }
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
-            },
-            "count": "10"
+            ]
           }
         },
         "names": [
@@ -158,7 +158,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

@@ -18,9 +18,9 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "project": {
+              "fetch": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -153,50 +153,51 @@
                     }
                   }
                 },
-                "expressions": [
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {}
-                      },
-                      "rootReference": {}
-                    }
-                  },
-                  {
-                    "scalarFunction": {
-                      "functionReference": 1,
-                      "outputType": {
-                        "timestamp": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "value": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              },
-                              "rootReference": {}
-                            }
-                          }
-                        },
-                        {
-                          "value": {
-                            "literal": {
-                              "intervalDayToSecond": {
-                                "days": 5
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "count": "10"
               }
             },
-            "count": "10"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "outputType": {
+                    "precisionTimestamp": {
+                      "precision": 6,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          },
+                          "rootReference": {}
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "intervalDayToSecond": {
+                            "days": 5
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         "names": [
@@ -207,7 +208,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

@@ -3,7 +3,7 @@
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "name": "sum"
+        "name": "count"
       }
     }
   ],
@@ -13,139 +13,109 @@
         "input": {
           "sort": {
             "input": {
-              "project": {
+              "aggregate": {
                 "input": {
-                  "aggregate": {
-                    "input": {
-                      "read": {
-                        "baseSchema": {
-                          "names": [
-                            "l_orderkey",
-                            "l_partkey",
-                            "l_suppkey",
-                            "l_linenumber",
-                            "l_quantity",
-                            "l_extendedprice",
-                            "l_discount",
-                            "l_tax",
-                            "l_returnflag",
-                            "l_linestatus",
-                            "l_shipdate",
-                            "l_commitdate",
-                            "l_receiptdate",
-                            "l_shipinstruct",
-                            "l_shipmode",
-                            "l_comment"
-                          ]
-                        },
-                        "projection": {
-                          "select": {
-                            "structItems": [
-                              {},
-                              {
-                                "field": 3
-                              },
-                              {
-                                "field": 5
-                              }
-                            ]
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "l_orderkey",
+                        "l_partkey",
+                        "l_suppkey",
+                        "l_linenumber",
+                        "l_quantity",
+                        "l_extendedprice",
+                        "l_discount",
+                        "l_tax",
+                        "l_returnflag",
+                        "l_linestatus",
+                        "l_shipdate",
+                        "l_commitdate",
+                        "l_receiptdate",
+                        "l_shipinstruct",
+                        "l_shipmode",
+                        "l_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {},
+                          {
+                            "field": 3
                           }
-                        },
-                        "namedTable": {
-                          "names": [
-                            "lineitem_small"
-                          ]
-                        }
+                        ]
                       }
                     },
-                    "groupings": [
+                    "namedTable": {
+                      "names": [
+                        "lineitem_small"
+                      ]
+                    }
+                  }
+                },
+                "groupings": [
+                  {
+                    "groupingExpressions": [
                       {
-                        "groupingExpressions": [
-                          {
-                            "selection": {
-                              "directReference": {
-                                "structField": {
-                                  "field": 1
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              }
-                            }
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
                           }
-                        ]
+                        }
                       },
                       {
-                        "groupingExpressions": [
-                          {
-                            "selection": {
-                              "directReference": {
-                                "structField": {
-                                  "field": 1
-                                }
-                              }
+                        "selection": {
+                          "directReference": {
+                            "structField": {
+                              "field": 1
                             }
                           }
-                        ]
-                      },
-                      {}
-                    ],
-                    "measures": [
-                      {
-                        "measure": {
-                          "invocation": "AGGREGATION_INVOCATION_ALL",
-                          "arguments": [
-                            {
-                              "value": {
-                                "selection": {
-                                  "directReference": {
-                                    "structField": {
-                                      "field": 2
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          ]
                         }
                       }
                     ]
-                  }
-                },
-                "expressions": [
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {
-                          "field": 2
-                        }
-                      }
-                    }
                   },
                   {
-                    "selection": {
-                      "directReference": {
-                        "structField": {}
-                      }
-                    }
-                  },
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {
-                          "field": 1
+                    "groupingExpressions": [
+                      {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
                         }
                       }
+                    ]
+                  },
+                  {}
+                ],
+                "measures": [
+                  {
+                    "measure": {
+                      "invocation": "AGGREGATION_INVOCATION_ALL",
+                      "arguments": [
+                        {
+                          "value": {
+                            "literal": {
+                              "i64": "1"
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
                 ]
               }
             },
             "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    }
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              },
               {
                 "expr": {
                   "selection": {
@@ -157,26 +127,14 @@
                   }
                 },
                 "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
-              },
-              {
-                "expr": {
-                  "selection": {
-                    "directReference": {
-                      "structField": {
-                        "field": 2
-                      }
-                    }
-                  }
-                },
-                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
               }
             ]
           }
         },
         "names": [
-          "sum(lineitem_small.l_extendedprice)",
+          "l_orderkey",
           "l_linenumber",
-          "l_orderkey"
+          "count(*)"
         ]
       }
     }

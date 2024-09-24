@@ -1,9 +1,16 @@
 {
+  "extensionUris": [
+    {
+      "extensionUriAnchor": 1,
+      "uri": "https://github.com/substrait-io/substrait/blob/main/extensions/functions_arithmetic.yaml"
+    }
+  ],
   "extensions": [
     {
       "extensionFunction": {
+        "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "xor"
+        "name": "bitwise_xor:i64_i64"
       }
     }
   ],
@@ -130,7 +137,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

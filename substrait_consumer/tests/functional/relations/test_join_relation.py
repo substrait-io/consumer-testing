@@ -18,9 +18,7 @@ def mark_producer_tests_as_xfail(request):
     producer = request.getfixturevalue('producer')
     test_case_name = request.node.callspec.id.split('-')[-1]
     if producer.__class__.__name__ == 'DuckDBProducer':
-        if test_case_name == "full_join":
-            pytest.skip(reason='INTERNAL Error: Unsupported join type FULL')
-        elif test_case_name in ["left_anti_join", "right_anti_join"]:
+        if test_case_name in ["left_anti_join", "right_anti_join"]:
             pytest.skip(reason='INTERNAL Error: Unsupported join type ANTI')
         elif test_case_name in ["left_single_join", "right_single_join"]:
             pytest.skip(reason='INTERNAL Error: Unsupported join comparison: !=')

@@ -49,31 +49,29 @@ AGGREGATE_RELATIONS = {
     ),
     "aggregate_with_group_by": (
         """
-    
-        SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER
+        SELECT L_ORDERKEY, L_LINENUMBER, count(*)
         FROM '{}'
-        GROUP BY L_LINENUMBER
-        ORDER BY L_LINENUMBER
+        GROUP BY L_ORDERKEY, L_LINENUMBER
+        ORDER BY L_ORDERKEY, L_LINENUMBER
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "aggregate_with_group_by_cube": (
         """
-    
-        SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER, L_ORDERKEY
+        SELECT L_ORDERKEY, L_LINENUMBER, count(*)
         FROM '{}'
-        GROUP BY CUBE(L_LINENUMBER, L_ORDERKEY)
-        ORDER BY L_LINENUMBER, L_ORDERKEY
+        GROUP BY CUBE(L_ORDERKEY, L_LINENUMBER)
+        ORDER BY L_ORDERKEY, L_LINENUMBER
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "aggregate_with_group_by_rollup": (
         """
     
-        SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER, L_ORDERKEY
+        SELECT L_ORDERKEY, L_LINENUMBER, count(*)
         FROM '{}'
-        GROUP BY ROLLUP(L_LINENUMBER, L_ORDERKEY)
-        ORDER BY L_LINENUMBER, L_ORDERKEY
+        GROUP BY ROLLUP(L_ORDERKEY, L_LINENUMBER)
+        ORDER BY L_ORDERKEY, L_LINENUMBER
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),

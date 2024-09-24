@@ -18,9 +18,9 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "project": {
+              "fetch": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -79,48 +79,48 @@
                     }
                   }
                 },
-                "expressions": [
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {}
-                      },
-                      "rootReference": {}
-                    }
-                  },
-                  {
-                    "scalarFunction": {
-                      "functionReference": 1,
-                      "outputType": {
-                        "i64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "value": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              },
-                              "rootReference": {}
-                            }
-                          }
-                        },
-                        {
-                          "value": {
-                            "literal": {
-                              "i64": "10"
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "count": "10"
               }
             },
-            "count": "10"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "outputType": {
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          },
+                          "rootReference": {}
+                        }
+                      }
+                    },
+                    {
+                      "value": {
+                        "literal": {
+                          "i64": "10"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         "names": [
@@ -131,7 +131,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

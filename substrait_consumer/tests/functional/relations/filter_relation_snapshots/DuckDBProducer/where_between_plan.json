@@ -43,9 +43,9 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "project": {
+              "fetch": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -288,19 +288,19 @@
                     }
                   }
                 },
-                "expressions": [
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {}
-                      },
-                      "rootReference": {}
-                    }
-                  }
-                ]
+                "count": "20"
               }
             },
-            "count": "20"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              }
+            ]
           }
         },
         "names": [
@@ -310,7 +310,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

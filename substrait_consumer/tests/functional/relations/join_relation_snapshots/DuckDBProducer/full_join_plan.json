@@ -10,7 +10,7 @@
       "extensionFunction": {
         "extensionUriReference": 1,
         "functionAnchor": 1,
-        "name": "is_not_distinct_from:i64_i64"
+        "name": "equal:i64_i64"
       }
     }
   ],
@@ -24,6 +24,85 @@
                 "input": {
                   "join": {
                     "left": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "c_custkey",
+                            "c_name",
+                            "c_address",
+                            "c_nationkey",
+                            "c_phone",
+                            "c_acctbal",
+                            "c_mktsegment",
+                            "c_comment"
+                          ],
+                          "struct": {
+                            "types": [
+                              {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "i32": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "decimal": {
+                                  "scale": 2,
+                                  "precision": 15,
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              {
+                                "string": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            ],
+                            "nullability": "NULLABILITY_REQUIRED"
+                          }
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {},
+                              {
+                                "field": 1
+                              }
+                            ]
+                          },
+                          "maintainSingularStruct": true
+                        },
+                        "namedTable": {
+                          "names": [
+                            "customer_small"
+                          ]
+                        }
+                      }
+                    },
+                    "right": {
                       "read": {
                         "baseSchema": {
                           "names": [
@@ -108,96 +187,6 @@
                         }
                       }
                     },
-                    "right": {
-                      "project": {
-                        "input": {
-                          "read": {
-                            "baseSchema": {
-                              "names": [
-                                "c_custkey",
-                                "c_name",
-                                "c_address",
-                                "c_nationkey",
-                                "c_phone",
-                                "c_acctbal",
-                                "c_mktsegment",
-                                "c_comment"
-                              ],
-                              "struct": {
-                                "types": [
-                                  {
-                                    "i64": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "string": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "string": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "i32": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "string": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "decimal": {
-                                      "scale": 2,
-                                      "precision": 15,
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "string": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  {
-                                    "string": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  }
-                                ],
-                                "nullability": "NULLABILITY_REQUIRED"
-                              }
-                            },
-                            "projection": {
-                              "select": {
-                                "structItems": [
-                                  {}
-                                ]
-                              },
-                              "maintainSingularStruct": true
-                            },
-                            "namedTable": {
-                              "names": [
-                                "customer_small"
-                              ]
-                            }
-                          }
-                        },
-                        "expressions": [
-                          {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              },
-                              "rootReference": {}
-                            }
-                          }
-                        ]
-                      }
-                    },
                     "expression": {
                       "scalarFunction": {
                         "functionReference": 1,
@@ -232,7 +221,7 @@
                         ]
                       }
                     },
-                    "type": "JOIN_TYPE_SEMI"
+                    "type": "JOIN_TYPE_OUTER"
                   }
                 },
                 "expressions": [
@@ -253,11 +242,39 @@
                       },
                       "rootReference": {}
                     }
+                  },
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 2
+                        }
+                      },
+                      "rootReference": {}
+                    }
+                  },
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 3
+                        }
+                      },
+                      "rootReference": {}
+                    }
                   }
                 ]
               }
             },
             "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
               {
                 "selection": {
                   "directReference": {
@@ -271,7 +288,9 @@
               {
                 "selection": {
                   "directReference": {
-                    "structField": {}
+                    "structField": {
+                      "field": 3
+                    }
                   },
                   "rootReference": {}
                 }
@@ -280,8 +299,9 @@
           }
         },
         "names": [
-          "o_orderkey",
-          "o_custkey"
+          "c_custkey",
+          "c_name",
+          "o_orderkey"
         ]
       }
     }

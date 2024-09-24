@@ -174,7 +174,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "lineitemsmall"
+                    "lineitem_small"
                   ]
                 }
               }
@@ -363,7 +363,7 @@
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }

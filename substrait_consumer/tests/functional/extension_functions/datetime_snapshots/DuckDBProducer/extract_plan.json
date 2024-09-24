@@ -18,9 +18,9 @@
     {
       "root": {
         "input": {
-          "fetch": {
+          "project": {
             "input": {
-              "project": {
+              "fetch": {
                 "input": {
                   "read": {
                     "baseSchema": {
@@ -153,55 +153,55 @@
                     }
                   }
                 },
-                "expressions": [
-                  {
-                    "selection": {
-                      "directReference": {
-                        "structField": {}
-                      },
-                      "rootReference": {}
-                    }
-                  },
-                  {
-                    "scalarFunction": {
-                      "functionReference": 1,
-                      "outputType": {
-                        "i64": {
-                          "nullability": "NULLABILITY_NULLABLE"
-                        }
-                      },
-                      "arguments": [
-                        {
-                          "enum": "year"
-                        },
-                        {
-                          "value": {
-                            "selection": {
-                              "directReference": {
-                                "structField": {}
-                              },
-                              "rootReference": {}
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "count": "10"
               }
             },
-            "count": "10"
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  },
+                  "rootReference": {}
+                }
+              },
+              {
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "outputType": {
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [
+                    {
+                      "enum": "year"
+                    },
+                    {
+                      "value": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          },
+                          "rootReference": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         "names": [
           "l_shipdate",
-          "year(l_shipdate)"
+          "\"year\"(l_shipdate)"
         ]
       }
     }
   ],
   "version": {
-    "minorNumber": 48,
+    "minorNumber": 53,
     "producer": "DuckDB"
   }
 }
