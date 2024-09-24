@@ -20,6 +20,19 @@ def mark_producer_tests_as_xfail(request):
     if producer.__class__.__name__ == 'DuckDBProducer':
         if func_name == "negate":
             pytest.skip(reason='Catalog Error: Scalar Function with name negate does not exist!')
+    elif producer.__class__.__name__ == 'DataFusionProducer':
+        if func_name == "modulus":
+            pytest.skip(reason='Invalid function modulus for DataFusionProducer')
+        elif func_name == "variance":
+            pytest.skip(reason='Invalid function variance for DataFusionProducer')
+        elif func_name == "product":
+            pytest.skip(reason='Invalid function product for DataFusionProducer')
+        elif func_name == "mode":
+            pytest.skip(reason='Invalid function mode for DataFusionProducer')
+        elif func_name == "negate":
+            pytest.skip(reason='Invalid function negate for DataFusionProducer')
+        elif func_name == "sign":
+            pytest.skip(reason='Invalid function sign for DataFusionProducer')
 
 
 @pytest.fixture

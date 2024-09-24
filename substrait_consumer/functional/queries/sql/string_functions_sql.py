@@ -40,13 +40,21 @@ SQL_SCALAR = {
         """,
         [DataFusionProducer],
     ),
-    "ends_with": (
+    "ends_with_duckdb": (
         """
         SELECT N_NAME
         FROM '{}'
         WHERE suffix(N_NAME, 'A');
         """,
         [DuckDBProducer],
+    ),
+    "ends_with": (
+        """
+        SELECT N_NAME
+        FROM '{}'
+        WHERE ends_with(N_NAME, 'A');
+        """,
+        [DataFusionProducer],
     ),
     "substring": (
         """
@@ -186,6 +194,6 @@ SQL_AGGREGATE = {
         GROUP BY N_NAME
         ORDER BY N_NAME
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }

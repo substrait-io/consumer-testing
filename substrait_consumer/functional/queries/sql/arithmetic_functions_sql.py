@@ -41,7 +41,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "factorial": (
         """
@@ -82,7 +82,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "cos": (
         """
@@ -154,7 +154,7 @@ SQL_SCALAR = {
         FROM 't'
         LIMIT 10;
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
 }
 
@@ -213,27 +213,27 @@ SQL_AGGREGATE = {
         SELECT mode(PS_SUPPLYCOST) AS MODE_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "product": (
         """
         SELECT product(PS_SUPPLYCOST) AS PRODUCT_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "std_dev": (
         """
         SELECT round(stddev(PS_SUPPLYCOST), 2) AS STDDEV_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "variance": (
         """
         SELECT round(variance(PS_SUPPLYCOST), 2) AS VARIANCE_SUPPLYCOST
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }

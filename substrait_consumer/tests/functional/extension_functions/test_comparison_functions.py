@@ -22,6 +22,10 @@ def mark_producer_tests_as_xfail(request):
     elif producer.__class__.__name__ == 'DataFusionProducer':
         if func_name == "coalesce":
             pytest.skip(reason='NotImplemented("Unsupported operator: EmptyRelation"')
+        elif func_name == "is_finite":
+            pytest.skip(reason='Invalid function isfinite for DataFusionProducer')
+        elif func_name == "is_infinite":
+            pytest.skip(reason='Invalid function isinf for DataFusionProducer')
     elif producer.__class__.__name__ == 'IsthmusProducer':
         if func_name == "is_not_distinct_from":
             pytest.skip(reason='java.lang.java.lang.IllegalArgumentException: java.lang.IllegalArgumentException: '

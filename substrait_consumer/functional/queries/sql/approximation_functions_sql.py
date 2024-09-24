@@ -7,7 +7,7 @@ SQL_AGGREGATE = {
         SELECT approx_count_distinct(l_comment)
         FROM '{}';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "approx_distinct": (
         """
