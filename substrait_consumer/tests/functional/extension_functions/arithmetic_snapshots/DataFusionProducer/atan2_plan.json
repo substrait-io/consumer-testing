@@ -3,14 +3,14 @@
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "name": "atan2"
+        "functionAnchor": 1,
+        "name": "round"
       }
     },
     {
       "extensionFunction": {
         "extensionUriReference": 4294967295,
-        "functionAnchor": 1,
-        "name": "round"
+        "name": "atan2"
       }
     }
   ],
@@ -20,46 +20,68 @@
         "input": {
           "project": {
             "input": {
-              "fetch": {
+              "project": {
                 "input": {
-                  "read": {
-                    "baseSchema": {
-                      "names": [
-                        "l_orderkey",
-                        "l_partkey",
-                        "l_suppkey",
-                        "l_linenumber",
-                        "l_quantity",
-                        "l_extendedprice",
-                        "l_discount",
-                        "l_tax",
-                        "l_returnflag",
-                        "l_linestatus",
-                        "l_shipdate",
-                        "l_commitdate",
-                        "l_receiptdate",
-                        "l_shipinstruct",
-                        "l_shipmode",
-                        "l_comment"
-                      ]
-                    },
-                    "projection": {
-                      "select": {
-                        "structItems": [
-                          {
-                            "field": 7
+                  "fetch": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "l_orderkey",
+                            "l_partkey",
+                            "l_suppkey",
+                            "l_linenumber",
+                            "l_quantity",
+                            "l_extendedprice",
+                            "l_discount",
+                            "l_tax",
+                            "l_returnflag",
+                            "l_linestatus",
+                            "l_shipdate",
+                            "l_commitdate",
+                            "l_receiptdate",
+                            "l_shipinstruct",
+                            "l_shipmode",
+                            "l_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {
+                                "field": 7
+                              }
+                            ]
                           }
-                        ]
+                        },
+                        "namedTable": {
+                          "names": [
+                            "lineitem"
+                          ]
+                        }
                       }
                     },
-                    "namedTable": {
-                      "names": [
-                        "lineitem"
-                      ]
-                    }
+                    "count": "10"
                   }
                 },
-                "count": "10"
+                "expressions": [
+                  {
+                    "cast": {
+                      "type": {
+                        "fp64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      },
+                      "input": {
+                        "selection": {
+                          "directReference": {
+                            "structField": {}
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
               }
             },
             "expressions": [
@@ -73,36 +95,18 @@
                           "arguments": [
                             {
                               "value": {
-                                "cast": {
-                                  "type": {
-                                    "fp64": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  "input": {
-                                    "selection": {
-                                      "directReference": {
-                                        "structField": {}
-                                      }
-                                    }
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
                                   }
                                 }
                               }
                             },
                             {
                               "value": {
-                                "cast": {
-                                  "type": {
-                                    "fp64": {
-                                      "nullability": "NULLABILITY_NULLABLE"
-                                    }
-                                  },
-                                  "input": {
-                                    "selection": {
-                                      "directReference": {
-                                        "structField": {}
-                                      }
-                                    }
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {}
                                   }
                                 }
                               }

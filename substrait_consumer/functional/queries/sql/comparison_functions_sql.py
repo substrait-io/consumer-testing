@@ -69,7 +69,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NOT NULL
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "is_null": (
         """
@@ -77,7 +77,7 @@ SQL_SCALAR = {
         FROM 't' 
         WHERE a IS NULL
         """,
-        [DuckDBProducer, IsthmusProducer],
+        [DataFusionProducer, DuckDBProducer, IsthmusProducer],
     ),
     "is_nan": (
         """
@@ -91,14 +91,14 @@ SQL_SCALAR = {
         SELECT a, isfinite(a) as isfinite_a
         FROM 't' 
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "is_infinite": (
         """
         SELECT a, isinf(a) as isinf_a
         FROM 't' 
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "between": (
         """

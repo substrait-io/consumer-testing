@@ -34,6 +34,12 @@ SCALAR_FUNCTIONS = (
         "ibis_expr": None,
     },
     {
+        "test_name": "ends_with_duckdb",
+        "file_names": ["nation.parquet"],
+        "sql_query": SQL_SCALAR["ends_with_duckdb"],
+        "ibis_expr": None,
+    },
+    {
         "test_name": "ends_with",
         "file_names": ["nation.parquet"],
         "sql_query": SQL_SCALAR["ends_with"],

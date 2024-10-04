@@ -17,7 +17,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "subtract": (
         """
@@ -25,7 +25,7 @@ SQL_SCALAR = {
         FROM '{}'
         LIMIT 10;
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
     "lt": (
         """
@@ -63,6 +63,6 @@ SQL_SCALAR = {
         """
         SELECT INTERVAL 1 HOUR + INTERVAL 5 HOUR
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }

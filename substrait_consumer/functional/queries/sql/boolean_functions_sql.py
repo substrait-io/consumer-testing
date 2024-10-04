@@ -30,7 +30,7 @@ SQL_SCALAR = {
         SELECT a, b,  xor(a, b) AS xor_a_b
         FROM 't';
         """,
-        [DuckDBProducer],
+        [DataFusionProducer, DuckDBProducer],
     ),
 }
 

@@ -19,6 +19,13 @@ def mark_producer_tests_as_xfail(request):
     if producer.__class__.__name__ == 'DuckDBProducer':
         if func_name == "add_intervals":
             pytest.skip(reason='INTERNAL Error: DUMMY_SCAN')
+    elif producer.__class__.__name__ == 'DataFusionProducer':
+        if func_name == "add":
+            pytest.skip(reason='DataFusion error: NotImplemented. Unsupported interval argument.')
+        elif func_name == "subtract":
+            pytest.skip(reason='DataFusion error: NotImplemented. Unsupported interval argument.')
+        elif func_name == "add_intervals":
+            pytest.skip(reason='DataFusion error: NotImplemented. Unsupported interval argument.')
 
 
 @pytest.fixture
