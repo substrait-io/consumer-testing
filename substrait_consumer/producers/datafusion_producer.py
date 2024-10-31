@@ -55,13 +55,11 @@ class DataFusionProducer(Producer):
 
         return MessageToJson(substrait_proto)
 
-    def register_tables(self, created_tables, file_names):
+    def register_tables(self, file_names):
         """
         Register tables to the datafusion session context.
 
         Parameters:
-            created_tables:
-                The set of tables that have already been created.
             file_names:
                 Name of parquet files.
         Returns:
@@ -71,9 +69,10 @@ class DataFusionProducer(Producer):
             parquet_file_paths = SubstraitUtils.get_full_path(file_names)
             for file_name, file_path in zip(file_names, parquet_file_paths):
                 table_name = Path(file_name).stem
-                if not self._ctx.table_exist(table_name):
-                    created_tables.add(table_name)
-                    self._ctx.register_parquet(table_name, file_path)
+                if self._ctx.table_exist(table_name):
+                    self._ctx.deregister_table(table_name)
+                self._ctx.register_parquet(table_name, file_path)
+                assert self._ctx.table_exist(table_name)
         else:
             if not self._ctx.table_exist("t"):
                 tables = pa.RecordBatch.from_arrays(
@@ -87,8 +86,8 @@ class DataFusionProducer(Producer):
                 )
                 self._ctx.register_record_batches("t", [[tables]])
 
-    def format_sql(self, created_tables, sql_query, file_names):
-        self.register_tables(created_tables, file_names)
+    def format_sql(self, sql_query, file_names):
+        self.register_tables(file_names)
         if len(file_names) > 0:
             table_names = [Path(f).stem for f in file_names]
             sql_query = sql_query.format(*table_names)

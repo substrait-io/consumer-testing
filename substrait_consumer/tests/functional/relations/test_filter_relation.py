@@ -43,7 +43,6 @@ class TestfilterRelation:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
-        cls.created_tables = set()
 
         yield
 
@@ -66,7 +65,6 @@ class TestfilterRelation:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -93,7 +91,6 @@ class TestfilterRelation:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -116,7 +113,6 @@ class TestfilterRelation:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
         )

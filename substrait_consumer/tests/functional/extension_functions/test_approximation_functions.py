@@ -44,7 +44,6 @@ class TestApproximationFunctions:
         cls.db_connection = duckdb.connect()
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
-        cls.created_tables = set()
 
         yield
 
@@ -67,7 +66,6 @@ class TestApproximationFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -94,7 +92,6 @@ class TestApproximationFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -117,7 +114,6 @@ class TestApproximationFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
         )

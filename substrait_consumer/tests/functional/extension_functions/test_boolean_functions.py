@@ -46,8 +46,6 @@ class TestBooleanFunctions:
             name="t",
         )
 
-        cls.created_tables = set()
-
         yield
 
         cls.db_connection.close()
@@ -68,7 +66,6 @@ class TestBooleanFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -94,7 +91,6 @@ class TestBooleanFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -117,7 +113,6 @@ class TestBooleanFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
         )
