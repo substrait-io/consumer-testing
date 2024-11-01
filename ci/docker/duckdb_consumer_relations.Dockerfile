@@ -8,4 +8,4 @@ RUN pip install --upgrade pip setuptools pytest pytest-snapshot substrait pyarro
 WORKDIR /substrait_consumer
 COPY . .
 
-CMD /usr/bin/python -mpytest -m consume_substrait_snapshot --consumer=DuckDBConsumer substrait_consumer/tests/functional/relations
+CMD /usr/bin/python -mpytest -m consume_substrait_snapshot --consumer=duckdb substrait_consumer/tests/functional/relations
