@@ -24,26 +24,14 @@ def support_matrix_df():
 def backends_info_df():
     return pd.DataFrame(
         {
-            "DataFusionProducer-DataFusionConsumer": [
-                "DataFusionProducer",
-                "DataFusionConsumer",
-            ],
-            "DataFusionProducer-DuckDBConsumer": [
-                "DataFusionProducer",
-                "DuckDBConsumer",
-            ],
-            "DuckDBProducer-DataFusionConsumer": [
-                "DuckDBProducer",
-                "DataFusionConsumer",
-            ],
-            "DuckDBProducer-DuckDBConsumer": ["DuckDBProducer", "DuckDBConsumer"],
-            "IbisProducer-DuckDBConsumer": ["IbisProducer", "DuckDBConsumer"],
-            "IbisProducer-DataFusionConsumer": ["IbisProducer", "DataFusionConsumer"],
-            "IsthmusProducer-DuckDBConsumer": ["IsthmusProducer", "DuckDBConsumer"],
-            "IsthmusProducer-DataFusionConsumer": [
-                "IsthmusProducer",
-                "DataFusionConsumer",
-            ],
+            "datafusion-datafusion": ["datafusion", "datafusion"],
+            "datafusion-duckdb": ["datafusion", "duckdb"],
+            "duckdb-datafusion": ["duckdb", "datafusion"],
+            "duckdb-duckdb": ["duckdb", "duckdb"],
+            "ibis-duckdb": ["ibis", "duckdb"],
+            "ibis-datafusion": ["ibis", "datafusion"],
+            "isthmus-duckdb": ["isthmus", "duckdb"],
+            "isthmus-datafusion": ["isthmus", "datafusion"],
         }.items(),
         columns=["backend_name", "categories"],
     )
