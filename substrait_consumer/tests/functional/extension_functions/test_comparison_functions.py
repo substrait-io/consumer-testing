@@ -58,8 +58,6 @@ class TestComparisonFunctions:
         cls.db_connection.execute("load substrait")
         load_custom_duckdb_table(cls.db_connection)
 
-        cls.created_tables = set()
-
         yield
 
         cls.db_connection.close()
@@ -83,7 +81,6 @@ class TestComparisonFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -112,7 +109,6 @@ class TestComparisonFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
             ibis_expr,
@@ -135,7 +131,6 @@ class TestComparisonFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            self.created_tables,
             file_names,
             sql_query,
         )

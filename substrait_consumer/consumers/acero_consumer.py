@@ -22,17 +22,12 @@ class AceroConsumer(Consumer):
         self.tables = {}
         self.table_provider = lambda names, schema: self.tables[names[0].lower()]
 
-    def setup(self, db_connection, created_tables, file_names: Iterable[str]):
+    def setup(self, db_connection, file_names: Iterable[str]):
         if len(file_names) > 0:
             parquet_file_paths = SubstraitUtils.get_full_path(file_names)
             for file_name, file_path in zip(file_names, parquet_file_paths):
                 table_name = Path(file_name).stem
-                table_name = table_name.translate(
-                    str.maketrans("", "", string.punctuation)
-                )
-                if f"{self.__class__.__name__}{table_name}" not in created_tables:
-                    created_tables.add(f"{self.__class__.__name__}{table_name}")
-                    self.tables[table_name] = pq.read_table(file_path)
+                self.tables[table_name] = pq.read_table(file_path)
         else:
             table = pa.table(
                 {

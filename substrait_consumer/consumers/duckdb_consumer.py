@@ -26,9 +26,9 @@ class DuckDBConsumer(Consumer):
         self.db_connection.execute("INSTALL substrait")
         self.db_connection.execute("LOAD substrait")
 
-    def setup(self, db_connection, created_tables, file_names: Iterable[str]):
+    def setup(self, db_connection, file_names: Iterable[str]):
         self.db_connection = db_connection
-        self.load_tables_from_parquet(created_tables, file_names)
+        self.load_tables_from_parquet(file_names)
 
     def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """
@@ -45,15 +45,12 @@ class DuckDBConsumer(Consumer):
 
     def load_tables_from_parquet(
         self,
-        created_tables: set,
         file_names: Iterable[str],
     ) -> list:
         """
         Load all the parquet files into separate tables in DuckDB.
 
         Parameters:
-            created_tables:
-                The set of tables that have already been created.
             file_names:
                 Name of parquet files.
 
@@ -64,10 +61,12 @@ class DuckDBConsumer(Consumer):
         table_names = []
         for file_name, file_path in zip(file_names, parquet_file_paths):
             table_name = Path(file_name).stem
-            if f"{self.__class__.__name__}{table_name}" not in created_tables:
-                create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
-                self.db_connection.execute(create_table_sql)
-                created_tables.add(f"{self.__class__.__name__}{table_name}")
+            try:
+                self.db_connection.execute(f"DROP TABLE {table_name}")
+            except:
+                pass
+            create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
+            self.db_connection.execute(create_table_sql)
             table_names.append(table_name)
 
         return table_names

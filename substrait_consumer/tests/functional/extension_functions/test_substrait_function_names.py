@@ -10,6 +10,7 @@ from substrait_consumer.functional import (
     arithmetic_configs, boolean_configs, comparison_configs, datetime_configs, logarithmic_configs, rounding_configs)
 from substrait_consumer.functional.common import check_subtrait_function_names, load_custom_duckdb_table
 from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.producers.producer import load_tables_from_parquet
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -32,7 +33,6 @@ class TestSubstraitFunctionNames:
             [("a", dt.int32), ("b", dt.int32), ("c", dt.boolean), ("d", dt.boolean)],
             name="t",
         )
-        cls.created_tables = set()
 
         yield
 
@@ -184,7 +184,7 @@ class TestSubstraitFunctionNames:
         producer.set_db_connection(self.db_connection)
 
         # Load the parquet files into DuckDB and return all the table names as a list
-        sql_query = producer.format_sql(self.created_tables, sql_query[0], file_names)
+        sql_query = producer.format_sql(sql_query[0], file_names)
 
         # Grab the json representation of the produced substrait plan to verify
         # the proper substrait function name.
@@ -197,6 +197,7 @@ class TestSubstraitFunctionNames:
             else:
                 pytest.skip("ibis expression currently undefined")
         else:
+            load_tables_from_parquet(self.db_connection, file_names)
             substrait_json = self.db_connection.get_substrait_json(sql_query)
             proto = substrait_json.fetchone()[0]
             substrait_plan = json.loads(proto)

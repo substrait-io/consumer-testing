@@ -24,14 +24,14 @@ class DataFusionConsumer(Consumer):
     def __init__(self):
         self._ctx = SessionContext()
 
-    def setup(self, db_connection, created_tables, file_names: Iterable[str]):
+    def setup(self, db_connection, file_names: Iterable[str]):
         if len(file_names) > 0:
             parquet_file_paths = SubstraitUtils.get_full_path(file_names)
             for file_name, file_path in zip(file_names, parquet_file_paths):
                 table_name = Path(file_name).stem
-                if not self._ctx.table_exist(table_name):
-                    created_tables.add(table_name)
-                    self._ctx.register_parquet(table_name, file_path)
+                if self._ctx.table_exist(table_name):
+                    self._ctx.deregister_table(table_name)
+                self._ctx.register_parquet(table_name, file_path)
         else:
             if not self._ctx.table_exist("t"):
                 tables = pa.RecordBatch.from_arrays(

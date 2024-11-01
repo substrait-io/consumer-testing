@@ -27,7 +27,6 @@ class TestTpchPlansValid:
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
         cls.duckdb_consumer = DuckDBConsumer(cls.db_connection)
-        cls.created_tables = set()
 
         yield
 
@@ -48,7 +47,7 @@ class TestTpchPlansValid:
         """
         producer = IsthmusProducer()
         producer.set_db_connection(self.db_connection)
-        sql_query = producer.format_sql(self.created_tables, sql_query, file_names)
+        sql_query = producer.format_sql(sql_query, file_names)
         substrait_query = producer.produce_substrait(sql_query)
 
         snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
@@ -115,7 +114,7 @@ class TestTpchPlansValid:
 
         # Load the parquet files into DuckDB and return all the table names as a list
         table_names = self.duckdb_consumer.load_tables_from_parquet(
-            self.created_tables, file_names
+            file_names
         )
 
         # Format the sql query by inserting all the table names

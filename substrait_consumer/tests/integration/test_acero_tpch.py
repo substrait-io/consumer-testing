@@ -29,7 +29,6 @@ class TestAceroConsumer:
         cls.duckdb_consumer = DuckDBConsumer(cls.db_connection)
         cls.acero_consumer = AceroConsumer()
         cls.utils = SubstraitUtils()
-        cls.created_tables = set()
 
         yield
 
@@ -69,7 +68,7 @@ class TestAceroConsumer:
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
         consumer = AceroConsumer()
-        consumer.setup(self.db_connection, self.created_tables, file_names)
+        consumer.setup(self.db_connection, file_names)
 
         subtrait_query_result_tb = consumer.run_substrait_query(
             substrait_query
@@ -140,7 +139,7 @@ class TestAceroConsumer:
         """
         # Load the parquet files into DuckDB and return all the table names as a list
         table_names = self.duckdb_consumer.load_tables_from_parquet(
-            self.created_tables, file_names
+            file_names
         )
 
         # Format the sql query by inserting all the table names

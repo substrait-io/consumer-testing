@@ -42,10 +42,10 @@ class IbisProducer(Producer):
         substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
         return substrait_plan
 
-    def format_sql(self, created_tables, sql_query, file_names):
+    def format_sql(self, sql_query, file_names):
         if len(file_names) > 0:
             table_names = load_tables_from_parquet(
-                self._db_connection, created_tables, file_names
+                self._db_connection, file_names
             )
             sql_query = sql_query.format(*table_names)
         return sql_query

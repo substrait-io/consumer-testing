@@ -51,7 +51,6 @@ def generate_snapshot_results(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
-    created_tables: set,
     file_names: Iterable[str],
     sql_query: tuple,
 ):
@@ -66,8 +65,6 @@ def generate_snapshot_results(
             Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
-        created_tables:
-            Tables names that have already been created.
         file_names:
             List of parquet files.
         sql_query:
@@ -76,7 +73,7 @@ def generate_snapshot_results(
     # Load the parquet files into DuckDB and return all the table names as a list
     producer = DuckDBProducer()
     producer.set_db_connection(db_con)
-    sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
+    sql_query = producer.format_sql(sql_query[0], file_names)
 
     duckdb_result = db_con.query(f"{sql_query}").arrow()
     duckdb_result = duckdb_result.rename_columns(
@@ -99,7 +96,6 @@ def substrait_producer_sql_test(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
-    created_tables: set,
     file_names: Iterable[str],
     sql_query: tuple,
     ibis_expr: Callable[[Table], Table],
@@ -119,8 +115,6 @@ def substrait_producer_sql_test(
             Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
-        created_tables:
-            Tables names that have already been created.
         file_names:
             List of parquet files.
         sql_query:
@@ -136,7 +130,7 @@ def substrait_producer_sql_test(
     supported_producers = sql_query[1]
 
     # Load the parquet files into DuckDB and return all the table names as a list
-    sql_query = producer.format_sql(created_tables, sql_query[0], file_names)
+    sql_query = producer.format_sql(sql_query[0], file_names)
 
     # Convert the SQL/Ibis expression to a substrait query plan
     if type(producer).__name__ == "IbisProducer":
@@ -165,7 +159,6 @@ def substrait_consumer_sql_test(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
-    created_tables: set,
     file_names: Iterable[str],
     sql_query: tuple,
     ibis_expr: Callable[[Table], Table],
@@ -184,8 +177,6 @@ def substrait_consumer_sql_test(
             Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
-        created_tables:
-            Tables names that have already been created.
         file_names:
             List of parquet files.
         sql_query:
@@ -197,7 +188,7 @@ def substrait_consumer_sql_test(
         consumer:
             Substrait consumer class.
     """
-    consumer.setup(db_con, created_tables, file_names)
+    consumer.setup(db_con, file_names)
 
     group, name = test_name.split(":")
     snopshot_dir = RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR

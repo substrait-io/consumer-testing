@@ -40,13 +40,13 @@ class IsthmusProducer(Producer):
 
         return substrait_plan_str
 
-    def format_sql(self, created_tables, sql_query, file_names):
+    def format_sql(self, sql_query, file_names):
         sql_query = sql_query.replace("'{}'", "{}")
         sql_query = sql_query.replace("'t'", "t")
         if len(file_names) > 0:
             self.file_names = file_names
             table_names = load_tables_from_parquet(
-                self._db_connection, created_tables, file_names
+                self._db_connection, file_names
             )
             sql_query = sql_query.format(*table_names)
         return sql_query

@@ -22,7 +22,6 @@ class TestDuckDBConsumer:
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
         cls.consumer = DuckDBConsumer(cls.db_connection)
-        cls.created_tables = set()
 
         yield
 
@@ -56,7 +55,7 @@ class TestDuckDBConsumer:
 
         # Load the parquet files into DuckDB and return all the table names as a list
         table_names = self.consumer.load_tables_from_parquet(
-            self.created_tables, file_names
+            file_names
         )
 
         # Format the sql query by inserting all the table names

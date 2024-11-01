@@ -35,7 +35,7 @@ COLUMN_D = [
 
 class Consumer(ABC):
     @abstractmethod
-    def setup(self, db_connection, created_tables, file_names: Iterable[str]):
+    def setup(self, db_connection, file_names: Iterable[str]):
         pass
 
     @abstractmethod
