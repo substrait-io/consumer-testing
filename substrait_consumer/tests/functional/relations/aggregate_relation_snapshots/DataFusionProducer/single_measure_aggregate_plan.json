@@ -45,7 +45,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "lineitem_small"
+                    "lineitem"
                   ]
                 }
               }
@@ -74,7 +74,7 @@
           }
         },
         "names": [
-          "count(lineitem_small.l_partkey)"
+          "count(lineitem.l_partkey)"
         ]
       }
     }

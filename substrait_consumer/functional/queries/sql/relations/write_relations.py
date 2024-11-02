@@ -5,14 +5,14 @@ from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 WRITE_RELATIONS = {
     "insert": (
         """
-        INSERT INTO '{}' (r_regionkey, r_name, r_comment)
+        INSERT INTO '{region}' (r_regionkey, r_name, r_comment)
         VALUES (99999, 'region_name', 'region comment');
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "update": (
         """
-        UPDATE '{}'
+        UPDATE '{customer}'
         SET c_address = 'Substait Avenue', c_phone = '123-456-7890'
         WHERE c_custkey = 1;
         """,
@@ -20,7 +20,7 @@ WRITE_RELATIONS = {
     ),
     "delete": (
         """
-        DELETE FROM '{}'
+        DELETE FROM '{customer}'
         WHERE c_custkey = 1;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],

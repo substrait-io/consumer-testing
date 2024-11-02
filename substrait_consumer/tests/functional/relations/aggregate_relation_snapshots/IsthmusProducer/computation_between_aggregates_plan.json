@@ -95,7 +95,7 @@
                         }
                       },
                       "namedTable": {
-                        "names": ["ORDERS_SMALL"]
+                        "names": ["ORDERS"]
                       }
                     }
                   },

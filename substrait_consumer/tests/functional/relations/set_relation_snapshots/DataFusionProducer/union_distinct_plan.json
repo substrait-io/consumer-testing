@@ -34,7 +34,7 @@
                           },
                           "namedTable": {
                             "names": [
-                              "customer_small"
+                              "customer"
                             ]
                           }
                         }
@@ -60,7 +60,7 @@
                               },
                               "namedTable": {
                                 "names": [
-                                  "nation_small"
+                                  "nation"
                                 ]
                               }
                             }

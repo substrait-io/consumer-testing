@@ -63,15 +63,16 @@ class TestAdhocExpression:
         nation,
         region,
     ) -> None:
-        adhoc_producer.set_db_connection(self.db_connection)
-        consumer.setup(self.db_connection, FILE_NAMES)
+        local_files = FILE_NAMES
+        named_tables = dict()
+        producer.setup(self.db_connection, local_files, named_tables)
+        consumer.setup(self.db_connection, local_files, named_tables)
 
         with open(SQL_FILE_PATH, "r") as f:
             sql_query = f.read()
 
         if not sql_query:
             raise ValueError("No SQL query.  Please write SQL into query.sql")
-        sql_query = adhoc_producer.format_sql(set(), sql_query, FILE_NAMES)
         substrait_plan = adhoc_producer.produce_substrait(
             sql_query,
             consumer,
@@ -92,7 +93,9 @@ class TestAdhocExpression:
                 )
 
         actual_result = consumer.run_substrait_query(substrait_plan)
-        expected_result = self.db_connection.query(f"{sql_query}").arrow()
+        duckdb_producer = DuckDBProducer()
+        duckdb_producer.setup(self.db_connection, local_files, named_tables)
+        expected_result = duckdb_producer.run_substrait_query(sql_query)
 
         verify_equals(
             actual_result.columns,

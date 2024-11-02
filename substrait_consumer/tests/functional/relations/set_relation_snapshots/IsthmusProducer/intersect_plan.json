@@ -62,7 +62,7 @@
                     }
                   },
                   "namedTable": {
-                    "names": ["CUSTOMER_SMALL"]
+                    "names": ["CUSTOMER"]
                   }
                 }
               },
@@ -115,7 +115,7 @@
                     }
                   },
                   "namedTable": {
-                    "names": ["NATION_SMALL"]
+                    "names": ["NATION"]
                   }
                 }
               },

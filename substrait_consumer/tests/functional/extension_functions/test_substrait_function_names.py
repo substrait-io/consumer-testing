@@ -1,16 +1,15 @@
 import json
-from typing import Callable, Iterable
+from typing import Callable
 
 import duckdb
 from ibis.expr.types.relations import Table
 from ibis_substrait.tests.compiler.conftest import *
 
-from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.functional import (
     arithmetic_configs, boolean_configs, comparison_configs, datetime_configs, logarithmic_configs, rounding_configs)
 from substrait_consumer.functional.common import check_subtrait_function_names, load_custom_duckdb_table
 from substrait_consumer.parametrization import custom_parametrization
-from substrait_consumer.producers.producer import load_tables_from_parquet
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -44,7 +43,8 @@ class TestSubstraitFunctionNames:
     def test_arithmetic_function_names(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -56,7 +56,8 @@ class TestSubstraitFunctionNames:
         """
         self.run_function_name_test(
             test_name,
-            file_names,
+            local_files,
+            named_tables,
             sql_query,
             ibis_expr,
             producer,
@@ -71,7 +72,8 @@ class TestSubstraitFunctionNames:
     def test_boolean_function_names(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -80,14 +82,15 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for boolean functions.
         """
         self.run_function_name_test(
-            test_name, file_names, sql_query, ibis_expr, producer, self.table_t
+            test_name, local_files, named_tables, sql_query, ibis_expr, producer, self.table_t
         )
 
     @custom_parametrization(comparison_configs.SCALAR_FUNCTIONS)
     def test_comparison_function_names(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -98,14 +101,15 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for comparison functions.
         """
         self.run_function_name_test(
-            test_name, file_names, sql_query, ibis_expr, producer, partsupp, nation
+            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp, nation
         )
 
     @custom_parametrization(datetime_configs.SCALAR_FUNCTIONS)
     def test_datetime_function_names(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -115,14 +119,15 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for datetime functions.
         """
         self.run_function_name_test(
-            test_name, file_names, sql_query, ibis_expr, producer, partsupp
+            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp
         )
 
     @custom_parametrization(logarithmic_configs.SCALAR_FUNCTIONS)
     def test_logarithmic_function_names(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -132,14 +137,15 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for logarithmic functions.
         """
         self.run_function_name_test(
-            test_name, file_names, sql_query, ibis_expr, producer, partsupp
+            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp
         )
 
     @custom_parametrization(rounding_configs.SCALAR_FUNCTIONS)
     def test_rounding_function_names(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -149,13 +155,14 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for rounding functions.
         """
         self.run_function_name_test(
-            test_name, file_names, sql_query, ibis_expr, producer, partsupp
+            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp
         )
 
     def run_function_name_test(
         self,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -169,8 +176,10 @@ class TestSubstraitFunctionNames:
         Parameters:
             test_name:
                 Expected function name as defined by the substrait spec.
-            file_names:
-                List of parquet files.
+            local_files:
+                A `dict` mapping format argument names to local files paths.
+            named_tables:
+                A `dict` mapping table names to local file paths.
             sql_query:
                 SQL query.
             ibis_expr:
@@ -178,28 +187,25 @@ class TestSubstraitFunctionNames:
             producer:
                 Substrait producer class.
             *args:
-                The data tables to be passed to the ibis expression.
+                The data named_tables to be passed to the ibis expression.
         """
 
-        producer.set_db_connection(self.db_connection)
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        sql_query = producer.format_sql(sql_query[0], file_names)
+        producer.setup(self.db_connection, local_files, named_tables)
 
         # Grab the json representation of the produced substrait plan to verify
         # the proper substrait function name.
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
-                substrait_plan = producer.produce_substrait(
+                substrait_plan_json = producer.produce_substrait(
                     sql_query, validate=False, ibis_expr=ibis_expr(*args)
                 )
-                substrait_plan = json.loads(substrait_plan)
             else:
                 pytest.skip("ibis expression currently undefined")
         else:
-            load_tables_from_parquet(self.db_connection, file_names)
-            substrait_json = self.db_connection.get_substrait_json(sql_query)
-            proto = substrait_json.fetchone()[0]
-            substrait_plan = json.loads(proto)
+            duckdb_producer = DuckDBProducer(self.db_connection)
+            duckdb_producer.setup(self.db_connection, local_files, named_tables)
+            substrait_plan_json = duckdb_producer.produce_substrait(sql_query[0])
 
+
+        substrait_plan = json.loads(substrait_plan_json)
         check_subtrait_function_names(substrait_plan, test_name)

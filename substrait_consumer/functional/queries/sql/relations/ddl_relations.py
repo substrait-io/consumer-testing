@@ -15,27 +15,27 @@ DDL_RELATIONS = {
     ),
     "drop_table": (
         """
-        DROP TABLE '{}';
+        DROP TABLE '{customer}';
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "alter_table": (
         """
-        ALTER TABLE '{}'
+        ALTER TABLE '{customer}'
         ADD email VARCHAR;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "alter_column": (
         """
-        ALTER TABLE '{}'
+        ALTER TABLE '{customer}'
         RENAME COLUMN c_address TO c_street_address;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "drop_column": (
         """
-        ALTER TABLE '{}'
+        ALTER TABLE '{customer}'
         DROP COLUMN c_address;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
@@ -47,7 +47,7 @@ DDL_RELATIONS = {
             C_CUSTKEY,
             C_NAME,
         FROM 
-            '{}';
+            '{customer}';
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
@@ -58,7 +58,7 @@ DDL_RELATIONS = {
             C_CUSTKEY,
             C_NAME,
         FROM 
-            '{}';
+            '{customer}';
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),

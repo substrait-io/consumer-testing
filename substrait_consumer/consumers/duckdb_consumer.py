@@ -1,15 +1,10 @@
 from __future__ import annotations
 
-import string
-from pathlib import Path
-from typing import Iterable
-
 import duckdb
 import pyarrow as pa
 
-from substrait_consumer.common import SubstraitUtils
-
 from .consumer import Consumer
+from substrait_consumer.producers.producer import load_named_tables
 
 
 class DuckDBConsumer(Consumer):
@@ -26,9 +21,9 @@ class DuckDBConsumer(Consumer):
         self.db_connection.execute("INSTALL substrait")
         self.db_connection.execute("LOAD substrait")
 
-    def setup(self, db_connection, file_names: Iterable[str]):
+    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
         self.db_connection = db_connection
-        self.load_tables_from_parquet(file_names)
+        load_named_tables(db_connection, named_tables)
 
     def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """
@@ -42,31 +37,3 @@ class DuckDBConsumer(Consumer):
             A pyarrow table resulting from running the substrait query plan.
         """
         return self.db_connection.from_substrait_json(substrait_query).arrow()
-
-    def load_tables_from_parquet(
-        self,
-        file_names: Iterable[str],
-    ) -> list:
-        """
-        Load all the parquet files into separate tables in DuckDB.
-
-        Parameters:
-            file_names:
-                Name of parquet files.
-
-        Returns:
-            A list of the table names.
-        """
-        parquet_file_paths = SubstraitUtils.get_full_path(file_names)
-        table_names = []
-        for file_name, file_path in zip(file_names, parquet_file_paths):
-            table_name = Path(file_name).stem
-            try:
-                self.db_connection.execute(f"DROP TABLE {table_name}")
-            except:
-                pass
-            create_table_sql = f"CREATE TABLE {table_name} AS SELECT * FROM read_parquet('{file_path}');"
-            self.db_connection.execute(create_table_sql)
-            table_names.append(table_name)
-
-        return table_names

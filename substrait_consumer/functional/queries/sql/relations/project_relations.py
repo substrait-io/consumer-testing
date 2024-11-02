@@ -6,28 +6,28 @@ PROJECT_RELATIONS = {
     "project_single_col": (
         """
         SELECT *
-        FROM '{}'
+        FROM '{lineitem}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "project_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "project_all_col": (
         """
         SELECT *
-        FROM '{}'
+        FROM '{region}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "extended_project": (
         """
         SELECT L_QUANTITY, L_EXTENDEDPRICE*10 AS MULTI_PRICE
-        FROM '{}'
+        FROM '{lineitem}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
@@ -35,24 +35,24 @@ PROJECT_RELATIONS = {
         """
         SELECT C_CUSTKEY,
            (SELECT SUM(O_TOTALPRICE) 
-               FROM {}
+               FROM '{orders}'
                WHERE C_CUSTKEY = O_CUSTKEY) 
                  AS total_price
-           FROM {}
+           FROM '{customer}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "distinct_in_project": (
         """
         SELECT DISTINCT L_LINESTATUS
-        FROM '{}'
+        FROM '{lineitem}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "count_distinct_in_project": (
         """
         SELECT COUNT(DISTINCT L_EXTENDEDPRICE)
-        FROM '{}'
+        FROM '{lineitem}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),

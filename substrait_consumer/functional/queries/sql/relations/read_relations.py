@@ -5,7 +5,7 @@ from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 READ_RELATIONS = {
     "read_named_table": (
         """
-        SELECT PS_PARTKEY FROM '{}'
+        SELECT PS_PARTKEY FROM '{partsupp}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
@@ -29,7 +29,7 @@ READ_RELATIONS = {
     ),
     "duckdb_read_local_file": (
         """
-        SELECT * FROM read_parquet('{}');
+        SELECT * FROM read_parquet('{customer_file_path}');
         """,
         [DuckDBProducer],
     ),

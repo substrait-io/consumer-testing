@@ -6,35 +6,35 @@ AGGREGATE_RELATIONS = {
     "single_measure_aggregate": (
         """
         SELECT COUNT(L_PARTKEY)
-        FROM '{}'
+        FROM '{lineitem}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "multiple_measure_aggregate": (
         """
         SELECT MIN(O_TOTALPRICE), MAX(O_TOTALPRICE), AVG(O_TOTALPRICE)
-        FROM '{}'
+        FROM '{orders}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "aggregate_with_computation": (
         """
         SELECT AVG(O_TOTALPRICE) * 10
-        FROM '{}'
+        FROM '{orders}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "compute_within_aggregate": (
         """
         SELECT AVG(O_TOTALPRICE * 10)
-        FROM '{}'
+        FROM '{orders}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "computation_between_aggregates": (
         """
         SELECT AVG(O_TOTALPRICE) + MAX(O_TOTALPRICE)
-        FROM '{}'
+        FROM '{orders}'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
@@ -42,15 +42,15 @@ AGGREGATE_RELATIONS = {
         """
         
         SELECT O_TOTALPRICE
-        FROM '{}'
-        WHERE O_TOTALPRICE <= (SELECT AVG(O_TOTALPRICE) FROM '{}')
+        FROM '{orders}'
+        WHERE O_TOTALPRICE <= (SELECT AVG(O_TOTALPRICE) FROM '{orders}')
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
     "aggregate_with_group_by": (
         """
         SELECT L_ORDERKEY, L_LINENUMBER, count(*)
-        FROM '{}'
+        FROM '{lineitem}'
         GROUP BY L_ORDERKEY, L_LINENUMBER
         ORDER BY L_ORDERKEY, L_LINENUMBER
         """,
@@ -59,7 +59,7 @@ AGGREGATE_RELATIONS = {
     "aggregate_with_group_by_cube": (
         """
         SELECT L_ORDERKEY, L_LINENUMBER, count(*)
-        FROM '{}'
+        FROM '{lineitem}'
         GROUP BY CUBE(L_ORDERKEY, L_LINENUMBER)
         ORDER BY L_ORDERKEY, L_LINENUMBER
         """,
@@ -69,7 +69,7 @@ AGGREGATE_RELATIONS = {
         """
     
         SELECT L_ORDERKEY, L_LINENUMBER, count(*)
-        FROM '{}'
+        FROM '{lineitem}'
         GROUP BY ROLLUP(L_ORDERKEY, L_LINENUMBER)
         ORDER BY L_ORDERKEY, L_LINENUMBER
         """,
@@ -79,7 +79,7 @@ AGGREGATE_RELATIONS = {
         """
     
         SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER, L_ORDERKEY
-        FROM '{}'
+        FROM '{lineitem}'
         GROUP BY GROUPING SETS 
         (
         (L_LINENUMBER),

@@ -5,7 +5,7 @@ SQL_SCALAR = {
     "ceil": (
         """
         SELECT PS_SUPPLYCOST, ceil(CAST(PS_SUPPLYCOST AS DOUBLE)) AS CEIL_SUPPLYCOST
-        FROM '{}'
+        FROM '{partsupp}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -13,7 +13,7 @@ SQL_SCALAR = {
     "floor": (
         """
         SELECT PS_SUPPLYCOST, floor(CAST(PS_SUPPLYCOST AS DOUBLE)) AS FLOOR_SUPPLYCOST
-        FROM '{}'
+        FROM '{partsupp}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -21,7 +21,7 @@ SQL_SCALAR = {
     "round": (
         """
         SELECT L_EXTENDEDPRICE, round(CAST(L_EXTENDEDPRICE AS DOUBLE), 1) AS ROUND_EXTENDEDPRICE
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],

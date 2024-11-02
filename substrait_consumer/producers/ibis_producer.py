@@ -1,5 +1,5 @@
 
-from .producer import Producer, load_tables_from_parquet
+from .producer import Producer, load_named_tables
 
 import duckdb
 import pytest
@@ -21,10 +21,11 @@ class IbisProducer(Producer):
         self._db_connection.execute("INSTALL substrait")
         self._db_connection.execute("LOAD substrait")
 
-    def set_db_connection(self, db_connection):
+    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
         self._db_connection = db_connection
+        load_named_tables(self._db_connection, named_tables)
 
-    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
         """
         Produce the Ibis substrait plan using the given Ibis expression
 
@@ -41,14 +42,6 @@ class IbisProducer(Producer):
         tpch_proto_bytes = compiler.compile(ibis_expr)
         substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
         return substrait_plan
-
-    def format_sql(self, sql_query, file_names):
-        if len(file_names) > 0:
-            table_names = load_tables_from_parquet(
-                self._db_connection, file_names
-            )
-            sql_query = sql_query.format(*table_names)
-        return sql_query
 
     def name(self):
         return "IbisProducer"

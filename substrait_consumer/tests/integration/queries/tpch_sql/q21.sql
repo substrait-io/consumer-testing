@@ -2,7 +2,7 @@ SELECT
     s_name,
     count(*) AS numwait
 FROM
-    '{}', '{}' l1, '{}', '{}'
+    '{supplier}', '{lineitem}' l1, '{orders}', '{nation}'
 WHERE
     s_suppkey = l1.l_suppkey
     AND o_orderkey = l1.l_orderkey
@@ -12,7 +12,7 @@ WHERE
         SELECT
             *
         FROM
-            '{}' l2
+            '{lineitem}' l2
         WHERE
             l2.l_orderkey = l1.l_orderkey
             AND l2.l_suppkey <> l1.l_suppkey)
@@ -20,7 +20,7 @@ WHERE
         SELECT
             *
         FROM
-            '{}' l3
+            '{lineitem}' l3
         WHERE
             l3.l_orderkey = l1.l_orderkey
             AND l3.l_suppkey <> l1.l_suppkey

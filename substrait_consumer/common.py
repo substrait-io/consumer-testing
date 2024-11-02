@@ -44,67 +44,16 @@ class SubstraitUtils:
     """
 
     @staticmethod
-    def get_full_path(file_names: Iterable[str]) -> list[str]:
+    def compute_full_paths(local_files: dict[str, str]) -> dict[str, str]:
         """
-        Get full paths for the TPCH parquet data.
+        Get the full paths for the given local files.
 
         Parameters:
-            file_names:
-                List of TPCH parquet data file names provided by the test case.
+            local_files:
+                A `dict` mapping format argument names to local files paths.
 
         Returns:
-            List of full paths.
+            A `dict` where the paths are expanded to absolute paths.
         """
         data_dir = CUR_DIR / "data" / "tpch_parquet"
-        full_paths_list = [f"{data_dir}/{dataset}" for dataset in file_names]
-
-        return full_paths_list
-
-    def format_sql_query(self, sql_query: str, file_names: list[str]) -> str:
-        """
-        Replace the 'Table' Parameters from the SQL query with the relative
-        file paths of the parquet data.
-
-        Parameters:
-            sql_query:
-                SQL query.
-            file_names:
-                List of file names.
-
-        Returns:
-            SQL Query with file paths.
-        """
-        sql_commands_list = [line.strip() for line in sql_query.strip().split("\n")]
-        sql_query = " ".join(sql_commands_list)
-        # Get full path for all datasets used in the query
-        parquet_file_paths = self.get_full_path(file_names)
-
-        return sql_query.format(*parquet_file_paths)
-
-    def format_substrait_query(
-        self, substrait_query: str, file_names: list[str]
-    ) -> str:
-        """
-        Replace the 'local_files' path in the substrait query plan with
-        the full path of the parquet data.
-
-        Parameters:
-            substrait_query:
-                Substrait query.
-            file_names:
-                List of file names.
-
-        Returns:
-            Substrait query plan in byte format.
-        """
-        # Get full path for all datasets used in the query
-        parquet_file_paths = self.get_full_path(file_names)
-
-        # Replace the filename placeholder in the substrait query plan with
-        # the proper parquet data file paths.
-        for count, file_path in enumerate(parquet_file_paths):
-            substrait_query = substrait_query.replace(
-                f"FILENAME_PLACEHOLDER_{count}", file_path
-            )
-
-        return substrait_query
+        return {k: f"{data_dir}/{v}" for k, v in local_files.items()}

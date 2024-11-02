@@ -6,13 +6,13 @@ SELECT
     o_totalprice,
     sum(l_quantity)
 FROM
-    '{}', '{}', '{}'
+    '{customer}', '{orders}', '{lineitem}'
 WHERE
     o_orderkey IN (
         SELECT
             l_orderkey
         FROM
-            '{}'
+            '{lineitem}'
         GROUP BY
             l_orderkey
         HAVING

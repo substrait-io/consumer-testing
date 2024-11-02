@@ -113,96 +113,6 @@
                                             }
                                           },
                                           "baseSchema": {
-                                            "names": ["L_ORDERKEY", "L_PARTKEY", "L_SUPPKEY", "L_LINENUMBER", "L_QUANTITY", "L_EXTENDEDPRICE", "L_DISCOUNT", "L_TAX", "L_RETURNFLAG", "L_LINESTATUS", "L_SHIPDATE", "L_COMMITDATE", "L_RECEIPTDATE", "L_SHIPINSTRUCT", "L_SHIPMODE", "L_COMMENT"],
-                                            "struct": {
-                                              "types": [{
-                                                "i64": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "i64": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "i64": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "i64": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "decimal": {
-                                                  "scale": 2,
-                                                  "precision": 15,
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "decimal": {
-                                                  "scale": 2,
-                                                  "precision": 15,
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "decimal": {
-                                                  "scale": 2,
-                                                  "precision": 15,
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "decimal": {
-                                                  "scale": 2,
-                                                  "precision": 15,
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "date": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "date": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "date": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }, {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              }],
-                                              "nullability": "NULLABILITY_REQUIRED"
-                                            }
-                                          },
-                                          "namedTable": {
-                                            "names": ["LINEITEM"]
-                                          }
-                                        }
-                                      },
-                                      "right": {
-                                        "read": {
-                                          "common": {
-                                            "direct": {
-                                            }
-                                          },
-                                          "baseSchema": {
                                             "names": ["C_CUSTKEY", "C_NAME", "C_ADDRESS", "C_NATIONKEY", "C_PHONE", "C_ACCTBAL", "C_MKTSEGMENT", "C_COMMENT"],
                                             "struct": {
                                               "types": [{
@@ -247,6 +157,62 @@
                                             "names": ["CUSTOMER"]
                                           }
                                         }
+                                      },
+                                      "right": {
+                                        "read": {
+                                          "common": {
+                                            "direct": {
+                                            }
+                                          },
+                                          "baseSchema": {
+                                            "names": ["O_ORDERKEY", "O_CUSTKEY", "O_ORDERSTATUS", "O_TOTALPRICE", "O_ORDERDATE", "O_ORDERPRIORITY", "O_CLERK", "O_SHIPPRIORITY", "O_COMMENT"],
+                                            "struct": {
+                                              "types": [{
+                                                "i64": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "i64": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "string": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "decimal": {
+                                                  "scale": 2,
+                                                  "precision": 15,
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "date": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "string": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "string": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "i32": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }, {
+                                                "string": {
+                                                  "nullability": "NULLABILITY_REQUIRED"
+                                                }
+                                              }],
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          },
+                                          "namedTable": {
+                                            "names": ["ORDERS"]
+                                          }
+                                        }
                                       }
                                     }
                                   },
@@ -257,7 +223,7 @@
                                         }
                                       },
                                       "baseSchema": {
-                                        "names": ["O_ORDERKEY", "O_CUSTKEY", "O_ORDERSTATUS", "O_TOTALPRICE", "O_ORDERDATE", "O_ORDERPRIORITY", "O_CLERK", "O_SHIPPRIORITY", "O_COMMENT"],
+                                        "names": ["L_ORDERKEY", "L_PARTKEY", "L_SUPPKEY", "L_LINENUMBER", "L_QUANTITY", "L_EXTENDEDPRICE", "L_DISCOUNT", "L_TAX", "L_RETURNFLAG", "L_LINESTATUS", "L_SHIPDATE", "L_COMMITDATE", "L_RECEIPTDATE", "L_SHIPINSTRUCT", "L_SHIPMODE", "L_COMMENT"],
                                         "struct": {
                                           "types": [{
                                             "i64": {
@@ -268,13 +234,51 @@
                                               "nullability": "NULLABILITY_REQUIRED"
                                             }
                                           }, {
-                                            "string": {
+                                            "i64": {
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "i64": {
                                               "nullability": "NULLABILITY_REQUIRED"
                                             }
                                           }, {
                                             "decimal": {
                                               "scale": 2,
                                               "precision": 15,
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "decimal": {
+                                              "scale": 2,
+                                              "precision": 15,
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "decimal": {
+                                              "scale": 2,
+                                              "precision": 15,
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "decimal": {
+                                              "scale": 2,
+                                              "precision": 15,
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "string": {
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "string": {
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "date": {
+                                              "nullability": "NULLABILITY_REQUIRED"
+                                            }
+                                          }, {
+                                            "date": {
                                               "nullability": "NULLABILITY_REQUIRED"
                                             }
                                           }, {
@@ -290,10 +294,6 @@
                                               "nullability": "NULLABILITY_REQUIRED"
                                             }
                                           }, {
-                                            "i32": {
-                                              "nullability": "NULLABILITY_REQUIRED"
-                                            }
-                                          }, {
                                             "string": {
                                               "nullability": "NULLABILITY_REQUIRED"
                                             }
@@ -302,7 +302,7 @@
                                         }
                                       },
                                       "namedTable": {
-                                        "names": ["ORDERS"]
+                                        "names": ["LINEITEM"]
                                       }
                                     }
                                   }
@@ -329,7 +329,7 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
-                                                  "field": 22
+                                                  "field": 6
                                                 }
                                               },
                                               "rootReference": {
@@ -359,7 +359,6 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
-                                                  "field": 16
                                                 }
                                               },
                                               "rootReference": {
@@ -371,7 +370,7 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
-                                                  "field": 25
+                                                  "field": 9
                                                 }
                                               },
                                               "rootReference": {
@@ -395,6 +394,7 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
+                                                  "field": 17
                                                 }
                                               },
                                               "rootReference": {
@@ -406,7 +406,7 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
-                                                  "field": 24
+                                                  "field": 8
                                                 }
                                               },
                                               "rootReference": {
@@ -430,7 +430,7 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
-                                                  "field": 28
+                                                  "field": 12
                                                 }
                                               },
                                               "rootReference": {
@@ -470,7 +470,7 @@
                                             "selection": {
                                               "directReference": {
                                                 "structField": {
-                                                  "field": 10
+                                                  "field": 27
                                                 }
                                               },
                                               "rootReference": {
@@ -505,6 +505,7 @@
                             "selection": {
                               "directReference": {
                                 "structField": {
+                                  "field": 17
                                 }
                               },
                               "rootReference": {
@@ -514,7 +515,7 @@
                             "selection": {
                               "directReference": {
                                 "structField": {
-                                  "field": 28
+                                  "field": 12
                                 }
                               },
                               "rootReference": {
@@ -524,7 +525,7 @@
                             "selection": {
                               "directReference": {
                                 "structField": {
-                                  "field": 31
+                                  "field": 15
                                 }
                               },
                               "rootReference": {
@@ -545,7 +546,7 @@
                                   "selection": {
                                     "directReference": {
                                       "structField": {
-                                        "field": 5
+                                        "field": 22
                                       }
                                     },
                                     "rootReference": {
@@ -586,7 +587,7 @@
                                         "selection": {
                                           "directReference": {
                                             "structField": {
-                                              "field": 6
+                                              "field": 23
                                             }
                                           },
                                           "rootReference": {

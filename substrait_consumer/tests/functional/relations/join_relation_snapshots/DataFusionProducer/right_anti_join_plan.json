@@ -39,7 +39,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "orders_small"
+                    "orders"
                   ]
                 }
               }
@@ -75,7 +75,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "lineitem_small"
+                    "lineitem"
                   ]
                 }
               }

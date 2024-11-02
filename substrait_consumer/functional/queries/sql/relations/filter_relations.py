@@ -6,7 +6,7 @@ FILTER_RELATIONS = {
     "where_equal_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_DISCOUNT = L_TAX
         ORDER BY L_DISCOUNT
         LIMIT 20;
@@ -16,7 +16,7 @@ FILTER_RELATIONS = {
     "where_not_equal_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_DISCOUNT != L_TAX
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
@@ -26,7 +26,7 @@ FILTER_RELATIONS = {
     "where_gt_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_DISCOUNT > L_TAX
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
@@ -36,7 +36,7 @@ FILTER_RELATIONS = {
     "where_gte_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_DISCOUNT >= L_TAX
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
@@ -46,7 +46,7 @@ FILTER_RELATIONS = {
     "where_lt_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_DISCOUNT < L_TAX
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
@@ -56,7 +56,7 @@ FILTER_RELATIONS = {
     "where_lte_multi_col": (
         """
         SELECT L_DISCOUNT, L_TAX
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_DISCOUNT <= L_TAX
         ORDER BY L_DISCOUNT, L_TAX
         LIMIT 20;
@@ -66,7 +66,7 @@ FILTER_RELATIONS = {
     "where_like": (
         """
         SELECT L_SHIPINSTRUCT, L_ORDERKEY
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_SHIPINSTRUCT LIKE '%DELIVER IN PERSON%'
         ORDER BY L_ORDERKEY
         LIMIT 20;
@@ -76,7 +76,7 @@ FILTER_RELATIONS = {
     "where_between": (
         """
         SELECT L_ORDERKEY
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_ORDERKEY BETWEEN 20 AND 50
         LIMIT 20;
         """,
@@ -85,7 +85,7 @@ FILTER_RELATIONS = {
     "where_in": (
         """
         SELECT L_ORDERKEY
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_ORDERKEY IN (1, 2, 3)
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
@@ -93,7 +93,7 @@ FILTER_RELATIONS = {
     "where_or": (
         """
         SELECT L_ORDERKEY, L_SHIPINSTRUCT
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_ORDERKEY = 2 OR L_ORDERKEY = 3
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
@@ -101,7 +101,7 @@ FILTER_RELATIONS = {
     "where_and": (
         """
         SELECT L_ORDERKEY, L_SHIPINSTRUCT
-        FROM '{}'
+        FROM '{lineitem}'
         WHERE L_ORDERKEY = 2 AND L_SHIPINSTRUCT = 'TAKE BACK RETURN'
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
@@ -109,7 +109,7 @@ FILTER_RELATIONS = {
     "having": (
         """
         SELECT L_QUANTITY, COUNT(*)
-        FROM '{}'
+        FROM '{lineitem}'
         GROUP BY L_QUANTITY
         HAVING COUNT(*) > 12100
         ORDER BY L_QUANTITY

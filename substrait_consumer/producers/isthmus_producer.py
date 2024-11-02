@@ -1,5 +1,7 @@
+import re
+
 import duckdb
-from .producer import Producer, load_tables_from_parquet
+from .producer import Producer, load_named_tables
 from ibis_substrait.compiler.core import SubstraitCompiler
 
 from substrait_consumer.context import get_schema, produce_isthmus_substrait
@@ -18,12 +20,14 @@ class IsthmusProducer(Producer):
         self._db_connection.execute("INSTALL substrait")
         self._db_connection.execute("LOAD substrait")
         self.compiler = SubstraitCompiler()
-        self.file_names = None
+        self.table_names = None
 
-    def set_db_connection(self, db_connection):
+    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
         self._db_connection = db_connection
+        self.table_names = list(named_tables.keys())
+        load_named_tables(self._db_connection, named_tables)
 
-    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
         """
         Produce the Isthmus substrait plan using the given SQL query.
 
@@ -35,21 +39,14 @@ class IsthmusProducer(Producer):
         Returns:
             Substrait query plan in json format.
         """
-        schema_list = get_schema(self.file_names)
+        schema_list = get_schema(self.table_names)
         substrait_plan_str = produce_isthmus_substrait(sql_query, schema_list, validate)
 
         return substrait_plan_str
 
-    def format_sql(self, sql_query, file_names):
-        sql_query = sql_query.replace("'{}'", "{}")
-        sql_query = sql_query.replace("'t'", "t")
-        if len(file_names) > 0:
-            self.file_names = file_names
-            table_names = load_tables_from_parquet(
-                self._db_connection, file_names
-            )
-            sql_query = sql_query.format(*table_names)
-        return sql_query
+    def _format_sql(self, sql_query):
+        sql_query = re.sub(r"'(\{[0-9a-zA-Z_]+\})'", r"\1", sql_query)
+        return sql_query.replace("'t'", "t")
 
     def name(self):
         return "IsthmusProducer"

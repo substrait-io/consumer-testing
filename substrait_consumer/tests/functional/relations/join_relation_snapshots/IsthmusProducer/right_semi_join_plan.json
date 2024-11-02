@@ -76,7 +76,7 @@
                     }
                   },
                   "namedTable": {
-                    "names": ["ORDERS_SMALL"]
+                    "names": ["ORDERS"]
                   }
                 }
               },
@@ -138,7 +138,7 @@
                               }
                             },
                             "namedTable": {
-                              "names": ["CUSTOMER_SMALL"]
+                              "names": ["CUSTOMER"]
                             }
                           }
                         },

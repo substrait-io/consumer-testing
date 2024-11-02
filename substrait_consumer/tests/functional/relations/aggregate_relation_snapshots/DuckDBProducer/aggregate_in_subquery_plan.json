@@ -116,7 +116,7 @@
                         },
                         "namedTable": {
                           "names": [
-                            "orders_small"
+                            "orders"
                           ]
                         }
                       }
@@ -206,7 +206,7 @@
                                     },
                                     "namedTable": {
                                       "names": [
-                                        "orders_small"
+                                        "orders"
                                       ]
                                     }
                                   }
