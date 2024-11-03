@@ -8,4 +8,4 @@ RUN pip install --upgrade pip setuptools pytest pytest-snapshot substrait==0.8.0
 WORKDIR /substrait_consumer
 COPY . .
 
-CMD /usr/bin/python -mpytest -m produce_substrait_snapshot --producer=IbisProducer substrait_consumer/tests/functional/extension_functions
+CMD /usr/bin/python -mpytest -m produce_substrait_snapshot --producer=ibis substrait_consumer/tests/functional/extension_functions

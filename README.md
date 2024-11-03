@@ -238,7 +238,7 @@ pytest -m produce_substrait_snapshot --snapshot-update
 You can update the snapshots from a single producer with the `--producer` option as well as
 for a single test by specifying the test file:
 ```commandline
-pytest -m produce_substrait_snapshot --producer IsthmusProducer --snapshot-update test_arithmetic_functions.py
+pytest -m produce_substrait_snapshot --producer isthmus --snapshot-update test_arithmetic_functions.py
 ```
 
 
@@ -272,21 +272,21 @@ If you are testing out an SQL query, copy your SQL query into `substrait_consume
 and run the following command (make sure to specify a producer that can convert SQL to Substrait):
 ```commandline
 cd substrait_consumer/tests/adhoc
-pytest --adhoc_producer=IsthmusProducer test_adhoc_expression.py
+pytest --adhoc_producer=isthmus test_adhoc_expression.py
 ```
 
 If you are testing out an Ibis expression, copy your Ibis expression into 
 `substrait_consumer/tests/adhoc/ibis_expr.py` and run the following command:
 ```commandline
 cd substrait_consumer/tests/adhoc
-pytest --adhoc_producer=IbisProducer test_adhoc_expression.py
+pytest --adhoc_producer=ibis test_adhoc_expression.py
 ```
 *Note: If you're using the IbisProducer, make sure you do not edit the function name and arguments
 already in line 2 of `ibis_expr.py`.  The test is expecting the specific name and arguments.
 
 You can save the produced substrait plans with the `--saveplan` option.
 ```commandline
-pytest --saveplan True --adhoc_producer=IsthmusProducer test_adhoc_expression.py
+pytest --saveplan True --adhoc_producer=isthmus test_adhoc_expression.py
 ```
 Plans will be saved as {producer_name}_substrait.json
 ```commandline
@@ -297,7 +297,7 @@ IsthmusProducer_substrait.json
 If you want to run the tests using specific producer/consumer pairs, you can use 
 the both the `--adhoc_producer` and `--consumer` options.
 ```commandline
-pytest --adhoc_producer=IsthmusProducer --consumer=AceroConsumer test_adhoc_expression.py
+pytest --adhoc_producer=isthmus --consumer=acero test_adhoc_expression.py
 ```
 
 

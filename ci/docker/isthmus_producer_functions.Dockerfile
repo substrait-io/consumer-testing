@@ -21,4 +21,4 @@ COPY . .
 
 CMD git submodule update --init \
 && ./build-and-copy-isthmus-shadow-jar.sh \
-&& /usr/bin/python -mpytest -m produce_substrait_snapshot --producer=IsthmusProducer substrait_consumer/tests/functional/extension_functions
+&& /usr/bin/python -mpytest -m produce_substrait_snapshot --producer=isthmus substrait_consumer/tests/functional/extension_functions

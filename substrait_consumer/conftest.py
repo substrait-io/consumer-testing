@@ -58,23 +58,23 @@ def pytest_addoption(parser):
     parser.addoption(
         "--consumer",
         action="store",
-        default=",".join([x.__name__ for x in CONSUMERS]),
+        default=",".join(CONSUMERS.keys()),
         help=f"A comma separated list of consumers to run against.",
-        choices=[x.__name__ for x in CONSUMERS],
+        choices=CONSUMERS.keys(),
     )
     parser.addoption(
         "--producer",
         action="store",
-        default=",".join([x.__name__ for x in PRODUCERS]),
+        default=",".join(PRODUCERS.keys()),
         help="A comma separated list of producers to run against.",
-        choices=[x.__name__ for x in PRODUCERS],
+        choices=PRODUCERS.keys(),
     )
     parser.addoption(
         "--adhoc_producer",
         action="store",
         default="",
         help="A comma separated list of producers to run against.",
-        choices=[x.__name__ for x in PRODUCERS],
+        choices=PRODUCERS.keys(),
     )
     parser.addoption(
         "--saveplan",
@@ -89,52 +89,53 @@ def saveplan(request):
     return request.config.getoption("--saveplan")
 
 
-PRODUCERS = [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer]
-CONSUMERS = [AceroConsumer, DataFusionConsumer, DuckDBConsumer]
+PRODUCERS = {
+    "datafusion": DataFusionProducer,
+    "duckdb": DuckDBProducer,
+    "ibis": IbisProducer,
+    "isthmus": IsthmusProducer,
+}
+CONSUMERS = {
+    "acero": AceroConsumer,
+    "datafusion": DataFusionConsumer,
+    "duckdb": DuckDBConsumer,
+}
 
 
-def _get_consumers():
-    return [cls for cls in CONSUMERS]
-
-
-def _get_producers():
-    return [cls for cls in PRODUCERS]
-
-
-@pytest.fixture(params=_get_consumers(), scope="session")
+@pytest.fixture(params=CONSUMERS.keys(), scope="session")
 def consumer(request):
-    consumers_list = request.config.option.consumer.split(",")
-    consumer = request.param()
-    if type(consumer).__name__ in consumers_list:
-        return consumer
+    requested_consumers = request.config.option.consumer.split(",")
+    consumer_name = request.param
+    if consumer_name in requested_consumers:
+        return CONSUMERS[consumer_name]()
     else:
         pytest.skip(
-            f"Skipping consumer: '{type(consumer).__name__})', "
-            f"the specified consumers are: {consumers_list}"
+            f"Skipping consumer: '{consumer_name})', "
+            f"the specified consumers are: {requested_consumers}"
         )
 
 
-@pytest.fixture(params=_get_producers(), scope="session")
+@pytest.fixture(params=PRODUCERS.keys(), scope="session")
 def producer(request):
-    producers_list = request.config.option.producer.split(",")
-    producer = request.param()
-    if type(producer).__name__ in producers_list:
-        return producer
+    requested_producers = request.config.option.producer.split(",")
+    producer_name = request.param
+    if producer_name in requested_producers:
+        return PRODUCERS[producer_name]()
     else:
         pytest.skip(
-            f"Skipping producer: '{type(producer).__name__})', "
-            f"the specified producers are: {producers_list}"
+            f"Skipping producer: '{producer_name})', "
+            f"the specified producers are: {requested_producers}"
         )
 
 
-@pytest.fixture(params=_get_producers(), scope="session")
+@pytest.fixture(params=PRODUCERS.keys(), scope="session")
 def adhoc_producer(request):
-    producers_list = request.config.option.adhoc_producer.split(",")
-    producer = request.param()
-    if type(producer).__name__ in producers_list:
-        return producer
+    requested_producers = request.config.option.adhoc_producer.split(",")
+    producer_name = request.param
+    if producer_name in requested_producers:
+        return PRODUCERS[producer_name]()
     else:
         pytest.skip(
-            f"Skipping producer: '{type(producer).__name__})', "
-            f"the specified producers are: {producers_list}"
+            f"Skipping producer: '{producer_name})', "
+            f"the specified producers are: {requested_producers}"
         )
