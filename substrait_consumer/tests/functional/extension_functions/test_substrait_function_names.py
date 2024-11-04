@@ -191,7 +191,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan = producer.produce_substrait(
-                    sql_query, DuckDBConsumer, ibis_expr(*args)
+                    sql_query, validate=False, ibis_expr=ibis_expr(*args)
                 )
                 substrait_plan = json.loads(substrait_plan)
             else:
