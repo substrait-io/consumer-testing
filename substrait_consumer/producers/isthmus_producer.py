@@ -23,7 +23,7 @@ class IsthmusProducer(Producer):
     def set_db_connection(self, db_connection):
         self._db_connection = db_connection
 
-    def produce_substrait(self, sql_query: str, validate=False, ibis_expr: str=None) -> str:
+    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
         """
         Produce the Isthmus substrait plan using the given SQL query.
 

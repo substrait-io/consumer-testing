@@ -12,7 +12,7 @@ class Producer(ABC):
         pass
 
     @abstractmethod
-    def produce_substrait(self, sql_query: str, ibis_expr: str = None) -> str:
+    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
         pass
 
     @abstractmethod

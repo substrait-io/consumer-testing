@@ -135,7 +135,7 @@ def substrait_producer_sql_test(
     # Convert the SQL/Ibis expression to a substrait query plan
     if type(producer).__name__ == "IbisProducer":
         if ibis_expr:
-            substrait_plan = producer.produce_substrait(sql_query, ibis_expr(*args))
+            substrait_plan = producer.produce_substrait(sql_query, validate, ibis_expr(*args))
         else:
             pytest.xfail("ibis expression currently undefined")
     else:
