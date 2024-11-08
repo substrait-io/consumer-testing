@@ -169,14 +169,22 @@ TPCH_QUERY_TESTS = (
     {
         "test_name": "test_tpch_sql_16",
         "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet", "part": "part.parquet", "supplier": "supplier.parquet"},
+        "named_tables": {
+            "partsupp": "partsupp.parquet",
+            "part": "part.parquet",
+            "supplier": "supplier.parquet",
+        },
         "sql_query": get_sql("q16.sql"),
         "substrait_query": get_substrait_plan("query_16_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_17",
         "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet", "part": "part.parquet", "lineitem": "lineitem.parquet"},
+        "named_tables": {
+            "lineitem": "lineitem.parquet",
+            "part": "part.parquet",
+            "lineitem": "lineitem.parquet",
+        },
         "sql_query": get_sql("q17.sql"),
         "substrait_query": get_substrait_plan("query_17_plan.json"),
     },
@@ -229,7 +237,11 @@ TPCH_QUERY_TESTS = (
     {
         "test_name": "test_tpch_sql_22",
         "local_files": {},
-        "named_tables": {"customer": "customer.parquet", "customer": "customer.parquet", "orders": "orders.parquet"},
+        "named_tables": {
+            "customer": "customer.parquet",
+            "customer": "customer.parquet",
+            "orders": "orders.parquet",
+        },
         "sql_query": get_sql("q22.sql"),
         "substrait_query": get_substrait_plan("query_22_plan.json"),
     },

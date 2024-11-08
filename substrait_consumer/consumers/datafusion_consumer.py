@@ -19,7 +19,9 @@ class DataFusionConsumer(Consumer):
     def __init__(self):
         self._ctx = SessionContext()
 
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         for table_name, file_path in named_tables.items():
             if self._ctx.table_exist(table_name):
                 self._ctx.deregister_table(table_name)

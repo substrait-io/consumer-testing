@@ -8,11 +8,11 @@ from substrait_consumer.common import SubstraitUtils
 
 class Producer(ABC):
     def __init__(
-            self,
-            db_connection: Optional[DuckDBPyConnection] = None,
-            local_files: Optional[dict[str, str]] = None,
-            named_tables: Optional[dict[str, str]] = None,
-            ):
+        self,
+        db_connection: Optional[DuckDBPyConnection] = None,
+        local_files: Optional[dict[str, str]] = None,
+        named_tables: Optional[dict[str, str]] = None,
+    ):
         if db_connection is None:
             db_connection = DuckDBPyConnection()
         if local_files is None:
@@ -22,11 +22,11 @@ class Producer(ABC):
         self.setup(db_connection, local_files, named_tables)
 
     def setup(
-            self,
-            db_connection: DuckDBPyConnection,
-            local_files: dict[str, str],
-            named_tables: dict[str, str],
-            ):
+        self,
+        db_connection: DuckDBPyConnection,
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
+    ):
         """
         Initializes this `Producer` instance.
 
@@ -47,7 +47,9 @@ class Producer(ABC):
         self._named_tables = SubstraitUtils.compute_full_paths(named_tables)
         self._setup(db_connection, self._local_files, self._named_tables)
 
-    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def produce_substrait(
+        self, sql_query: str, validate=False, ibis_expr: str = None
+    ) -> str:
         """
         Produces a Substrait plan of the given query in JSON format.
 
@@ -88,7 +90,9 @@ class Producer(ABC):
         return sql_query.format(**self._local_files, **named_tables)
 
     @abstractmethod
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         """
         Initializes this `Producer` instance with base-class-specific logic.
 
@@ -107,7 +111,9 @@ class Producer(ABC):
         pass
 
     @abstractmethod
-    def _produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(
+        self, sql_query: str, validate=False, ibis_expr: str = None
+    ) -> str:
         """
         Produces a Substrait plan of the given SQL query in JSON format.
 

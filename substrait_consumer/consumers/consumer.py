@@ -37,7 +37,9 @@ COLUMN_D = [
 
 class Consumer(ABC):
 
-    def setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         """
         Initializes this `Consumer` instance.
 
@@ -58,7 +60,9 @@ class Consumer(ABC):
         self._setup(db_connection, local_files, named_tables)
 
     @abstractmethod
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         pass
 
     @abstractmethod

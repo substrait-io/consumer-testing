@@ -82,7 +82,13 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for boolean functions.
         """
         self.run_function_name_test(
-            test_name, local_files, named_tables, sql_query, ibis_expr, producer, self.table_t
+            test_name,
+            local_files,
+            named_tables,
+            sql_query,
+            ibis_expr,
+            producer,
+            self.table_t,
         )
 
     @custom_parametrization(comparison_configs.SCALAR_FUNCTIONS)
@@ -101,7 +107,14 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for comparison functions.
         """
         self.run_function_name_test(
-            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp, nation
+            test_name,
+            local_files,
+            named_tables,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
+            nation,
         )
 
     @custom_parametrization(datetime_configs.SCALAR_FUNCTIONS)
@@ -119,7 +132,13 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for datetime functions.
         """
         self.run_function_name_test(
-            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp
+            test_name,
+            local_files,
+            named_tables,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
         )
 
     @custom_parametrization(logarithmic_configs.SCALAR_FUNCTIONS)
@@ -137,7 +156,13 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for logarithmic functions.
         """
         self.run_function_name_test(
-            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp
+            test_name,
+            local_files,
+            named_tables,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
         )
 
     @custom_parametrization(rounding_configs.SCALAR_FUNCTIONS)
@@ -155,7 +180,13 @@ class TestSubstraitFunctionNames:
         Verify the substrait function names for rounding functions.
         """
         self.run_function_name_test(
-            test_name, local_files, named_tables, sql_query, ibis_expr, producer, partsupp
+            test_name,
+            local_files,
+            named_tables,
+            sql_query,
+            ibis_expr,
+            producer,
+            partsupp,
         )
 
     def run_function_name_test(
@@ -205,7 +236,6 @@ class TestSubstraitFunctionNames:
             duckdb_producer = DuckDBProducer(self.db_connection)
             duckdb_producer.setup(self.db_connection, local_files, named_tables)
             substrait_plan_json = duckdb_producer.produce_substrait(sql_query[0])
-
 
         substrait_plan = json.loads(substrait_plan_json)
         check_subtrait_function_names(substrait_plan, test_name)

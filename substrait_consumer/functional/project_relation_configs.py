@@ -33,7 +33,10 @@ PROJECT_RELATION_TESTS = (
     {
         "test_name": "subquery_in_project",
         "local_files": {},
-        "named_tables": {"orders": "orders_small.parquet", "customer": "customer_small.parquet"},
+        "named_tables": {
+            "orders": "orders_small.parquet",
+            "customer": "customer_small.parquet",
+        },
         "sql_query": PROJECT_RELATIONS["subquery_in_project"],
         "ibis_expr": None
     },

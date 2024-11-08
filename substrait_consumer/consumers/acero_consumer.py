@@ -16,7 +16,9 @@ class AceroConsumer(Consumer):
         self.named_tables = {}
         self.table_provider = lambda names, schema: self.named_tables[names[0].lower()]
 
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         for table_name, file_path in named_tables.items():
             self.named_tables[table_name] = pq.read_table(file_path)
         else:

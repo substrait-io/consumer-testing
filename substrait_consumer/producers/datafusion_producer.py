@@ -22,11 +22,15 @@ class DataFusionProducer(Producer):
         else:
             self._db_connection = db_connection
 
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         self._db_connection = db_connection
         self.register_named_tables(named_tables)
 
-    def _produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(
+        self, sql_query: str, validate=False, ibis_expr: str = None
+    ) -> str:
         """
         Produce the DataFusion substrait plan using the given SQL query.
 

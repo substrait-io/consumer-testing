@@ -40,7 +40,10 @@ AGGREGATE_RELATION_TESTS = (
     {
         "test_name": "aggregate_in_subquery",
         "local_files": {},
-        "named_tables": {"orders": "orders_small.parquet", "orders": "orders_small.parquet"},
+        "named_tables": {
+            "orders": "orders_small.parquet",
+            "orders": "orders_small.parquet",
+        },
         "sql_query": AGGREGATE_RELATIONS["aggregate_in_subquery"],
         "ibis_expr": None
     },

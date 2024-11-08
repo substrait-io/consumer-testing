@@ -21,7 +21,9 @@ class DuckDBConsumer(Consumer):
         self.db_connection.execute("INSTALL substrait")
         self.db_connection.execute("LOAD substrait")
 
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         self.db_connection = db_connection
         load_named_tables(db_connection, named_tables)
 

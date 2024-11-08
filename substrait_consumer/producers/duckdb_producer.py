@@ -20,11 +20,15 @@ class DuckDBProducer(Producer):
             self._db_connection.execute("INSTALL substrait")
             self._db_connection.execute("LOAD substrait")
 
-    def _setup(self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         self._db_connection = db_connection
         load_named_tables(self._db_connection, named_tables)
 
-    def _produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(
+        self, sql_query: str, validate=False, ibis_expr: str = None
+    ) -> str:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 
