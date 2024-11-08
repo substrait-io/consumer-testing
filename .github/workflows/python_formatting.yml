@@ -1,0 +1,21 @@
+name: Python Formatting
+
+on: [push, pull_request]
+
+jobs:
+  darker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          cache: 'pip'
+      - name: Install darker
+        run: pip install darker
+      - name: Run darker
+        run: |
+          darker --revision origin/main . --diff --check || (echo "Formatting of changed lines does not respect 'black'. Please run 'darker --revision origin/main .' and commit the changes."; false)
