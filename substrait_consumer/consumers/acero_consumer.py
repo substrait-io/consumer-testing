@@ -1,14 +1,8 @@
 from __future__ import annotations
 
-import string
-from pathlib import Path
-from typing import Iterable
-
 import pyarrow as pa
 import pyarrow.parquet as pq
 import pyarrow.substrait as substrait
-
-from substrait_consumer.common import SubstraitUtils
 
 from .consumer import COLUMN_A, COLUMN_B, COLUMN_C, COLUMN_D, Consumer
 
@@ -19,15 +13,14 @@ class AceroConsumer(Consumer):
     """
 
     def __init__(self):
-        self.tables = {}
-        self.table_provider = lambda names, schema: self.tables[names[0].lower()]
+        self.named_tables = {}
+        self.table_provider = lambda names, schema: self.named_tables[names[0].lower()]
 
-    def setup(self, db_connection, file_names: Iterable[str]):
-        if len(file_names) > 0:
-            parquet_file_paths = SubstraitUtils.get_full_path(file_names)
-            for file_name, file_path in zip(file_names, parquet_file_paths):
-                table_name = Path(file_name).stem
-                self.tables[table_name] = pq.read_table(file_path)
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
+        for table_name, file_path in named_tables.items():
+            self.named_tables[table_name] = pq.read_table(file_path)
         else:
             table = pa.table(
                 {
@@ -37,7 +30,7 @@ class AceroConsumer(Consumer):
                     "d": COLUMN_D,
                 }
             )
-            self.tables["t"] = table
+            self.named_tables["t"] = table
 
     def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """

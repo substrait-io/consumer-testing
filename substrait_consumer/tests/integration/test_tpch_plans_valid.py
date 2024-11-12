@@ -6,6 +6,7 @@ import substrait_validator as sv
 
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
@@ -27,6 +28,7 @@ class TestTpchPlansValid:
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
         cls.duckdb_consumer = DuckDBConsumer(cls.db_connection)
+        cls.duckdb_producer = DuckDBProducer(cls.db_connection)
 
         yield
 
@@ -37,7 +39,8 @@ class TestTpchPlansValid:
         self,
         snapshot,
         test_name: str,
-        file_names: list,
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
         sort_results: bool = False,
@@ -46,8 +49,7 @@ class TestTpchPlansValid:
         Generate the substrait plans using Isthmus.
         """
         producer = IsthmusProducer()
-        producer.set_db_connection(self.db_connection)
-        sql_query = producer.format_sql(sql_query, file_names)
+        producer.setup(self.db_connection, local_files, named_tables)
         substrait_query = producer.produce_substrait(sql_query)
 
         snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
@@ -58,7 +60,8 @@ class TestTpchPlansValid:
     def test_isthmus_substrait_plans_valid(
         self,
         test_name: str,
-        file_names: list,
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
         sort_results: bool = False,
@@ -86,7 +89,8 @@ class TestTpchPlansValid:
     def test_duckdb_substrait_plans_valid(
         self,
         test_name: str,
-        file_names: list,
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
         sort_results: bool = False,
@@ -95,8 +99,10 @@ class TestTpchPlansValid:
         Run the Duckdb generated substrait plans through the substrait validator.
 
         Parameters:
-            file_names:
-                List of parquet files.
+            local_files:
+                A `dict` mapping format argument names to local files paths.
+            named_tables:
+                A `dict` mapping table names to local file paths.
             sql_query:
                 SQL query.
         """
@@ -112,14 +118,8 @@ class TestTpchPlansValid:
         # too few field names
         config.override_diagnostic_level(4003, "error", "info")
 
-        # Load the parquet files into DuckDB and return all the table names as a list
-        table_names = self.duckdb_consumer.load_tables_from_parquet(
-            file_names
-        )
-
         # Format the sql query by inserting all the table names
-        sql_query = sql_query.format(*table_names)
+        self.duckdb_producer.setup(self.db_connection, local_files, named_tables)
 
-        duckdb_substrait_plan = self.db_connection.get_substrait(sql_query)
-        proto_bytes = duckdb_substrait_plan.fetchone()[0]
+        proto_bytes = self.duckdb_producer.produce_substrait(sql_query)
         sv.check_plan_valid(proto_bytes, config)

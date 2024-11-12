@@ -8,7 +8,7 @@ SELECT
     s_phone,
     s_comment
 FROM
-    '{}', '{}', '{}', '{}', '{}'
+    '{part}', '{supplier}', '{partsupp}', '{nation}', '{region}'
 WHERE
     p_partkey = ps_partkey
     AND s_suppkey = ps_suppkey
@@ -21,7 +21,7 @@ WHERE
         SELECT
             min(ps_supplycost)
         FROM
-            '{}', '{}', '{}', '{}'
+            '{partsupp}', '{supplier}', '{nation}', '{region}'
         WHERE
             p_partkey = ps_partkey
             AND s_suppkey = ps_suppkey

@@ -45,7 +45,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "orders_small"
+                    "orders"
                   ]
                 }
               }
@@ -93,7 +93,7 @@
           }
         },
         "names": [
-          "avg(orders_small.o_totalprice * Int64(10))"
+          "avg(orders.o_totalprice * Int64(10))"
         ]
       }
     }

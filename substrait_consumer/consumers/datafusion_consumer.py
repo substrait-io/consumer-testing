@@ -1,17 +1,12 @@
 from __future__ import annotations
 
 import json
-import string
-from pathlib import Path
-from typing import Iterable
 
 import pyarrow as pa
 from datafusion import SessionContext
 from datafusion import substrait as ds
 from google.protobuf.json_format import Parse
 from substrait.gen.proto.plan_pb2 import Plan
-
-from substrait_consumer.common import SubstraitUtils
 
 from .consumer import COLUMN_A, COLUMN_B, COLUMN_C, COLUMN_D, Consumer
 
@@ -24,17 +19,16 @@ class DataFusionConsumer(Consumer):
     def __init__(self):
         self._ctx = SessionContext()
 
-    def setup(self, db_connection, file_names: Iterable[str]):
-        if len(file_names) > 0:
-            parquet_file_paths = SubstraitUtils.get_full_path(file_names)
-            for file_name, file_path in zip(file_names, parquet_file_paths):
-                table_name = Path(file_name).stem
-                if self._ctx.table_exist(table_name):
-                    self._ctx.deregister_table(table_name)
-                self._ctx.register_parquet(table_name, file_path)
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
+        for table_name, file_path in named_tables.items():
+            if self._ctx.table_exist(table_name):
+                self._ctx.deregister_table(table_name)
+            self._ctx.register_parquet(table_name, file_path)
         else:
             if not self._ctx.table_exist("t"):
-                tables = pa.RecordBatch.from_arrays(
+                named_tables = pa.RecordBatch.from_arrays(
                     [
                         pa.array(COLUMN_A),
                         pa.array(COLUMN_B),
@@ -44,7 +38,7 @@ class DataFusionConsumer(Consumer):
                     names=["a", "b", "c", "d"],
                 )
 
-                self._ctx.register_record_batches("t", [[tables]])
+                self._ctx.register_record_batches("t", [[named_tables]])
 
     def run_substrait_query(self, substrait_query: str) -> pa.Table:
         """

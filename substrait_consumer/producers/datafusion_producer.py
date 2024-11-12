@@ -22,10 +22,15 @@ class DataFusionProducer(Producer):
         else:
             self._db_connection = db_connection
 
-    def set_db_connection(self, db_connection):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         self._db_connection = db_connection
+        self.register_named_tables(named_tables)
 
-    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(
+        self, sql_query: str, validate=False, ibis_expr: str = None
+    ) -> str:
         """
         Produce the DataFusion substrait plan using the given SQL query.
 
@@ -55,27 +60,26 @@ class DataFusionProducer(Producer):
 
         return MessageToJson(substrait_proto)
 
-    def register_tables(self, file_names):
+    def register_named_tables(self, named_tables):
         """
-        Register tables to the datafusion session context.
+        Register named_tables to the datafusion session context.
 
         Parameters:
-            file_names:
-                Name of parquet files.
+            named_tables:
+                A `dict` mapping table names to local file paths, which should
+                be loaded into the datafusion session context.
         Returns:
             None
         """
-        if len(file_names) > 0:
-            parquet_file_paths = SubstraitUtils.get_full_path(file_names)
-            for file_name, file_path in zip(file_names, parquet_file_paths):
-                table_name = Path(file_name).stem
+        if len(named_tables) > 0:
+            for table_name, file_path in named_tables.items():
                 if self._ctx.table_exist(table_name):
                     self._ctx.deregister_table(table_name)
                 self._ctx.register_parquet(table_name, file_path)
                 assert self._ctx.table_exist(table_name)
         else:
             if not self._ctx.table_exist("t"):
-                tables = pa.RecordBatch.from_arrays(
+                named_tables = pa.RecordBatch.from_arrays(
                     [
                         pa.array(COLUMN_A),
                         pa.array(COLUMN_B),
@@ -84,14 +88,7 @@ class DataFusionProducer(Producer):
                     ],
                     names=["a", "b", "c", "d"],
                 )
-                self._ctx.register_record_batches("t", [[tables]])
-
-    def format_sql(self, sql_query, file_names):
-        self.register_tables(file_names)
-        if len(file_names) > 0:
-            table_names = [Path(f).stem for f in file_names]
-            sql_query = sql_query.format(*table_names)
-        return sql_query
+                self._ctx.register_record_batches("t", [[named_tables]])
 
     def name(self):
         return "DataFusionProducer"

@@ -3,6 +3,7 @@ import pytest
 
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.verification import verify_equals
 from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
@@ -22,6 +23,7 @@ class TestDuckDBConsumer:
         cls.db_connection.execute("INSTALL substrait")
         cls.db_connection.execute("LOAD substrait")
         cls.consumer = DuckDBConsumer(cls.db_connection)
+        cls.producer = DuckDBProducer(cls.db_connection)
 
         yield
 
@@ -31,13 +33,14 @@ class TestDuckDBConsumer:
     def test_substrait_query(
         self,
         test_name: str,
-        file_names: list,
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
         sort_results: bool = False,
     ) -> None:
         """
-        1.  Load all the parquet files into DuckDB as separate tables.
+        1.  Load all the parquet files into DuckDB as separate named_tables.
         2.  Format the SQL query to work with DuckDB by inserting all the table names.
         3.  Execute the SQL on DuckDB.
         4.  Run the substrait query plan.
@@ -47,28 +50,23 @@ class TestDuckDBConsumer:
         Parameters:
             test_name:
                 Name of test.
-            file_names:
-                List of parquet files.
+            local_files:
+                A `dict` mapping format argument names to local files paths.
+            named_tables:
+                A `dict` mapping table names to local file paths.
             sql_query:
                 SQL query.
         """
-
-        # Load the parquet files into DuckDB and return all the table names as a list
-        table_names = self.consumer.load_tables_from_parquet(
-            file_names
-        )
-
-        # Format the sql query by inserting all the table names
-        sql_query = sql_query.format(*table_names)
+        self.consumer.setup(self.db_connection, local_files, named_tables)
+        self.producer.setup(self.db_connection, local_files, named_tables)
 
         # Convert the SQL into a substrait query plan and run the plan.
-        substrait_plan = self.db_connection.get_substrait_json(sql_query)
-        proto_bytes = substrait_plan.fetchone()[0]
+        proto_bytes = self.producer.produce_substrait(sql_query)
 
         subtrait_query_result_tb = self.consumer.run_substrait_query(proto_bytes)
 
         # Calculate results to verify against by running the SQL query on DuckDB
-        duckdb_sql_result_tb = self.db_connection.query(f"{sql_query}").arrow()
+        duckdb_sql_result_tb = self.producer.run_sql_query(sql_query)
 
         col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
         exp_col_names = [x.lower() for x in duckdb_sql_result_tb.column_names]

@@ -10,9 +10,9 @@ JOIN_RELATIONS = {
             c.C_NAME,
             o.O_ORDERKEY
         FROM
-            '{}' c
+            '{customer}' c
         INNER JOIN
-            '{}' o
+            '{orders}' o
         ON
             c.C_CUSTKEY = o.O_CUSTKEY;
         """,
@@ -25,9 +25,9 @@ JOIN_RELATIONS = {
             c.C_NAME,
             o.O_ORDERKEY
         FROM
-            '{}' c
+            '{customer}' c
         LEFT JOIN
-            '{}' o
+            '{orders}' o
         ON
             c.C_CUSTKEY = o.O_CUSTKEY;
         """,
@@ -40,9 +40,9 @@ JOIN_RELATIONS = {
             c.C_NAME,
             o.O_ORDERKEY
         FROM
-            '{}' c
+            '{customer}' c
         RIGHT JOIN
-            '{}' o
+            '{orders}' o
         ON
             c.C_CUSTKEY = o.O_CUSTKEY;
         """,
@@ -55,9 +55,9 @@ JOIN_RELATIONS = {
             c.C_NAME,
             o.O_ORDERKEY
         FROM
-            '{}' c
+            '{customer}' c
         FULL JOIN
-            '{}' o
+            '{orders}' o
         ON
             c.C_CUSTKEY = o.O_CUSTKEY;
         """,
@@ -70,9 +70,9 @@ JOIN_RELATIONS = {
             c.C_NAME,
             o.O_ORDERKEY
         FROM
-            '{}' c
+            '{customer}' c
         CROSS JOIN
-            '{}' o
+            '{orders}' o
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
@@ -82,11 +82,11 @@ JOIN_RELATIONS = {
             c.C_CUSTKEY,
             c.C_NAME
         FROM
-            '{}' c
+            '{customer}' c
         WHERE
             EXISTS (
                 SELECT 1
-                FROM '{}' o
+                FROM '{orders}' o
                 WHERE o.O_CUSTKEY = c.C_CUSTKEY
             );
         """,
@@ -98,11 +98,11 @@ JOIN_RELATIONS = {
             o.O_ORDERKEY,
             o.O_CUSTKEY
         FROM
-            '{}' o
+            '{orders}' o
         WHERE
             EXISTS (
                 SELECT 1
-                FROM '{}' c
+                FROM '{customer}' c
                 WHERE c.C_CUSTKEY = o.O_CUSTKEY
             );
         """,
@@ -114,11 +114,11 @@ JOIN_RELATIONS = {
             c.C_CUSTKEY,
             c.C_NAME
         FROM
-            '{}' c
+            '{customer}' c
         WHERE
             NOT EXISTS (
                 SELECT 1
-                FROM '{}' o
+                FROM '{orders}' o
                 WHERE o.O_CUSTKEY = c.C_CUSTKEY
             );
         """,
@@ -130,11 +130,11 @@ JOIN_RELATIONS = {
             o.O_ORDERKEY,
             o.O_CUSTKEY
         FROM
-            '{}' o
+            '{orders}' o
         WHERE
             NOT EXISTS (
                 SELECT 1
-                FROM '{}' l
+                FROM '{lineitem}' l
                 WHERE l.L_ORDERKEY = o.O_ORDERKEY
             );
         """,
@@ -150,9 +150,9 @@ JOIN_RELATIONS = {
             c2.C_NAME AS c2name,
             c2.C_NATIONKEY AS c2nationakey
         FROM
-            '{}' c1
+            '{customer}' c1
         LEFT JOIN
-            '{}' c2
+            '{customer}' c2
         ON
             c1.C_NATIONKEY = c2.C_NATIONKEY
             AND c1.C_CUSTKEY <> c2.C_CUSTKEY;
@@ -169,9 +169,9 @@ JOIN_RELATIONS = {
             c2.C_NAME AS c2name,
             c2.C_NATIONKEY AS c2nationakey
         FROM
-            '{}' c1
+            '{customer}' c1
         RIGHT JOIN
-            '{}' c2
+            '{customer}' c2
         ON
             c1.C_NATIONKEY = c2.C_NATIONKEY
             AND c1.C_CUSTKEY <> c2.C_CUSTKEY;
@@ -186,13 +186,13 @@ JOIN_RELATIONS = {
             CASE 
                 WHEN EXISTS (
                     SELECT 1
-                    FROM '{}' o
+                    FROM '{orders}' o
                     WHERE o.O_CUSTKEY = c.C_CUSTKEY
                 ) THEN 'Marked'
                 ELSE 'Not Marked'
             END AS mark_status
         FROM
-            '{}' c;
+            '{customer}' c;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),
@@ -204,13 +204,13 @@ JOIN_RELATIONS = {
             CASE 
                 WHEN EXISTS (
                     SELECT 1
-                    FROM '{}' c
+                    FROM '{customer}' c
                     WHERE c.C_CUSTKEY = o.O_CUSTKEY
                 ) THEN 'Marked'
                 ELSE 'Not Marked'
             END AS mark_status
         FROM
-            '{}' o;
+            '{orders}' o;
         """,
         [DuckDBProducer, DataFusionProducer, IsthmusProducer],
     ),

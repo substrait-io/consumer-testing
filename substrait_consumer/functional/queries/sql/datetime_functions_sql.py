@@ -6,7 +6,7 @@ SQL_SCALAR = {
     "extract": (
         """
         SELECT L_SHIPDATE, extract(year FROM L_SHIPDATE)
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -14,7 +14,7 @@ SQL_SCALAR = {
     "add": (
         """
         SELECT L_SHIPDATE, L_SHIPDATE + INTERVAL 5 DAY
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DuckDBProducer],
@@ -22,7 +22,7 @@ SQL_SCALAR = {
     "subtract": (
         """
         SELECT L_SHIPDATE, L_SHIPDATE - INTERVAL 5 DAY
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DuckDBProducer],
@@ -30,7 +30,7 @@ SQL_SCALAR = {
     "lt": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE < L_RECEIPTDATE
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -38,7 +38,7 @@ SQL_SCALAR = {
     "lte": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE <= L_RECEIPTDATE
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -46,7 +46,7 @@ SQL_SCALAR = {
     "gt": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE > L_RECEIPTDATE
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -54,7 +54,7 @@ SQL_SCALAR = {
     "gte": (
         """
         SELECT L_COMMITDATE, L_RECEIPTDATE, L_COMMITDATE >= L_RECEIPTDATE
-        FROM '{}'
+        FROM '{lineitem}'
         LIMIT 10;
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],

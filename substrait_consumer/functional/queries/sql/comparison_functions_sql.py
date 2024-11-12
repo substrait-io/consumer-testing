@@ -6,7 +6,7 @@ SQL_SCALAR = {
     "not_equal": (
         """
         SELECT N_NAME
-        FROM '{}'
+        FROM '{nation}'
         WHERE NOT N_NAME = 'CANADA'
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -14,7 +14,7 @@ SQL_SCALAR = {
     "equal": (
         """
         SELECT PS_AVAILQTY, PS_PARTKEY
-        FROM '{}'
+        FROM '{partsupp}'
         WHERE PS_AVAILQTY = PS_PARTKEY
         """,
         [DataFusionProducer, DuckDBProducer, IsthmusProducer],
@@ -30,7 +30,7 @@ SQL_SCALAR = {
     "lt": (
         """
         SELECT PS_AVAILQTY
-        FROM '{}'
+        FROM '{partsupp}'
         WHERE PS_AVAILQTY < 10
         ORDER BY PS_AVAILQTY
         """,
@@ -39,7 +39,7 @@ SQL_SCALAR = {
     "lte": (
         """
         SELECT PS_AVAILQTY
-        FROM '{}'
+        FROM '{partsupp}'
         WHERE PS_AVAILQTY <= 10
         ORDER BY PS_AVAILQTY
         """,
@@ -48,7 +48,7 @@ SQL_SCALAR = {
     "gt": (
         """
         SELECT PS_AVAILQTY
-        FROM '{}'
+        FROM '{partsupp}'
         WHERE PS_AVAILQTY > 9990
         ORDER BY PS_AVAILQTY
         """,
@@ -57,7 +57,7 @@ SQL_SCALAR = {
     "gte": (
         """
         SELECT PS_AVAILQTY
-        FROM '{}'
+        FROM '{partsupp}'
         WHERE PS_AVAILQTY >= 9990
         ORDER BY PS_AVAILQTY
         """,

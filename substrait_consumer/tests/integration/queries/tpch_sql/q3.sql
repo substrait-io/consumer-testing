@@ -4,7 +4,7 @@ SELECT
     o_orderdate,
     o_shippriority
 FROM
-    '{}', '{}', '{}'
+    '{customer}', '{orders}', '{lineitem}'
 WHERE
     c_mktsegment = 'BUILDING'
     AND c_custkey = o_custkey

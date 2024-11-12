@@ -44,7 +44,7 @@
                 }
               },
               "namedTable": {
-                "names": ["PARTSUPP_SMALL"]
+                "names": ["PARTSUPP"]
               }
             }
           },

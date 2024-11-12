@@ -1,4 +1,4 @@
-from typing import Callable, Iterable
+from typing import Callable
 
 import duckdb
 from ibis.expr.types.relations import Table
@@ -56,7 +56,8 @@ class TestBooleanFunctions:
         self,
         snapshot,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -66,7 +67,8 @@ class TestBooleanFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            file_names,
+            local_files,
+            named_tables,
             sql_query,
             ibis_expr,
             producer,
@@ -80,7 +82,8 @@ class TestBooleanFunctions:
         self,
         snapshot,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
         producer,
@@ -91,7 +94,8 @@ class TestBooleanFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            file_names,
+            local_files,
+            named_tables,
             sql_query,
             ibis_expr,
             producer,
@@ -104,7 +108,8 @@ class TestBooleanFunctions:
         self,
         snapshot,
         test_name: str,
-        file_names: Iterable[str],
+        local_files: dict[str, str],
+        named_tables: dict[str, str],
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
@@ -113,6 +118,7 @@ class TestBooleanFunctions:
             test_name,
             snapshot,
             self.db_connection,
-            file_names,
+            local_files,
+            named_tables,
             sql_query,
         )

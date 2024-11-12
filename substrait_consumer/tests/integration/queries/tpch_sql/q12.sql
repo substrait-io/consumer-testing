@@ -15,7 +15,7 @@ SELECT
             0
         END) AS low_line_count
 FROM
-    '{}', '{}'
+    '{orders}', '{lineitem}'
 WHERE
     o_orderkey = l_orderkey
     AND l_shipmode IN ('MAIL', 'SHIP')

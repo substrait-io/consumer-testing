@@ -1,10 +1,11 @@
 import json
-import substrait_validator as sv
-from .producer import Producer, load_tables_from_parquet
-from substrait_consumer.common import SubstraitUtils
+from typing import Optional
 
 import duckdb
+import pyarrow as pa
+import substrait_validator as sv
 
+from .producer import Producer, load_named_tables
 
 class DuckDBProducer(Producer):
     """
@@ -19,10 +20,15 @@ class DuckDBProducer(Producer):
             self._db_connection.execute("INSTALL substrait")
             self._db_connection.execute("LOAD substrait")
 
-    def set_db_connection(self, db_connection):
+    def _setup(
+        self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
+    ):
         self._db_connection = db_connection
+        load_named_tables(self._db_connection, named_tables)
 
-    def produce_substrait(self, sql_query: str, validate = False, ibis_expr: str = None) -> str:
+    def _produce_substrait(
+        self, sql_query: str, validate=False, ibis_expr: str = None
+    ) -> str:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 
@@ -47,17 +53,11 @@ class DuckDBProducer(Producer):
         python_json = json.loads(proto_bytes)
         return json.dumps(python_json, indent=2)
 
-    def format_sql(self, sql_query, file_names):
-        if len(file_names) > 0:
-            if "read_parquet" in sql_query:
-                parquet_file_path = SubstraitUtils.get_full_path(file_names)
-                sql_query = sql_query.format(parquet_file_path[0])
-            else:
-                table_names = load_tables_from_parquet(
-                    self._db_connection, file_names
-                )
-                sql_query = sql_query.format(*table_names)
-        return sql_query
+    def run_sql_query(self, sql_query: str) -> Optional[pa.Table]:
+        sql_query = self.format_sql(sql_query)
+        result = self._db_connection.query(f"{sql_query}")
+        if result is not None:
+            return result.arrow()
 
     def name(self):
         return "DuckDBProducer"

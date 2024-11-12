@@ -53,7 +53,7 @@
                         },
                         "namedTable": {
                           "names": [
-                            "lineitem_small"
+                            "lineitem"
                           ]
                         }
                       }
@@ -152,7 +152,7 @@
           }
         },
         "names": [
-          "sum(lineitem_small.l_extendedprice)",
+          "sum(lineitem.l_extendedprice)",
           "l_linenumber",
           "l_orderkey"
         ]

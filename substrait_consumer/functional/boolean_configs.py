@@ -4,25 +4,29 @@ from substrait_consumer.functional.queries.ibis_expressions.boolean_functions_ex
 SCALAR_FUNCTIONS = (
     {
         "test_name": "or",
-        "file_names": [],
+        "local_files": {},
+        "named_tables": {},
         "sql_query": SQL_SCALAR["or"],
         "ibis_expr": IBIS_SCALAR["or"],
     },
     {
         "test_name": "and",
-        "file_names": [],
+        "local_files": {},
+        "named_tables": {},
         "sql_query": SQL_SCALAR["and"],
         "ibis_expr": IBIS_SCALAR["and"],
     },
     {
         "test_name": "not",
-        "file_names": [],
+        "local_files": {},
+        "named_tables": {},
         "sql_query": SQL_SCALAR["not"],
         "ibis_expr": None,
     },
     {
         "test_name": "xor",
-        "file_names": [],
+        "local_files": {},
+        "named_tables": {},
         "sql_query": SQL_SCALAR["xor"],
         "ibis_expr": None,
     },
@@ -31,13 +35,15 @@ SCALAR_FUNCTIONS = (
 AGGREGATE_FUNCTIONS = (
     {
         "test_name": "bool_and",
-        "file_names": [],
+        "local_files": {},
+        "named_tables": {},
         "sql_query": SQL_AGGREGATE["bool_and"],
         "ibis_expr": None,
     },
     {
         "test_name": "bool_or",
-        "file_names": [],
+        "local_files": {},
+        "named_tables": {},
         "sql_query": SQL_AGGREGATE["bool_or"],
         "ibis_expr": None,
     },

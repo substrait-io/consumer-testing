@@ -42,13 +42,13 @@ def produce_isthmus_substrait(sql_string, schema_list, validate=False):
     return json_plan
 
 
-def get_schema(file_names):
+def get_schema(local_files):
     """
     Create the list of schemas based on the given file names.  If there are no files
     give, a custom schema for the data is used.
 
     Parameters:
-        file_names: List of file names.
+        local_files: List of file names.
 
     Returns:
         List of all schemas as a java list.
@@ -56,11 +56,11 @@ def get_schema(file_names):
     import substrait_consumer.java_definitions as java
 
     arr = java.ArrayListClass()
-    if file_names:
+    if local_files:
         text_schema_file = open(schema_file)
         schema_string = text_schema_file.read().replace("\n", " ").split(";")[:-1]
         for create_table in schema_string:
-            if "small" not in file_names[0]:
+            if "small" not in local_files[0]:
                 create_table = create_table.replace("_small", "")
             java_obj = jpype.JObject @ jpype.JString(create_table)
             arr.add(java_obj)

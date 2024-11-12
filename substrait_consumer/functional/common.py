@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable, Iterable
+from typing import TYPE_CHECKING, Callable
 
 import pytest
 from duckdb import DuckDBPyConnection
@@ -51,7 +51,8 @@ def generate_snapshot_results(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
-    file_names: Iterable[str],
+    local_files: dict[str, str],
+    named_tables: dict[str, str],
     sql_query: tuple,
 ):
     """
@@ -65,17 +66,18 @@ def generate_snapshot_results(
             Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
-        file_names:
-            List of parquet files.
+        local_files:
+            A `dict` mapping format argument names to local files paths.
+        named_tables:
+            A `dict` mapping table names to local file paths.
         sql_query:
             SQL query.
     """
     # Load the parquet files into DuckDB and return all the table names as a list
     producer = DuckDBProducer()
-    producer.set_db_connection(db_con)
-    sql_query = producer.format_sql(sql_query[0], file_names)
+    producer.setup(db_con, local_files, named_tables)
 
-    duckdb_result = db_con.query(f"{sql_query}").arrow()
+    duckdb_result = producer.run_sql_query(sql_query[0])
     duckdb_result = duckdb_result.rename_columns(
         list(map(str.lower, duckdb_result.column_names))
     )
@@ -96,7 +98,8 @@ def substrait_producer_sql_test(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
-    file_names: Iterable[str],
+    local_files: dict[str, str],
+    named_tables: dict[str, str],
     sql_query: tuple,
     ibis_expr: Callable[[Table], Table],
     producer,
@@ -114,9 +117,11 @@ def substrait_producer_sql_test(
         snapshot:
             Pytest snapshot plugin used for verification.
         db_con:
-            DuckDB connection for creating in memory tables.
-        file_names:
-            List of parquet files.
+            DuckDB connection for creating in memory named_tables.
+        local_files:
+            A `dict` mapping format argument names to local files paths.
+        named_tables:
+            A `dict` mapping table names to local file paths.
         sql_query:
             SQL query.
         ibis_expr:
@@ -126,11 +131,8 @@ def substrait_producer_sql_test(
         *args:
             The data tables to be passed to the ibis expression.
     """
-    producer.set_db_connection(db_con)
-    supported_producers = sql_query[1]
-
-    # Load the parquet files into DuckDB and return all the table names as a list
-    sql_query = producer.format_sql(sql_query[0], file_names)
+    producer.setup(db_con, local_files, named_tables)
+    sql_query, supported_producers = sql_query
 
     # Convert the SQL/Ibis expression to a substrait query plan
     if type(producer).__name__ == "IbisProducer":
@@ -159,7 +161,8 @@ def substrait_consumer_sql_test(
     test_name: str,
     snapshot: Snapshot,
     db_con: DuckDBPyConnection,
-    file_names: Iterable[str],
+    local_files: dict[str, str],
+    named_tables: dict[str, str],
     sql_query: tuple,
     ibis_expr: Callable[[Table], Table],
     producer,
@@ -177,8 +180,10 @@ def substrait_consumer_sql_test(
             Pytest snapshot plugin used for verification.
         db_con:
             DuckDB connection for creating in memory tables.
-        file_names:
-            List of parquet files.
+        local_files:
+            A `dict` mapping format argument names to local files paths.
+        named_tables:
+            A `dict` mapping table names to local file paths.
         sql_query:
             SQL query.
         ibis_expr:
@@ -188,7 +193,7 @@ def substrait_consumer_sql_test(
         consumer:
             Substrait consumer class.
     """
-    consumer.setup(db_con, file_names)
+    consumer.setup(db_con, local_files, named_tables)
 
     group, name = test_name.split(":")
     snopshot_dir = RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR

@@ -100,7 +100,7 @@
                     }
                   },
                   "namedTable": {
-                    "names": ["LINEITEM_SMALL"]
+                    "names": ["LINEITEM"]
                   }
                 }
               },

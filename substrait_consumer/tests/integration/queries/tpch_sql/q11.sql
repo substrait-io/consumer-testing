@@ -2,9 +2,9 @@ SELECT
   ps.ps_partkey,
   sum(ps.ps_supplycost * ps.ps_availqty) AS "value"
 FROM
-  '{}' ps,
-  '{}' s,
-  '{}' n
+  '{partsupp}' ps,
+  '{supplier}' s,
+  '{nation}' n
 WHERE
   ps.ps_suppkey = s.s_suppkey
   AND s.s_nationkey = n.n_nationkey
@@ -15,9 +15,9 @@ GROUP BY
       SELECT
         sum(ps.ps_supplycost * ps.ps_availqty) * 0.0001000000
       FROM
-        '{}' ps,
-        '{}' s,
-        '{}' n
+        '{partsupp}' ps,
+        '{supplier}' s,
+        '{nation}' n
       WHERE
         ps.ps_suppkey = s.s_suppkey
         AND s.s_nationkey = n.n_nationkey

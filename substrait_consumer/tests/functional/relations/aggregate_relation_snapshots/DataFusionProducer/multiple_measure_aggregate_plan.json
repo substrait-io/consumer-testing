@@ -52,7 +52,7 @@
                 },
                 "namedTable": {
                   "names": [
-                    "orders_small"
+                    "orders"
                   ]
                 }
               }
@@ -115,9 +115,9 @@
           }
         },
         "names": [
-          "MIN(orders_small.o_totalprice)",
-          "MAX(orders_small.o_totalprice)",
-          "avg(orders_small.o_totalprice)"
+          "MIN(orders.o_totalprice)",
+          "MAX(orders.o_totalprice)",
+          "avg(orders.o_totalprice)"
         ]
       }
     }

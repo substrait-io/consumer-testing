@@ -1,7 +1,7 @@
 SELECT
     sum(l_extendedprice * (1 - l_discount)) AS revenue
 FROM
-    '{}', '{}'
+    '{lineitem}', '{part}'
 WHERE (p_partkey = l_partkey
     AND p_brand = 'Brand#12'
     AND p_container IN ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')

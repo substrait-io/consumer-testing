@@ -12,7 +12,7 @@ FROM (
         l_extendedprice * (1 - l_discount) AS volume,
         n2.n_name AS nation
     FROM
-        '{}', '{}', '{}', '{}', '{}', '{}' n1, '{}' n2, '{}'
+        '{part}', '{supplier}', '{lineitem}', '{orders}', '{customer}', '{nation}' n1, '{nation}' n2, '{region}'
     WHERE
         p_partkey = l_partkey
         AND s_suppkey = l_suppkey

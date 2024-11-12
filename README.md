@@ -98,58 +98,38 @@ query_1.py
 TPCH_QUERY_TESTS = (
     {
         "test_name": "test_tpch_sql_1",
-        "file_names": ["lineitem.parquet"],
+        "local_files": {},
+        "named_tables": {"lineitem": "lineitem.parquet"},
         "sql_query": get_sql("q1.sql"),
         "substrait_query": get_substrait_plan("query_01_plan.json"),
     },
     {
         "test_name": "test_tpch_sql_2",
-        "file_names": [
-            "part.parquet",
-            "supplier.parquet",
-            "partsupp.parquet",
-            "nation.parquet",
-            "region.parquet",
-            "partsupp.parquet",
-            "supplier.parquet",
-            "nation.parquet",
-            "region.parquet",
-        ],
+        "local_files": {},
+        "named_tables": {
+            "part": "part.parquet",
+            "supplier": "supplier.parquet",
+            "partsupp": "partsupp.parquet",
+            "nation": "nation.parquet",
+            "region": "region.parquet",
+            "partsupp": "partsupp.parquet",
+            "supplier": "supplier.parquet",
+            "nation": "nation.parquet",
+            "region": "region.parquet",
+        },
         "sql_query": get_sql("q2.sql"),
         "substrait_query": get_substrait_plan("query_02_plan.json"),
     },
-]
+)
 ```
 ## Substrait Plans
 Substrait query plans are located in `substrait_consumer/tests/integration/queries/tpch_substrait_plans`.
-The substrait query plans have placeholder strings in the `local_files` objects in the json 
-structure.  
-```json
-"local_files": {
-  "items": [
-    {
-      "uri_file": "file://FILENAME_PLACEHOLDER_0",
-      "parquet": {}
-    }
-  ]
-}
-```
-
-
-When the tests are run, these placeholders are replaced by the parquet data listed 
-listed in `"file_names"` in the test case args file. The order of parquet file appearance in the 
-`"file_names"` list should be consistent with the ordering for the table names in the substrait 
-query plan.
 
 ## SQL Queries
 SQL queries are located in `substrait_consumer/tests/integration/queries/tpch_sql`.
 
-The SQL queries have empty bracket placeholders (`'{}'`) where the table names will be inserted. 
-Table names are determined based on the `"file_names"` in the test case args file. The order of 
-parquet file appearance in the `"file_names"` list should be consistent with the ordering for the 
-table names in the SQL query. The actual format after replacement will depend on the consumer being 
-used.
- 
+The SQL queries have named placeholders (`'{customer}'`) where the table names or file paths will be inserted.
+Table names are determined based on the `"named_tables"` and `"local_files"` in the test case args file.
 
 # Function Tests
 The substrait function tests aim to test the functions available in Substrait.  This is done
@@ -182,7 +162,8 @@ arithmetic_tests.py
 SCALAR_FUNCTIONS = (
     {
         "test_name": "add",
-        "file_names": ["partsupp.parquet"],
+        "local_files": {},
+        "named_tables": {"partsupp": "partsupp.parquet"},
         "sql_query": SQL_SCALAR["add"],
         "ibis_expr": IBIS_SCALAR["add"],
     },
@@ -196,7 +177,7 @@ SQL_SCALAR = {
     "add":
         """
         SELECT PS_PARTKEY, PS_SUPPKEY, add(PS_PARTKEY, PS_SUPPKEY) AS ADD_KEY
-        FROM '{}';
+        FROM '{partsupp}';
         """,
 ```
 
