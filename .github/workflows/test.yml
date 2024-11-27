@@ -6,124 +6,65 @@ on:
       - main
 
 jobs:
-  datafusion_producer_functions:
-    name: Run DataFusion producer function tests
-    runs-on: ubuntu-latest
+  consumers:
+    name: Run consumer tests
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        consumer: [datafusion, duckdb]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_producer_functions.Dockerfile .)
-  datafusion_consumer_functions:
-    name: Run DataFusion consumer function tests
-    runs-on: ubuntu-latest
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run functions tests
+      run: pytest -m consume_substrait_snapshot --consumer=${{ matrix.consumer }} substrait_consumer/tests/functional/extension_functions
+
+    - name: Run relations tests
+      run: pytest -m consume_substrait_snapshot --consumer=${{ matrix.consumer }} substrait_consumer/tests/functional/relations
+
+  producers:
+    name: Run producer tests
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        producer: [datafusion, duckdb, ibis, isthmus]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer_functions.Dockerfile .)
-  datafusion_producer_relations:
-    name: Run DataFusion producer relation tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_producer_relations.Dockerfile .)
-  datafusion_consumer_relations:
-    name: Run DataFusion consumer relation tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/datafusion_consumer_relations.Dockerfile .)
-  duckdb_producer_functions:
-    name: Run DuckDB producer function tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Install Java
+      uses: actions/setup-java@v4
+      if: ${{ matrix.producer == 'isthmus' }}
+      with:
+        distribution: 'temurin'
+        java-version: '21'
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_producer_functions.Dockerfile .)
-  duckdb_consumer_functions:
-    name: Run DuckDB consumer function tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Build and install Isthmus
+      if: ${{ matrix.producer == 'isthmus' }}
+      run: ./build-and-copy-isthmus-shadow-jar.sh
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer_functions.Dockerfile .)
-  duckdb_producer_relations:
-    name: Run DuckDB producer relation tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+    - name: Run functions tests
+      run: pytest -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/tests/functional/extension_functions
 
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_producer_relations.Dockerfile .)
-  duckdb_consumer_relations:
-    name: Run DuckDB consumer relation tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/duckdb_consumer_relations.Dockerfile .)
-  ibis_producer:
-    name: Run Ibis producer tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/ibis_producer.Dockerfile .)
-  isthmus_producer_functions:
-    name: Run Isthmus producer function tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/isthmus_producer_functions.Dockerfile .)
-  isthmus_producer_relations:
-    name: Run Isthmus producer relation tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Build & run
-        run: docker run --rm $(docker build -q --file ./ci/docker/isthmus_producer_relations.Dockerfile .)
+    - name: Run relations tests
+      run: pytest -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/tests/functional/relations
