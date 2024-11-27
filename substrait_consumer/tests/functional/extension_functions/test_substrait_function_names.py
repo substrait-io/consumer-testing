@@ -228,7 +228,7 @@ class TestSubstraitFunctionNames:
         if type(producer).__name__ == "IbisProducer":
             if ibis_expr:
                 substrait_plan_json = producer.produce_substrait(
-                    sql_query, validate=False, ibis_expr=ibis_expr(*args)
+                    sql_query[0], validate=False, ibis_expr=ibis_expr(*args)
                 )
             else:
                 pytest.skip("ibis expression currently undefined")
