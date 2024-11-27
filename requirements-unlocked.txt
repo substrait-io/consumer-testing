@@ -1,0 +1,14 @@
+datafusion==40.1.0
+duckdb
+filelock
+ibis-framework
+ibis-substrait
+JPype1
+protobuf==5.28.3
+pyarrow
+pytest
+pytest-csv
+pytest-snapshot
+pytest-xdist
+substrait
+substrait-validator
