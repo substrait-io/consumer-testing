@@ -60,6 +60,7 @@ class TestRoundingFunctions:
     def test_producer_rounding_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -73,6 +74,7 @@ class TestRoundingFunctions:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -89,6 +91,7 @@ class TestRoundingFunctions:
     def test_consumer_rounding_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -103,6 +106,7 @@ class TestRoundingFunctions:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -117,6 +121,7 @@ class TestRoundingFunctions:
     def test_generate_rounding_functions_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -127,6 +132,7 @@ class TestRoundingFunctions:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

@@ -76,6 +76,7 @@ class TestProjectRelation:
     def test_producer_project_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -88,6 +89,7 @@ class TestProjectRelation:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -104,6 +106,7 @@ class TestProjectRelation:
     def test_consumer_project_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -116,6 +119,7 @@ class TestProjectRelation:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -130,6 +134,7 @@ class TestProjectRelation:
     def test_generate_project_relation_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -140,6 +145,7 @@ class TestProjectRelation:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
