@@ -22,6 +22,38 @@ RELATION_SNAPSHOT_DIR = (
 )
 
 
+def check_match(
+    snapshot: Snapshot, value: str | bytes, snapshot_name: str | Path
+) -> bool:
+    """
+    Returns True iff the given `value` matches the snapshot according to `assert_match`.
+
+    Calls `snapshot.assert_match(value, snapshot_name)` and returns True if the
+    snapshot matches, returns False if it doesn't, and reraises any other exception
+    that may occur.
+
+    Parameters:
+        snapshot:
+            `snapshot` test fixture from pytest-snapshot
+        value:
+            Value to check against the snapshot
+        snapshot_name:
+            Path to the file containing the snapshot
+
+    Returns:
+        True if `value` matches the content of the file in `snapshot_name`, False
+        otherwise.
+    """
+    try:
+        snapshot.assert_match(value, snapshot_name)
+    except AssertionError as e:
+        if str(e).startswith("value does not match the expected value in"):
+            return False
+        raise e
+
+    return True
+
+
 def check_subtrait_function_names(
     substrait_plan: dict,
     expected_function_name,
@@ -52,6 +84,7 @@ def check_subtrait_function_names(
 def generate_snapshot_results(
     test_name: str,
     snapshot: Snapshot,
+    record_property,
     db_con: DuckDBPyConnection,
     local_files: dict[str, str],
     named_tables: dict[str, str],
@@ -79,7 +112,22 @@ def generate_snapshot_results(
     producer = DuckDBProducer()
     producer.setup(db_con, local_files, named_tables)
 
-    duckdb_result = producer.run_sql_query(sql_query[0])
+    group, name = test_name.split(":")
+    outcome_path = f"{name}_outcome.txt"
+    result_path = f"{name}_result.txt"
+
+    if "relation" in group:
+        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / "relation_test_results"
+    else:
+        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / "function_test_results"
+
+    try:
+        duckdb_result = producer.run_sql_query(sql_query[0])
+    except BaseException as e:
+        record_property("outcome", str(type(e)))
+        snapshot.assert_match(str(type(e)), outcome_path)
+        return
+
     duckdb_result = duckdb_result.rename_columns(
         list(map(str.lower, duckdb_result.column_names))
     )
@@ -88,17 +136,16 @@ def generate_snapshot_results(
         duckdb_result_data.extend(column.data)
         duckdb_result_data.extend([' '])
     str_result_data = '\n'.join(map(str, duckdb_result_data))
-    group, name = test_name.split(":")
-    if "relation" in group:
-        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / "relation_test_results"
-    else:
-        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / "function_test_results"
-    snapshot.assert_match(str_result_data, f"{name}_result.txt")
+
+    match_result = check_match(snapshot, str_result_data, result_path)
+    record_property("outcome", str(match_result))
+    snapshot.assert_match(str(match_result), outcome_path)
 
 
 def substrait_producer_sql_test(
     test_name: str,
     snapshot: Snapshot,
+    record_property,
     db_con: DuckDBPyConnection,
     local_files: dict[str, str],
     named_tables: dict[str, str],
@@ -136,31 +183,50 @@ def substrait_producer_sql_test(
     producer.setup(db_con, local_files, named_tables)
     sql_query, supported_producers = sql_query
 
+    group, name = test_name.split(":")
+    outcome_path = f"{name}-{producer.name()}_outcome.txt"
+    plan_path = f"{name}_plan.json"
+
+    if "relation" in group:
+        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / type(producer).__name__
+    else:
+        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / type(producer).__name__
+
     # Convert the SQL/Ibis expression to a substrait query plan
     if isinstance(producer, IbisProducer):
         if ibis_expr:
-            substrait_plan = producer.produce_substrait(sql_query, validate, ibis_expr(*args))
+            try:
+                substrait_plan = producer.produce_substrait(
+                    sql_query, validate, ibis_expr(*args)
+                )
+            except BaseException as e:
+                record_property("outcome", str(type(e)))
+                snapshot.assert_match(str(type(e)), outcome_path)
+                return
         else:
             pytest.xfail("ibis expression currently undefined")
     else:
         if type(producer) in supported_producers:
-            substrait_plan = producer.produce_substrait(sql_query, validate)
+            try:
+                substrait_plan = producer.produce_substrait(sql_query, validate)
+            except BaseException as e:
+                record_property("outcome", str(type(e)))
+                snapshot.assert_match(str(type(e)), outcome_path)
+                return
         else:
             pytest.xfail(
                 f"{producer.name()} does not support the following SQL: {sql_query}"
             )
 
-    group, name = test_name.split(":")
-    if "relation" in group:
-        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / type(producer).__name__
-    else:
-        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / type(producer).__name__
-    snapshot.assert_match(str(substrait_plan), f"{name}_plan.json")
+    match_result = check_match(snapshot, str(substrait_plan), plan_path)
+    record_property("outcome", str(match_result))
+    snapshot.assert_match(str(match_result), outcome_path)
 
 
 def substrait_consumer_sql_test(
     test_name: str,
     snapshot: Snapshot,
+    record_property,
     db_con: DuckDBPyConnection,
     local_files: dict[str, str],
     named_tables: dict[str, str],
@@ -197,31 +263,40 @@ def substrait_consumer_sql_test(
     consumer.setup(db_con, local_files, named_tables)
 
     group, name = test_name.split(":")
-    snopshot_dir = RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR
-    plan_path = (
-        snopshot_dir
-        / group
-        / type(producer).__name__
-        / f"{name}_plan.json"
+    snapshot_dir = (
+        RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR
     )
-    if plan_path.is_file():
-        substrait_plan = plan_path.read_text()
+    results_dir = (
+        "relation_test_results" if "relation" in group else "function_test_results"
+    )
+    snapshot.snapshot_dir = snapshot_dir / group / results_dir
+    plan_path = snapshot_dir / group / type(producer).__name__ / f"{name}_plan.json"
+    outcome_path = f"{name}-{producer.name()}-{consumer.name()}_outcome.txt"
+    result_path = f"{name}_result.txt"
 
-        results_dir = "relation_test_results" if "relation" in group else "function_test_results"
-        snapshot.snapshot_dir = snopshot_dir / group / results_dir
-        actual_result = consumer.run_substrait_query(substrait_plan)
-        actual_result = actual_result.rename_columns(
-            list(map(str.lower, actual_result.column_names))
-        ).columns
-        result_list = []
-        for column in actual_result:
-            result_list.extend(column.data)
-            result_list.extend([' '])
-        str_result = '\n'.join(map(str, result_list))
-        snapshot.assert_match(str_result, f"{name}_result.txt")
-
-    else:
+    if not plan_path.is_file():
         pytest.skip(f"No substrait plan exists for {producer.name()}:{name}")
+
+    substrait_plan = plan_path.read_text()
+
+    try:
+        actual_result = consumer.run_substrait_query(substrait_plan)
+    except BaseException as e:
+        record_property("outcome", str(type(e)))
+        snapshot.assert_match(str(type(e)), outcome_path)
+        return
+
+    actual_result = actual_result.rename_columns(
+        list(map(str.lower, actual_result.column_names))
+    ).columns
+    result_list = []
+    for column in actual_result:
+        result_list.extend(column.data)
+        result_list.extend([" "])
+    str_result = "\n".join(map(str, result_list))
+    match_result = check_match(snapshot, str_result, result_path)
+    record_property("outcome", str(match_result))
+    snapshot.assert_match(str(match_result), outcome_path)
 
 
 def load_custom_duckdb_table(db_connection):

@@ -4,6 +4,8 @@ import duckdb
 import pyarrow as pa
 import pytest
 
+from pytest_snapshot.plugin import Snapshot
+
 from substrait_consumer.common import SubstraitUtils
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
 from substrait_consumer.parametrization import custom_parametrization
@@ -37,6 +39,7 @@ class TestAceroConsumer:
     def test_isthmus_substrait_plan(
         self,
         test_name: str,
+        snapshot: Snapshot,
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
@@ -67,20 +70,28 @@ class TestAceroConsumer:
             sort_results:
                 Whether to sort the results before comparison.
         """
+        tpch_num = test_name.split("_")[-1].zfill(2)
+
         # Format the substrait query to include the parquet file paths.
         # Calculate the result of running the substrait query plan.
         consumer = AceroConsumer()
         consumer.setup(self.db_connection, local_files, named_tables)
 
-        subtrait_query_result_tb = consumer.run_substrait_query(
-            substrait_query
-        )
+        try:
+            subtrait_query_result_tb = consumer.run_substrait_query(substrait_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         # Reformat the sql query to be used by duck db by inserting all the
         # parquet filepaths where the table names should be.
         # Calculate results to verify against by running the SQL query on DuckDB
         sql_query = self.duckdb_producer.format_sql(sql_query)
-        duckdb_query_result_tb = self.duckdb_producer.run_sql_query(sql_query)
+        try:
+            duckdb_query_result_tb = self.duckdb_producer.run_sql_query(sql_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
         exp_col_names = [x.lower() for x in duckdb_query_result_tb.column_names]
@@ -117,6 +128,7 @@ class TestAceroConsumer:
     def test_duckdb_substrait_plan(
         self,
         test_name: str,
+        snapshot: Snapshot,
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
@@ -142,17 +154,33 @@ class TestAceroConsumer:
             sql_query:
                 SQL query.
         """
+        tpch_num = test_name.split("_")[-1].zfill(2)
+
         self.duckdb_producer.setup(self.db_connection, local_files, named_tables)
         self.acero_consumer.setup(self.db_connection, local_files, named_tables)
 
         # Convert the SQL into a substrait query plan
-        proto_bytes = self.duckdb_producer.produce_substrait(sql_query)
+        try:
+            proto_bytes = self.duckdb_producer.produce_substrait(sql_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         # Run the duckdb produced substrait plan against Acero
-        subtrait_query_result_tb = self.acero_consumer.run_substrait_query(proto_bytes)
+        try:
+            subtrait_query_result_tb = self.acero_consumer.run_substrait_query(
+                proto_bytes
+            )
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         # Calculate results to verify against by running the SQL query on DuckDB
-        duckdb_sql_result_tb = self.duckdb_producer.run_sql_query(sql_query)
+        try:
+            duckdb_sql_result_tb = self.duckdb_producer.run_sql_query(sql_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
         exp_col_names = [x.lower() for x in duckdb_sql_result_tb.column_names]

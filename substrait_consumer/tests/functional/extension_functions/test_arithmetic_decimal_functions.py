@@ -73,6 +73,7 @@ class TestArithmeticDecimalFunctions:
     def test_producer_arithmetic_decimal_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -85,6 +86,7 @@ class TestArithmeticDecimalFunctions:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -100,6 +102,7 @@ class TestArithmeticDecimalFunctions:
     def test_consumer_arithmetic_decimal_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -113,6 +116,7 @@ class TestArithmeticDecimalFunctions:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -127,6 +131,7 @@ class TestArithmeticDecimalFunctions:
     def test_generate_arithmetic_decimal_functions_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -137,6 +142,7 @@ class TestArithmeticDecimalFunctions:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

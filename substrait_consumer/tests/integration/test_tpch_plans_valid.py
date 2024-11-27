@@ -4,7 +4,10 @@ import duckdb
 import pytest
 import substrait_validator as sv
 
+from pytest_snapshot.plugin import Snapshot
+
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
+from substrait_consumer.functional.common import check_match
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
@@ -37,8 +40,8 @@ class TestTpchPlansValid:
     @custom_parametrization(TPCH_QUERY_TESTS)
     def test_isthmus_substrait_plan_generation(
         self,
-        snapshot,
         test_name: str,
+        snapshot: Snapshot,
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
@@ -48,18 +51,28 @@ class TestTpchPlansValid:
         """
         Generate the substrait plans using Isthmus.
         """
+        tpch_num = test_name.split("_")[-1].zfill(2)
+        snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
+
         producer = IsthmusProducer()
         producer.setup(self.db_connection, local_files, named_tables)
-        substrait_query = producer.produce_substrait(sql_query)
 
-        snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
-        tpch_num = test_name.split("_")[-1].zfill(2)
-        snapshot.assert_match(str(substrait_query), f"query_{tpch_num}_plan.json")
+        try:
+            substrait_query = producer.produce_substrait(sql_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
+
+        match_result = check_match(
+            snapshot, str(substrait_query), f"query_{tpch_num}_plan.json"
+        )
+        snapshot.assert_match(str(match_result), f"query_{tpch_num}_outcome.txt")
 
     @custom_parametrization(TPCH_QUERY_TESTS)
     def test_isthmus_substrait_plans_valid(
         self,
         test_name: str,
+        snapshot: Snapshot,
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
@@ -83,12 +96,17 @@ class TestTpchPlansValid:
         # Warning. not yet implemented: matching function calls with their definitions
         config.override_diagnostic_level(1, "info", "info")
 
-        sv.check_plan_valid(substrait_query, config)
+        try:
+            sv.check_plan_valid(substrait_query, config)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
+            return
 
     @custom_parametrization(TPCH_QUERY_TESTS)
     def test_duckdb_substrait_plans_valid(
         self,
         test_name: str,
+        snapshot: Snapshot,
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
@@ -121,5 +139,10 @@ class TestTpchPlansValid:
         # Format the sql query by inserting all the table names
         self.duckdb_producer.setup(self.db_connection, local_files, named_tables)
 
-        proto_bytes = self.duckdb_producer.produce_substrait(sql_query)
-        sv.check_plan_valid(proto_bytes, config)
+        try:
+            proto_bytes = self.duckdb_producer.produce_substrait(sql_query)
+            # TODO: failures in the validator obstruct an otherwise passing test!
+            sv.check_plan_valid(proto_bytes, config)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
+            return

@@ -58,6 +58,7 @@ class TestFetchRelation:
     def test_producer_fetch_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -70,6 +71,7 @@ class TestFetchRelation:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -86,6 +88,7 @@ class TestFetchRelation:
     def test_consumer_fetch_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -98,6 +101,7 @@ class TestFetchRelation:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -112,6 +116,7 @@ class TestFetchRelation:
     def test_generate_fetch_relation_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -122,6 +127,7 @@ class TestFetchRelation:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

@@ -77,6 +77,7 @@ class TestComparisonFunctions:
     def test_producer_comparison_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -90,6 +91,7 @@ class TestComparisonFunctions:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -106,6 +108,7 @@ class TestComparisonFunctions:
     def test_consumer_comparison_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -120,6 +123,7 @@ class TestComparisonFunctions:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -134,6 +138,7 @@ class TestComparisonFunctions:
     def test_generate_comparison_functions_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -144,6 +149,7 @@ class TestComparisonFunctions:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

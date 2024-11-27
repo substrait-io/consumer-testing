@@ -76,6 +76,7 @@ class TestLogarithmicFunctions:
     def test_producer_logarithmic_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -88,6 +89,7 @@ class TestLogarithmicFunctions:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -103,6 +105,7 @@ class TestLogarithmicFunctions:
     def test_consumer_logarithmic_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -116,6 +119,7 @@ class TestLogarithmicFunctions:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -131,6 +135,7 @@ class TestLogarithmicFunctions:
     def test_generate_logarithmic_functions_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -141,6 +146,7 @@ class TestLogarithmicFunctions:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
