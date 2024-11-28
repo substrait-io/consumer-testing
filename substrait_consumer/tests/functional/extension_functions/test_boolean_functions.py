@@ -33,7 +33,7 @@ class TestBooleanFunctions:
     """
 
     @staticmethod
-    @pytest.fixture(scope="class", autouse=True)
+    @pytest.fixture(autouse=True)
     def setup_teardown_class(request):
         cls = request.cls
 

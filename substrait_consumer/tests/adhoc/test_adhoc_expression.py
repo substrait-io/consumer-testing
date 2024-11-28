@@ -31,13 +31,13 @@ class TestAdhocExpression:
     """
 
     @staticmethod
-    @pytest.fixture(scope="class", autouse=True)
+    @pytest.fixture(autouse=True)
     def setup_teardown_class(request):
         cls = request.cls
         cls.produced_plans = set()
 
     @staticmethod
-    @pytest.fixture(scope="function", autouse=True)
+    @pytest.fixture(autouse=True)
     def setup_teardown_function(request):
         cls = request.cls
 
