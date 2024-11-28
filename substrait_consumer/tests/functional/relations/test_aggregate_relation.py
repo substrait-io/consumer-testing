@@ -17,12 +17,16 @@ def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
     consumer = request.getfixturevalue('consumer')
+    test_name = request.getfixturevalue('test_name')
     if consumer.__class__.__name__ == 'DuckDBConsumer':
         if producer.__class__.__name__ != 'DuckDBProducer':
             pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
     elif consumer.__class__.__name__ == 'DataFusionConsumer':
         if producer.__class__.__name__ != 'DataFusionProducer':
             pytest.skip(reason=f'Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}')
+    elif consumer.__class__.__name__ == 'AceroConsumer':
+        if producer.__class__.__name__ == 'IsthmusProducer' and test_name == 'compute_within_aggregate':
+            pytest.skip(reason="'isthmus-acero-compute_within_aggregate' currently crashes")
 
 
 @pytest.mark.usefixtures("prepare_small_tpch_parquet_data")
