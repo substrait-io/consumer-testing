@@ -36,17 +36,17 @@
     {
       "root": {
         "input": {
-          "project": {
-            "common": {
-              "emit": {
-                "outputMapping": [
-                  4,
-                  5
-                ]
-              }
-            },
+          "filter": {
             "input": {
-              "filter": {
+              "project": {
+                "common": {
+                  "emit": {
+                    "outputMapping": [
+                      4,
+                      5
+                    ]
+                  }
+                },
                 "input": {
                   "read": {
                     "common": {
@@ -92,104 +92,104 @@
                     }
                   }
                 },
-                "condition": {
-                  "scalarFunction": {
-                    "functionReference": 1,
-                    "outputType": {
-                      "bool": {
-                        "nullability": "NULLABILITY_NULLABLE"
-                      }
-                    },
-                    "arguments": [
-                      {
-                        "value": {
-                          "scalarFunction": {
-                            "functionReference": 2,
-                            "outputType": {
-                              "bool": {
-                                "nullability": "NULLABILITY_NULLABLE"
-                              }
-                            },
-                            "arguments": [
-                              {
-                                "value": {
-                                  "selection": {
-                                    "directReference": {
-                                      "structField": {}
-                                    },
-                                    "rootReference": {}
-                                  }
-                                }
-                              },
-                              {
-                                "value": {
-                                  "literal": {
-                                    "i8": 5
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        }
+                "expressions": [
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {}
                       },
-                      {
-                        "value": {
-                          "scalarFunction": {
-                            "functionReference": 3,
-                            "outputType": {
-                              "bool": {
-                                "nullability": "NULLABILITY_NULLABLE"
-                              }
-                            },
-                            "arguments": [
-                              {
-                                "value": {
-                                  "selection": {
-                                    "directReference": {
-                                      "structField": {
-                                        "field": 1
-                                      }
-                                    },
-                                    "rootReference": {}
-                                  }
-                                }
-                              },
-                              {
-                                "value": {
-                                  "literal": {
-                                    "i8": 1
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            "expressions": [
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {}
-                  },
-                  "rootReference": {}
-                }
-              },
-              {
-                "selection": {
-                  "directReference": {
-                    "structField": {
-                      "field": 1
+                      "rootReference": {}
                     }
                   },
-                  "rootReference": {}
-                }
+                  {
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 1
+                        }
+                      },
+                      "rootReference": {}
+                    }
+                  }
+                ]
               }
-            ]
+            },
+            "condition": {
+              "scalarFunction": {
+                "functionReference": 1,
+                "outputType": {
+                  "bool": {
+                    "nullability": "NULLABILITY_NULLABLE"
+                  }
+                },
+                "arguments": [
+                  {
+                    "value": {
+                      "scalarFunction": {
+                        "functionReference": 2,
+                        "outputType": {
+                          "bool": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                },
+                                "rootReference": {}
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "i8": 5
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "value": {
+                      "scalarFunction": {
+                        "functionReference": 3,
+                        "outputType": {
+                          "bool": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {
+                                    "field": 1
+                                  }
+                                },
+                                "rootReference": {}
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "i8": 1
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
           }
         },
         "names": [
@@ -200,7 +200,7 @@
     }
   ],
   "version": {
-    "minorNumber": 38,
+    "minorNumber": 56,
     "producer": "ibis-substrait"
   }
 }

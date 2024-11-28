@@ -72,6 +72,9 @@
                 }
               }
             },
+            "groupings": [
+              {}
+            ],
             "measures": [
               {
                 "measure": {
@@ -110,7 +113,7 @@
     }
   ],
   "version": {
-    "minorNumber": 38,
+    "minorNumber": 56,
     "producer": "ibis-substrait"
   }
 }
