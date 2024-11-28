@@ -299,3 +299,25 @@ methods on how to run the substrait query plan against that consumer.  Look at
 
 In order for the test to use the new consumer, the consumer class name should also be added
 to the CONSUMERS list in `substrait_consumer/conftest.py`.
+
+# How to Update Producers/Consumers/Dependencies
+The versions of all dependencies in `requirements.txt` are frozen in order to
+make the tests reproducible. Similarly, the version of the Isthmus producer is
+frozen via its version of the git submodule at `substrait-java/`. Development
+and CI should mainly happen with those versions in order to eliminate diverging
+behavior due to version differences.
+
+In order to update a specific producer or consumer or one or several of the
+dependencies, install the desired versions using:
+
+```bash
+pip install --upgrade package==1.23.4 # upgrade package to specific version
+pip install --upgrade package         # upgrade package to latest version
+pip install --upgrade -r requirements-unlocked.txt # upgrade all dependencies to latest version
+```
+
+For dependencies in git submodules, update the corresponding submodules.
+
+After the dependency was updated, run the tests and make sure that all changes
+in test outcomes are expected and fix potential problems and/or update the
+snapshots.
