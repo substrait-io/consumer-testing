@@ -10,6 +10,7 @@ jobs:
     name: Run consumer tests
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         consumer: [datafusion, duckdb]
     steps:
@@ -35,6 +36,7 @@ jobs:
     name: Run producer tests
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         producer: [datafusion, duckdb, ibis, isthmus]
     steps:
