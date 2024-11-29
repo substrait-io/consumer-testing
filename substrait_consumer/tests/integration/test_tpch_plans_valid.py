@@ -76,12 +76,12 @@ class TestTpchPlansValid:
         config = sv.Config()
         # Isthmus plan overrides
         # ValueError: Error at plan: missing required protobuf field: version (code 1002)
-        config.override_diagnostic_level(1002, "error", "info")
+        config.override_diagnostic_level(1002, "info", "info")
         # ValueError: Warning at plan.extension_uris[0].uri: did not attempt to resolve YAML:
         # configured recursion limit for URI resolution has been reached
-        config.override_diagnostic_level(2001, "warning", "info")
+        config.override_diagnostic_level(2001, "info", "info")
         # Warning. not yet implemented: matching function calls with their definitions
-        config.override_diagnostic_level(1, "warning", "info")
+        config.override_diagnostic_level(1, "info", "info")
 
         sv.check_plan_valid(substrait_query, config)
 
@@ -110,13 +110,13 @@ class TestTpchPlansValid:
 
         # Duckdb plan overrides
         # not yet implemented: typecast validation rules are not yet implemented
-        config.override_diagnostic_level(1, "warning", "info")
+        config.override_diagnostic_level(1, "info", "info")
         # function definition unavailable: cannot check validity of call
-        config.override_diagnostic_level(6003, "warning", "info")
+        config.override_diagnostic_level(6003, "info", "info")
         # Function Anchor to YAML file
-        config.override_diagnostic_level(3001, "error", "info")
+        config.override_diagnostic_level(3001, "info", "info")
         # too few field names
-        config.override_diagnostic_level(4003, "error", "info")
+        config.override_diagnostic_level(4003, "info", "info")
 
         # Format the sql query by inserting all the table names
         self.duckdb_producer.setup(self.db_connection, local_files, named_tables)
