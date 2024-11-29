@@ -51,7 +51,7 @@ class TestProjectRelation:
 
     @staticmethod
     @pytest.fixture(autouse=True)
-    def setup_teardown_class(request):
+    def setup_teardown_function(request):
         cls = request.cls
 
         cls.db_connection = duckdb.connect()
