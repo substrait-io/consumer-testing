@@ -38,8 +38,8 @@ class TestDDLRelation:
     """
 
     @staticmethod
-    @pytest.fixture(scope="class", autouse=True)
-    def setup_teardown_class(request):
+    @pytest.fixture(autouse=True)
+    def setup_teardown_function(request):
         cls = request.cls
 
         cls.db_connection = duckdb.connect()

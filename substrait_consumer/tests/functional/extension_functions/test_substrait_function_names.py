@@ -20,7 +20,7 @@ class TestSubstraitFunctionNames:
     """
 
     @staticmethod
-    @pytest.fixture(scope="function", autouse=True)
+    @pytest.fixture(autouse=True)
     def setup_teardown_function(request):
         cls = request.cls
 
