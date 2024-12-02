@@ -131,7 +131,7 @@
               }]
             }
           }],
-          "op": "SET_OP_INTERSECTION_PRIMARY"
+          "op": "SET_OP_INTERSECTION_MULTISET"
         }
       },
       "names": ["C_NATIONKEY"]

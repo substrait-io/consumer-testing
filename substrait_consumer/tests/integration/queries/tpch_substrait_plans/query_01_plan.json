@@ -212,7 +212,8 @@
                                   "value": {
                                     "literal": {
                                       "intervalDayToSecond": {
-                                        "seconds": 10368
+                                        "seconds": 10368,
+                                        "precision": 6
                                       }
                                     }
                                   }
