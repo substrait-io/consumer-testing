@@ -17,13 +17,13 @@ READ_RELATIONS = {
     ),
     "datafusion_read_virtual_table": (
         """
-        CREATE TABLE IF NOT EXISTS valuetable AS VALUES(1,'HELLO'),(12,'DATAFUSION');
+        SELECT * FROM VALUES (10)
         """,
         [DataFusionProducer],
     ),
     "duckdb_read_virtual_table": (
         """
-        CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
+        SELECT * FROM (VALUES (10))
         """,
         [DuckDBProducer],
     ),
