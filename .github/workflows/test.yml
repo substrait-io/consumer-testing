@@ -59,11 +59,24 @@ jobs:
       if: ${{ matrix.producer == 'isthmus' }}
       with:
         distribution: 'temurin'
-        java-version: '21'
+        java-version: '17'
 
-    - name: Build and install Isthmus
+    - name: Setup Gradle
       if: ${{ matrix.producer == 'isthmus' }}
-      run: ./build-and-copy-isthmus-shadow-jar.sh
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: 8.8
+
+    - name: Build Isthmus
+      if: ${{ matrix.producer == 'isthmus' }}
+      working-directory: ./substrait-java/isthmus
+      run: ../gradlew shadowJar
+
+    - name: Copy Isthmus JARs
+      if: ${{ matrix.producer == 'isthmus' }}
+      run: |-
+        mkdir ./jars
+        cp substrait-java/isthmus/build/libs/*all.jar ./jars
 
     - name: Run functions tests
       run: pytest -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/tests/functional/extension_functions
