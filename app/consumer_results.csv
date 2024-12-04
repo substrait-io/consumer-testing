@@ -1,5 +1,5 @@
 FullFunction,datafusion-acero,datafusion-datafusion,datafusion-duckdb,duckdb-acero,duckdb-datafusion,duckdb-duckdb,ibis-datafusion,ibis-acero,ibis-duckdb,isthmus-duckdb,isthmus-datafusion,isthmus-acero
-approximation.approx_count_distinct,False,False,False,False,False,False,False,False,False,False,False,False
+approximation.approx_count_distinct,False,False,False,False,False,True,False,False,False,False,False,False
 approximation.approx_distinct,False,False,False,False,False,False,False,False,False,False,False,False
 arithmetic_decimal.add,False,False,False,False,False,True,False,False,False,False,False,False
 arithmetic_decimal.subtract,False,False,False,False,False,True,False,False,False,False,False,False
@@ -19,7 +19,7 @@ arithmetic.factorial,False,True,False,False,False,True,False,False,False,False,F
 arithmetic.power,False,False,False,False,False,True,False,False,False,False,False,False
 arithmetic.sqrt,False,True,False,False,False,True,False,False,False,False,False,True
 arithmetic.exp,False,True,False,False,False,True,False,False,False,False,False,False
-arithmetic.negate,False,False,False,False,False,False,False,False,False,False,False,False
+arithmetic.negate,False,False,False,False,False,False,False,True,False,False,False,False
 arithmetic.cos,False,True,False,False,False,True,False,False,False,False,False,True
 arithmetic.acos,False,False,False,False,False,True,False,False,False,False,False,True
 arithmetic.sin,False,True,False,False,False,True,False,False,False,False,False,True
@@ -35,7 +35,7 @@ arithmetic.count_star,False,True,False,False,False,True,False,False,False,False,
 arithmetic.avg,False,True,False,False,False,True,False,False,False,False,False,False
 arithmetic.min,False,False,False,False,False,True,False,False,False,False,False,True
 arithmetic.max,False,False,False,False,False,True,False,False,False,False,False,True
-arithmetic.median,False,False,False,False,False,False,False,False,False,False,False,False
+arithmetic.median,False,False,False,False,False,True,False,False,False,False,False,False
 arithmetic.mode,False,False,False,False,False,True,False,False,False,False,False,False
 arithmetic.product,False,False,False,False,False,True,False,False,False,False,False,False
 arithmetic.std_dev,False,False,False,False,False,True,False,False,False,False,False,False
@@ -75,7 +75,7 @@ logarithmic.logb,False,False,False,False,False,False,False,False,False,False,Fal
 rounding.ceil,False,True,False,False,False,True,False,False,False,False,False,True
 rounding.floor,False,True,False,False,False,True,False,False,False,False,False,True
 rounding.round,False,False,False,False,False,True,False,False,False,False,False,False
-string.concat,False,True,False,False,False,True,False,False,False,False,False,True
+string.concat,False,True,False,False,False,True,False,False,False,False,False,False
 string.concat_ws,False,True,False,False,False,True,False,False,False,False,False,False
 string.like,False,True,False,False,False,True,False,False,False,False,False,False
 string.starts_with0,False,True,False,False,False,True,False,False,False,False,False,False
@@ -94,7 +94,7 @@ string.char_length,False,True,False,False,False,True,False,False,False,False,Fal
 string.bit_length,False,True,False,False,False,True,False,False,False,False,False,False
 string.ltrim,False,True,False,False,False,True,False,False,False,False,False,False
 string.rtrim,False,True,False,False,False,True,False,False,False,False,False,False
-string.trim,False,True,False,False,False,True,False,False,False,False,False,False
+string.trim,False,False,False,False,False,True,False,False,False,False,False,False
 string.lpad,False,True,False,False,False,True,False,False,False,False,False,False
 string.rpad,False,True,False,False,False,True,False,False,False,False,False,False
 string.left,False,True,False,False,False,True,False,False,False,False,False,False

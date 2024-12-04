@@ -1,0 +1,53 @@
+name: Support Matrix
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  consumers:
+    name: Ensure support matrix is up-to-date
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [consume, produce]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+
+    - name: Install Java
+      uses: actions/setup-java@v4
+      if: ${{ matrix.target == 'produce' }}
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Build and install Isthmus
+      if: ${{ matrix.target == 'produce' }}
+      run: ./build-and-copy-isthmus-shadow-jar.sh
+
+    - name: Run functions tests
+      working-directory: ./substrait_consumer/tests/functional/extension_functions
+      # Make this target succeed always as failing tests are part of the outcome
+      # and should be processed by the next step.
+      run: pytest -v --tb=no --csv ${{ matrix.target }}r_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status' -m ${{ matrix.target }}_substrait_snapshot || true
+
+    - name: Parse results
+      working-directory: ./substrait_consumer/tests/functional/extension_functions
+      run: python parse_${{ matrix.target }}r_pytest_output.py ../../../../app/${{ matrix.target }}r_results.csv
+
+    - name: Ensure CSV is up-to-date
+      run: git diff --exit-code || (echo "Please update the support matrix, add it to this PR, and run CI again."; false)
