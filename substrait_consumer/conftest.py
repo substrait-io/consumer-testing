@@ -90,15 +90,11 @@ def saveplan(request):
 
 
 PRODUCERS = {
-    "datafusion": DataFusionProducer,
-    "duckdb": DuckDBProducer,
-    "ibis": IbisProducer,
-    "isthmus": IsthmusProducer,
+    cls.name(): cls
+    for cls in [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer]
 }
 CONSUMERS = {
-    "acero": AceroConsumer,
-    "datafusion": DataFusionConsumer,
-    "duckdb": DuckDBConsumer,
+    cls.name(): cls for cls in [AceroConsumer, DataFusionConsumer, DuckDBConsumer]
 }
 
 

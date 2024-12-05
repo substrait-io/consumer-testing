@@ -12,6 +12,11 @@ class IbisProducer(Producer):
     """
     Adapts the Ibis Substrait producer to the test framework.
     """
+
+    @classmethod
+    def name(self):
+        return "ibis"
+
     def __init__(self, db_connection=None):
         if db_connection is not None:
             self._db_connection = db_connection
@@ -46,6 +51,3 @@ class IbisProducer(Producer):
         tpch_proto_bytes = compiler.compile(ibis_expr)
         substrait_plan = json_format.MessageToJson(tpch_proto_bytes)
         return substrait_plan
-
-    def name(self):
-        return "IbisProducer"

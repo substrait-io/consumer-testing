@@ -10,6 +10,10 @@ from substrait_consumer.functional.common import (
     generate_snapshot_results,
     substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.producers.datafusion_producer import DataFusionProducer
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
+from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
+from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 
 
 @pytest.fixture
@@ -17,12 +21,16 @@ def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
     producer = request.getfixturevalue('producer')
     consumer = request.getfixturevalue('consumer')
-    if consumer.__class__.__name__ == 'DuckDBConsumer':
-        if producer.__class__.__name__ != 'DuckDBProducer':
-            pytest.skip(reason=f'Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}')
-    elif consumer.__class__.__name__ == 'DataFusionConsumer':
-        if producer.__class__.__name__ != 'DataFusionProducer':
-            pytest.skip(reason=f'Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}')
+    if isinstance(consumer, DuckDBConsumer):
+        if not isinstance(producer, DuckDBProducer):
+            pytest.skip(
+                reason=f"Unsupported Integration: duckdb consumer with {producer.name()} producer"
+            )
+    elif isinstance(consumer, DataFusionConsumer):
+        if not isinstance(producer, DataFusionProducer):
+            pytest.skip(
+                reason=f"Unsupported Integration: datafusion consumer with {producer.name()} producer"
+            )
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")

@@ -37,6 +37,11 @@ COLUMN_D = [
 
 class Consumer(ABC):
 
+    @classmethod
+    @abstractmethod
+    def name(cls):
+        pass
+
     def setup(
         self, db_connection, local_files: dict[str, str], named_tables: dict[str, str]
     ):

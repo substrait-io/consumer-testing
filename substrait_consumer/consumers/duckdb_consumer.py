@@ -12,6 +12,10 @@ class DuckDBConsumer(Consumer):
     Adapts the DuckDB Substrait consumer to the test framework.
     """
 
+    @classmethod
+    def name(self):
+        return "duckdb"
+
     def __init__(self, db_connection=None):
         if db_connection is not None:
             self.db_connection = db_connection

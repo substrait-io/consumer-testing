@@ -15,6 +15,11 @@ class DataFusionProducer(Producer):
     """
     Adapts the DataFusion Substrait producer to the test framework.
     """
+
+    @classmethod
+    def name(self):
+        return "datafusion"
+
     def __init__(self, db_connection=None):
         self._ctx = SessionContext()
         if db_connection is not None:
@@ -89,6 +94,3 @@ class DataFusionProducer(Producer):
                     names=["a", "b", "c", "d"],
                 )
                 self._ctx.register_record_batches("t", [[named_tables]])
-
-    def name(self):
-        return "DataFusionProducer"
