@@ -197,15 +197,15 @@ IBIS_SCALAR = {
 ## Updating Snapshots
 
 ### Substrait Plan Snapshots
-Each producer has its own set of substrait plan snapshots that are stored in the `*_snapshots`
-directory under `substrait_consumer/tests/functional/extension_functions/`
+Each producer has its own set of Substrait plan snapshots that are stored in
+`*_plan.json` files under
+`substrait_consumer/tests/functional/extension_functions/snapshots/` and
+`substrait_consumer/tests/functional/relations/snapshots/`:
 ```commandline
-cd substrait_consumer/tests/functional/extension_functions/boolean_snapshots
-ls
-DuckDBProducer		IbisProducer		IsthmusProducer
-cd DuckDBProducer
-and_plan.json		bool_or_plan.json	or_plan.json
-bool_and_plan.json	not_plan.json		xor_plan.json
+$ ls substrait_consumer/tests/functional/extension_functions/snapshots/producer/approximation/
+approx_count_distinct-duckdb_plan.json  approx_distinct-datafusion_plan.json
+$ ls substrait_consumer/tests/functional/relations/snapshots/producer/fetch/
+fetch-isthmus_plan.json  fetch_with_offset-isthmus_plan.json
 ```
 
 Substrait plan snapshots are used to verify that producers are able to generate substrait plans.
@@ -232,13 +232,14 @@ cd substrait_consumer/tests/functional/extension_functions
 pytest -m generate_function_snapshots --snapshot-update test_arithmetic_functions.py
 ```
 
-Results snapshots are saved in the `function_test_results` under each
-function grouping snapshots folder.
+Results snapshots are saved `*_result.txt` files under
+`substrait_consumer/tests/functional/extension_functions/snapshots/` and
+`substrait_consumer/tests/functional/relations/snapshots/`:
 ```commandline
-cd substrait_consumer/tests/functional/extension_functions/boolean_snapshots/function_test_results
-ls
-and_result.txt		bool_or_result.txt	or_result.txt
-bool_and_result.txt	not_result.txt		xor_result.txt
+$ ls substrait_consumer/tests/functional/extension_functions/snapshots/consumer/approximation/
+approx_count_distinct_result.txt
+$ ls substrait_consumer/tests/functional/relations/snapshots/consumer/fetch/
+fetch_result.txt  fetch_with_offset_result.txt
 ```
 
 

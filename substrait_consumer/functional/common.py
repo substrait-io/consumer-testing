@@ -13,15 +13,6 @@ if TYPE_CHECKING:
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 
-
-FUNCTION_SNAPSHOT_DIR = (
-    Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
-)
-RELATION_SNAPSHOT_DIR = (
-    Path(__file__).parent.parent / "tests" / "functional" / "relations"
-)
-
-
 def check_subtrait_function_names(
     substrait_plan: dict,
     expected_function_name,
@@ -88,12 +79,7 @@ def generate_snapshot_results(
         duckdb_result_data.extend(column.data)
         duckdb_result_data.extend([' '])
     str_result_data = '\n'.join(map(str, duckdb_result_data))
-    group, name = test_name.split(":")
-    if "relation" in group:
-        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / "relation_test_results"
-    else:
-        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / "function_test_results"
-    snapshot.assert_match(str_result_data, f"{name}_result.txt")
+    snapshot.assert_match(str_result_data, f"{test_name}_result.txt")
 
 
 def substrait_producer_sql_test(
@@ -150,12 +136,8 @@ def substrait_producer_sql_test(
                 f"{producer.name()} does not support the following SQL: {sql_query}"
             )
 
-    group, name = test_name.split(":")
-    if "relation" in group:
-        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / type(producer).__name__
-    else:
-        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / type(producer).__name__
-    snapshot.assert_match(str(substrait_plan), f"{name}_plan.json")
+    plan_path = f"{test_name}-{producer.name()}_plan.json"
+    snapshot.assert_match(str(substrait_plan), plan_path)
 
 
 def substrait_consumer_sql_test(
@@ -164,9 +146,7 @@ def substrait_consumer_sql_test(
     db_con: DuckDBPyConnection,
     local_files: dict[str, str],
     named_tables: dict[str, str],
-    sql_query: tuple,
-    ibis_expr: Callable[[Table], Table],
-    producer,
+    plan_path: Path,
     consumer,
 ):
     """
@@ -185,43 +165,28 @@ def substrait_consumer_sql_test(
             A `dict` mapping format argument names to local files paths.
         named_tables:
             A `dict` mapping table names to local file paths.
-        sql_query:
-            SQL query.
-        ibis_expr:
-            Ibis expression.
-        producer:
-            Substrait producer class.
+        plan_path:
+            Path to the plan that should be executed on the consumer.
         consumer:
             Substrait consumer class.
     """
     consumer.setup(db_con, local_files, named_tables)
 
-    group, name = test_name.split(":")
-    snopshot_dir = RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR
-    plan_path = (
-        snopshot_dir
-        / group
-        / type(producer).__name__
-        / f"{name}_plan.json"
-    )
-    if plan_path.is_file():
-        substrait_plan = plan_path.read_text()
+    if not plan_path.is_file():
+        pytest.skip(f"Substrait plan at '{plan_path}' does not exist")
 
-        results_dir = "relation_test_results" if "relation" in group else "function_test_results"
-        snapshot.snapshot_dir = snopshot_dir / group / results_dir
-        actual_result = consumer.run_substrait_query(substrait_plan)
-        actual_result = actual_result.rename_columns(
-            list(map(str.lower, actual_result.column_names))
-        ).columns
-        result_list = []
-        for column in actual_result:
-            result_list.extend(column.data)
-            result_list.extend([' '])
-        str_result = '\n'.join(map(str, result_list))
-        snapshot.assert_match(str_result, f"{name}_result.txt")
+    substrait_plan = plan_path.read_text()
 
-    else:
-        pytest.skip(f"No substrait plan exists for {producer.name()}:{name}")
+    actual_result = consumer.run_substrait_query(substrait_plan)
+    actual_result = actual_result.rename_columns(
+        list(map(str.lower, actual_result.column_names))
+    ).columns
+    result_list = []
+    for column in actual_result:
+        result_list.extend(column.data)
+        result_list.extend([" "])
+    str_result = "\n".join(map(str, result_list))
+    snapshot.assert_match(str_result, f"{test_name}_result.txt")
 
 
 def load_custom_duckdb_table(db_connection):

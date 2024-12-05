@@ -16,9 +16,7 @@ from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 
-
-DATA_DIR = Path(__file__).parent.parent.parent.parent / "data"
-
+SNAPSHOT_DIR = Path(__file__).parent / "snapshots"
 
 @pytest.fixture
 def mark_producer_tests_as_xfail(request):
@@ -84,7 +82,7 @@ class TestProjectRelation:
         producer,
         partsupp
     ) -> None:
-        test_name = f"project_relation_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "producer" / "project"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -112,16 +110,16 @@ class TestProjectRelation:
         producer,
         consumer,
     ) -> None:
-        test_name = f"project_relation_snapshots:{test_name}"
+        test_name = f"{test_name}-{producer.name()}"
+        plan_path = SNAPSHOT_DIR / "producer" / "project" / f"{test_name}_plan.json"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "project"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
             local_files,
             named_tables,
-            sql_query,
-            ibis_expr,
-            producer,
+            plan_path,
             consumer,
         )
 
@@ -136,7 +134,7 @@ class TestProjectRelation:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"project_relation_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "project"
         generate_snapshot_results(
             test_name,
             snapshot,

@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Callable
 
 import duckdb
@@ -11,6 +12,7 @@ from substrait_consumer.functional.common import (
     substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
 
+SNAPSHOT_DIR = Path(__file__).parent / "snapshots"
 
 @pytest.fixture
 def mark_producer_tests_as_xfail(request):
@@ -64,7 +66,7 @@ class TestDDLRelation:
         producer,
         partsupp
     ) -> None:
-        test_name = f"ddl_relation_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "producer" / "ddl"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -92,15 +94,15 @@ class TestDDLRelation:
         producer,
         consumer,
     ) -> None:
-        test_name = f"ddl_relation_snapshots:{test_name}"
+        test_name = f"{test_name}-{producer.name()}"
+        plan_path = SNAPSHOT_DIR / "producer" / "ddl" / f"{test_name}_plan.json"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "ddl"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
             local_files,
             named_tables,
-            sql_query,
-            ibis_expr,
-            producer,
+            plan_path,
             consumer,
         )

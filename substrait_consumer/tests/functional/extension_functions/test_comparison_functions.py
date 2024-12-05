@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Callable
 
 import duckdb
@@ -15,6 +16,7 @@ from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 
+SNAPSHOT_DIR = Path(__file__).parent / "snapshots"
 
 @pytest.fixture
 def mark_producer_tests_as_xfail(request):
@@ -86,7 +88,7 @@ class TestComparisonFunctions:
         partsupp,
         nation,
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "producer" / "comparison"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -113,19 +115,17 @@ class TestComparisonFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp,
-        nation,
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"{test_name}-{producer.name()}"
+        plan_path = SNAPSHOT_DIR / "producer" / "comparison" / f"{test_name}_plan.json"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "comparison"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
             local_files,
             named_tables,
-            sql_query,
-            ibis_expr,
-            producer,
+            plan_path,
             consumer,
         )
 
@@ -140,7 +140,7 @@ class TestComparisonFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "comparison"
         generate_snapshot_results(
             test_name,
             snapshot,
