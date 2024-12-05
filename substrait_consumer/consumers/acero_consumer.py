@@ -12,6 +12,10 @@ class AceroConsumer(Consumer):
     Adapts the Acero Substrait consumer to the test framework.
     """
 
+    @classmethod
+    def name(self):
+        return "acero"
+
     def __init__(self):
         self.named_tables = {}
         self.table_provider = lambda names, schema: self.named_tables[names[0].lower()]

@@ -10,6 +10,7 @@ from substrait_consumer.functional import (
 from substrait_consumer.functional.common import check_subtrait_function_names, load_custom_duckdb_table
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
+from substrait_consumer.producers.ibis_producer import IbisProducer
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -225,7 +226,7 @@ class TestSubstraitFunctionNames:
 
         # Grab the json representation of the produced substrait plan to verify
         # the proper substrait function name.
-        if type(producer).__name__ == "IbisProducer":
+        if isinstance(producer, IbisProducer):
             if ibis_expr:
                 substrait_plan_json = producer.produce_substrait(
                     sql_query[0], validate=False, ibis_expr=ibis_expr(*args)

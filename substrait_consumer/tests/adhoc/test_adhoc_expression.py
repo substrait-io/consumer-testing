@@ -89,7 +89,7 @@ class TestAdhocExpression:
                     outfile.write(json.dumps(python_json, indent=4))
             else:
                 pytest.skip(
-                    f"Plan already produced using the producer: {producer_name}"
+                    f"Plan already produced using the producer: {adhoc_producer.name()}"
                 )
 
         actual_result = consumer.run_substrait_query(substrait_plan)

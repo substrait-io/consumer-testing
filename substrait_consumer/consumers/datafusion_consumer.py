@@ -16,6 +16,10 @@ class DataFusionConsumer(Consumer):
     Adapts the Datafusion Substrait consumer to the test framework.
     """
 
+    @classmethod
+    def name(self):
+        return "datafusion"
+
     def __init__(self):
         self._ctx = SessionContext()
 

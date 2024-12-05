@@ -11,6 +11,8 @@ if TYPE_CHECKING:
     from pytest_snapshot.plugin import Snapshot
 
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
+from substrait_consumer.producers.ibis_producer import IbisProducer
+
 
 FUNCTION_SNAPSHOT_DIR = (
     Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
@@ -135,7 +137,7 @@ def substrait_producer_sql_test(
     sql_query, supported_producers = sql_query
 
     # Convert the SQL/Ibis expression to a substrait query plan
-    if type(producer).__name__ == "IbisProducer":
+    if isinstance(producer, IbisProducer):
         if ibis_expr:
             substrait_plan = producer.produce_substrait(sql_query, validate, ibis_expr(*args))
         else:
@@ -145,8 +147,7 @@ def substrait_producer_sql_test(
             substrait_plan = producer.produce_substrait(sql_query, validate)
         else:
             pytest.xfail(
-                f"{type(producer).__name__} does not support the following SQL: "
-                f"{sql_query}"
+                f"{producer.name()} does not support the following SQL: {sql_query}"
             )
 
     group, name = test_name.split(":")
@@ -220,9 +221,7 @@ def substrait_consumer_sql_test(
         snapshot.assert_match(str_result, f"{name}_result.txt")
 
     else:
-        pytest.skip(
-            f"No substrait plan exists for {type(producer).__name__}:{name}"
-        )
+        pytest.skip(f"No substrait plan exists for {producer.name()}:{name}")
 
 
 def load_custom_duckdb_table(db_connection):

@@ -11,6 +11,11 @@ class IsthmusProducer(Producer):
     """
     Adapts the Isthmus Substrait producer to the test framework.
     """
+
+    @classmethod
+    def name(self):
+        return "isthmus"
+
     def __init__(self, db_connection=None):
         if db_connection is not None:
             self._db_connection = db_connection
@@ -51,6 +56,3 @@ class IsthmusProducer(Producer):
     def _format_sql(self, sql_query):
         sql_query = re.sub(r"'(\{[0-9a-zA-Z_]+\})'", r"\1", sql_query)
         return sql_query.replace("'t'", "t")
-
-    def name(self):
-        return "IsthmusProducer"

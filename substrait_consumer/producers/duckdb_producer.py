@@ -12,6 +12,10 @@ class DuckDBProducer(Producer):
     Adapts the DuckDB Substrait producer to the test framework.
     """
 
+    @classmethod
+    def name(self):
+        return "duckdb"
+
     def __init__(self, db_connection=None):
         if db_connection is not None:
             self._db_connection = db_connection
@@ -58,6 +62,3 @@ class DuckDBProducer(Producer):
         result = self._db_connection.query(f"{sql_query}")
         if result is not None:
             return result.arrow()
-
-    def name(self):
-        return "DuckDBProducer"

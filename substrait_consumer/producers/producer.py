@@ -7,6 +7,11 @@ from substrait_consumer.common import SubstraitUtils
 
 
 class Producer(ABC):
+    @classmethod
+    @abstractmethod
+    def name(cls):
+        pass
+
     def __init__(
         self,
         db_connection: Optional[DuckDBPyConnection] = None,

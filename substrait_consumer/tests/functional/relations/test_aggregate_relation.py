@@ -10,7 +10,12 @@ from substrait_consumer.functional.common import (
     generate_snapshot_results,
     substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
-
+from substrait_consumer.producers.datafusion_producer import DataFusionProducer
+from substrait_consumer.producers.duckdb_producer import DuckDBProducer
+from substrait_consumer.producers.isthmus_producer import IsthmusProducer
+from substrait_consumer.consumers.acero_consumer import AceroConsumer
+from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
+from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 
 @pytest.fixture
 def mark_consumer_tests_as_xfail(request):
@@ -18,19 +23,19 @@ def mark_consumer_tests_as_xfail(request):
     producer = request.getfixturevalue("producer")
     consumer = request.getfixturevalue("consumer")
     test_name = request.getfixturevalue("test_name")
-    if consumer.__class__.__name__ == "DuckDBConsumer":
-        if producer.__class__.__name__ != "DuckDBProducer":
+    if isinstance(consumer, DuckDBConsumer):
+        if not isinstance(producer, DuckDBProducer):
             pytest.skip(
-                reason=f"Unsupported Integration: DuckDBConsumer with non {producer.__class__.__name__}"
+                reason=f"Unsupported Integration: duckdb consumer with {producer.name()} producer"
             )
-    elif consumer.__class__.__name__ == "DataFusionConsumer":
-        if producer.__class__.__name__ != "DataFusionProducer":
+    elif isinstance(consumer, DataFusionConsumer):
+        if not isinstance(producer, DataFusionProducer):
             pytest.skip(
-                reason=f"Unsupported Integration: DataFusionConsumer with non {producer.__class__.__name__}"
+                reason=f"Unsupported Integration: datafusion consumer with {producer.name()} producer"
             )
-    elif consumer.__class__.__name__ == "AceroConsumer":
+    elif isinstance(consumer, AceroConsumer):
         if (
-            producer.__class__.__name__ == "IsthmusProducer"
+            not (isinstance(producer, IsthmusProducer))
             and test_name == "compute_within_aggregate"
         ):
             pytest.skip(
