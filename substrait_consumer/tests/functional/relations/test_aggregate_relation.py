@@ -35,9 +35,8 @@ def mark_consumer_tests_as_xfail(request):
             )
     elif isinstance(consumer, AceroConsumer):
         if (
-            not (isinstance(producer, IsthmusProducer))
-            and test_name == "compute_within_aggregate"
-        ):
+            isinstance(producer, IsthmusProducer)
+        ) and test_name == "compute_within_aggregate":
             pytest.skip(
                 reason="'isthmus-acero-compute_within_aggregate' currently crashes"
             )
