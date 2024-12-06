@@ -29,23 +29,5 @@ df.status = df.status == "passed"
 # Pivot such that each producer/consumer pair becomes one columns.
 df = df.pivot(index="FullFunction", columns="producer-consumer", values="status")
 
-# Temporarily use the old column order to make CI happy.
-df = df[
-    [
-        "datafusion-acero",
-        "datafusion-datafusion",
-        "datafusion-duckdb",
-        "duckdb-acero",
-        "duckdb-datafusion",
-        "duckdb-duckdb",
-        "ibis-datafusion",
-        "ibis-acero",
-        "ibis-duckdb",
-        "isthmus-duckdb",
-        "isthmus-datafusion",
-        "isthmus-acero",
-    ]
-]
-
 # Write out result.
 df.to_csv(args.output, sep=",")
