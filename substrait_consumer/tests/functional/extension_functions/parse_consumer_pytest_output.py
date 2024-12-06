@@ -1,58 +1,51 @@
-import csv
-import re
-import sys
+import argparse
 
-try:
-    PARSED_RESULTS_FILE = sys.argv[1]
-except IndexError:
-    print("Please specify an output file")
-    sys.exit(1)
+import pandas as pd
 
-DATA_DICT = {}
+# Set up argument parsing.
+parser = argparse.ArgumentParser(prog="consumer pytest output parser")
+parser.add_argument(
+    "-i", "--input", help="Path to the input CSV file created by pytest"
+)
+parser.add_argument("-o", "--output", help="Path to the output CSV file")
+args = parser.parse_args()
 
-with open("./consumer_pytest_output.csv", "r") as file:
-    csvreader = csv.reader(file, delimiter=";")
-    rowcount = 0
-    for row in csvreader:
-        print(row)
-        if rowcount > 0:
-            data = row[0].split("::")[-1]
-            status = row[1]
-            function_group = None
-            try:
-                function_group = re.search(r"consumer_(.*?)_functions\[", data).group(1)
-            except AttributeError:
-                print(f"No consumer function found in test case: {data}")
-            producer, consumer, function = (
-                re.search(r"\[(.*?)\]", data).group(1).split("-")
-            )
-            full_operation = function_group + "." + function
-            if status == "passed":
-                status = "True"
-            else:
-                status = "False"
-            if full_operation not in DATA_DICT:
-                DATA_DICT[full_operation] = [(producer, consumer, status)]
-            else:
-                DATA_DICT[full_operation].append((producer, consumer, status))
-        rowcount += 1
+# Read CSV file.
+df = pd.read_csv(args.input, sep=";")
 
-with open(PARSED_RESULTS_FILE, "w", newline="") as csvfile:
-    writer = csv.writer(
-        csvfile, escapechar=" ", quoting=csv.QUOTE_NONE, quotechar=" ", delimiter=" ", lineterminator="\n"
-    )
-    header = False
-    rowcount = 0
-    for key, value in sorted(DATA_DICT.items()):
-        sorted_by_producer = sorted(value, key=lambda x: x[0])
-        if not header:
-            firstrow = "FullFunction"
-            for tup in sorted_by_producer:
-                firstrow += "," + f"{tup[0]}-{tup[1]}"
-            writer.writerow([firstrow])
-            header = True
-        DATA_DICT[key] = sorted_by_producer
-        statuses_list = [key]
-        for producer_consumer_status in sorted_by_producer:
-            statuses_list.append(producer_consumer_status[2])
-        writer.writerow([",".join(statuses_list)])
+# Decompose test name into various components
+df["test_name"] = df.id.str.split("::").str[-1]
+regex = r".*consumer_(.+)_functions\[(.+)-(.+)-(.+)\]"
+df["function_group"] = df.test_name.str.replace(regex, lambda m: m.group(1), regex=True)
+df["producer"] = df.test_name.str.replace(regex, lambda m: m.group(2), regex=True)
+df["consumer"] = df.test_name.str.replace(regex, lambda m: m.group(3), regex=True)
+df["function"] = df.test_name.str.replace(regex, lambda m: m.group(4), regex=True)
+
+# Bring into desired output format.
+df["FullFunction"] = df.function_group + "." + df.function
+df["producer-consumer"] = df.producer + "-" + df.consumer
+df.status = df.status == "passed"
+
+# Pivot such that each producer/consumer pair becomes one columns.
+df = df.pivot(index="FullFunction", columns="producer-consumer", values="status")
+
+# Temporarily use the old column order to make CI happy.
+df = df[
+    [
+        "datafusion-acero",
+        "datafusion-datafusion",
+        "datafusion-duckdb",
+        "duckdb-acero",
+        "duckdb-datafusion",
+        "duckdb-duckdb",
+        "ibis-datafusion",
+        "ibis-acero",
+        "ibis-duckdb",
+        "isthmus-duckdb",
+        "isthmus-datafusion",
+        "isthmus-acero",
+    ]
+]
+
+# Write out result.
+df.to_csv(args.output, sep=",")
