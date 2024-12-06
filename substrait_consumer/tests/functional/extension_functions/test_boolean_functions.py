@@ -63,6 +63,7 @@ class TestBooleanFunctions:
     def test_producer_boolean_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -74,6 +75,7 @@ class TestBooleanFunctions:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -89,6 +91,7 @@ class TestBooleanFunctions:
     def test_consumer_boolean_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -101,6 +104,7 @@ class TestBooleanFunctions:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -115,6 +119,7 @@ class TestBooleanFunctions:
     def test_generate_boolean_functions_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -125,6 +130,7 @@ class TestBooleanFunctions:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

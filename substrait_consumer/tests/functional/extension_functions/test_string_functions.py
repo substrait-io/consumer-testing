@@ -73,6 +73,7 @@ class TestStringFunctions:
     def test_producer_string_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -86,6 +87,7 @@ class TestStringFunctions:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -102,6 +104,7 @@ class TestStringFunctions:
     def test_consumer_string_functions(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -116,6 +119,7 @@ class TestStringFunctions:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -130,6 +134,7 @@ class TestStringFunctions:
     def test_generate_string_functions_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -140,6 +145,7 @@ class TestStringFunctions:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
