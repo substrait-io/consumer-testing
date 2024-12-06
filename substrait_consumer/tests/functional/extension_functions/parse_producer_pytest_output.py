@@ -36,7 +36,7 @@ with open("./producer_pytest_output.csv", "r") as file:
 
 with open(PARSED_RESULTS_FILE, "w", newline="") as csvfile:
     writer = csv.writer(
-        csvfile, escapechar=" ", quoting=csv.QUOTE_NONE, quotechar=" ", delimiter=" "
+        csvfile, escapechar=" ", quoting=csv.QUOTE_NONE, quotechar=" ", delimiter=" ", lineterminator="\n"
     )
     any_value = next(iter(DATA_DICT.values()))
     systems = sorted([item[0] for item in any_value])
@@ -44,7 +44,7 @@ with open(PARSED_RESULTS_FILE, "w", newline="") as csvfile:
         ["FullFunction," + ",".join(systems)]
     )
     rowcount = 0
-    for key, value in DATA_DICT.items():
+    for key, value in sorted(DATA_DICT.items()):
         sorted_by_prod = sorted(value, key=lambda x: x[0])
         DATA_DICT[key] = sorted_by_prod
         statuses_list = [key]

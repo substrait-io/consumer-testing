@@ -39,11 +39,11 @@ with open("./consumer_pytest_output.csv", "r") as file:
 
 with open(PARSED_RESULTS_FILE, "w", newline="") as csvfile:
     writer = csv.writer(
-        csvfile, escapechar=" ", quoting=csv.QUOTE_NONE, quotechar=" ", delimiter=" "
+        csvfile, escapechar=" ", quoting=csv.QUOTE_NONE, quotechar=" ", delimiter=" ", lineterminator="\n"
     )
     header = False
     rowcount = 0
-    for key, value in DATA_DICT.items():
+    for key, value in sorted(DATA_DICT.items()):
         sorted_by_producer = sorted(value, key=lambda x: x[0])
         if not header:
             firstrow = "FullFunction"
