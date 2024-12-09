@@ -9,45 +9,6 @@ from substrait_consumer.functional.common import (
     substrait_producer_sql_test)
 from substrait_consumer.functional.logarithmic_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
-from substrait_consumer.producers.datafusion_producer import DataFusionProducer
-from substrait_consumer.producers.duckdb_producer import DuckDBProducer
-from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
-from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
-
-
-@pytest.fixture
-def mark_producer_tests_as_xfail(request):
-    """Marks a subset of tests as expected to be fail."""
-    producer = request.getfixturevalue('producer')
-    func_name = request.node.callspec.id.split('-')[1]
-    if isinstance(producer, (DataFusionProducer, DuckDBProducer)):
-        if func_name == "logb":
-            pytest.skip(reason='Catalog Error: Scalar Function with name logb does not exist!')
-
-
-@pytest.fixture
-def mark_consumer_tests_as_xfail(request):
-    """Marks a subset of tests as expected to be fail."""
-    producer = request.getfixturevalue('producer')
-    consumer = request.getfixturevalue('consumer')
-    if isinstance(consumer, DuckDBConsumer):
-        if not isinstance(producer, DuckDBProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: duckdb consumer with {producer.name()} producer"
-            )
-    elif isinstance(consumer, DataFusionConsumer):
-        if not isinstance(producer, DataFusionProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: datafusion consumer with {producer.name()} producer"
-            )
-
-
-@pytest.fixture
-def mark_generate_result_tests_as_xfail(request):
-    """Marks a subset of tests as expected to be fail."""
-    func_name = request.node.callspec.id
-    if func_name == "logb":
-        pytest.skip(reason='Catalog Error: Scalar Function with name logb does not exist!')
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -72,7 +33,6 @@ class TestLogarithmicFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.produce_substrait_snapshot
-    @pytest.mark.usefixtures('mark_producer_tests_as_xfail')
     def test_producer_logarithmic_functions(
         self,
         snapshot,
@@ -101,7 +61,6 @@ class TestLogarithmicFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.consume_substrait_snapshot
-    @pytest.mark.usefixtures('mark_consumer_tests_as_xfail')
     def test_consumer_logarithmic_functions(
         self,
         snapshot,
@@ -131,7 +90,6 @@ class TestLogarithmicFunctions:
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.generate_function_snapshots
-    @pytest.mark.usefixtures('mark_generate_result_tests_as_xfail')
     def test_generate_logarithmic_functions_results(
         self,
         snapshot,
