@@ -9,30 +9,16 @@ from substrait_consumer.functional.common import (
     substrait_producer_sql_test)
 from substrait_consumer.functional.rounding_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
-from substrait_consumer.producers.datafusion_producer import DataFusionProducer
-from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
-from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 
 
 @pytest.fixture
 def mark_consumer_tests_as_xfail(request):
     """Marks a subset of tests as expected to be fail."""
-    producer = request.getfixturevalue('producer')
     consumer = request.getfixturevalue('consumer')
     func_name = request.node.callspec.id.split('-')[-1]
-    if isinstance(consumer, DuckDBConsumer):
-        if not isinstance(producer, DuckDBProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: duckdb consumer with {producer.name()} producer"
-            )
-    elif isinstance(consumer, DataFusionConsumer):
-        if not isinstance(producer, DataFusionProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: datafusion consumer with {producer.name()} producer"
-            )
-        elif func_name in ["round"]:
-            pytest.skip(reason='Results mismatch.')
+    if isinstance(consumer, DataFusionConsumer) and func_name in ["round"]:
+        pytest.skip(reason="Flaky results")
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
