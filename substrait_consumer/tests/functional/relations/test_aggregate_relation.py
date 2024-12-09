@@ -10,12 +10,8 @@ from substrait_consumer.functional.common import (
     generate_snapshot_results,
     substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
-from substrait_consumer.producers.datafusion_producer import DataFusionProducer
-from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
-from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
-from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 
 @pytest.fixture
 def mark_consumer_tests_as_xfail(request):
@@ -23,17 +19,7 @@ def mark_consumer_tests_as_xfail(request):
     producer = request.getfixturevalue("producer")
     consumer = request.getfixturevalue("consumer")
     test_name = request.getfixturevalue("test_name")
-    if isinstance(consumer, DuckDBConsumer):
-        if not isinstance(producer, DuckDBProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: duckdb consumer with {producer.name()} producer"
-            )
-    elif isinstance(consumer, DataFusionConsumer):
-        if not isinstance(producer, DataFusionProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: datafusion consumer with {producer.name()} producer"
-            )
-    elif isinstance(consumer, AceroConsumer):
+    if isinstance(consumer, AceroConsumer):
         if (
             isinstance(producer, IsthmusProducer)
         ) and test_name == "compute_within_aggregate":
@@ -67,6 +53,7 @@ class TestAggregatetRelation:
     def test_producer_aggregate_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -79,6 +66,7 @@ class TestAggregatetRelation:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -95,6 +83,7 @@ class TestAggregatetRelation:
     def test_consumer_aggregate_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -107,6 +96,7 @@ class TestAggregatetRelation:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -121,6 +111,7 @@ class TestAggregatetRelation:
     def test_generate_aggregate_relation_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -131,6 +122,7 @@ class TestAggregatetRelation:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

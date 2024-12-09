@@ -47,7 +47,7 @@ boolean.not,True,True,False,True
 boolean.or,True,True,True,True
 boolean.xor,False,True,False,False
 comparison.between,True,True,False,True
-comparison.coalesce,False,False,False,True
+comparison.coalesce,False,True,False,True
 comparison.equal,True,True,True,True
 comparison.gt,True,True,True,True
 comparison.gte,True,True,True,True
@@ -61,7 +61,7 @@ comparison.lt,True,True,True,True
 comparison.lte,True,True,True,True
 comparison.not_equal,True,True,True,True
 datetime.add,False,True,False,False
-datetime.add_intervals,False,False,False,False
+datetime.add_intervals,False,True,False,False
 datetime.extract,True,True,False,True
 datetime.gt,True,True,False,True
 datetime.gte,True,True,False,True
@@ -98,5 +98,5 @@ string.string_agg,False,True,False,False
 string.strpos,True,True,False,False
 string.substring0,True,True,True,False
 string.substring1,False,False,False,True
-string.trim,False,True,False,False
+string.trim,True,True,False,False
 string.upper,True,True,True,False

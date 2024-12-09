@@ -10,31 +10,6 @@ from substrait_consumer.functional.common import (
     generate_snapshot_results,
     substrait_consumer_sql_test, substrait_producer_sql_test)
 from substrait_consumer.parametrization import custom_parametrization
-from substrait_consumer.producers.datafusion_producer import DataFusionProducer
-from substrait_consumer.producers.duckdb_producer import DuckDBProducer
-from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
-from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
-
-
-@pytest.fixture
-def mark_consumer_tests_as_xfail(request):
-    """Marks a subset of tests as expected to be fail."""
-    producer = request.getfixturevalue('producer')
-    consumer = request.getfixturevalue('consumer')
-    test_case_name = request.node.callspec.id.split('-')[-1]
-
-    if isinstance(consumer, DuckDBConsumer):
-        if not isinstance(producer, DuckDBProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: duckdb consumer with {producer.name()} producer"
-            )
-    elif isinstance(consumer, DataFusionConsumer):
-        if not isinstance(producer, DataFusionProducer):
-            pytest.skip(
-                reason=f"Unsupported Integration: datafusion consumer with {producer.name()} producer"
-            )
-        elif test_case_name in ["having"]:
-            pytest.skip(reason='pyarrow.lib.ArrowInvalid: Schema at index 0 was different')
 
 
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
@@ -62,6 +37,7 @@ class TestfilterRelation:
     def test_producer_filter_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -74,6 +50,7 @@ class TestfilterRelation:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -86,10 +63,10 @@ class TestfilterRelation:
 
     @custom_parametrization(FILTER_RELATION_TESTS)
     @pytest.mark.consume_substrait_snapshot
-    @pytest.mark.usefixtures('mark_consumer_tests_as_xfail')
     def test_consumer_filter_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -102,6 +79,7 @@ class TestfilterRelation:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -116,6 +94,7 @@ class TestfilterRelation:
     def test_generate_filter_relation_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -126,6 +105,7 @@ class TestfilterRelation:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
