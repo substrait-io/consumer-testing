@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Callable
 
 import duckdb
@@ -16,6 +17,8 @@ from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
 from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
+
+SNAPSHOT_DIR = Path(__file__).parent / "snapshots"
 
 @pytest.fixture
 def mark_consumer_tests_as_xfail(request):
@@ -75,7 +78,7 @@ class TestAggregatetRelation:
         producer,
         partsupp
     ) -> None:
-        test_name = f"aggregate_relation_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "producer" / "aggregate"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -103,16 +106,16 @@ class TestAggregatetRelation:
         producer,
         consumer,
     ) -> None:
-        test_name = f"aggregate_relation_snapshots:{test_name}"
+        test_name = f"{test_name}-{producer.name()}"
+        plan_path = SNAPSHOT_DIR / "producer" / "aggregate" / f"{test_name}_plan.json"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "aggregate"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
             self.db_connection,
             local_files,
             named_tables,
-            sql_query,
-            ibis_expr,
-            producer,
+            plan_path,
             consumer,
         )
 
@@ -127,7 +130,7 @@ class TestAggregatetRelation:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"aggregate_relation_snapshots:{test_name}"
+        snapshot.snapshot_dir = SNAPSHOT_DIR / "consumer" / "aggregate"
         generate_snapshot_results(
             test_name,
             snapshot,
