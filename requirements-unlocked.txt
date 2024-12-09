@@ -4,6 +4,7 @@ filelock
 ibis-framework
 ibis-substrait
 JPype1
+pandas
 protobuf==5.28.3
 pyarrow
 pytest

@@ -1,53 +1,31 @@
-import csv
-import re
-import sys
+import argparse
 
-try:
-    PARSED_RESULTS_FILE = sys.argv[1]
-except IndexError:
-    print("Please specify an output file")
-    sys.exit(1)
-DATA_DICT = {}
+import pandas as pd
 
-with open("./producer_pytest_output.csv", "r") as file:
-    csvreader = csv.reader(file, delimiter=";")
-    rowcount = 0
-    for row in csvreader:
-        print(row)
-        if rowcount > 0:
-            data = row[0].split("::")[-1]
-            status = row[1]
-            function_group = None
-            try:
-                function_group = re.search(r"producer_(.*?)_functions\[", data).group(1)
-            except AttributeError:
-                print(f"No producer function found in test case: {data}")
-            producer, function = re.search(r"\[(.*?)\]", data).group(1).split("-")
-            full_operation = function_group + "." + function
-            if status == "passed":
-                status = "True"
-            else:
-                status = "False"
-            if full_operation not in DATA_DICT:
-                DATA_DICT[full_operation] = [(producer, status)]
-            else:
-                DATA_DICT[full_operation].append((producer, status))
-        rowcount += 1
+# Set up argument parsing.
+parser = argparse.ArgumentParser(prog="consumer pytest output parser")
+parser.add_argument(
+    "-i", "--input", help="Path to the input CSV file created by pytest"
+)
+parser.add_argument("-o", "--output", help="Path to the output CSV file")
+args = parser.parse_args()
 
-with open(PARSED_RESULTS_FILE, "w", newline="") as csvfile:
-    writer = csv.writer(
-        csvfile, escapechar=" ", quoting=csv.QUOTE_NONE, quotechar=" ", delimiter=" "
-    )
-    any_value = next(iter(DATA_DICT.values()))
-    systems = sorted([item[0] for item in any_value])
-    writer.writerow(
-        ["FullFunction," + ",".join(systems)]
-    )
-    rowcount = 0
-    for key, value in DATA_DICT.items():
-        sorted_by_prod = sorted(value, key=lambda x: x[0])
-        DATA_DICT[key] = sorted_by_prod
-        statuses_list = [key]
-        for pair in sorted_by_prod:
-            statuses_list.append(pair[1])
-        writer.writerow([",".join(statuses_list)])
+# Read CSV file.
+df = pd.read_csv(args.input, sep=";")
+
+# Decompose test name into various components
+df["test_name"] = df.id.str.split("::").str[-1]
+regex = r".*producer_(.+)_functions\[(.+)-(.+)\]"
+df["function_group"] = df.test_name.str.replace(regex, lambda m: m.group(1), regex=True)
+df["producer"] = df.test_name.str.replace(regex, lambda m: m.group(2), regex=True)
+df["function"] = df.test_name.str.replace(regex, lambda m: m.group(3), regex=True)
+
+# Bring into desired output format.
+df["FullFunction"] = df.function_group + "." + df.function
+df.status = df.status == "passed"
+
+# Pivot such that each producer/consumer pair becomes one columns.
+df = df.pivot(index="FullFunction", columns="producer", values="status")
+
+# Write out result.
+df.to_csv(args.output, sep=",")
