@@ -1,0 +1,41 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "read": {
+                "virtualTable": {
+                  "values": [
+                    {
+                      "fields": [
+                        {
+                          "i32": 42
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "expressions": [
+              {
+                "literal": {
+                  "string": "test_string"
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "'test_string'"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 53,
+    "producer": "DuckDB"
+  }
+}

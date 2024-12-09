@@ -1,0 +1,43 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "read": {
+                "virtualTable": {
+                  "values": [
+                    {
+                      "fields": [
+                        {
+                          "i32": 42
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "expressions": [
+              {
+                "literal": {
+                  "intervalDayToSecond": {
+                    "microseconds": 125163520
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "'06:00:00'::INTERVAL"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 53,
+    "producer": "DuckDB"
+  }
+}
