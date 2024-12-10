@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT round(stddev(PS_SUPPLYCOST), 2) AS STDDEV_SUPPLYCOST FROM '{partsupp}';"
+    },
+    "test_name": "std_dev"
+}

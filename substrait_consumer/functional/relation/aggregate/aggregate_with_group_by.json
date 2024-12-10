@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT L_ORDERKEY, L_LINENUMBER, count(*) FROM '{lineitem}' GROUP BY L_ORDERKEY, L_LINENUMBER ORDER BY L_ORDERKEY, L_LINENUMBER"
+    },
+    "test_name": "aggregate_with_group_by"
+}

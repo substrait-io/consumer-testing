@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT PS_SUPPLYCOST FROM '{partsupp}' ORDER BY PS_SUPPLYCOST DESC LIMIT 10;"
+    },
+    "test_name": "single_col_desc"
+}

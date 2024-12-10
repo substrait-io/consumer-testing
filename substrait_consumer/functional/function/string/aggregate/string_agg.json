@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT N_NAME, string_agg(N_NAME, ',') FROM '{nation}' GROUP BY N_NAME ORDER BY N_NAME"
+    },
+    "test_name": "string_agg"
+}

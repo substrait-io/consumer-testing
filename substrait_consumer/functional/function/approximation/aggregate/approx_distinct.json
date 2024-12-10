@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion"
+        ],
+        "query": "SELECT approx_distinct(l_comment) FROM '{lineitem}';"
+    },
+    "test_name": "approx_distinct"
+}

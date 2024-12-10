@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT min(L_EXTENDEDPRICE) AS MIN_EXTENDEDPRICE FROM '{lineitem}';"
+    },
+    "test_name": "min"
+}

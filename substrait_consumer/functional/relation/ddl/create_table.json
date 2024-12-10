@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "CREATE TABLE customer2 ( custkey INT NOT NULL, name VARCHAR NOT NULL, address VARCHAR NOT NULL, )"
+    },
+    "test_name": "create_table"
+}

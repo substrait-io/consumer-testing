@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT round(acos(CAST(l_tax AS DOUBLE)), 2) AS ACOS_TAX FROM '{lineitem}' LIMIT 10;"
+    },
+    "test_name": "acos"
+}

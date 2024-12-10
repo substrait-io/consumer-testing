@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT N_NAME, ltrim(N_NAME, 'A') AS ltrim_N_NAME FROM '{nation}'"
+    },
+    "test_name": "ltrim"
+}

@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT L_EXTENDEDPRICE, L_TAX, round(mod(L_EXTENDEDPRICE, L_TAX), 2) AS MODULUS_KEY FROM '{lineitem}' LIMIT 10;"
+    },
+    "test_name": "modulus"
+}

@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT L_SHIPDATE, L_SHIPDATE - INTERVAL 5 DAY FROM '{lineitem}' LIMIT 10;"
+    },
+    "test_name": "subtract"
+}

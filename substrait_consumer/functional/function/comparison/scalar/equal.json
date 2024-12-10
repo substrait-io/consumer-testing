@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT PS_AVAILQTY, PS_PARTKEY FROM '{partsupp}' WHERE PS_AVAILQTY = PS_PARTKEY"
+    },
+    "test_name": "equal"
+}

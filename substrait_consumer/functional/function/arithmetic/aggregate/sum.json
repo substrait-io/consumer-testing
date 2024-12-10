@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT sum(PS_SUPPLYCOST) AS SUM_SUPPLYCOST FROM '{partsupp}';"
+    },
+    "test_name": "sum"
+}

@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT PS_PARTKEY, power(PS_PARTKEY, 2) AS POWER_KEY FROM '{partsupp}' LIMIT 10;"
+    },
+    "test_name": "power"
+}

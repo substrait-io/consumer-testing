@@ -1,0 +1,12 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT bool_and(c) AS bool_and_c FROM 't'"
+    },
+    "test_name": "bool_and"
+}

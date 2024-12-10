@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "isthmus"
+        ],
+        "query": "SELECT N_NAME, SUBSTRING(N_NAME FROM 1 FOR 3) AS substr_name FROM '{nation}';"
+    },
+    "test_name": "substring1"
+}

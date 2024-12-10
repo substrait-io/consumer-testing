@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT N_NATIONKEY, factorial(N_NATIONKEY) AS FACTORIAL_KEY FROM '{nation}' WHERE N_NATIONKEY <= 10 LIMIT 100;"
+    },
+    "test_name": "factorial"
+}

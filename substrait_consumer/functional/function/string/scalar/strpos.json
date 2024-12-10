@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT N_NAME, strpos(N_NAME, 'A') AS strpos_name FROM '{nation}'"
+    },
+    "test_name": "strpos"
+}

@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT L_DISCOUNT, L_TAX FROM '{lineitem}' WHERE L_DISCOUNT <= L_TAX ORDER BY L_DISCOUNT, L_TAX LIMIT 20;"
+    },
+    "test_name": "where_lte_multi_col"
+}

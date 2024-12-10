@@ -1,0 +1,11 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "isthmus"
+        ],
+        "query": "SELECT 10"
+    },
+    "test_name": "isthmus_read_virtual_table"
+}

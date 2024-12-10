@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT COUNT(DISTINCT L_EXTENDEDPRICE) FROM '{lineitem}'"
+    },
+    "test_name": "count_distinct_in_project"
+}

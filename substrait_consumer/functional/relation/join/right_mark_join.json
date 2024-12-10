@@ -1,0 +1,16 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer_small.parquet",
+        "orders": "orders_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT o.O_ORDERKEY, o.O_CUSTKEY, CASE WHEN EXISTS ( SELECT 1 FROM '{customer}' c WHERE c.C_CUSTKEY = o.O_CUSTKEY ) THEN 'Marked' ELSE 'Not Marked' END AS mark_status FROM '{orders}' o;"
+    },
+    "test_name": "right_mark_join"
+}

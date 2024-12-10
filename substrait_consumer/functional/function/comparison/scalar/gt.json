@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT PS_AVAILQTY FROM '{partsupp}' WHERE PS_AVAILQTY > 9990 ORDER BY PS_AVAILQTY"
+    },
+    "test_name": "gt"
+}

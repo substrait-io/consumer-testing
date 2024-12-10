@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT INTERVAL 1 HOUR + INTERVAL 5 HOUR"
+    },
+    "test_name": "add_intervals"
+}

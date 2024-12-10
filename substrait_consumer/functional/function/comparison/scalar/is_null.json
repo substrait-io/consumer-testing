@@ -1,0 +1,12 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT a FROM 't' WHERE a IS NULL"
+    },
+    "test_name": "is_null"
+}

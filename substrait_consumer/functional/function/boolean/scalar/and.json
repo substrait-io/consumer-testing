@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT a, b FROM 't' WHERE a < 5 AND b = 1;"
+    },
+    "test_name": "and"
+}

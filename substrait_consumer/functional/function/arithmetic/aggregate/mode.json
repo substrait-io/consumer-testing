@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT mode(PS_SUPPLYCOST) AS MODE_SUPPLYCOST FROM '{partsupp}';"
+    },
+    "test_name": "mode"
+}

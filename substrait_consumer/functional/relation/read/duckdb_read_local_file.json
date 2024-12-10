@@ -1,0 +1,13 @@
+{
+    "local_files": {
+        "customer_file_path": "customer_small.parquet"
+    },
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT * FROM read_parquet('{customer_file_path}');"
+    },
+    "test_name": "duckdb_read_local_file"
+}

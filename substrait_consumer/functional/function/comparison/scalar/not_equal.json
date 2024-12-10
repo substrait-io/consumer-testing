@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT N_NAME FROM '{nation}' WHERE NOT N_NAME = 'CANADA'"
+    },
+    "test_name": "not_equal"
+}

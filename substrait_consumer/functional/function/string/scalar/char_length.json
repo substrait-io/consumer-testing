@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT N_NAME, length(N_NAME) AS char_length_N_NAME FROM '{nation}'"
+    },
+    "test_name": "char_length"
+}
