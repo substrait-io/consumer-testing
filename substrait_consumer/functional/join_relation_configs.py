@@ -10,7 +10,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["inner_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "left_join",
@@ -20,7 +19,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["left_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "right_join",
@@ -30,7 +28,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["right_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "full_join",
@@ -40,7 +37,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["full_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "cross_join",
@@ -50,7 +46,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["cross_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "left_semi_join",
@@ -60,7 +55,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["left_semi_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "right_semi_join",
@@ -70,7 +64,6 @@ JOIN_RELATION_TESTS = (
             "customer": "customer_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["right_semi_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "left_anti_join",
@@ -80,7 +73,6 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["left_anti_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "right_anti_join",
@@ -90,7 +82,6 @@ JOIN_RELATION_TESTS = (
             "lineitem": "lineitem_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["right_anti_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "left_single_join",
@@ -100,7 +91,6 @@ JOIN_RELATION_TESTS = (
             "customer": "customer_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["left_single_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "right_single_join",
@@ -110,7 +100,6 @@ JOIN_RELATION_TESTS = (
             "customer": "customer_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["right_single_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "left_mark_join",
@@ -120,7 +109,6 @@ JOIN_RELATION_TESTS = (
             "customer": "customer_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["left_mark_join"],
-        "ibis_expr": None
     },
     {
         "test_name": "right_mark_join",
@@ -130,6 +118,5 @@ JOIN_RELATION_TESTS = (
             "orders": "orders_small.parquet",
         },
         "sql_query": JOIN_RELATIONS["right_mark_join"],
-        "ibis_expr": None
     },
 )

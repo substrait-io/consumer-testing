@@ -1,8 +1,5 @@
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.boolean_configs import (
     AGGREGATE_FUNCTIONS, SCALAR_FUNCTIONS)
@@ -28,10 +25,6 @@ class TestBooleanFunctions:
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
         load_custom_duckdb_table(cls.db_connection)
-        cls.table_t = ibis.table(
-            [("a", dt.int32), ("b", dt.int32), ("c", dt.boolean), ("d", dt.boolean)],
-            name="t",
-        )
 
         yield
 
@@ -47,7 +40,6 @@ class TestBooleanFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
     ) -> None:
         test_name = f"function:boolean:{test_name}"
@@ -59,9 +51,7 @@ class TestBooleanFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            self.table_t,
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
@@ -74,7 +64,6 @@ class TestBooleanFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
     ) -> None:
@@ -87,7 +76,6 @@ class TestBooleanFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )
@@ -102,7 +90,6 @@ class TestBooleanFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
     ) -> None:
         test_name = f"function:boolean:{test_name}"
         generate_snapshot_results(

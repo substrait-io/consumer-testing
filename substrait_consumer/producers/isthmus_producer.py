@@ -1,13 +1,13 @@
 import re
 
 import duckdb
-from .producer import Producer, load_named_tables
+from .producer import SQLProducer, load_named_tables
 from ibis_substrait.compiler.core import SubstraitCompiler
 
 from substrait_consumer.context import get_schema, produce_isthmus_substrait
 
 
-class IsthmusProducer(Producer):
+class IsthmusProducer(SQLProducer):
     """
     Adapts the Isthmus Substrait producer to the test framework.
     """
@@ -34,9 +34,7 @@ class IsthmusProducer(Producer):
         self.table_names = list(named_tables.keys())
         load_named_tables(self._db_connection, named_tables)
 
-    def _produce_substrait(
-        self, sql_query: str, validate=False, ibis_expr: str = None
-    ) -> str:
+    def _produce_substrait(self, sql_query: str, validate=False) -> str:
         """
         Produce the Isthmus substrait plan using the given SQL query.
 

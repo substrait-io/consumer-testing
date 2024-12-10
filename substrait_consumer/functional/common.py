@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import inspect
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable
+import types
+from typing import TYPE_CHECKING, Any, Callable
 
 import pytest
 from duckdb import DuckDBPyConnection
-from ibis.expr.types.relations import Table
 
 if TYPE_CHECKING:
     from pytest_snapshot.plugin import Snapshot
@@ -148,6 +149,84 @@ def generate_snapshot_results(
     snapshot.assert_match(str(match_result), outcome_path)
 
 
+def substrait_producer_ibis_test(category: str, group: str) -> None:
+    """
+    Decorator for Ibis expression tests.
+
+    This function is meant to be used as a decorator for Ibis expression tests. The
+    arguments to the decorator help categorizing the tests. The decorated test case can
+    use arbitrary fixtures, which will continue to work. The test case is expected to
+    return an Ibis expression. The decorator will wrap the function in a test that (1)
+    calls the function to create an Ibis expression, (2) translates that expression to
+    Substrait using Ibis' Substrait compiler, and (3) snapshots the resulting plan.
+
+    Parameters:
+        category:
+            Category of the test ("relation", "function", "integration")
+        group:
+            Group of the test ("approximation", "arithmetic", "ddl", "join", ...)
+    """
+
+    def decorator(
+        test_fn: Callable[..., Any],
+    ):
+        # Actual test logic: create Ibis expression, translate to Substrait, check result.
+        def wrapper(snapshot, record_property, *args, **kwargs):
+            name = test_fn.__name__
+            assert name.startswith("test_") and name.endswith("_expr")
+            name = name[len("test_") : -len("_expr")]
+            outcome_path = f"{name}-ibis_outcome.txt"
+            plan_path = f"{name}_plan.json"
+
+            record_property("category", category)
+            record_property("group", group)
+            record_property("name", name)
+            record_property("producer", "ibis")
+
+            snapshot.snapshot_dir = (
+                SNAPSHOT_DIR[category] / (group + "_snapshots") / "IbisProducer"
+            )
+
+            ibis_producer = IbisProducer()
+            ibis_expr = test_fn(*args, **kwargs)
+            try:
+                substrait_plan = ibis_producer._produce_substrait(ibis_expr)
+            except BaseException as e:
+                record_property("outcome", str(type(e)))
+                snapshot.assert_match(str(type(e)), outcome_path)
+                return
+
+            match_result = check_match(snapshot, str(substrait_plan), plan_path)
+            record_property("outcome", str(match_result))
+            snapshot.assert_match(str(match_result), outcome_path)
+
+        # Decorator magic: add function parameters for other fixtures.
+        signature = inspect.signature(test_fn)
+        parameters = list(signature.parameters.values())
+        parameters.append(
+            inspect.Parameter("snapshot", inspect.Parameter.POSITIONAL_OR_KEYWORD)
+        )
+        parameters.append(
+            inspect.Parameter(
+                "record_property", inspect.Parameter.POSITIONAL_OR_KEYWORD
+            )
+        )
+        new_signature = signature.replace(parameters=parameters)
+        updated_wrapper = types.FunctionType(
+            wrapper.__code__,
+            wrapper.__globals__,
+            name=test_fn.__name__,
+            argdefs=test_fn.__defaults__,
+            closure=wrapper.__closure__,
+        )
+        updated_wrapper.__signature__ = new_signature
+
+        # Add marker and return.
+        return pytest.mark.produce_substrait_snapshot(updated_wrapper)
+
+    return decorator
+
+
 def substrait_producer_sql_test(
     test_name: str,
     snapshot: Snapshot,
@@ -156,9 +235,7 @@ def substrait_producer_sql_test(
     local_files: dict[str, str],
     named_tables: dict[str, str],
     sql_query: tuple,
-    ibis_expr: Callable[[Table], Table],
     producer,
-    *args,
     validate=False,
 ):
     """
@@ -179,15 +256,20 @@ def substrait_producer_sql_test(
             A `dict` mapping table names to local file paths.
         sql_query:
             SQL query.
-        ibis_expr:
-            Ibis expression.
         producer:
             Substrait producer class.
-        *args:
-            The data tables to be passed to the ibis expression.
     """
-    producer.setup(db_con, local_files, named_tables)
+    if isinstance(producer, IbisProducer):
+        pytest.skip("Ibis producer cannot run SQL test")
+
     sql_query, supported_producers = sql_query
+
+    if not type(producer) in supported_producers:
+        pytest.xfail(
+            f"{producer.name()} does not support the following SQL: {sql_query}"
+        )
+
+    producer.setup(db_con, local_files, named_tables)
 
     category, group, name = test_name.split(":")
     record_property("category", category)
@@ -201,31 +283,13 @@ def substrait_producer_sql_test(
         SNAPSHOT_DIR[category] / (group + "_snapshots") / type(producer).__name__
     )
 
-    # Convert the SQL/Ibis expression to a substrait query plan
-    if isinstance(producer, IbisProducer):
-        if ibis_expr:
-            try:
-                substrait_plan = producer.produce_substrait(
-                    sql_query, validate, ibis_expr(*args)
-                )
-            except BaseException as e:
-                record_property("outcome", str(type(e)))
-                snapshot.assert_match(str(type(e)), outcome_path)
-                return
-        else:
-            pytest.xfail("ibis expression currently undefined")
-    else:
-        if type(producer) in supported_producers:
-            try:
-                substrait_plan = producer.produce_substrait(sql_query, validate)
-            except BaseException as e:
-                record_property("outcome", str(type(e)))
-                snapshot.assert_match(str(type(e)), outcome_path)
-                return
-        else:
-            pytest.xfail(
-                f"{producer.name()} does not support the following SQL: {sql_query}"
-            )
+    # Convert the SQL query to a Substrait query plan.
+    try:
+        substrait_plan = producer.produce_substrait(sql_query, validate)
+    except BaseException as e:
+        record_property("outcome", str(type(e)))
+        snapshot.assert_match(str(type(e)), outcome_path)
+        return
 
     match_result = check_match(snapshot, str(substrait_plan), plan_path)
     record_property("outcome", str(match_result))
@@ -240,7 +304,6 @@ def substrait_consumer_sql_test(
     local_files: dict[str, str],
     named_tables: dict[str, str],
     sql_query: tuple,
-    ibis_expr: Callable[[Table], Table],
     producer,
     consumer,
 ):
@@ -262,8 +325,6 @@ def substrait_consumer_sql_test(
             A `dict` mapping table names to local file paths.
         sql_query:
             SQL query.
-        ibis_expr:
-            Ibis expression.
         producer:
             Substrait producer class.
         consumer:

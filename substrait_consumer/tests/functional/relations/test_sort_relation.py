@@ -1,8 +1,5 @@
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.sort_relation_configs import (
     SORT_RELATION_TESTS)
@@ -42,9 +39,7 @@ class TestSortRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp
     ) -> None:
         test_name = f"relation:sort:{test_name}"
         substrait_producer_sql_test(
@@ -55,9 +50,7 @@ class TestSortRelation:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
             validate=True
         )
 
@@ -71,7 +64,6 @@ class TestSortRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
     ) -> None:
@@ -84,7 +76,6 @@ class TestSortRelation:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )
@@ -99,7 +90,6 @@ class TestSortRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
     ) -> None:
         test_name = f"relation:sort:{test_name}"
         generate_snapshot_results(

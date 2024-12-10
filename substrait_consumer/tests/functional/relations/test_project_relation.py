@@ -1,9 +1,5 @@
-from pathlib import Path
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.project_relation_configs import (
     PROJECT_RELATION_TESTS)
@@ -43,9 +39,7 @@ class TestProjectRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp
     ) -> None:
         test_name = f"relation:project:{test_name}"
         substrait_producer_sql_test(
@@ -56,9 +50,7 @@ class TestProjectRelation:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
             validate=True
         )
 
@@ -72,7 +64,6 @@ class TestProjectRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
     ) -> None:
@@ -85,7 +76,6 @@ class TestProjectRelation:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )
@@ -100,7 +90,6 @@ class TestProjectRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
     ) -> None:
         test_name = f"relation:project:{test_name}"
         generate_snapshot_results(

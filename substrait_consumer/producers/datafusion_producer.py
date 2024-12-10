@@ -1,17 +1,16 @@
 from pathlib import Path
 import substrait_validator as sv
-from .producer import Producer
+from .producer import SQLProducer
 import substrait.gen.proto.plan_pb2 as plan_pb2
 from datafusion import SessionContext
 from datafusion import substrait as ss
 from google.protobuf.json_format import MessageToJson
 import pyarrow as pa
 
-from substrait_consumer.common import SubstraitUtils
 from substrait_consumer.consumers.consumer import COLUMN_A, COLUMN_B, COLUMN_C, COLUMN_D
 
 
-class DataFusionProducer(Producer):
+class DataFusionProducer(SQLProducer):
     """
     Adapts the DataFusion Substrait producer to the test framework.
     """
@@ -33,9 +32,7 @@ class DataFusionProducer(Producer):
         self._db_connection = db_connection
         self.register_named_tables(named_tables)
 
-    def _produce_substrait(
-        self, sql_query: str, validate=False, ibis_expr: str = None
-    ) -> str:
+    def _produce_substrait(self, sql_query: str, validate=False) -> str:
         """
         Produce the DataFusion substrait plan using the given SQL query.
 
