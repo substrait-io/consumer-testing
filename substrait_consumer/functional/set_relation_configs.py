@@ -10,7 +10,6 @@ SET_RELATION_TESTS = (
             "nation": "nation_small.parquet",
         },
         "sql_query": SET_RELATIONS["union_distinct"],
-        "ibis_expr": None
     },
     {
         "test_name": "union_all",
@@ -20,7 +19,6 @@ SET_RELATION_TESTS = (
             "nation": "nation_small.parquet",
         },
         "sql_query": SET_RELATIONS["union_all"],
-        "ibis_expr": None
     },
     {
         "test_name": "intersect",
@@ -30,7 +28,6 @@ SET_RELATION_TESTS = (
             "nation": "nation_small.parquet",
         },
         "sql_query": SET_RELATIONS["intersect"],
-        "ibis_expr": None
     },
     {
         "test_name": "except",
@@ -40,6 +37,5 @@ SET_RELATION_TESTS = (
             "customer": "customer_small.parquet",
         },
         "sql_query": SET_RELATIONS["except"],
-        "ibis_expr": None
     },
 )

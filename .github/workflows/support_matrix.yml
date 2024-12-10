@@ -53,12 +53,19 @@ jobs:
         cp substrait-java/isthmus/build/libs/*all.jar ./jars
 
     - name: Run functions tests
-      working-directory: ./substrait_consumer/tests/functional/extension_functions
-      run: pytest -v --tb=no --csv ${{ matrix.target }}r_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status,properties_as_columns' -m ${{ matrix.target }}_substrait_snapshot
+      run: |-
+        pytest -v --tb=no \
+            -m ${{ matrix.target }}_substrait_snapshot \
+            substrait_consumer/tests/functional/extension_functions/ \
+            substrait_consumer/functional/queries/ibis_expressions/ \
+            --csv ${{ matrix.target }}r_pytest_output.csv --csv-delimiter ';' \
+            --csv-columns 'id,status,properties_as_columns'
 
     - name: Parse results
-      working-directory: ./substrait_consumer/tests/functional/extension_functions
-      run: python parse_${{ matrix.target }}r_pytest_output.py --input ${{ matrix.target }}r_pytest_output.csv --output ../../../../app/${{ matrix.target }}r_results.csv
+      run: |-
+        python substrait_consumer/tests/functional/extension_functions/parse_${{ matrix.target }}r_pytest_output.py \
+            --input ${{ matrix.target }}r_pytest_output.csv \
+            --output app/${{ matrix.target }}r_results.csv
 
     - name: Ensure CSV is up-to-date
       run: git diff --exit-code || (echo "Please update the support matrix, add it to this PR, and run CI again."; false)
