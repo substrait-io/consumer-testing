@@ -46,7 +46,7 @@ class TestfilterRelation:
         producer,
         partsupp
     ) -> None:
-        test_name = f"filter_relation_snapshots:{test_name}"
+        test_name = f"relation:filter:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -75,7 +75,7 @@ class TestfilterRelation:
         producer,
         consumer,
     ) -> None:
-        test_name = f"filter_relation_snapshots:{test_name}"
+        test_name = f"relation:filter:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -101,7 +101,7 @@ class TestfilterRelation:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"filter_relation_snapshots:{test_name}"
+        test_name = f"relation:filter:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

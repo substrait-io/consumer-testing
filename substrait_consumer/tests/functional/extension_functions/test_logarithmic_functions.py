@@ -45,7 +45,7 @@ class TestLogarithmicFunctions:
         producer,
         partsupp,
     ) -> None:
-        test_name = f"logarithmic_snapshots:{test_name}"
+        test_name = f"function:logarithmic:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -74,7 +74,7 @@ class TestLogarithmicFunctions:
         consumer,
         partsupp,
     ) -> None:
-        test_name = f"logarithmic_snapshots:{test_name}"
+        test_name = f"function:logarithmic:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -100,7 +100,7 @@ class TestLogarithmicFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"logarithmic_snapshots:{test_name}"
+        test_name = f"function:logarithmic:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,
