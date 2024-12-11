@@ -78,17 +78,17 @@ def rpad_expr(nation, orders):
 
 
 def ltrim_expr(nation, orders):
-    new_col = nation.n_name.lstrip("A").name("ltrim_N_NAME")
+    new_col = nation.n_name.lstrip().name("ltrim_N_NAME")
     return nation[nation.n_name, new_col]
 
 
 def rtrim_expr(nation, orders):
-    new_col = nation.n_name.rstrip("A").name("rtrim_N_NAME")
+    new_col = nation.n_name.rstrip().name("rtrim_N_NAME")
     return nation[nation.n_name, new_col]
 
 
 def trim_expr(nation, orders):
-    new_col = nation.n_name.strip("A").name("trim_N_NAME")
+    new_col = nation.n_name.strip().name("trim_N_NAME")
     return nation[nation.n_name, new_col]
 
 
