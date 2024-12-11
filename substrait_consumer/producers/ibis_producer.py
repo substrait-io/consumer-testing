@@ -2,10 +2,10 @@
 from .producer import Producer, load_named_tables
 
 import duckdb
-import pytest
 
 from google.protobuf import json_format
 from ibis_substrait.compiler.core import SubstraitCompiler
+from ibis import Table
 
 
 class IbisProducer(Producer):
@@ -32,9 +32,7 @@ class IbisProducer(Producer):
         self._db_connection = db_connection
         load_named_tables(self._db_connection, named_tables)
 
-    def _produce_substrait(
-        self, sql_query: str, validate=False, ibis_expr: str = None
-    ) -> str:
+    def _produce_substrait(self, ibis_expr: Table) -> str:
         """
         Produce the Ibis substrait plan using the given Ibis expression
 
@@ -44,8 +42,6 @@ class IbisProducer(Producer):
         Returns:
             Substrait query plan in json format.
         """
-        if ibis_expr is None:
-            pytest.skip("ibis expression currently undefined")
         compiler = SubstraitCompiler()
 
         tpch_proto_bytes = compiler.compile(ibis_expr)

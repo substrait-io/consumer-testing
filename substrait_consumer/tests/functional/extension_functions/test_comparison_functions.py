@@ -1,8 +1,5 @@
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.common import (
     generate_snapshot_results, load_custom_duckdb_table,
@@ -42,12 +39,9 @@ class TestComparisonFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
-        nation,
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"function:comparison:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -56,10 +50,7 @@ class TestComparisonFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
-            nation,
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
@@ -72,13 +63,10 @@ class TestComparisonFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp,
-        nation,
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"function:comparison:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -87,7 +75,6 @@ class TestComparisonFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )
@@ -102,9 +89,8 @@ class TestComparisonFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"function:comparison:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

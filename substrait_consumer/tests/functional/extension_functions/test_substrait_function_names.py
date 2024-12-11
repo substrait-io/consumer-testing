@@ -1,10 +1,7 @@
 import json
-from typing import Callable
 
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
-
+import pytest
 from pytest_snapshot.plugin import Snapshot
 
 from substrait_consumer.functional import (
@@ -31,10 +28,6 @@ class TestSubstraitFunctionNames:
         cls.db_connection.execute("install substrait")
         cls.db_connection.execute("load substrait")
         load_custom_duckdb_table(cls.db_connection)
-        cls.table_t = ibis.table(
-            [("a", dt.int32), ("b", dt.int32), ("c", dt.boolean), ("d", dt.boolean)],
-            name="t",
-        )
 
         yield
 
@@ -50,10 +43,7 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
-        lineitem,
     ) -> None:
         """
         Verify the substrait function names for arithmetic functions.
@@ -64,11 +54,7 @@ class TestSubstraitFunctionNames:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
-            lineitem,
-            self.table_t,
         )
 
     @custom_parametrization(
@@ -81,7 +67,6 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
-        ibis_expr: Callable[[Table], Table],
         producer,
     ) -> None:
         """
@@ -93,9 +78,7 @@ class TestSubstraitFunctionNames:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            self.table_t,
         )
 
     @custom_parametrization(comparison_configs.SCALAR_FUNCTIONS)
@@ -106,10 +89,7 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
-        nation,
     ) -> None:
         """
         Verify the substrait function names for comparison functions.
@@ -120,10 +100,7 @@ class TestSubstraitFunctionNames:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
-            nation,
         )
 
     @custom_parametrization(datetime_configs.SCALAR_FUNCTIONS)
@@ -134,9 +111,7 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
     ) -> None:
         """
         Verify the substrait function names for datetime functions.
@@ -147,9 +122,7 @@ class TestSubstraitFunctionNames:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
         )
 
     @custom_parametrization(logarithmic_configs.SCALAR_FUNCTIONS)
@@ -160,9 +133,7 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
     ) -> None:
         """
         Verify the substrait function names for logarithmic functions.
@@ -173,9 +144,7 @@ class TestSubstraitFunctionNames:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
         )
 
     @custom_parametrization(rounding_configs.SCALAR_FUNCTIONS)
@@ -186,9 +155,7 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
     ) -> None:
         """
         Verify the substrait function names for rounding functions.
@@ -199,9 +166,7 @@ class TestSubstraitFunctionNames:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
         )
 
     def run_function_name_test(
@@ -211,9 +176,7 @@ class TestSubstraitFunctionNames:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        *args
     ):
         """
 
@@ -229,36 +192,23 @@ class TestSubstraitFunctionNames:
                 A `dict` mapping table names to local file paths.
             sql_query:
                 SQL query.
-            ibis_expr:
-                Ibis expression.
             producer:
                 Substrait producer class.
-            *args:
-                The data named_tables to be passed to the ibis expression.
         """
+        if isinstance(producer, IbisProducer):
+            pytest.skip("function names currently not tested for Ibis producer")
+
         producer.setup(self.db_connection, local_files, named_tables)
 
         # Grab the json representation of the produced substrait plan to verify
         # the proper substrait function name.
-        if isinstance(producer, IbisProducer):
-            if ibis_expr:
-                try:
-                    substrait_plan_json = producer.produce_substrait(
-                        sql_query[0], validate=False, ibis_expr=ibis_expr(*args)
-                    )
-                except BaseException as e:
-                    snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
-                    return
-            else:
-                pytest.skip("ibis expression currently undefined")
-        else:
-            duckdb_producer = DuckDBProducer(self.db_connection)
-            duckdb_producer.setup(self.db_connection, local_files, named_tables)
-            try:
-                substrait_plan_json = duckdb_producer.produce_substrait(sql_query[0])
-            except BaseException as e:
-                snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
-                return
+        duckdb_producer = DuckDBProducer(self.db_connection)
+        duckdb_producer.setup(self.db_connection, local_files, named_tables)
+        try:
+            substrait_plan_json = duckdb_producer.produce_substrait(sql_query[0])
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
+            return
 
         substrait_plan = json.loads(substrait_plan_json)
         try:

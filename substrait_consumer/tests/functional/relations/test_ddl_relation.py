@@ -1,8 +1,5 @@
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.ddl_relation_configs import (
     DDL_RELATION_TESTS)
@@ -41,11 +38,9 @@ class TestDDLRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp
     ) -> None:
-        test_name = f"ddl_relation_snapshots:{test_name}"
+        test_name = f"relation:ddl:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -54,9 +49,7 @@ class TestDDLRelation:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
             validate=True
         )
 
@@ -70,11 +63,10 @@ class TestDDLRelation:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
     ) -> None:
-        test_name = f"ddl_relation_snapshots:{test_name}"
+        test_name = f"relation:ddl:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -83,7 +75,6 @@ class TestDDLRelation:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )

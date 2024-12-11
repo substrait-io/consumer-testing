@@ -1,8 +1,5 @@
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.common import (
     generate_snapshot_results, substrait_consumer_sql_test,
@@ -51,12 +48,9 @@ class TestRoundingFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        partsupp,
-        lineitem
     ) -> None:
-        test_name = f"rounding_snapshots:{test_name}"
+        test_name = f"function:rounding:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -65,10 +59,7 @@ class TestRoundingFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            partsupp,
-            lineitem,
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
@@ -82,13 +73,10 @@ class TestRoundingFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        partsupp,
-        lineitem,
     ) -> None:
-        test_name = f"rounding_snapshots:{test_name}"
+        test_name = f"function:rounding:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -97,7 +85,6 @@ class TestRoundingFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )
@@ -112,9 +99,8 @@ class TestRoundingFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"rounding_snapshots:{test_name}"
+        test_name = f"function:rounding:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

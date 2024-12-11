@@ -52,29 +52,30 @@ class Producer(ABC):
         self._named_tables = SubstraitUtils.compute_full_paths(named_tables)
         self._setup(db_connection, self._local_files, self._named_tables)
 
+
+class SQLProducer(Producer):
     def produce_substrait(
-        self, sql_query: str, validate=False, ibis_expr: str = None
+        self,
+        sql_query: str,
+        validate=False,
     ) -> str:
         """
         Produces a Substrait plan of the given query in JSON format.
 
-        The query can be given either as sql_query or as Ibis expression. In
-        the first case, the function first formats the query using
-        `self.format_sql`. In either case, the function lets the concrete
-        class produce the substrait plan using `self._produce_substrait`.
+        The query is given as a SQL query. The function first formats the query using
+        `self.format_sql` and then lets the concrete class produce the substrait plan
+        using `self._produce_substrait`.
 
         Parameters:
             sql_query:
                 SQL query.
             validate:
                 Whether the Substrait plan should be validated.
-            ibis_expr:
-                Ibis expression.
         Returns:
             Substrait query plan in JSON format.
         """
         sql_query = self.format_sql(sql_query)
-        return self._produce_substrait(sql_query, validate, ibis_expr)
+        return self._produce_substrait(sql_query, validate)
 
     def format_sql(self, sql_query: str) -> str:
         """
@@ -117,7 +118,9 @@ class Producer(ABC):
 
     @abstractmethod
     def _produce_substrait(
-        self, sql_query: str, validate=False, ibis_expr: str = None
+        self,
+        sql_query: str,
+        validate=False,
     ) -> str:
         """
         Produces a Substrait plan of the given SQL query in JSON format.
@@ -130,8 +133,6 @@ class Producer(ABC):
                 SQL query.
             validate:
                 Whether the Substrait plan should be validated.
-            ibis_expr:
-                Ibis expression.
         Returns:
             Substrait query plan in JSON format.
         """
