@@ -54,6 +54,7 @@ class TestWriteRelation:
     def test_producer_write_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -66,6 +67,7 @@ class TestWriteRelation:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -82,6 +84,7 @@ class TestWriteRelation:
     def test_consumer_write_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -94,6 +97,7 @@ class TestWriteRelation:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

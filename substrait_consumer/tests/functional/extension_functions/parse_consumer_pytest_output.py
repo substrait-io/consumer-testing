@@ -24,7 +24,7 @@ df["function"] = df.test_name.str.replace(regex, lambda m: m.group(4), regex=Tru
 # Bring into desired output format.
 df["FullFunction"] = df.function_group + "." + df.function
 df["producer-consumer"] = df.producer + "-" + df.consumer
-df.status = df.status == "passed"
+df.status = df.outcome == "True"
 
 # Pivot such that each producer/consumer pair becomes one columns.
 df = df.pivot(index="FullFunction", columns="producer-consumer", values="status")

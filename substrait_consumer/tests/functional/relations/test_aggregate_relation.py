@@ -67,6 +67,7 @@ class TestAggregatetRelation:
     def test_producer_aggregate_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -79,6 +80,7 @@ class TestAggregatetRelation:
         substrait_producer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -95,6 +97,7 @@ class TestAggregatetRelation:
     def test_consumer_aggregate_relations(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -107,6 +110,7 @@ class TestAggregatetRelation:
         substrait_consumer_sql_test(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,
@@ -121,6 +125,7 @@ class TestAggregatetRelation:
     def test_generate_aggregate_relation_results(
         self,
         snapshot,
+        record_property,
         test_name: str,
         local_files: dict[str, str],
         named_tables: dict[str, str],
@@ -131,6 +136,7 @@ class TestAggregatetRelation:
         generate_snapshot_results(
             test_name,
             snapshot,
+            record_property,
             self.db_connection,
             local_files,
             named_tables,

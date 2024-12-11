@@ -41,9 +41,7 @@ jobs:
 
     - name: Run functions tests
       working-directory: ./substrait_consumer/tests/functional/extension_functions
-      # Make this target succeed always as failing tests are part of the outcome
-      # and should be processed by the next step.
-      run: pytest -v --tb=no --csv ${{ matrix.target }}r_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status' -m ${{ matrix.target }}_substrait_snapshot || true
+      run: pytest -v --tb=no --csv ${{ matrix.target }}r_pytest_output.csv --csv-delimiter ';' --csv-columns 'id,status,properties_as_columns' -m ${{ matrix.target }}_substrait_snapshot
 
     - name: Parse results
       working-directory: ./substrait_consumer/tests/functional/extension_functions

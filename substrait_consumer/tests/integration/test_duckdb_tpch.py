@@ -1,6 +1,8 @@
 import duckdb
 import pytest
 
+from pytest_snapshot.plugin import Snapshot
+
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
@@ -33,6 +35,7 @@ class TestDuckDBConsumer:
     def test_substrait_query(
         self,
         test_name: str,
+        snapshot: Snapshot,
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: str,
@@ -57,16 +60,30 @@ class TestDuckDBConsumer:
             sql_query:
                 SQL query.
         """
+        tpch_num = test_name.split("_")[-1].zfill(2)
+
         self.consumer.setup(self.db_connection, local_files, named_tables)
         self.producer.setup(self.db_connection, local_files, named_tables)
 
         # Convert the SQL into a substrait query plan and run the plan.
-        proto_bytes = self.producer.produce_substrait(sql_query)
+        try:
+            proto_bytes = self.producer.produce_substrait(sql_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
-        subtrait_query_result_tb = self.consumer.run_substrait_query(proto_bytes)
+        try:
+            subtrait_query_result_tb = self.consumer.run_substrait_query(proto_bytes)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         # Calculate results to verify against by running the SQL query on DuckDB
-        duckdb_sql_result_tb = self.producer.run_sql_query(sql_query)
+        try:
+            duckdb_sql_result_tb = self.producer.run_sql_query(sql_query)
+        except BaseException as e:
+            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+            return
 
         col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
         exp_col_names = [x.lower() for x in duckdb_sql_result_tb.column_names]
