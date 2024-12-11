@@ -92,11 +92,11 @@ string.reverse,False,True,True,False,True,True,False,True,True,False,False,False
 string.right,False,True,True,False,True,True,False,True,True,False,False,False
 string.rpad,False,True,True,False,True,True,False,True,True,False,False,False
 string.rtrim,False,True,True,False,True,True,False,False,False,False,False,False
-string.starts_with0,False,True,True,False,True,True,False,True,True,False,False,False
-string.starts_with1,False,True,True,False,True,True,False,True,True,False,False,False
+string.starts_with0,False,True,True,False,False,False,False,True,True,False,False,False
+string.starts_with1,False,False,False,False,True,True,False,False,False,False,False,False
 string.string_agg,False,False,False,False,False,True,False,False,False,False,False,False
 string.strpos,False,True,True,False,True,True,False,False,False,False,False,False
-string.substring0,False,True,True,False,True,True,False,True,True,False,False,True
-string.substring1,False,True,True,False,True,True,False,True,True,False,False,True
+string.substring0,False,True,True,False,True,True,False,True,True,False,False,False
+string.substring1,False,False,False,False,False,False,False,False,False,False,False,True
 string.trim,False,True,False,False,True,True,False,False,False,False,False,False
 string.upper,False,True,True,False,True,True,False,True,True,False,False,False

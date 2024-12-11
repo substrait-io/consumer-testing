@@ -45,7 +45,7 @@ class TestWriteRelation:
         producer,
         partsupp
     ) -> None:
-        test_name = f"write_relation_snapshots:{test_name}"
+        test_name = f"relation:write:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -74,7 +74,7 @@ class TestWriteRelation:
         producer,
         consumer,
     ) -> None:
-        test_name = f"write_relation_snapshots:{test_name}"
+        test_name = f"relation:write:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,

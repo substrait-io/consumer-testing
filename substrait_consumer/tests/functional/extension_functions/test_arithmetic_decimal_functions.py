@@ -57,7 +57,7 @@ class TestArithmeticDecimalFunctions:
         producer,
         partsupp,
     ) -> None:
-        test_name = f"arithmetic_decimal_snapshots:{test_name}"
+        test_name = f"function:arithmetic_decimal:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -87,7 +87,7 @@ class TestArithmeticDecimalFunctions:
         consumer,
         partsupp,
     ) -> None:
-        test_name = f"arithmetic_decimal_snapshots:{test_name}"
+        test_name = f"function:arithmetic_decimal:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -113,7 +113,7 @@ class TestArithmeticDecimalFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"arithmetic_decimal_snapshots:{test_name}"
+        test_name = f"function:arithmetic_decimal:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

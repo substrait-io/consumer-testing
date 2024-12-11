@@ -56,7 +56,7 @@ class TestRoundingFunctions:
         partsupp,
         lineitem
     ) -> None:
-        test_name = f"rounding_snapshots:{test_name}"
+        test_name = f"function:rounding:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -88,7 +88,7 @@ class TestRoundingFunctions:
         partsupp,
         lineitem,
     ) -> None:
-        test_name = f"rounding_snapshots:{test_name}"
+        test_name = f"function:rounding:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -114,7 +114,7 @@ class TestRoundingFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"rounding_snapshots:{test_name}"
+        test_name = f"function:rounding:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

@@ -50,7 +50,7 @@ class TestBooleanFunctions:
         ibis_expr: Callable[[Table], Table],
         producer,
     ) -> None:
-        test_name = f"boolean_snapshots:{test_name}"
+        test_name = f"function:boolean:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -78,7 +78,7 @@ class TestBooleanFunctions:
         producer,
         consumer,
     ) -> None:
-        test_name = f"boolean_snapshots:{test_name}"
+        test_name = f"function:boolean:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -104,7 +104,7 @@ class TestBooleanFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"boolean_snapshots:{test_name}"
+        test_name = f"function:boolean:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

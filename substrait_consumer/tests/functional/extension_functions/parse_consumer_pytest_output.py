@@ -13,21 +13,30 @@ args = parser.parse_args()
 # Read CSV file.
 df = pd.read_csv(args.input, sep=";")
 
-# Decompose test name into various components
-df["test_name"] = df.id.str.split("::").str[-1]
-regex = r".*consumer_(.+)_functions\[(.+)-(.+)-(.+)\]"
-df["function_group"] = df.test_name.str.replace(regex, lambda m: m.group(1), regex=True)
-df["producer"] = df.test_name.str.replace(regex, lambda m: m.group(2), regex=True)
-df["consumer"] = df.test_name.str.replace(regex, lambda m: m.group(3), regex=True)
-df["function"] = df.test_name.str.replace(regex, lambda m: m.group(4), regex=True)
+# Compute full function name.
+df["FullFunction"] = df.group + "." + df.name
 
-# Bring into desired output format.
-df["FullFunction"] = df.function_group + "." + df.function
+# Remove skipped tests with incomplete information.
+df = df[df.FullFunction.notna()]
+
+# Make sure we have all combinations of (producer, consumer, FullFunction).
+producers = pd.DataFrame(df.producer.unique())
+consumers = pd.DataFrame(df.consumer.unique())
+functions = pd.DataFrame(df.FullFunction.unique())
+df_all = pd.merge(producers, consumers, how="cross")
+df_all = pd.merge(df_all, functions, how="cross")
+df_all.columns = ["producer", "consumer", "FullFunction"]
+df = pd.merge(df_all, df, how="left")
+
+# Compute desired output columns.
 df["producer-consumer"] = df.producer + "-" + df.consumer
-df.status = df.outcome == "True"
+df.status = df.outcome.astype(str) == "True"
+df = df.fillna("False")
 
 # Pivot such that each producer/consumer pair becomes one columns.
 df = df.pivot(index="FullFunction", columns="producer-consumer", values="status")
+
+# Count any combinations that didn't exist as "failed".
 
 # Write out result.
 df.to_csv(args.output, sep=",")

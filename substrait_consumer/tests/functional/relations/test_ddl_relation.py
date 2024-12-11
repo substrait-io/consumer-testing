@@ -45,7 +45,7 @@ class TestDDLRelation:
         producer,
         partsupp
     ) -> None:
-        test_name = f"ddl_relation_snapshots:{test_name}"
+        test_name = f"relation:ddl:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -74,7 +74,7 @@ class TestDDLRelation:
         producer,
         consumer,
     ) -> None:
-        test_name = f"ddl_relation_snapshots:{test_name}"
+        test_name = f"relation:ddl:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
