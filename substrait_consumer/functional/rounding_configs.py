@@ -1,22 +1,10 @@
-from substrait_consumer.functional.queries.sql.rounding_functions_sql import SQL_SCALAR
+from pathlib import Path
 
-SCALAR_FUNCTIONS = (
-    {
-        "test_name": "ceil",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["ceil"],
-    },
-    {
-        "test_name": "floor",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["floor"],
-    },
-    {
-        "test_name": "round",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["round"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+SCALAR_DIR = CONFIG_DIR / "function" / "rounding" / "scalar"
+AGGREGATE_DIR = CONFIG_DIR / "function" / "rounding" / "aggregate"
+
+SCALAR_FUNCTIONS = tuple(load_json(file) for file in SCALAR_DIR.glob("*.json"))
+AGGREGATE_FUNCTIONS = tuple(load_json(file) for file in AGGREGATE_DIR.glob("*.json"))

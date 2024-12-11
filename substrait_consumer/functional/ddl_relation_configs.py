@@ -1,47 +1,7 @@
-from substrait_consumer.functional.queries.sql.relations.ddl_relations import (
-    DDL_RELATIONS)
+from pathlib import Path
 
-DDL_RELATION_TESTS = (
-    {
-        "test_name": "create_table",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": DDL_RELATIONS["create_table"],
-    },
-    {
-        "test_name": "drop_table",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": DDL_RELATIONS["drop_table"],
-    },
-    {
-        "test_name": "alter_table",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": DDL_RELATIONS["alter_table"],
-    },
-    {
-        "test_name": "alter_column",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": DDL_RELATIONS["alter_column"],
-    },
-    {
-        "test_name": "drop_column",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": DDL_RELATIONS["drop_column"],
-    },
-    {
-        "test_name": "create_view",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": DDL_RELATIONS["create_view"],
-    },
-    {
-        "test_name": "create_or_replace_view",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": DDL_RELATIONS["create_or_replace_view"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+DDL_DIR = CONFIG_DIR / "relation" / "ddl"
+DDL_RELATION_TESTS = tuple(load_json(file) for file in DDL_DIR.glob("*.json"))

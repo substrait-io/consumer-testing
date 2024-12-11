@@ -264,7 +264,7 @@ def substrait_producer_sql_test(
 
     sql_query, supported_producers = sql_query
 
-    if not type(producer) in supported_producers:
+    if not producer.name() in supported_producers:
         pytest.xfail(
             f"{producer.name()} does not support the following SQL: {sql_query}"
         )

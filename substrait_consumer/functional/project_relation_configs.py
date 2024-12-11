@@ -1,50 +1,7 @@
-from substrait_consumer.functional.queries.sql.relations.project_relations import (
-    PROJECT_RELATIONS)
+from pathlib import Path
 
-PROJECT_RELATION_TESTS = (
-    {
-        "test_name": "project_single_col",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem_small.parquet"},
-        "sql_query": PROJECT_RELATIONS["project_single_col"],
-    },
-    {
-        "test_name": "project_multi_col",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem_small.parquet"},
-        "sql_query": PROJECT_RELATIONS["project_multi_col"],
-    },
-    {
-        "test_name": "project_all_col",
-        "local_files": {},
-        "named_tables": {"region": "region_small.parquet"},
-        "sql_query": PROJECT_RELATIONS["project_all_col"],
-    },
-    {
-        "test_name": "extended_project",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem_small.parquet"},
-        "sql_query": PROJECT_RELATIONS["extended_project"],
-    },
-    {
-        "test_name": "subquery_in_project",
-        "local_files": {},
-        "named_tables": {
-            "orders": "orders_small.parquet",
-            "customer": "customer_small.parquet",
-        },
-        "sql_query": PROJECT_RELATIONS["subquery_in_project"],
-    },
-    {
-        "test_name": "distinct_in_project",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem_small.parquet"},
-        "sql_query": PROJECT_RELATIONS["distinct_in_project"],
-    },
-    {
-        "test_name": "count_distinct_in_project",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem_small.parquet"},
-        "sql_query": PROJECT_RELATIONS["count_distinct_in_project"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+PROJECT_DIR = CONFIG_DIR / "relation" / "project"
+PROJECT_RELATION_TESTS = tuple(load_json(file) for file in PROJECT_DIR.glob("*.json"))

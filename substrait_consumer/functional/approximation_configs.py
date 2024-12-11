@@ -1,16 +1,10 @@
-from substrait_consumer.functional.queries.sql.approximation_functions_sql import SQL_AGGREGATE
+from pathlib import Path
 
-AGGREGATE_FUNCTIONS = (
-    {
-        "test_name": "approx_count_distinct",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_AGGREGATE["approx_count_distinct"],
-    },
-    {
-        "test_name": "approx_distinct",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_AGGREGATE["approx_distinct"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+SCALAR_DIR = CONFIG_DIR / "function" / "approximation" / "scalar"
+AGGREGATE_DIR = CONFIG_DIR / "function" / "approximation" / "aggregate"
+
+SCALAR_FUNCTIONS = tuple(load_json(file) for file in SCALAR_DIR.glob("*.json"))
+AGGREGATE_FUNCTIONS = tuple(load_json(file) for file in AGGREGATE_DIR.glob("*.json"))

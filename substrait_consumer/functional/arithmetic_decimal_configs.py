@@ -1,64 +1,10 @@
-from substrait_consumer.functional.queries.sql.arithmetic_demical_functions_sql import (
-    SQL_SCALAR,
-    SQL_AGGREGATE,
-)
+from pathlib import Path
 
-SCALAR_FUNCTIONS = (
-    {
-        "test_name": "add",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["add"],
-    },
-    {
-        "test_name": "subtract",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["subtract"],
-    },
-    {
-        "test_name": "multiply",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["multiply"],
-    },
-    {
-        "test_name": "divide",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["divide"],
-    },
-    {
-        "test_name": "modulus",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["modulus"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
 
-AGGREGATE_FUNCTIONS = (
-    {
-        "test_name": "sum",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_AGGREGATE["sum"],
-    },
-    {
-        "test_name": "avg",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_AGGREGATE["avg"],
-    },
-    {
-        "test_name": "min",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_AGGREGATE["min"],
-    },
-    {
-        "test_name": "max",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_AGGREGATE["max"],
-    },
-)
+CONFIG_DIR = Path(__file__).parent
+SCALAR_DIR = CONFIG_DIR / "function" / "arithmetic_decimal" / "scalar"
+AGGREGATE_DIR = CONFIG_DIR / "function" / "arithmetic_decimal" / "aggregate"
+
+SCALAR_FUNCTIONS = tuple(load_json(file) for file in SCALAR_DIR.glob("*.json"))
+AGGREGATE_FUNCTIONS = tuple(load_json(file) for file in AGGREGATE_DIR.glob("*.json"))

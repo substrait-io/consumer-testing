@@ -1,52 +1,10 @@
-from substrait_consumer.functional.queries.sql.datetime_functions_sql import SQL_SCALAR
+from pathlib import Path
 
-SCALAR_FUNCTIONS = (
-    {
-        "test_name": "extract",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["extract"],
-    },
-    {
-        "test_name": "add",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["add"],
-    },
-    {
-        "test_name": "subtract",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["subtract"],
-    },
-    {
-        "test_name": "lt",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["lt"],
-    },
-    {
-        "test_name": "lte",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["lte"],
-    },
-    {
-        "test_name": "gt",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["gt"],
-    },
-    {
-        "test_name": "gte",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": SQL_SCALAR["gte"],
-    },
-    {
-        "test_name": "add_intervals",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": SQL_SCALAR["add_intervals"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+SCALAR_DIR = CONFIG_DIR / "function" / "datetime" / "scalar"
+AGGREGATE_DIR = CONFIG_DIR / "function" / "datetime" / "aggregate"
+
+SCALAR_FUNCTIONS = tuple(load_json(file) for file in SCALAR_DIR.glob("*.json"))
+AGGREGATE_FUNCTIONS = tuple(load_json(file) for file in AGGREGATE_DIR.glob("*.json"))
