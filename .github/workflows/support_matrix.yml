@@ -33,11 +33,24 @@ jobs:
       if: ${{ matrix.target == 'produce' }}
       with:
         distribution: 'temurin'
-        java-version: '21'
+        java-version: '17'
 
-    - name: Build and install Isthmus
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
       if: ${{ matrix.target == 'produce' }}
-      run: ./build-and-copy-isthmus-shadow-jar.sh
+      with:
+        gradle-version: 8.8
+
+    - name: Build Isthmus
+      working-directory: ./substrait-java/isthmus
+      if: ${{ matrix.target == 'produce' }}
+      run: ../gradlew shadowJar
+
+    - name: Copy Isthmus JARs
+      if: ${{ matrix.target == 'produce' }}
+      run: |-
+        mkdir ./jars
+        cp substrait-java/isthmus/build/libs/*all.jar ./jars
 
     - name: Run functions tests
       working-directory: ./substrait_consumer/tests/functional/extension_functions
