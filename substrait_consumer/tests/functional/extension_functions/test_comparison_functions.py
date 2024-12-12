@@ -47,7 +47,7 @@ class TestComparisonFunctions:
         partsupp,
         nation,
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"function:comparison:{test_name}"
         substrait_producer_sql_test(
             test_name,
             snapshot,
@@ -78,7 +78,7 @@ class TestComparisonFunctions:
         partsupp,
         nation,
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"function:comparison:{test_name}"
         substrait_consumer_sql_test(
             test_name,
             snapshot,
@@ -104,7 +104,7 @@ class TestComparisonFunctions:
         sql_query: tuple,
         ibis_expr: Callable[[Table], Table],
     ) -> None:
-        test_name = f"comparison_snapshots:{test_name}"
+        test_name = f"function:comparison:{test_name}"
         generate_snapshot_results(
             test_name,
             snapshot,

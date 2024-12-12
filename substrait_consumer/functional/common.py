@@ -20,6 +20,10 @@ FUNCTION_SNAPSHOT_DIR = (
 RELATION_SNAPSHOT_DIR = (
     Path(__file__).parent.parent / "tests" / "functional" / "relations"
 )
+SNAPSHOT_DIR = {
+    "function": FUNCTION_SNAPSHOT_DIR,
+    "relation": RELATION_SNAPSHOT_DIR,
+}
 
 
 def check_match(
@@ -112,14 +116,16 @@ def generate_snapshot_results(
     producer = DuckDBProducer()
     producer.setup(db_con, local_files, named_tables)
 
-    group, name = test_name.split(":")
+    category, group, name = test_name.split(":")
+    record_property("category", category)
+    record_property("group", group)
+    record_property("name", name)
+
     outcome_path = f"{name}_outcome.txt"
     result_path = f"{name}_result.txt"
-
-    if "relation" in group:
-        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / "relation_test_results"
-    else:
-        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / "function_test_results"
+    snapshot.snapshot_dir = (
+        SNAPSHOT_DIR[category] / (group + "_snapshots") / (category + "_test_results")
+    )
 
     try:
         duckdb_result = producer.run_sql_query(sql_query[0])
@@ -183,14 +189,17 @@ def substrait_producer_sql_test(
     producer.setup(db_con, local_files, named_tables)
     sql_query, supported_producers = sql_query
 
-    group, name = test_name.split(":")
+    category, group, name = test_name.split(":")
+    record_property("category", category)
+    record_property("group", group)
+    record_property("name", name)
+    record_property("producer", producer.name())
+
     outcome_path = f"{name}-{producer.name()}_outcome.txt"
     plan_path = f"{name}_plan.json"
-
-    if "relation" in group:
-        snapshot.snapshot_dir = RELATION_SNAPSHOT_DIR / group / type(producer).__name__
-    else:
-        snapshot.snapshot_dir = FUNCTION_SNAPSHOT_DIR / group / type(producer).__name__
+    snapshot.snapshot_dir = (
+        SNAPSHOT_DIR[category] / (group + "_snapshots") / type(producer).__name__
+    )
 
     # Convert the SQL/Ibis expression to a substrait query plan
     if isinstance(producer, IbisProducer):
@@ -262,15 +271,23 @@ def substrait_consumer_sql_test(
     """
     consumer.setup(db_con, local_files, named_tables)
 
-    group, name = test_name.split(":")
-    snapshot_dir = (
-        RELATION_SNAPSHOT_DIR if "relation" in group else FUNCTION_SNAPSHOT_DIR
+    category, group, name = test_name.split(":")
+    record_property("category", category)
+    record_property("group", group)
+    record_property("name", name)
+    record_property("producer", producer.name())
+    record_property("consumer", consumer.name())
+
+    snapshot.snapshot_dir = (
+        SNAPSHOT_DIR[category] / (group + "_snapshots") / (category + "_test_results")
     )
-    results_dir = (
-        "relation_test_results" if "relation" in group else "function_test_results"
+    snapshot_dir = SNAPSHOT_DIR[category]
+    plan_path = (
+        snapshot_dir
+        / (group + "_snapshots")
+        / type(producer).__name__
+        / f"{name}_plan.json"
     )
-    snapshot.snapshot_dir = snapshot_dir / group / results_dir
-    plan_path = snapshot_dir / group / type(producer).__name__ / f"{name}_plan.json"
     outcome_path = f"{name}-{producer.name()}-{consumer.name()}_outcome.txt"
     result_path = f"{name}_result.txt"
 

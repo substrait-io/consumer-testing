@@ -25,14 +25,14 @@ SCALAR_FUNCTIONS = (
         "ibis_expr": None,
     },
     {
-        "test_name": "starts_with",
+        "test_name": "starts_with0",
         "local_files": {},
         "named_tables": {"nation": "nation.parquet"},
         "sql_query": SQL_SCALAR["starts_with"],
         "ibis_expr": IBIS_SCALAR["starts_with"],
     },
     {
-        "test_name": "starts_with",
+        "test_name": "starts_with1",
         "local_files": {},
         "named_tables": {"nation": "nation.parquet"},
         "sql_query": SQL_SCALAR["starts_with_duckdb"],
@@ -46,14 +46,14 @@ SCALAR_FUNCTIONS = (
         "ibis_expr": IBIS_SCALAR["ends_with"],
     },
     {
-        "test_name": "substring",
+        "test_name": "substring0",
         "local_files": {},
         "named_tables": {"nation": "nation.parquet"},
         "sql_query": SQL_SCALAR["substring"],
         "ibis_expr": IBIS_SCALAR["substr"],
     },
     {
-        "test_name": "substring",
+        "test_name": "substring1",
         "local_files": {},
         "named_tables": {"nation": "nation.parquet"},
         "sql_query": SQL_SCALAR["substring_isthmus"],
