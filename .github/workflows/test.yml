@@ -83,3 +83,7 @@ jobs:
 
     - name: Run relations tests
       run: pytest -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/tests/functional/relations
+
+    - name: Run Ibis expression tests
+      if: ${{ matrix.producer == 'ibis' }}
+      run: pytest substrait_consumer/functional/queries/ibis_expressions/

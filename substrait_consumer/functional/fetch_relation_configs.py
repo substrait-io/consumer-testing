@@ -7,13 +7,11 @@ FETCH_RELATION_TESTS = (
         "local_files": {},
         "named_tables": {"orders": "orders.parquet"},
         "sql_query": FETCH_RELATIONS["fetch"],
-        "ibis_expr": None
     },
     {
         "test_name": "fetch_with_offset",
         "local_files": {},
         "named_tables": {"orders": "orders.parquet"},
         "sql_query": FETCH_RELATIONS["fetch_with_offset"],
-        "ibis_expr": None
     },
 )

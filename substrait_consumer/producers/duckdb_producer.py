@@ -5,9 +5,9 @@ import duckdb
 import pyarrow as pa
 import substrait_validator as sv
 
-from .producer import Producer, load_named_tables
+from .producer import SQLProducer, load_named_tables
 
-class DuckDBProducer(Producer):
+class DuckDBProducer(SQLProducer):
     """
     Adapts the DuckDB Substrait producer to the test framework.
     """
@@ -30,9 +30,7 @@ class DuckDBProducer(Producer):
         self._db_connection = db_connection
         load_named_tables(self._db_connection, named_tables)
 
-    def _produce_substrait(
-        self, sql_query: str, validate=False, ibis_expr: str = None
-    ) -> str:
+    def _produce_substrait(self, sql_query: str, validate=False) -> str:
         """
         Produce the DuckDB substrait plan using the given SQL query.
 

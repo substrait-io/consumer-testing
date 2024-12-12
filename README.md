@@ -181,7 +181,6 @@ SCALAR_FUNCTIONS = (
         "local_files": {},
         "named_tables": {"partsupp": "partsupp.parquet"},
         "sql_query": SQL_SCALAR["add"],
-        "ibis_expr": IBIS_SCALAR["add"],
     },
 ```
 

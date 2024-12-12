@@ -1,8 +1,5 @@
-from typing import Callable
-
 import duckdb
-from ibis.expr.types.relations import Table
-from ibis_substrait.tests.compiler.conftest import *
+import pytest
 
 from substrait_consumer.functional.common import (
     generate_snapshot_results, substrait_consumer_sql_test,
@@ -42,10 +39,7 @@ class TestStringFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
-        nation,
-        orders,
     ) -> None:
         test_name = f"function:string:{test_name}"
         substrait_producer_sql_test(
@@ -56,10 +50,7 @@ class TestStringFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
-            nation,
-            orders,
         )
 
     @custom_parametrization(SCALAR_FUNCTIONS + AGGREGATE_FUNCTIONS)
@@ -72,11 +63,8 @@ class TestStringFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
         producer,
         consumer,
-        nation,
-        orders,
     ) -> None:
         test_name = f"function:string:{test_name}"
         substrait_consumer_sql_test(
@@ -87,7 +75,6 @@ class TestStringFunctions:
             local_files,
             named_tables,
             sql_query,
-            ibis_expr,
             producer,
             consumer,
         )
@@ -102,7 +89,6 @@ class TestStringFunctions:
         local_files: dict[str, str],
         named_tables: dict[str, str],
         sql_query: tuple,
-        ibis_expr: Callable[[Table], Table],
     ) -> None:
         test_name = f"function:string:{test_name}"
         generate_snapshot_results(
