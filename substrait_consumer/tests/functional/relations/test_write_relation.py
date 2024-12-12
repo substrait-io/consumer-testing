@@ -1,10 +1,8 @@
 import duckdb
 import pytest
 
-from substrait_consumer.functional.write_relation_configs import (
-    WRITE_RELATION_TESTS)
-from substrait_consumer.functional.common import (
-    substrait_consumer_sql_test, substrait_producer_sql_test)
+from substrait_consumer.functional.write_relation_configs import WRITE_RELATION_TESTS
+from substrait_consumer.functional.common import substrait_consumer_sql_test
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -27,31 +25,6 @@ class TestWriteRelation:
         yield
 
         cls.db_connection.close()
-
-    @custom_parametrization(WRITE_RELATION_TESTS)
-    @pytest.mark.produce_substrait_snapshot
-    def test_producer_write_relations(
-        self,
-        snapshot,
-        record_property,
-        test_name: str,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-    ) -> None:
-        test_name = f"relation:write:{test_name}"
-        substrait_producer_sql_test(
-            test_name,
-            snapshot,
-            record_property,
-            self.db_connection,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-            validate=True
-        )
 
     @custom_parametrization(WRITE_RELATION_TESTS)
     @pytest.mark.consume_substrait_snapshot

@@ -3,8 +3,9 @@ import pytest
 
 from substrait_consumer.functional.approximation_configs import AGGREGATE_FUNCTIONS
 from substrait_consumer.functional.common import (
-    generate_snapshot_results, substrait_consumer_sql_test,
-    substrait_producer_sql_test)
+    generate_snapshot_results,
+    substrait_consumer_sql_test,
+)
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -27,30 +28,6 @@ class TestApproximationFunctions:
         yield
 
         cls.db_connection.close()
-
-    @custom_parametrization(AGGREGATE_FUNCTIONS)
-    @pytest.mark.produce_substrait_snapshot
-    def test_producer_approximation_functions(
-        self,
-        snapshot,
-        record_property,
-        test_name: str,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-    ) -> None:
-        test_name = f"function:approximation:{test_name}"
-        substrait_producer_sql_test(
-            test_name,
-            snapshot,
-            record_property,
-            self.db_connection,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
 
     @custom_parametrization(AGGREGATE_FUNCTIONS)
     @pytest.mark.consume_substrait_snapshot
