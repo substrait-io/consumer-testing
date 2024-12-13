@@ -2,7 +2,6 @@ from pathlib import Path
 
 import duckdb
 import pytest
-import substrait_validator as sv
 
 from pytest_snapshot.plugin import Snapshot
 
@@ -116,25 +115,12 @@ class TestTpchPlansValid:
             sql_query:
                 SQL query.
         """
-        config = sv.Config()
-
-        # Duckdb plan overrides
-        # not yet implemented: typecast validation rules are not yet implemented
-        config.override_diagnostic_level(1, "info", "info")
-        # function definition unavailable: cannot check validity of call
-        config.override_diagnostic_level(6003, "info", "info")
-        # Function Anchor to YAML file
-        config.override_diagnostic_level(3001, "info", "info")
-        # too few field names
-        config.override_diagnostic_level(4003, "info", "info")
 
         # Format the sql query by inserting all the table names
         self.duckdb_producer.setup(self.db_connection, local_files, named_tables)
 
         try:
-            proto_bytes = self.duckdb_producer.produce_substrait(sql_query)
-            # TODO: failures in the validator obstruct an otherwise passing test!
-            sv.check_plan_valid(proto_bytes, config)
+            self.duckdb_producer.produce_substrait(sql_query, validate=True)
         except BaseException as e:
             snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
             return
