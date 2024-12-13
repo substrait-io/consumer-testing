@@ -298,13 +298,12 @@ def substrait_producer_sql_test(
 
 
 def substrait_consumer_sql_test(
-    test_name: str,
+    path: Path,
     snapshot: Snapshot,
     record_property,
     db_con: DuckDBPyConnection,
     local_files: dict[str, str],
     named_tables: dict[str, str],
-    sql_query: tuple,
     producer,
     consumer,
 ):
@@ -324,8 +323,6 @@ def substrait_consumer_sql_test(
             A `dict` mapping format argument names to local files paths.
         named_tables:
             A `dict` mapping table names to local file paths.
-        sql_query:
-            SQL query.
         producer:
             Substrait producer class.
         consumer:
@@ -333,7 +330,8 @@ def substrait_consumer_sql_test(
     """
     consumer.setup(db_con, local_files, named_tables)
 
-    category, group, name = test_name.split(":")
+    path = str(path).split(".")[0].split("/")
+    category, group, name = path[0], path[1], path[-1]
     record_property("category", category)
     record_property("group", group)
     record_property("name", name)

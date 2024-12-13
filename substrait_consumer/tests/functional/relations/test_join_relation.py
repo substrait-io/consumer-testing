@@ -1,12 +1,8 @@
 import duckdb
 import pytest
 
-from substrait_consumer.functional.join_relation_configs import (
-    JOIN_RELATION_TESTS)
-from substrait_consumer.functional.common import (
-    generate_snapshot_results,
-    substrait_consumer_sql_test,
-)
+from substrait_consumer.functional.join_relation_configs import JOIN_RELATION_TESTS
+from substrait_consumer.functional.common import generate_snapshot_results
 from substrait_consumer.parametrization import custom_parametrization
 
 
@@ -29,32 +25,6 @@ class TestJoinRelation:
         yield
 
         cls.db_connection.close()
-
-    @custom_parametrization(JOIN_RELATION_TESTS)
-    @pytest.mark.consume_substrait_snapshot
-    def test_consumer_join_relations(
-        self,
-        snapshot,
-        record_property,
-        test_name: str,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-        consumer,
-    ) -> None:
-        test_name = f"relation:join:{test_name}"
-        substrait_consumer_sql_test(
-            test_name,
-            snapshot,
-            record_property,
-            self.db_connection,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-            consumer,
-        )
 
     @custom_parametrization(JOIN_RELATION_TESTS)
     @pytest.mark.generate_function_snapshots

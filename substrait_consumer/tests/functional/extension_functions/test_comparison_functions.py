@@ -4,7 +4,6 @@ import pytest
 from substrait_consumer.functional.common import (
     generate_snapshot_results,
     load_custom_duckdb_table,
-    substrait_consumer_sql_test,
 )
 from substrait_consumer.functional.comparison_configs import SCALAR_FUNCTIONS
 from substrait_consumer.parametrization import custom_parametrization
@@ -30,32 +29,6 @@ class TestComparisonFunctions:
         yield
 
         cls.db_connection.close()
-
-    @custom_parametrization(SCALAR_FUNCTIONS)
-    @pytest.mark.consume_substrait_snapshot
-    def test_consumer_comparison_functions(
-        self,
-        snapshot,
-        record_property,
-        test_name: str,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-        consumer,
-    ) -> None:
-        test_name = f"function:comparison:{test_name}"
-        substrait_consumer_sql_test(
-            test_name,
-            snapshot,
-            record_property,
-            self.db_connection,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-            consumer,
-        )
 
     @custom_parametrization(SCALAR_FUNCTIONS)
     @pytest.mark.generate_function_snapshots
