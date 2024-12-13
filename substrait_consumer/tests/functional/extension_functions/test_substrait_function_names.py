@@ -1,218 +1,80 @@
 import json
+from pathlib import Path
 
 import duckdb
 import pytest
 from pytest_snapshot.plugin import Snapshot
 
-from substrait_consumer.functional import (
-    arithmetic_configs, boolean_configs, comparison_configs, datetime_configs, logarithmic_configs, rounding_configs)
-from substrait_consumer.functional.common import check_subtrait_function_names, load_custom_duckdb_table
-from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.common import check_subtrait_function_names
+from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 
 
+CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "functional"
+FUNCTION_CONFIG_DIR = CONFIG_DIR / "function"
+TEST_CASE_PATHS = list(
+    (path.relative_to(CONFIG_DIR),) for path in FUNCTION_CONFIG_DIR.rglob("*.json")
+)
+IDS = (str(path[0]).removesuffix(".json") for path in TEST_CASE_PATHS)
+
+
+@pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
-class TestSubstraitFunctionNames:
+def test_function_name(
+    path: Path,
+    snapshot: Snapshot,
+    db_con: duckdb.DuckDBPyConnection,
+    producer,
+):
     """
-    Test Class for testing functions names in substrait plans created by different
-    producers.
+
+    Verify the substrait function names that appear in the produced plan match up
+    with the function names as defined in Substrait.
+
+    Parameters:
+        test_name:
+            Expected function name as defined by the substrait spec.
+        local_files:
+            A `dict` mapping format argument names to local files paths.
+        named_tables:
+            A `dict` mapping table names to local file paths.
+        producer:
+            Substrait producer class.
     """
+    test_case = load_json(CONFIG_DIR / path)
+    local_files = test_case["local_files"]
+    named_tables = test_case["named_tables"]
+    sql_query = test_case["sql_query"]
+    path = str(path).split(".")[0].split("/")
+    group, test_name = path[1], path[-1]
 
-    @staticmethod
-    @pytest.fixture(autouse=True)
-    def setup_teardown_function(request):
-        cls = request.cls
-
-        cls.db_connection = duckdb.connect()
-        cls.db_connection.execute("install substrait")
-        cls.db_connection.execute("load substrait")
-        load_custom_duckdb_table(cls.db_connection)
-
-        yield
-
-        cls.db_connection.close()
-
-    @custom_parametrization(
-        arithmetic_configs.SCALAR_FUNCTIONS + arithmetic_configs.AGGREGATE_FUNCTIONS
+    snapshot.snapshot_dir = (
+        Path(__file__).parent
+        / "snapshots"
+        / "test_substrait_function_names"
+        / f"test_{group}_function_names"
+        / f"{producer.name()}-{test_name}"
     )
-    def test_arithmetic_function_names(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        producer,
-    ) -> None:
-        """
-        Verify the substrait function names for arithmetic functions.
-        """
-        self.run_function_name_test(
-            test_name,
-            snapshot,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
 
-    @custom_parametrization(
-        boolean_configs.SCALAR_FUNCTIONS + boolean_configs.AGGREGATE_FUNCTIONS
-    )
-    def test_boolean_function_names(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        producer,
-    ) -> None:
-        """
-        Verify the substrait function names for boolean functions.
-        """
-        self.run_function_name_test(
-            test_name,
-            snapshot,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
+    if isinstance(producer, IbisProducer):
+        pytest.skip("function names currently not tested for Ibis producer")
 
-    @custom_parametrization(comparison_configs.SCALAR_FUNCTIONS)
-    def test_comparison_function_names(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        producer,
-    ) -> None:
-        """
-        Verify the substrait function names for comparison functions.
-        """
-        self.run_function_name_test(
-            test_name,
-            snapshot,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
+    producer.setup(db_con, local_files, named_tables)
 
-    @custom_parametrization(datetime_configs.SCALAR_FUNCTIONS)
-    def test_datetime_function_names(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        producer,
-    ) -> None:
-        """
-        Verify the substrait function names for datetime functions.
-        """
-        self.run_function_name_test(
-            test_name,
-            snapshot,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
+    # Grab the json representation of the produced substrait plan to verify
+    # the proper substrait function name.
+    duckdb_producer = DuckDBProducer(db_con)
+    duckdb_producer.setup(db_con, local_files, named_tables)
+    try:
+        substrait_plan_json = duckdb_producer.produce_substrait(sql_query[0])
+    except BaseException as e:
+        snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
+        return
 
-    @custom_parametrization(logarithmic_configs.SCALAR_FUNCTIONS)
-    def test_logarithmic_function_names(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        producer,
-    ) -> None:
-        """
-        Verify the substrait function names for logarithmic functions.
-        """
-        self.run_function_name_test(
-            test_name,
-            snapshot,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
-
-    @custom_parametrization(rounding_configs.SCALAR_FUNCTIONS)
-    def test_rounding_function_names(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-    ) -> None:
-        """
-        Verify the substrait function names for rounding functions.
-        """
-        self.run_function_name_test(
-            test_name,
-            snapshot,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-        )
-
-    def run_function_name_test(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-    ):
-        """
-
-        Verify the substrait function names that appear in the produced plan match up
-        with the function names as defined in Substrait.
-
-        Parameters:
-            test_name:
-                Expected function name as defined by the substrait spec.
-            local_files:
-                A `dict` mapping format argument names to local files paths.
-            named_tables:
-                A `dict` mapping table names to local file paths.
-            sql_query:
-                SQL query.
-            producer:
-                Substrait producer class.
-        """
-        if isinstance(producer, IbisProducer):
-            pytest.skip("function names currently not tested for Ibis producer")
-
-        producer.setup(self.db_connection, local_files, named_tables)
-
-        # Grab the json representation of the produced substrait plan to verify
-        # the proper substrait function name.
-        duckdb_producer = DuckDBProducer(self.db_connection)
-        duckdb_producer.setup(self.db_connection, local_files, named_tables)
-        try:
-            substrait_plan_json = duckdb_producer.produce_substrait(sql_query[0])
-        except BaseException as e:
-            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
-            return
-
-        substrait_plan = json.loads(substrait_plan_json)
-        try:
-            check_subtrait_function_names(substrait_plan, test_name)
-        except BaseException as e:
-            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
-            return
+    substrait_plan = json.loads(substrait_plan_json)
+    try:
+        check_subtrait_function_names(substrait_plan, test_name)
+    except BaseException as e:
+        snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
+        return
