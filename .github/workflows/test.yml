@@ -87,3 +87,44 @@ jobs:
     - name: Run Ibis expression tests
       if: ${{ matrix.producer == 'ibis' }}
       run: pytest substrait_consumer/functional/queries/ibis_expressions/
+
+  integration:
+    name: Run integration tests
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+
+    - name: Install Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: 8.8
+
+    - name: Build Isthmus
+      working-directory: ./substrait-java/isthmus
+      run: ../gradlew shadowJar
+
+    - name: Copy Isthmus JARs
+      run: |-
+        mkdir ./jars
+        cp substrait-java/isthmus/build/libs/*all.jar ./jars
+
+    - name: Run integration tests
+      run: pytest -v substrait_consumer/tests/integration
