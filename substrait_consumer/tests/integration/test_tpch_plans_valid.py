@@ -46,7 +46,6 @@ class TestTpchPlansValid:
         named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
-        sort_results: bool = False,
     ) -> None:
         """
         Generate the substrait plans using Isthmus.
@@ -77,7 +76,6 @@ class TestTpchPlansValid:
         named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
-        sort_results: bool = False,
     ) -> None:
         """
         Run the Isthmus generated substrait plans through the substrait validator.
@@ -113,7 +111,6 @@ class TestTpchPlansValid:
         named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
-        sort_results: bool = False,
     ) -> None:
         """
         Run the Duckdb generated substrait plans through the substrait validator.
