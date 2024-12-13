@@ -7,10 +7,24 @@ from filelock import FileLock
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
 from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
+from substrait_consumer.functional.common import load_custom_duckdb_table
 from substrait_consumer.producers.datafusion_producer import DataFusionProducer
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
+
+
+@pytest.fixture
+def db_con():
+    db_connection = duckdb.connect()
+    db_connection.execute("INSTALL substrait")
+    db_connection.execute("LOAD substrait")
+
+    load_custom_duckdb_table(db_connection)
+
+    yield db_connection
+
+    db_connection.close()
 
 
 @pytest.fixture(scope="session")

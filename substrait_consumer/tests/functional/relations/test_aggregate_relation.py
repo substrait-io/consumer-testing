@@ -5,7 +5,8 @@ from substrait_consumer.functional.aggregate_relation_configs import (
     AGGREGATE_RELATION_TESTS)
 from substrait_consumer.functional.common import (
     generate_snapshot_results,
-    substrait_consumer_sql_test, substrait_producer_sql_test)
+    substrait_consumer_sql_test,
+)
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
@@ -44,31 +45,6 @@ class TestAggregatetRelation:
         yield
 
         cls.db_connection.close()
-
-    @custom_parametrization(AGGREGATE_RELATION_TESTS)
-    @pytest.mark.produce_substrait_snapshot
-    def test_producer_aggregate_relations(
-        self,
-        snapshot,
-        record_property,
-        test_name: str,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: tuple,
-        producer,
-    ) -> None:
-        test_name = f"relation:aggregate:{test_name}"
-        substrait_producer_sql_test(
-            test_name,
-            snapshot,
-            record_property,
-            self.db_connection,
-            local_files,
-            named_tables,
-            sql_query,
-            producer,
-            validate=True
-        )
 
     @custom_parametrization(AGGREGATE_RELATION_TESTS)
     @pytest.mark.consume_substrait_snapshot

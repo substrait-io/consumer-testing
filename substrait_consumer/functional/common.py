@@ -228,7 +228,7 @@ def substrait_producer_ibis_test(category: str, group: str) -> None:
 
 
 def substrait_producer_sql_test(
-    test_name: str,
+    path: Path,
     snapshot: Snapshot,
     record_property,
     db_con: DuckDBPyConnection,
@@ -271,7 +271,8 @@ def substrait_producer_sql_test(
 
     producer.setup(db_con, local_files, named_tables)
 
-    category, group, name = test_name.split(":")
+    path = str(path).split(".")[0].split("/")
+    category, group, name = path[0], path[1], path[-1]
     record_property("category", category)
     record_property("group", group)
     record_property("name", name)
