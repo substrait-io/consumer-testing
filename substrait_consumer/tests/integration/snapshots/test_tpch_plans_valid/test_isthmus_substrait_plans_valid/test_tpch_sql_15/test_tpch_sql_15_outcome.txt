@@ -1,1 +1,1 @@
-<class 'ValueError'>
+<java class 'org.apache.calcite.runtime.CalciteContextException'>
