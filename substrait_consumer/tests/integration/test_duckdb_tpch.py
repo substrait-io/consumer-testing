@@ -6,7 +6,6 @@ from pytest_snapshot.plugin import Snapshot
 from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
-from substrait_consumer.verification import verify_equals
 from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 
@@ -90,17 +89,8 @@ class TestDuckDBConsumer:
 
         # Verify results between substrait plan query and sql running against
         # duckdb are equal.
-        verify_equals(
-            col_names,
-            exp_col_names,
-            message=f"Actual column names: \n{col_names} \n"
-            f"are not equal to the expected"
-            f"column names: \n{exp_col_names}",
-        )
-        verify_equals(
-            subtrait_query_result_tb,
-            duckdb_sql_result_tb,
-            message=f"Result table: \n{subtrait_query_result_tb} \n"
-            f"is not equal to the expected "
-            f"table: \n{duckdb_sql_result_tb}",
-        )
+        outcome = {
+            "column_names": col_names == exp_col_names,
+            "table": subtrait_query_result_tb == duckdb_sql_result_tb,
+        }
+        snapshot.assert_match(str(outcome), f"query_{tpch_num}_outcome.txt")
