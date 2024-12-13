@@ -1,0 +1,11 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT a, isfinite(a) as isfinite_a FROM 't'"
+    },
+    "test_name": "is_finite"
+}

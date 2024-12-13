@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER, L_ORDERKEY FROM '{lineitem}' GROUP BY GROUPING SETS ( (L_LINENUMBER), (L_ORDERKEY) ) ORDER BY L_LINENUMBER"
+    },
+    "test_name": "aggregate_with_grouping_set"
+}

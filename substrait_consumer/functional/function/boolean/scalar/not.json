@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT c FROM 't' WHERE NOT FALSE"
+    },
+    "test_name": "not"
+}

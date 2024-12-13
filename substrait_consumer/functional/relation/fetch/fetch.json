@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "orders": "orders.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT O_ORDERKEY FROM '{orders}' FETCH NEXT 1 ROWS ONLY;"
+    },
+    "test_name": "fetch"
+}

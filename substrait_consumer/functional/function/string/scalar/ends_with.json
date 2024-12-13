@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT N_NAME FROM '{nation}' WHERE suffix(N_NAME, 'A');"
+    },
+    "test_name": "ends_with"
+}

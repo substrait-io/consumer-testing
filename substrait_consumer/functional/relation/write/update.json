@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "UPDATE '{customer}' SET c_address = 'Substait Avenue', c_phone = '123-456-7890' WHERE c_custkey = 1;"
+    },
+    "test_name": "update"
+}

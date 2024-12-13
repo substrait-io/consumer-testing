@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT L_QUANTITY, COUNT(*) FROM '{lineitem}' GROUP BY L_QUANTITY HAVING COUNT(*) > 12100 ORDER BY L_QUANTITY"
+    },
+    "test_name": "having"
+}

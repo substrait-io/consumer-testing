@@ -1,0 +1,16 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem_small.parquet",
+        "orders": "orders_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT o.O_ORDERKEY, o.O_CUSTKEY FROM '{orders}' o WHERE NOT EXISTS ( SELECT 1 FROM '{lineitem}' l WHERE l.L_ORDERKEY = o.O_ORDERKEY );"
+    },
+    "test_name": "right_anti_join"
+}

@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT PS_PARTKEY, negate(PS_PARTKEY) AS NEGATE_KEY FROM '{partsupp}' LIMIT 10;"
+    },
+    "test_name": "negate"
+}

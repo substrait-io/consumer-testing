@@ -1,0 +1,12 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT a, isnan(a) as isnan_a FROM 't'"
+    },
+    "test_name": "is_nan"
+}

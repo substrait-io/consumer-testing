@@ -1,0 +1,16 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer_small.parquet",
+        "orders": "orders_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT c.C_CUSTKEY, c.C_NAME, o.O_ORDERKEY FROM '{customer}' c INNER JOIN '{orders}' o ON c.C_CUSTKEY = o.O_CUSTKEY;"
+    },
+    "test_name": "inner_join"
+}

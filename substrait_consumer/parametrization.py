@@ -58,7 +58,7 @@ def custom_parametrization(test_cases: list[dict]) -> MarkDecorator:
         has_mark = False
 
         argument_values.append(case_tuple)
-        ids.append(case_tuple[0])
+        ids.append(test_case["test_name"])
 
     return pytest.mark.parametrize(
         argnames=argument_names, argvalues=argument_values, ids=ids

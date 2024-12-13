@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT L_ORDERKEY FROM '{lineitem}' WHERE L_ORDERKEY IN (1, 2, 3)"
+    },
+    "test_name": "where_in"
+}

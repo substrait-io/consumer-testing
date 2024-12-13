@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT coalesce(NULL,NULL,'test_string')"
+    },
+    "test_name": "coalesce"
+}

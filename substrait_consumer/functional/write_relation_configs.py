@@ -1,23 +1,7 @@
-from substrait_consumer.functional.queries.sql.relations.write_relations import (
-    WRITE_RELATIONS)
+from pathlib import Path
 
-WRITE_RELATION_TESTS = (
-    {
-        "test_name": "insert",
-        "local_files": {},
-        "named_tables": {"region": "region.parquet"},
-        "sql_query": WRITE_RELATIONS["insert"],
-    },
-    {
-        "test_name": "update",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": WRITE_RELATIONS["update"],
-    },
-    {
-        "test_name": "delete",
-        "local_files": {},
-        "named_tables": {"customer": "customer.parquet"},
-        "sql_query": WRITE_RELATIONS["delete"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+WRITE_DIR = CONFIG_DIR / "relation" / "write"
+WRITE_RELATION_TESTS = tuple(load_json(file) for file in WRITE_DIR.glob("*.json"))

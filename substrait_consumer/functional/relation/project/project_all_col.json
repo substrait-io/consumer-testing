@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "region": "region_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT * FROM '{region}'"
+    },
+    "test_name": "project_all_col"
+}

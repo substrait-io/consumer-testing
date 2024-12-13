@@ -1,43 +1,10 @@
-from substrait_consumer.functional.queries.sql.boolean_functions_sql import SQL_SCALAR, SQL_AGGREGATE
+from pathlib import Path
 
-SCALAR_FUNCTIONS = (
-    {
-        "test_name": "or",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": SQL_SCALAR["or"],
-    },
-    {
-        "test_name": "and",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": SQL_SCALAR["and"],
-    },
-    {
-        "test_name": "not",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": SQL_SCALAR["not"],
-    },
-    {
-        "test_name": "xor",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": SQL_SCALAR["xor"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
 
-AGGREGATE_FUNCTIONS = (
-    {
-        "test_name": "bool_and",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": SQL_AGGREGATE["bool_and"],
-    },
-    {
-        "test_name": "bool_or",
-        "local_files": {},
-        "named_tables": {},
-        "sql_query": SQL_AGGREGATE["bool_or"],
-    },
-)
+CONFIG_DIR = Path(__file__).parent
+SCALAR_DIR = CONFIG_DIR / "function" / "boolean" / "scalar"
+AGGREGATE_DIR = CONFIG_DIR / "function" / "boolean" / "aggregate"
+
+SCALAR_FUNCTIONS = tuple(load_json(file) for file in SCALAR_DIR.glob("*.json"))
+AGGREGATE_FUNCTIONS = tuple(load_json(file) for file in AGGREGATE_DIR.glob("*.json"))

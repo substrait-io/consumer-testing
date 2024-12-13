@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "CREATE VIEW customer_view AS SELECT C_CUSTKEY, C_NAME, FROM '{customer}';"
+    },
+    "test_name": "create_view"
+}

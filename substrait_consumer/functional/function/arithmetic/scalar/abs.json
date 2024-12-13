@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT a, abs(a) AS ABS_A FROM 't' LIMIT 10;"
+    },
+    "test_name": "abs"
+}

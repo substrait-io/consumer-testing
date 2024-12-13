@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT PS_SUPPLYCOST, ceil(CAST(PS_SUPPLYCOST AS DOUBLE)) AS CEIL_SUPPLYCOST FROM '{partsupp}' LIMIT 10;"
+    },
+    "test_name": "ceil"
+}

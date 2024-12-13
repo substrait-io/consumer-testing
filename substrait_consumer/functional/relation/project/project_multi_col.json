@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT L_DISCOUNT, L_TAX FROM '{lineitem}'"
+    },
+    "test_name": "project_multi_col"
+}

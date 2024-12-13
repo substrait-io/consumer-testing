@@ -1,0 +1,16 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer_small.parquet",
+        "orders": "orders_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT o_totalprice FROM '{orders}' EXCEPT SELECT c_acctbal FROM '{customer}'"
+    },
+    "test_name": "except"
+}

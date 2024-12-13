@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "orders": "orders_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT AVG(O_TOTALPRICE) + MAX(O_TOTALPRICE) FROM '{orders}'"
+    },
+    "test_name": "computation_between_aggregates"
+}

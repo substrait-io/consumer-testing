@@ -1,28 +1,10 @@
-from substrait_consumer.functional.queries.sql.logarithmic_functions_sql import SQL_SCALAR
+from pathlib import Path
 
-SCALAR_FUNCTIONS = (
-    {
-        "test_name": "ln",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["ln"],
-    },
-    {
-        "test_name": "log10",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["log10"],
-    },
-    {
-        "test_name": "log2",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["log2"],
-    },
-    {
-        "test_name": "logb",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["logb"],
-    },
-)
+from substrait_consumer.functional.utils import load_json
+
+CONFIG_DIR = Path(__file__).parent
+SCALAR_DIR = CONFIG_DIR / "function" / "logarithmic" / "scalar"
+AGGREGATE_DIR = CONFIG_DIR / "function" / "logarithmic" / "aggregate"
+
+SCALAR_FUNCTIONS = tuple(load_json(file) for file in SCALAR_DIR.glob("*.json"))
+AGGREGATE_FUNCTIONS = tuple(load_json(file) for file in AGGREGATE_DIR.glob("*.json"))

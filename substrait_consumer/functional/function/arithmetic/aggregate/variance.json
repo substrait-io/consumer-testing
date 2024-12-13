@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT round(variance(PS_SUPPLYCOST), 2) AS VARIANCE_SUPPLYCOST FROM '{partsupp}';"
+    },
+    "test_name": "variance"
+}

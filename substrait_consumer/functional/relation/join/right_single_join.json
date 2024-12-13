@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT c1.C_CUSTKEY AS c1key, c1.C_NAME AS c1name, c1.C_NATIONKEY AS c1nationakey, c2.C_CUSTKEY AS c2key, c2.C_NAME AS c2name, c2.C_NATIONKEY AS c2nationakey FROM '{customer}' c1 RIGHT JOIN '{customer}' c2 ON c1.C_NATIONKEY = c2.C_NATIONKEY AND c1.C_CUSTKEY <> c2.C_CUSTKEY;"
+    },
+    "test_name": "right_single_join"
+}

@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT round(avg(L_EXTENDEDPRICE), 2) AS AVG_EXTENDEDPRICE FROM '{lineitem}';"
+    },
+    "test_name": "avg"
+}

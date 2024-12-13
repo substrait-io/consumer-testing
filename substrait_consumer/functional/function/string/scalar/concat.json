@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT N_NAME, concat(N_NAME, N_COMMENT) AS concat_nation FROM '{nation}';"
+    },
+    "test_name": "concat"
+}

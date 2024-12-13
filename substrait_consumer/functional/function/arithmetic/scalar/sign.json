@@ -1,0 +1,12 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT a, sign(a) AS SIGN_A FROM 't' LIMIT 10;"
+    },
+    "test_name": "sign"
+}

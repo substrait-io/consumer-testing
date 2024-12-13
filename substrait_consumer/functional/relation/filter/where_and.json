@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT L_ORDERKEY, L_SHIPINSTRUCT FROM '{lineitem}' WHERE L_ORDERKEY = 2 AND L_SHIPINSTRUCT = 'TAKE BACK RETURN'"
+    },
+    "test_name": "where_and"
+}

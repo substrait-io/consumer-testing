@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb"
+        ],
+        "query": "SELECT product(PS_SUPPLYCOST) AS PRODUCT_SUPPLYCOST FROM '{partsupp}';"
+    },
+    "test_name": "product"
+}

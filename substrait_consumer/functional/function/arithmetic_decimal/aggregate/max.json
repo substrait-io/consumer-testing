@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT max(L_EXTENDEDPRICE) AS MAX_EXTENDEDPRICE FROM '{lineitem}';"
+    },
+    "test_name": "max"
+}

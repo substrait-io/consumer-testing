@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT L_TAX, L_EXTENDEDPRICE, round(divide(L_EXTENDEDPRICE, L_TAX), 2) AS DIVIDE_KEY FROM '{lineitem}' LIMIT 10;"
+    },
+    "test_name": "divide"
+}

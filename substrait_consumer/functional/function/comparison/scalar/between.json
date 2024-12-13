@@ -1,0 +1,13 @@
+{
+    "local_files": {},
+    "named_tables": {},
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT a FROM 't' WHERE a BETWEEN 1 AND 5 ORDER BY a"
+    },
+    "test_name": "between"
+}

@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "region": "region.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "INSERT INTO '{region}' (r_regionkey, r_name, r_comment) VALUES (99999, 'region_name', 'region comment');"
+    },
+    "test_name": "insert"
+}

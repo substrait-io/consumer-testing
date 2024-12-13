@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT median(PS_SUPPLYCOST) AS MEDIAN_SUPPLYCOST FROM '{partsupp}';"
+    },
+    "test_name": "median"
+}

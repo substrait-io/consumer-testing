@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT sum(L_EXTENDEDPRICE) AS SUM_EXTENDEDPRICE FROM '{lineitem}';"
+    },
+    "test_name": "sum"
+}

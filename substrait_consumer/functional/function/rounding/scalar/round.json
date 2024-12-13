@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT L_EXTENDEDPRICE, round(CAST(L_EXTENDEDPRICE AS DOUBLE), 1) AS ROUND_EXTENDEDPRICE FROM '{lineitem}' LIMIT 10;"
+    },
+    "test_name": "round"
+}

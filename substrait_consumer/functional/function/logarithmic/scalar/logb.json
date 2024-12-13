@@ -1,0 +1,14 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb"
+        ],
+        "query": "SELECT PS_SUPPLYCOST, round(logb(PS_SUPPLYCOST, 10), 2) AS LOGB_SUPPLY FROM '{partsupp}' LIMIT 10;"
+    },
+    "test_name": "logb"
+}

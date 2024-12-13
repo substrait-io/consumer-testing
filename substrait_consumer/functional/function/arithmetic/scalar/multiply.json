@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "datafusion",
+            "duckdb",
+            "isthmus"
+        ],
+        "query": "SELECT PS_PARTKEY, PS_PARTKEY * 10 AS MULTIPLY_KEY FROM '{partsupp}' LIMIT 10;"
+    },
+    "test_name": "multiply"
+}

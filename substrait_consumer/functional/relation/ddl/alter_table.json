@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "ALTER TABLE '{customer}' ADD email VARCHAR;"
+    },
+    "test_name": "alter_table"
+}

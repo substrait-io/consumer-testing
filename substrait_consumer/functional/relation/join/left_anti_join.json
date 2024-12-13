@@ -1,0 +1,16 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer_small.parquet",
+        "orders": "orders_small.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "datafusion",
+            "isthmus"
+        ],
+        "query": "SELECT c.C_CUSTKEY, c.C_NAME FROM '{customer}' c WHERE NOT EXISTS ( SELECT 1 FROM '{orders}' o WHERE o.O_CUSTKEY = c.C_CUSTKEY );"
+    },
+    "test_name": "left_anti_join"
+}
