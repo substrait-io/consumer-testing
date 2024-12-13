@@ -93,6 +93,7 @@ class TestTpchPlansValid:
         # ValueError: Warning at plan.extension_uris[0].uri: did not attempt to resolve YAML:
         # configured recursion limit for URI resolution has been reached
         config.override_diagnostic_level(2001, "info", "info")
+        config.override_diagnostic_level(3005, "info", "info")  # warning
         # Warning. not yet implemented: matching function calls with their definitions
         config.override_diagnostic_level(1, "info", "info")
 
