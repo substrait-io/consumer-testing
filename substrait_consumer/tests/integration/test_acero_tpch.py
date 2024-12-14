@@ -10,7 +10,6 @@ from substrait_consumer.common import SubstraitUtils
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
 from substrait_consumer.parametrization import custom_parametrization
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
-from substrait_consumer.verification import verify_equals
 from substrait_consumer.tests.integration.queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 
@@ -109,20 +108,11 @@ class TestAceroConsumer:
 
         # Verify results between substrait plan query and sql running against
         # duckdb are equal.
-        verify_equals(
-            col_names,
-            exp_col_names,
-            message=f"Actual column names: \n{col_names} \n"
-            f"are not equal to the expected"
-            f"column names: \n{exp_col_names}",
-        )
-        verify_equals(
-            subtrait_query_result_tb,
-            duckdb_query_result_tb,
-            message=f"Result table: \n{subtrait_query_result_tb} \n"
-            f"is not equal to the expected "
-            f"table: \n{duckdb_query_result_tb}",
-        )
+        outcome = {
+            "column_names": col_names == exp_col_names,
+            "table": subtrait_query_result_tb == duckdb_query_result_tb,
+        }
+        snapshot.assert_match(str(outcome), f"query_{tpch_num}_outcome.txt")
 
     @custom_parametrization(TPCH_QUERY_TESTS)
     def test_duckdb_substrait_plan(
@@ -187,20 +177,11 @@ class TestAceroConsumer:
 
         # Verify results between substrait plan query and sql running against
         # duckdb are equal.
-        verify_equals(
-            col_names,
-            exp_col_names,
-            message=f"Actual column names: \n{col_names} \n"
-            f"are not equal to the expected"
-            f"column names: \n{exp_col_names}",
-        )
-        verify_equals(
-            subtrait_query_result_tb,
-            duckdb_sql_result_tb,
-            message=f"Result table: \n{subtrait_query_result_tb} \n"
-            f"is not equal to the expected "
-            f"table: \n{duckdb_sql_result_tb}",
-        )
+        outcome = {
+            "column_names": col_names == exp_col_names,
+            "table": subtrait_query_result_tb == duckdb_sql_result_tb,
+        }
+        snapshot.assert_match(str(outcome), f"query_{tpch_num}_outcome.txt")
 
 
 def arrow_sort_tb_values(table: pa.Table, sortby: Iterable[str]) -> pa.Table:
