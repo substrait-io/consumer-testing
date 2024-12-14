@@ -87,7 +87,7 @@ def check_subtrait_function_names(
 
 
 def generate_snapshot_results(
-    test_name: str,
+    path: Path,
     snapshot: Snapshot,
     record_property,
     db_con: DuckDBPyConnection,
@@ -113,11 +113,11 @@ def generate_snapshot_results(
         sql_query:
             SQL query.
     """
-    # Load the parquet files into DuckDB and return all the table names as a list
     producer = DuckDBProducer()
     producer.setup(db_con, local_files, named_tables)
 
-    category, group, name = test_name.split(":")
+    path = str(path).split(".")[0].split("/")
+    category, group, name = path[0], path[1], path[-1]
     record_property("category", category)
     record_property("group", group)
     record_property("name", name)
@@ -135,14 +135,17 @@ def generate_snapshot_results(
         snapshot.assert_match(str(type(e)), outcome_path)
         return
 
-    duckdb_result = duckdb_result.rename_columns(
-        list(map(str.lower, duckdb_result.column_names))
-    )
-    duckdb_result_data = []
-    for column in duckdb_result.columns:
-        duckdb_result_data.extend(column.data)
-        duckdb_result_data.extend([' '])
-    str_result_data = '\n'.join(map(str, duckdb_result_data))
+    if duckdb_result is None:
+        str_result_data = "(no result)"
+    else:
+        duckdb_result = duckdb_result.rename_columns(
+            list(map(str.lower, duckdb_result.column_names))
+        )
+        duckdb_result_data = []
+        for column in duckdb_result.columns:
+            duckdb_result_data.extend(column.data)
+            duckdb_result_data.extend([" "])
+        str_result_data = "\n".join(map(str, duckdb_result_data))
 
     match_result = check_match(snapshot, str_result_data, result_path)
     record_property("outcome", str(match_result))
