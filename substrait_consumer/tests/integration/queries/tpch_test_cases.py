@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from substrait_consumer.common import get_sql, get_substrait_plan
 
 TPCH_QUERY_TESTS = (
@@ -246,3 +249,26 @@ TPCH_QUERY_TESTS = (
         "substrait_query": get_substrait_plan("query_22_plan.json"),
     },
 )
+
+BASE_PATH = Path(__file__).parent.parent / "tpch"
+
+for test in TPCH_QUERY_TESTS:
+    sql_query = test.pop("sql_query")
+    test.pop("substrait_query")
+    query_num = int(test["test_name"].split("_")[3])
+    short_name = f"q{query_num:02d}"
+    long_name = f"tpch_query_{query_num:02d}"
+    test["sql_query"] = {
+        "producers": ["duckdb", "isthmus"],
+        "query_path": f"{short_name}.sql",
+    }
+    test["test_name"] = long_name
+
+    test_path = BASE_PATH / f"{short_name}.json"
+    sql_path = BASE_PATH / f"{short_name}.sql"
+
+    with open(sql_path, "w") as f:
+        f.write(sql_query)
+
+    with open(test_path, "w") as f:
+        json.dump(test, f, indent=4, sort_keys=True)

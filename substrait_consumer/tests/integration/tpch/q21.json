@@ -1,0 +1,17 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "lineitem": "lineitem.parquet",
+        "nation": "nation.parquet",
+        "orders": "orders.parquet",
+        "supplier": "supplier.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "isthmus"
+        ],
+        "query_path": "q21.sql"
+    },
+    "test_name": "tpch_query_21"
+}

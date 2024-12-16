@@ -1,0 +1,15 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "customer": "customer.parquet",
+        "orders": "orders.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "isthmus"
+        ],
+        "query_path": "q22.sql"
+    },
+    "test_name": "tpch_query_22"
+}
