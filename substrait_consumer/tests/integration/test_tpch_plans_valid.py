@@ -86,18 +86,11 @@ class TestTpchPlansValid:
             substrait_query:
                 Substrait query.
         """
-        config = sv.Config()
-        # Isthmus plan overrides
-        # ValueError: Error at plan: missing required protobuf field: version (code 1002)
-        config.override_diagnostic_level(1002, "info", "info")
-        # ValueError: Warning at plan.extension_uris[0].uri: did not attempt to resolve YAML:
-        # configured recursion limit for URI resolution has been reached
-        config.override_diagnostic_level(2001, "info", "info")
-        # Warning. not yet implemented: matching function calls with their definitions
-        config.override_diagnostic_level(1, "info", "info")
+        producer = IsthmusProducer()
+        producer.setup(self.db_connection, local_files, named_tables)
 
         try:
-            sv.check_plan_valid(substrait_query, config)
+            producer.produce_substrait(sql_query, validate=True)
         except BaseException as e:
             snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
             return
