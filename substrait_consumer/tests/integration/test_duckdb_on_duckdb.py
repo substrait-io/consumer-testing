@@ -61,7 +61,7 @@ def test_substrait_query(
 
     outcome_path = f"query_{tpch_num:02d}_outcome.txt"
 
-    # Convert the SQL into a substrait query plan and run the plan.
+    # Produce DuckDB plan from SQL query.
     try:
         proto_bytes = producer.produce_substrait(sql_query)
     except BaseException as e:
