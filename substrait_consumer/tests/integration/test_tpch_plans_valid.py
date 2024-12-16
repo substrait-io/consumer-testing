@@ -4,14 +4,10 @@ import duckdb
 import pytest
 from pytest_snapshot.plugin import Snapshot
 
-from substrait_consumer.functional.common import check_match
+from substrait_consumer.functional.common import substrait_producer_sql_test
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
-
-PLAN_SNAPSHOT_DIR = (
-    Path(__file__).parent / "queries" / "tpch_substrait_plans"
-)
 
 CONFIG_DIR = Path(__file__).parent.parent / "integration"
 TPCH_CONFIG_DIR = CONFIG_DIR / "tpch"
@@ -23,38 +19,29 @@ IDS = list((str(path[0]).removesuffix(".json") for path in TEST_CASE_PATHS))
 
 @pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
 @pytest.mark.usefixtures("prepare_tpch_parquet_data")
+@pytest.mark.produce_substrait_snapshot
 def test_isthmus_substrait_plan_generation(
     path: Path,
     snapshot: Snapshot,
+    record_property,
     db_con: duckdb.DuckDBPyConnection,
-) -> None:
-    """
-    Generate the substrait plans using Isthmus.
-    """
+):
     test_case = load_json(CONFIG_DIR / path)
-    test_name = test_case["test_name"]
     local_files = test_case["local_files"]
     named_tables = test_case["named_tables"]
-    sql_query, supported_producers = test_case["sql_query"]
-
-    assert "isthmus" in supported_producers
-
-    tpch_num = test_name.split("_")[-1].zfill(2)
-    snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
-
+    sql_query = test_case["sql_query"]
     producer = IsthmusProducer()
-    producer.setup(db_con, local_files, named_tables)
-
-    try:
-        substrait_query = producer.produce_substrait(sql_query)
-    except BaseException as e:
-        snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
-        return
-
-    match_result = check_match(
-        snapshot, str(substrait_query), f"query_{tpch_num}_plan.json"
+    substrait_producer_sql_test(
+        path,
+        snapshot,
+        record_property,
+        db_con,
+        local_files,
+        named_tables,
+        sql_query,
+        producer,
+        validate=False,
     )
-    snapshot.assert_match(str(match_result), f"query_{tpch_num}_outcome.txt")
 
 
 @pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)

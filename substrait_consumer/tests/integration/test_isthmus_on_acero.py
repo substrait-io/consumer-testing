@@ -8,7 +8,7 @@ from substrait_consumer.consumers.acero_consumer import AceroConsumer
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
-PLAN_DIR = Path(__file__).parent / "queries" / "tpch_substrait_plans"
+PLAN_DIR = Path(__file__).parent.parent / "functional" / "tpch"
 
 CONFIG_DIR = Path(__file__).parent.parent / "integration"
 TPCH_CONFIG_DIR = CONFIG_DIR / "tpch"
@@ -68,7 +68,12 @@ def test_isthmus_substrait_plan(
     outcome_path = f"query_{tpch_num:02d}_outcome.txt"
 
     # Load Isthmus plan from file.
-    substrait_plan_path = PLAN_DIR / f"query_{tpch_num:02d}_plan.json"
+    substrait_plan_path = (
+        PLAN_DIR
+        / f"q{tpch_num:02d}_snapshots"
+        / "IsthmusProducer"
+        / f"q{tpch_num:02d}_plan.json"
+    )
     with open(substrait_plan_path, "r") as f:
         proto_bytes = f.read()
 

@@ -21,9 +21,11 @@ FUNCTION_SNAPSHOT_DIR = (
 RELATION_SNAPSHOT_DIR = (
     Path(__file__).parent.parent / "tests" / "functional" / "relations"
 )
+TPCH_SNAPSHOT_DIR = Path(__file__).parent.parent / "tests" / "functional" / "tpch"
 SNAPSHOT_DIR = {
     "function": FUNCTION_SNAPSHOT_DIR,
     "relation": RELATION_SNAPSHOT_DIR,
+    "tpch": TPCH_SNAPSHOT_DIR,
 }
 
 
