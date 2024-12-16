@@ -43,7 +43,6 @@ class TestAceroConsumer:
         named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
-        sort_results: bool = False,
     ) -> None:
         """
         1.  Format the substrait_query by replacing the 'local_files' 'uri_file'
@@ -66,8 +65,6 @@ class TestAceroConsumer:
                 SQL query.
             substrait_query:
                 Substrait query.
-            sort_results:
-                Whether to sort the results before comparison.
         """
         tpch_num = test_name.split("_")[-1].zfill(2)
 
@@ -95,17 +92,6 @@ class TestAceroConsumer:
         col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
         exp_col_names = [x.lower() for x in duckdb_query_result_tb.column_names]
 
-        # Sort results by specified column names
-        if sort_results:
-            subtrait_sort_col = subtrait_query_result_tb.column_names[0]
-            subtrait_query_result_tb = arrow_sort_tb_values(
-                subtrait_query_result_tb, sortby=[subtrait_sort_col]
-            )
-            duckdb_sort_col = duckdb_query_result_tb.column_names[0]
-            duckdb_query_result_tb = arrow_sort_tb_values(
-                duckdb_query_result_tb, sortby=[duckdb_sort_col]
-            )
-
         # Verify results between substrait plan query and sql running against
         # duckdb are equal.
         outcome = {
@@ -123,7 +109,6 @@ class TestAceroConsumer:
         named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
-        sort_results: bool = False,
     ) -> None:
         """
         1.  Load all the parquet files into DuckDB as separate named_tables.
@@ -182,24 +167,3 @@ class TestAceroConsumer:
             "table": subtrait_query_result_tb == duckdb_sql_result_tb,
         }
         snapshot.assert_match(str(outcome), f"query_{tpch_num}_outcome.txt")
-
-
-def arrow_sort_tb_values(table: pa.Table, sortby: Iterable[str]) -> pa.Table:
-    """
-    Sort the pyarrow table by the given list of columns.
-
-    Parameters:
-        table:
-            Original pyarrow Table.
-        sortby:
-            Columns to sort the results by.
-
-    Returns:
-        Pyarrow Table sorted by given columns.
-
-    """
-    table_sorted_indexes = pa.compute.bottom_k_unstable(
-        table, sort_keys=sortby, k=len(table)
-    )
-    table_sorted = table.take(table_sorted_indexes)
-    return table_sorted

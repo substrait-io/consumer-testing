@@ -39,7 +39,6 @@ class TestDuckDBConsumer:
         named_tables: dict[str, str],
         sql_query: str,
         substrait_query: str,
-        sort_results: bool = False,
     ) -> None:
         """
         1.  Load all the parquet files into DuckDB as separate named_tables.
