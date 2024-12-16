@@ -102,6 +102,8 @@ class TestTpchPlansValid:
             snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
             return
 
+        snapshot.assert_match("True", f"{test_name}_outcome.txt")
+
     @custom_parametrization(TPCH_QUERY_TESTS)
     def test_duckdb_substrait_plans_valid(
         self,
@@ -146,3 +148,5 @@ class TestTpchPlansValid:
         except BaseException as e:
             snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
             return
+
+        snapshot.assert_match("True", f"{test_name}_outcome.txt")
