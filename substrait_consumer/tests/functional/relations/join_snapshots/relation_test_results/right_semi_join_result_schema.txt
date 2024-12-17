@@ -1,0 +1,2 @@
+o_orderkey: int64
+o_custkey: int64

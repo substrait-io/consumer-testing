@@ -30,7 +30,7 @@ df = pd.merge(df_all, df, how="left")
 
 # Compute desired output columns.
 df["producer-consumer"] = df.producer + "-" + df.consumer
-df.status = df.outcome.astype(str) == "True"
+df.status = df.data_outcome.astype(str) == "True"
 df = df.fillna("False")
 
 # Pivot such that each producer/consumer pair becomes one columns.

@@ -1,0 +1,2 @@
+a: int64
+abs_a: int64

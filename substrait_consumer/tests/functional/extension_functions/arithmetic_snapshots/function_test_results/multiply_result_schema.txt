@@ -1,0 +1,2 @@
+ps_partkey: int64
+multiply_key: int64

@@ -1,0 +1,3 @@
+ps_partkey: int64
+ps_suppkey: int64
+add_key: int64

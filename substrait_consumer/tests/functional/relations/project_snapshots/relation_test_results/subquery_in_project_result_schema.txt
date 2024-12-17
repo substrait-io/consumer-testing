@@ -1,0 +1,2 @@
+c_custkey: int64
+total_price: decimal128(38, 2)

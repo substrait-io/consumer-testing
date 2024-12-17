@@ -1,0 +1,2 @@
+n_name: string
+ltrim_n_name: string

@@ -1,0 +1,2 @@
+l_shipdate: date32[day]
+main.date_part('year', l_shipdate): int64

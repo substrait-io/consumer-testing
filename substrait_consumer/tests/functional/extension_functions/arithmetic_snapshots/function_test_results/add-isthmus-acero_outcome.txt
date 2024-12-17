@@ -1,1 +1,1 @@
-True
+{'schema': True, 'data': True}

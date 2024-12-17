@@ -1,0 +1,2 @@
+l_shipdate: date32[day]
+(l_shipdate + to_days(cast(trunc(cast(5 as double)) as integer))): timestamp[us]

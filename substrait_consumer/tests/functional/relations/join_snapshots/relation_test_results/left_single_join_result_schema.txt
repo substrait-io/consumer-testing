@@ -1,0 +1,6 @@
+c1key: int64
+c1name: string
+c1nationakey: int32
+c2key: int64
+c2name: string
+c2nationakey: int32

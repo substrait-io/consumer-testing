@@ -1,0 +1,1 @@
+<class 'duckdb.duckdb.ParserException'>

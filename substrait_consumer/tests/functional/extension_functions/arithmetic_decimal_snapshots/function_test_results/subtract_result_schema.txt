@@ -1,0 +1,3 @@
+l_tax: decimal128(15, 2)
+l_discount: decimal128(15, 2)
+subtract_key: decimal128(16, 2)

@@ -1,0 +1,2 @@
+l_discount: decimal128(15, 2)
+l_tax: decimal128(15, 2)

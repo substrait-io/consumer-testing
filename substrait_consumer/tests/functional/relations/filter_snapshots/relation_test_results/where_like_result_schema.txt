@@ -1,0 +1,2 @@
+l_shipinstruct: string
+l_orderkey: int64

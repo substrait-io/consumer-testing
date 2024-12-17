@@ -1,0 +1,3 @@
+l_commitdate: date32[day]
+l_receiptdate: date32[day]
+(l_commitdate <= l_receiptdate): bool
