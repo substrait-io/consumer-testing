@@ -74,6 +74,9 @@ def test_isthmus_substrait_plan(
         / "IsthmusProducer"
         / f"q{tpch_num:02d}_plan.json"
     )
+    if not substrait_plan_path.is_file():
+        pytest.skip(f"No substrait plan exists for {producer.name()}:{test_name}")
+
     with open(substrait_plan_path, "r") as f:
         proto_bytes = f.read()
 
