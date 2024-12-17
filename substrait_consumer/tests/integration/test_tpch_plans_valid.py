@@ -2,127 +2,135 @@ from pathlib import Path
 
 import duckdb
 import pytest
-
 from pytest_snapshot.plugin import Snapshot
 
-from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.functional.common import check_match
-from substrait_consumer.parametrization import custom_parametrization
+from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
-from .queries.tpch_test_cases import TPCH_QUERY_TESTS
 
 PLAN_SNAPSHOT_DIR = (
     Path(__file__).parent / "queries" / "tpch_substrait_plans"
 )
 
+CONFIG_DIR = Path(__file__).parent.parent / "integration"
+TPCH_CONFIG_DIR = CONFIG_DIR / "tpch"
+TEST_CASE_PATHS = list(
+    (path.relative_to(CONFIG_DIR),) for path in TPCH_CONFIG_DIR.rglob("*.json")
+)
+IDS = list((str(path[0]).removesuffix(".json") for path in TEST_CASE_PATHS))
 
-class TestTpchPlansValid:
+
+@pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
+@pytest.mark.usefixtures("prepare_tpch_parquet_data")
+def test_isthmus_substrait_plan_generation(
+    path: Path,
+    snapshot: Snapshot,
+    db_con: duckdb.DuckDBPyConnection,
+) -> None:
     """
-    Test Class for validating TPC-H substrait plans.
+    Generate the substrait plans using Isthmus.
     """
+    test_case = load_json(CONFIG_DIR / path)
+    test_name = test_case["test_name"]
+    local_files = test_case["local_files"]
+    named_tables = test_case["named_tables"]
+    sql_query, supported_producers = test_case["sql_query"]
 
-    @staticmethod
-    @pytest.fixture(autouse=True)
-    def setup_teardown_function(request):
-        cls = request.cls
-        cls.db_connection = duckdb.connect()
-        cls.db_connection.execute("INSTALL substrait")
-        cls.db_connection.execute("LOAD substrait")
-        cls.duckdb_consumer = DuckDBConsumer(cls.db_connection)
-        cls.duckdb_producer = DuckDBProducer(cls.db_connection)
+    assert "isthmus" in supported_producers
 
-        yield
+    tpch_num = test_name.split("_")[-1].zfill(2)
+    snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
 
-        cls.db_connection.close()
+    producer = IsthmusProducer()
+    producer.setup(db_con, local_files, named_tables)
 
-    @custom_parametrization(TPCH_QUERY_TESTS)
-    def test_isthmus_substrait_plan_generation(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        substrait_query: str,
-    ) -> None:
-        """
-        Generate the substrait plans using Isthmus.
-        """
-        tpch_num = test_name.split("_")[-1].zfill(2)
-        snapshot.snapshot_dir = PLAN_SNAPSHOT_DIR
+    try:
+        substrait_query = producer.produce_substrait(sql_query)
+    except BaseException as e:
+        snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
+        return
 
-        producer = IsthmusProducer()
-        producer.setup(self.db_connection, local_files, named_tables)
+    match_result = check_match(
+        snapshot, str(substrait_query), f"query_{tpch_num}_plan.json"
+    )
+    snapshot.assert_match(str(match_result), f"query_{tpch_num}_outcome.txt")
 
-        try:
-            substrait_query = producer.produce_substrait(sql_query)
-        except BaseException as e:
-            snapshot.assert_match(str(type(e)), f"query_{tpch_num}_outcome.txt")
-            return
 
-        match_result = check_match(
-            snapshot, str(substrait_query), f"query_{tpch_num}_plan.json"
-        )
-        snapshot.assert_match(str(match_result), f"query_{tpch_num}_outcome.txt")
+@pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
+@pytest.mark.usefixtures("prepare_tpch_parquet_data")
+def test_isthmus_substrait_plans_valid(
+    path: Path,
+    snapshot: Snapshot,
+    db_con: duckdb.DuckDBPyConnection,
+) -> None:
+    """
+    Run the Isthmus generated substrait plans through the substrait validator.
 
-    @custom_parametrization(TPCH_QUERY_TESTS)
-    def test_isthmus_substrait_plans_valid(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        substrait_query: str,
-    ) -> None:
-        """
-        Run the Isthmus generated substrait plans through the substrait validator.
+    Parameters:
+        substrait_query:
+            Substrait query.
+    """
+    test_case = load_json(CONFIG_DIR / path)
+    test_name = test_case["test_name"]
+    local_files = test_case["local_files"]
+    named_tables = test_case["named_tables"]
+    sql_query, supported_producers = test_case["sql_query"]
+    tpch_num = int(test_name.split("_")[-1])
 
-        Parameters:
-            substrait_query:
-                Substrait query.
-        """
-        producer = IsthmusProducer()
-        producer.setup(self.db_connection, local_files, named_tables)
+    assert "isthmus" in supported_producers
 
-        try:
-            producer.produce_substrait(sql_query, validate=True)
-        except BaseException as e:
-            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
-            return
+    snapshot.snapshot_dir = snapshot.snapshot_dir.parent / f"test_tpch_sql_{tpch_num}"
 
-        snapshot.assert_match("True", f"{test_name}_outcome.txt")
+    producer = IsthmusProducer()
+    producer.setup(db_con, local_files, named_tables)
 
-    @custom_parametrization(TPCH_QUERY_TESTS)
-    def test_duckdb_substrait_plans_valid(
-        self,
-        test_name: str,
-        snapshot: Snapshot,
-        local_files: dict[str, str],
-        named_tables: dict[str, str],
-        sql_query: str,
-        substrait_query: str,
-    ) -> None:
-        """
-        Run the Duckdb generated substrait plans through the substrait validator.
+    try:
+        producer.produce_substrait(sql_query, validate=True)
+    except BaseException as e:
+        snapshot.assert_match(str(type(e)), f"test_tpch_sql_{tpch_num}_outcome.txt")
+        return
 
-        Parameters:
-            local_files:
-                A `dict` mapping format argument names to local files paths.
-            named_tables:
-                A `dict` mapping table names to local file paths.
-            sql_query:
-                SQL query.
-        """
+    snapshot.assert_match("True", f"test_tpch_sql_{tpch_num}_outcome.txt")
 
-        # Format the sql query by inserting all the table names
-        self.duckdb_producer.setup(self.db_connection, local_files, named_tables)
 
-        try:
-            self.duckdb_producer.produce_substrait(sql_query, validate=True)
-        except BaseException as e:
-            snapshot.assert_match(str(type(e)), f"{test_name}_outcome.txt")
-            return
+@pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
+@pytest.mark.usefixtures("prepare_tpch_parquet_data")
+def test_duckdb_substrait_plans_valid(
+    path: Path,
+    snapshot: Snapshot,
+    db_con: duckdb.DuckDBPyConnection,
+) -> None:
+    """
+    Run the Duckdb generated substrait plans through the substrait validator.
 
-        snapshot.assert_match("True", f"{test_name}_outcome.txt")
+    Parameters:
+        local_files:
+            A `dict` mapping format argument names to local files paths.
+        named_tables:
+            A `dict` mapping table names to local file paths.
+        sql_query:
+            SQL query.
+    """
+    test_case = load_json(CONFIG_DIR / path)
+    test_name = test_case["test_name"]
+    local_files = test_case["local_files"]
+    named_tables = test_case["named_tables"]
+    sql_query, supported_producers = test_case["sql_query"]
+    tpch_num = int(test_name.split("_")[-1])
+
+    assert "duckdb" in supported_producers
+
+    snapshot.snapshot_dir = snapshot.snapshot_dir.parent / f"test_tpch_sql_{tpch_num}"
+
+    # Format the sql query by inserting all the table names
+    duckdb_producer = DuckDBProducer()
+    duckdb_producer.setup(db_con, local_files, named_tables)
+
+    try:
+        duckdb_producer.produce_substrait(sql_query, validate=True)
+    except BaseException as e:
+        snapshot.assert_match(str(type(e)), f"test_tpch_sql_{tpch_num}_outcome.txt")
+        return
+
+    snapshot.assert_match("True", f"test_tpch_sql_{tpch_num}_outcome.txt")

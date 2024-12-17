@@ -1,0 +1,16 @@
+{
+    "local_files": {},
+    "named_tables": {
+        "nation": "nation.parquet",
+        "partsupp": "partsupp.parquet",
+        "supplier": "supplier.parquet"
+    },
+    "sql_query": {
+        "producers": [
+            "duckdb",
+            "isthmus"
+        ],
+        "query_path": "q11.sql"
+    },
+    "test_name": "tpch_query_11"
+}
