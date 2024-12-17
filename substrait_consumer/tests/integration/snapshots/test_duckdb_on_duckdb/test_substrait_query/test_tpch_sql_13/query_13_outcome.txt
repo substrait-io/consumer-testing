@@ -1,1 +1,1 @@
-{'column_names': True, 'table': True}
+{'schema': True, 'data': True}
