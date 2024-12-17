@@ -8,6 +8,8 @@ from substrait_consumer.consumers.duckdb_consumer import DuckDBConsumer
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
+PLAN_DIR = Path(__file__).parent.parent / "functional" / "tpch"
+
 CONFIG_DIR = Path(__file__).parent.parent / "integration"
 TPCH_CONFIG_DIR = CONFIG_DIR / "tpch"
 TEST_CASE_PATHS = list(
@@ -61,12 +63,18 @@ def test_substrait_query(
 
     outcome_path = f"query_{tpch_num:02d}_outcome.txt"
 
-    # Produce DuckDB plan from SQL query.
-    try:
-        proto_bytes = producer.produce_substrait(sql_query)
-    except BaseException as e:
-        snapshot.assert_match(str(type(e)), outcome_path)
-        return
+    # Load DuckDB plan from file.
+    substrait_plan_path = (
+        PLAN_DIR
+        / f"q{tpch_num:02d}_snapshots"
+        / type(producer).__name__
+        / f"q{tpch_num:02d}_plan.json"
+    )
+    if not substrait_plan_path.is_file():
+        pytest.skip(f"No substrait plan exists for {producer.name()}:{test_name}")
+
+    with open(substrait_plan_path, "r") as f:
+        proto_bytes = f.read()
 
     try:
         subtrait_query_result_tb = consumer.run_substrait_query(proto_bytes)
