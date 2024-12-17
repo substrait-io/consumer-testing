@@ -124,8 +124,10 @@ def generate_snapshot_results(
     record_property("group", group)
     record_property("name", name)
 
-    outcome_path = f"{name}_outcome.txt"
-    result_path = f"{name}_result.txt"
+    outcome_path = f"{name}-generate-outcome.txt"
+    data_path = f"{name}_result_data.txt"
+    schema_path = f"{name}_result_schema.txt"
+
     snapshot.snapshot_dir = (
         SNAPSHOT_DIR[category] / (group + "_snapshots") / (category + "_test_results")
     )
@@ -138,20 +140,29 @@ def generate_snapshot_results(
         return
 
     if duckdb_result is None:
+        str_result_schema = "(no result)"
         str_result_data = "(no result)"
     else:
         duckdb_result = duckdb_result.rename_columns(
             list(map(str.lower, duckdb_result.column_names))
         )
+        str_result_schema = str(duckdb_result.schema)
         duckdb_result_data = []
         for column in duckdb_result.columns:
             duckdb_result_data.extend(column.data)
             duckdb_result_data.extend([" "])
         str_result_data = "\n".join(map(str, duckdb_result_data))
 
-    match_result = check_match(snapshot, str_result_data, result_path)
-    record_property("outcome", str(match_result))
-    snapshot.assert_match(str(match_result), outcome_path)
+    schema_match_result = check_match(snapshot, str_result_schema, schema_path)
+    data_match_result = check_match(snapshot, str_result_data, data_path)
+
+    record_property("schema_outcome", str(schema_match_result))
+    record_property("data_outcome", str(data_match_result))
+    outcome = {
+        "schema": schema_match_result,
+        "data": data_match_result,
+    }
+    snapshot.assert_match(str(outcome), outcome_path)
 
 
 def substrait_producer_ibis_test(category: str, group: str) -> None:
@@ -354,7 +365,8 @@ def substrait_consumer_sql_test(
         / f"{name}_plan.json"
     )
     outcome_path = f"{name}-{producer.name()}-{consumer.name()}_outcome.txt"
-    result_path = f"{name}_result.txt"
+    data_path = f"{name}_result_data.txt"
+    schema_path = f"{name}_result_schema.txt"
 
     if not plan_path.is_file():
         pytest.skip(f"No substrait plan exists for {producer.name()}:{name}")
@@ -370,15 +382,24 @@ def substrait_consumer_sql_test(
 
     actual_result = actual_result.rename_columns(
         list(map(str.lower, actual_result.column_names))
-    ).columns
-    result_list = []
-    for column in actual_result:
-        result_list.extend(column.data)
-        result_list.extend([" "])
-    str_result = "\n".join(map(str, result_list))
-    match_result = check_match(snapshot, str_result, result_path)
-    record_property("outcome", str(match_result))
-    snapshot.assert_match(str(match_result), outcome_path)
+    )
+
+    str_schema = str(actual_result.schema)
+    schema_match_result = check_match(snapshot, str_schema, schema_path)
+    data_list = []
+    for column in actual_result.columns:
+        data_list.extend(column.data)
+        data_list.extend([" "])
+    str_data = "\n".join(map(str, data_list))
+    data_match_result = check_match(snapshot, str_data, data_path)
+
+    record_property("schema_outcome", str(schema_match_result))
+    record_property("data_outcome", str(data_match_result))
+    outcome = {
+        "schema": schema_match_result,
+        "data": data_match_result,
+    }
+    snapshot.assert_match(str(outcome), outcome_path)
 
 
 def load_custom_duckdb_table(db_connection):
