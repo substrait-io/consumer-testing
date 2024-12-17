@@ -1,0 +1,2 @@
+n_name: string
+repeated_n_name: string

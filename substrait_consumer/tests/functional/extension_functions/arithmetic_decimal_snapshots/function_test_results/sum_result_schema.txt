@@ -1,0 +1,1 @@
+sum_extendedprice: decimal128(38, 2)

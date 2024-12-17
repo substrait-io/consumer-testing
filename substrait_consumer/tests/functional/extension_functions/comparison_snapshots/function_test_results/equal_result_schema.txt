@@ -1,0 +1,2 @@
+ps_availqty: int64
+ps_partkey: int64

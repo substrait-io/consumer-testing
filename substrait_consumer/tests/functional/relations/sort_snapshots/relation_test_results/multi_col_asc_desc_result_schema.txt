@@ -1,0 +1,2 @@
+ps_supplycost: decimal128(15, 2)
+ps_availqty: int64

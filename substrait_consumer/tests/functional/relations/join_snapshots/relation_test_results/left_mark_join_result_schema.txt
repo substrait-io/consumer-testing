@@ -1,0 +1,3 @@
+c_custkey: int64
+c_name: string
+mark_status: string

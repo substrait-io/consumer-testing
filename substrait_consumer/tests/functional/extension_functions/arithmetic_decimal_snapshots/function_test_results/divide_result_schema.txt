@@ -1,0 +1,3 @@
+l_tax: decimal128(15, 2)
+l_extendedprice: decimal128(15, 2)
+divide_key: double

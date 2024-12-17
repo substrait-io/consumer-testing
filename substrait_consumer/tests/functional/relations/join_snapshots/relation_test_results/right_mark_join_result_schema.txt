@@ -1,0 +1,3 @@
+o_orderkey: int64
+o_custkey: int64
+mark_status: string

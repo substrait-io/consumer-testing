@@ -1,0 +1,2 @@
+n_name: string
+string_agg(n_name, ','): string

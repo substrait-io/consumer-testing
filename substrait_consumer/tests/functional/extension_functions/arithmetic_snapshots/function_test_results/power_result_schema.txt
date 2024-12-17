@@ -1,0 +1,2 @@
+ps_partkey: int64
+power_key: double

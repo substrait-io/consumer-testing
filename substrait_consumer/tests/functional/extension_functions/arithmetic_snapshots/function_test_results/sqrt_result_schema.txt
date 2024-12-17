@@ -1,0 +1,2 @@
+ps_partkey: int64
+sqrt_key: double

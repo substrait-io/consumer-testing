@@ -1,0 +1,2 @@
+l_extendedprice: decimal128(15, 2)
+round_extendedprice: double

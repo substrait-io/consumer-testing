@@ -1,0 +1,1 @@
+ps_availqty: int64

@@ -1,0 +1,1 @@
+avg_extendedprice: double

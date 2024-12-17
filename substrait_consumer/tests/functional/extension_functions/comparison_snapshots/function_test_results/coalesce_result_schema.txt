@@ -1,0 +1,1 @@
+coalesce(null, null, 'test_string'): string

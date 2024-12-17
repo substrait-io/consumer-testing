@@ -1,0 +1,1 @@
+approx_distinct(lineitem.l_comment): uint64

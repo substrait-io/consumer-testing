@@ -1,0 +1,2 @@
+n_name: string
+bit_length_n_name: int64

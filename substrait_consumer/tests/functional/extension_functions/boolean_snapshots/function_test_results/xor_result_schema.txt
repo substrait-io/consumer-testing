@@ -1,0 +1,3 @@
+a: int64
+b: int64
+xor_a_b: int64

@@ -1,0 +1,2 @@
+o_comment: string
+uppercase_o_comment: string

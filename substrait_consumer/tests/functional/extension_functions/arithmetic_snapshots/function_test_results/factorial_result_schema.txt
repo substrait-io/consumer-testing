@@ -1,0 +1,2 @@
+n_nationkey: int32
+factorial_key: decimal128(38, 0)

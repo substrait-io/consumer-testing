@@ -1,0 +1,1 @@
+(to_hours(cast(trunc(cast(1 as double)) as bigint)) + to_hours(cast(trunc(cast(5 as double)) as bigint))): month_day_nano_interval

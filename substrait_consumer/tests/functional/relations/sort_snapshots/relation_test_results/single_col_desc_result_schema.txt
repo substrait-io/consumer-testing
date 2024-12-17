@@ -1,0 +1,1 @@
+ps_supplycost: decimal128(15, 2)

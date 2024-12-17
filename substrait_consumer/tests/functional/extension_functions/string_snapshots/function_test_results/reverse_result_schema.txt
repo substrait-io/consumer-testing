@@ -1,0 +1,2 @@
+n_name: string
+reversed_n_name: string
