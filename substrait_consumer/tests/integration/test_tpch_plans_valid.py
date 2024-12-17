@@ -4,7 +4,10 @@ import duckdb
 import pytest
 from pytest_snapshot.plugin import Snapshot
 
-from substrait_consumer.functional.common import substrait_producer_sql_test
+from substrait_consumer.functional.common import (
+    substrait_producer_sql_test,
+    generate_snapshot_results,
+)
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
@@ -69,4 +72,27 @@ def test_substrait_plans_valid(
         sql_query,
         producer,
         validate=True,
+    )
+
+
+@pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
+@pytest.mark.usefixtures("prepare_tpch_parquet_data")
+def test_generate_snapshot_results(
+    path: Path,
+    snapshot: Snapshot,
+    record_property,
+    db_con: duckdb.DuckDBPyConnection,
+):
+    test_case = load_json(CONFIG_DIR / path)
+    local_files = test_case["local_files"]
+    named_tables = test_case["named_tables"]
+    sql_query = test_case["sql_query"]
+    generate_snapshot_results(
+        path,
+        snapshot,
+        record_property,
+        db_con,
+        local_files,
+        named_tables,
+        sql_query,
     )

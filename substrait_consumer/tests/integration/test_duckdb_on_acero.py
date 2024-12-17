@@ -70,29 +70,6 @@ def test_substrait_query(
     data_path = f"q{tpch_num:02d}_result_data.txt"
     schema_path = f"q{tpch_num:02d}_result_schema.txt"
 
-    # Calculate results to verify against by running the SQL query on DuckDB
-    try:
-        duckdb_result = producer.run_sql_query(sql_query)
-    except BaseException as e:
-        snapshot.assert_match(str(type(e)), outcome_path)
-        return
-
-    duckdb_result = duckdb_result.rename_columns(
-        list(map(str.lower, duckdb_result.column_names))
-    )
-    str_result_schema = str(duckdb_result.schema)
-    duckdb_result_data = []
-    for column in duckdb_result.columns:
-        duckdb_result_data.extend(column.data)
-        duckdb_result_data.extend([" "])
-    str_result_data = "\n".join(map(str, duckdb_result_data))
-
-    schema_match_result = check_match(snapshot, str_result_schema, schema_path)
-    data_match_result = check_match(snapshot, str_result_data, data_path)
-
-    assert schema_match_result
-    assert data_match_result
-
     # Load DuckDB plan from file.
     substrait_plan_path = (
         PLAN_DIR

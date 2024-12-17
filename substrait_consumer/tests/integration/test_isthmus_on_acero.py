@@ -74,29 +74,6 @@ def test_isthmus_substrait_plan(
     data_path = f"q{tpch_num:02d}_result_data.txt"
     schema_path = f"q{tpch_num:02d}_result_schema.txt"
 
-    # Calculate results to verify against by running the SQL query on DuckDB
-    try:
-        consumer_result = producer.run_sql_query(sql_query)
-    except BaseException as e:
-        snapshot.assert_match(str(type(e)), outcome_path)
-        return
-
-    consumer_result = consumer_result.rename_columns(
-        list(map(str.lower, consumer_result.column_names))
-    )
-    str_result_schema = str(consumer_result.schema)
-    consumer_result_data = []
-    for column in consumer_result.columns:
-        consumer_result_data.extend(column.data)
-        consumer_result_data.extend([" "])
-    str_result_data = "\n".join(map(str, consumer_result_data))
-
-    schema_match_result = check_match(snapshot, str_result_schema, schema_path)
-    data_match_result = check_match(snapshot, str_result_data, data_path)
-
-    assert schema_match_result
-    assert data_match_result
-
     # Load Isthmus plan from file.
     substrait_plan_path = (
         PLAN_DIR
