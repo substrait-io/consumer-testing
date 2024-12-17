@@ -76,20 +76,20 @@ def test_isthmus_substrait_plan(
 
     # Calculate results to verify against by running the SQL query on DuckDB
     try:
-        duckdb_result = producer.run_sql_query(sql_query)
+        consumer_result = producer.run_sql_query(sql_query)
     except BaseException as e:
         snapshot.assert_match(str(type(e)), outcome_path)
         return
 
-    duckdb_result = duckdb_result.rename_columns(
-        list(map(str.lower, duckdb_result.column_names))
+    consumer_result = consumer_result.rename_columns(
+        list(map(str.lower, consumer_result.column_names))
     )
-    str_result_schema = str(duckdb_result.schema)
-    duckdb_result_data = []
-    for column in duckdb_result.columns:
-        duckdb_result_data.extend(column.data)
-        duckdb_result_data.extend([" "])
-    str_result_data = "\n".join(map(str, duckdb_result_data))
+    str_result_schema = str(consumer_result.schema)
+    consumer_result_data = []
+    for column in consumer_result.columns:
+        consumer_result_data.extend(column.data)
+        consumer_result_data.extend([" "])
+    str_result_data = "\n".join(map(str, consumer_result_data))
 
     schema_match_result = check_match(snapshot, str_result_schema, schema_path)
     data_match_result = check_match(snapshot, str_result_data, data_path)
@@ -111,18 +111,28 @@ def test_isthmus_substrait_plan(
         proto_bytes = f.read()
 
     try:
-        subtrait_query_result_tb = consumer.run_substrait_query(proto_bytes)
+        consumer_result = consumer.run_substrait_query(proto_bytes)
     except BaseException as e:
         snapshot.assert_match(str(type(e)), outcome_path)
         return
 
-    col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
-    exp_col_names = [x.lower() for x in duckdb_result.column_names]
+    consumer_result = consumer_result.rename_columns(
+        list(map(str.lower, consumer_result.column_names))
+    )
+    str_result_schema = str(consumer_result.schema)
+    consumer_result_data = []
+    for column in consumer_result.columns:
+        consumer_result_data.extend(column.data)
+        consumer_result_data.extend([" "])
+    str_result_data = "\n".join(map(str, consumer_result_data))
+
+    schema_match_result = check_match(snapshot, str_result_schema, schema_path)
+    data_match_result = check_match(snapshot, str_result_data, data_path)
 
     # Verify results between substrait plan query and sql running against
     # duckdb are equal.
     outcome = {
-        "schema": col_names == exp_col_names,
-        "data": subtrait_query_result_tb == duckdb_result,
+        "schema": schema_match_result,
+        "data": data_match_result,
     }
     snapshot.assert_match(str(outcome), outcome_path)
