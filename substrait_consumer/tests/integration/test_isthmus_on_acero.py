@@ -99,7 +99,7 @@ def test_isthmus_substrait_plan(
     # Verify results between substrait plan query and sql running against
     # duckdb are equal.
     outcome = {
-        "column_names": col_names == exp_col_names,
-        "table": subtrait_query_result_tb == duckdb_sql_result_tb,
+        "schema": col_names == exp_col_names,
+        "data": subtrait_query_result_tb == duckdb_sql_result_tb,
     }
     snapshot.assert_match(str(outcome), outcome_path)
