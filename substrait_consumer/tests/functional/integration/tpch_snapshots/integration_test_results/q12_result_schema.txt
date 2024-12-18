@@ -1,0 +1,3 @@
+l_shipmode: string
+high_line_count: decimal128(38, 0)
+low_line_count: decimal128(38, 0)

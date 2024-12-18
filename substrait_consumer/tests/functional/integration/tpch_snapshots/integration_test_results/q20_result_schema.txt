@@ -1,0 +1,2 @@
+s_name: string
+s_address: string

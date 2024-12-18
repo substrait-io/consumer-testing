@@ -1,0 +1,8 @@
+c_custkey: int64
+c_name: string
+revenue: decimal128(38, 4)
+c_acctbal: decimal128(15, 2)
+n_name: string
+c_address: string
+c_phone: string
+c_comment: string

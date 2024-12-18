@@ -1,0 +1,4 @@
+l_orderkey: int64
+revenue: decimal128(38, 4)
+o_orderdate: date32[day]
+o_shippriority: int32

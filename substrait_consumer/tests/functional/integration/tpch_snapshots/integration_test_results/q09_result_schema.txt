@@ -1,0 +1,3 @@
+nation: string
+o_year: int64
+sum_profit: decimal128(38, 4)

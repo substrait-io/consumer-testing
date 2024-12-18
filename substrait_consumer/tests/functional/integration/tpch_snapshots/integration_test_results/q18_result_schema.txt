@@ -1,0 +1,6 @@
+c_name: string
+c_custkey: int64
+o_orderkey: int64
+o_orderdate: date32[day]
+o_totalprice: decimal128(15, 2)
+sum(l_quantity): decimal128(38, 2)
