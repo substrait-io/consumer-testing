@@ -9,8 +9,8 @@ from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 
-CONFIG_DIR = Path(__file__).parent.parent / "integration"
-TPCH_CONFIG_DIR = CONFIG_DIR / "tpch"
+CONFIG_DIR = Path(__file__).parent.parent
+TPCH_CONFIG_DIR = CONFIG_DIR / "integration" / "tpch"
 TEST_CASE_PATHS = list(
     (path.relative_to(CONFIG_DIR),) for path in TPCH_CONFIG_DIR.rglob("*.json")
 )
