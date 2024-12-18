@@ -1,1 +1,1 @@
-c_nationkey: int32
+n_nationkey: int32

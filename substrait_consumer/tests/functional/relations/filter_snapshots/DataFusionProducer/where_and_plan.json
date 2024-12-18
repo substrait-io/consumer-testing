@@ -1,0 +1,131 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "equal"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "and"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "filter": {
+            "input": {
+              "read": {
+                "baseSchema": {
+                  "names": [
+                    "l_orderkey",
+                    "l_partkey",
+                    "l_suppkey",
+                    "l_linenumber",
+                    "l_quantity",
+                    "l_extendedprice",
+                    "l_discount",
+                    "l_tax",
+                    "l_returnflag",
+                    "l_linestatus",
+                    "l_shipdate",
+                    "l_commitdate",
+                    "l_receiptdate",
+                    "l_shipinstruct",
+                    "l_shipmode",
+                    "l_comment"
+                  ]
+                },
+                "projection": {
+                  "select": {
+                    "structItems": [
+                      {},
+                      {
+                        "field": 13
+                      }
+                    ]
+                  }
+                },
+                "namedTable": {
+                  "names": [
+                    "lineitem"
+                  ]
+                }
+              }
+            },
+            "condition": {
+              "scalarFunction": {
+                "functionReference": 1,
+                "arguments": [
+                  {
+                    "value": {
+                      "scalarFunction": {
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "i64": "2"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "value": {
+                      "scalarFunction": {
+                        "arguments": [
+                          {
+                            "value": {
+                              "selection": {
+                                "directReference": {
+                                  "structField": {
+                                    "field": 1
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": {
+                              "literal": {
+                                "string": "TAKE BACK RETURN"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "names": [
+          "l_orderkey",
+          "l_shipinstruct"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

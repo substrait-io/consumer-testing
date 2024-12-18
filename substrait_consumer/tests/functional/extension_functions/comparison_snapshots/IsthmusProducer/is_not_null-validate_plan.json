@@ -1,0 +1,99 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_comparison.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "name": "is_not_null:any"
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [4]
+            }
+          },
+          "input": {
+            "filter": {
+              "common": {
+                "direct": {
+                }
+              },
+              "input": {
+                "read": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "baseSchema": {
+                    "names": ["A", "B", "C", "D"],
+                    "struct": {
+                      "types": [{
+                        "i32": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i32": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "bool": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "bool": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "namedTable": {
+                    "names": ["T"]
+                  }
+                }
+              },
+              "condition": {
+                "scalarFunction": {
+                  "outputType": {
+                    "bool": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          },
+          "expressions": [{
+            "selection": {
+              "directReference": {
+                "structField": {
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }]
+        }
+      },
+      "names": ["A"]
+    }
+  }]
+}

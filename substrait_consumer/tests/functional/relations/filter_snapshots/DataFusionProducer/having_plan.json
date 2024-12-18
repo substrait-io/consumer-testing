@@ -1,0 +1,147 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "count"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "gt"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "sort": {
+            "input": {
+              "filter": {
+                "input": {
+                  "aggregate": {
+                    "input": {
+                      "read": {
+                        "baseSchema": {
+                          "names": [
+                            "l_orderkey",
+                            "l_partkey",
+                            "l_suppkey",
+                            "l_linenumber",
+                            "l_quantity",
+                            "l_extendedprice",
+                            "l_discount",
+                            "l_tax",
+                            "l_returnflag",
+                            "l_linestatus",
+                            "l_shipdate",
+                            "l_commitdate",
+                            "l_receiptdate",
+                            "l_shipinstruct",
+                            "l_shipmode",
+                            "l_comment"
+                          ]
+                        },
+                        "projection": {
+                          "select": {
+                            "structItems": [
+                              {
+                                "field": 4
+                              }
+                            ]
+                          }
+                        },
+                        "namedTable": {
+                          "names": [
+                            "lineitem"
+                          ]
+                        }
+                      }
+                    },
+                    "groupings": [
+                      {
+                        "groupingExpressions": [
+                          {
+                            "selection": {
+                              "directReference": {
+                                "structField": {}
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "measures": [
+                      {
+                        "measure": {
+                          "invocation": "AGGREGATION_INVOCATION_ALL",
+                          "arguments": [
+                            {
+                              "value": {
+                                "literal": {
+                                  "i64": "1"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "condition": {
+                  "scalarFunction": {
+                    "functionReference": 1,
+                    "arguments": [
+                      {
+                        "value": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {
+                                "field": 1
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "value": {
+                          "literal": {
+                            "i64": "12100"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    }
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              }
+            ]
+          }
+        },
+        "names": [
+          "l_quantity",
+          "count(*)"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

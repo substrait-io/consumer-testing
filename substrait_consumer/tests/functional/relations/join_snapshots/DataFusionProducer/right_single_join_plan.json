@@ -1,0 +1,239 @@
+{
+  "extensions": [
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "name": "not_equal"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 1,
+        "name": "equal"
+      }
+    },
+    {
+      "extensionFunction": {
+        "extensionUriReference": 4294967295,
+        "functionAnchor": 2,
+        "name": "and"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "project": {
+            "input": {
+              "join": {
+                "left": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "c_custkey",
+                        "c_name",
+                        "c_address",
+                        "c_nationkey",
+                        "c_phone",
+                        "c_acctbal",
+                        "c_mktsegment",
+                        "c_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {},
+                          {
+                            "field": 1
+                          },
+                          {
+                            "field": 3
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "customer"
+                      ]
+                    }
+                  }
+                },
+                "right": {
+                  "read": {
+                    "baseSchema": {
+                      "names": [
+                        "c_custkey",
+                        "c_name",
+                        "c_address",
+                        "c_nationkey",
+                        "c_phone",
+                        "c_acctbal",
+                        "c_mktsegment",
+                        "c_comment"
+                      ]
+                    },
+                    "projection": {
+                      "select": {
+                        "structItems": [
+                          {},
+                          {
+                            "field": 1
+                          },
+                          {
+                            "field": 3
+                          }
+                        ]
+                      }
+                    },
+                    "namedTable": {
+                      "names": [
+                        "customer"
+                      ]
+                    }
+                  }
+                },
+                "expression": {
+                  "scalarFunction": {
+                    "functionReference": 2,
+                    "arguments": [
+                      {
+                        "value": {
+                          "scalarFunction": {
+                            "functionReference": 1,
+                            "arguments": [
+                              {
+                                "value": {
+                                  "selection": {
+                                    "directReference": {
+                                      "structField": {
+                                        "field": 2
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "value": {
+                                  "selection": {
+                                    "directReference": {
+                                      "structField": {
+                                        "field": 5
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "value": {
+                          "scalarFunction": {
+                            "arguments": [
+                              {
+                                "value": {
+                                  "selection": {
+                                    "directReference": {
+                                      "structField": {}
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "value": {
+                                  "selection": {
+                                    "directReference": {
+                                      "structField": {
+                                        "field": 3
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "type": "JOIN_TYPE_RIGHT"
+              }
+            },
+            "expressions": [
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {}
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 2
+                    }
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 3
+                    }
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 4
+                    }
+                  }
+                }
+              },
+              {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 5
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "names": [
+          "c1key",
+          "c1name",
+          "c1nationakey",
+          "c2key",
+          "c2name",
+          "c2nationakey"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

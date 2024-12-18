@@ -1,1 +1,1 @@
-(avg(o_totalprice) * 10): double
+avg(orders.o_totalprice) * int64(10): double
