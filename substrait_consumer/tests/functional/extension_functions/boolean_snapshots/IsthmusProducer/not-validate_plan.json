@@ -1,0 +1,61 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [4]
+            }
+          },
+          "input": {
+            "read": {
+              "common": {
+                "direct": {
+                }
+              },
+              "baseSchema": {
+                "names": ["A", "B", "C", "D"],
+                "struct": {
+                  "types": [{
+                    "i32": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "i32": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "bool": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "bool": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }],
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "namedTable": {
+                "names": ["T"]
+              }
+            }
+          },
+          "expressions": [{
+            "selection": {
+              "directReference": {
+                "structField": {
+                  "field": 2
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }]
+        }
+      },
+      "names": ["C"]
+    }
+  }]
+}

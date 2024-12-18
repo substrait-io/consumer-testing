@@ -1,0 +1,44 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "read": {
+            "baseSchema": {
+              "names": [
+                "column1"
+              ],
+              "struct": {
+                "types": [
+                  {
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }
+                ]
+              }
+            },
+            "virtualTable": {
+              "values": [
+                {
+                  "fields": [
+                    {
+                      "i64": "10"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "names": [
+          "column1"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 51,
+    "producer": "datafusion"
+  }
+}

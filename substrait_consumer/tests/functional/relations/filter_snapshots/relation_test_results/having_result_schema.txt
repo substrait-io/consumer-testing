@@ -1,2 +1,2 @@
 l_quantity: decimal128(15, 2)
-count_star(): int64
+count(*): int64

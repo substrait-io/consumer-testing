@@ -1,0 +1,195 @@
+{
+  "relations": [
+    {
+      "root": {
+        "input": {
+          "sort": {
+            "input": {
+              "set": {
+                "inputs": [
+                  {
+                    "project": {
+                      "input": {
+                        "read": {
+                          "baseSchema": {
+                            "names": [
+                              "c_custkey",
+                              "c_name",
+                              "c_address",
+                              "c_nationkey",
+                              "c_phone",
+                              "c_acctbal",
+                              "c_mktsegment",
+                              "c_comment"
+                            ],
+                            "struct": {
+                              "types": [
+                                {
+                                  "i64": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "i32": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "decimal": {
+                                    "scale": 2,
+                                    "precision": 15,
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                }
+                              ],
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          "projection": {
+                            "select": {
+                              "structItems": [
+                                {
+                                  "field": 3
+                                }
+                              ]
+                            },
+                            "maintainSingularStruct": true
+                          },
+                          "namedTable": {
+                            "names": [
+                              "customer"
+                            ]
+                          }
+                        }
+                      },
+                      "expressions": [
+                        {
+                          "selection": {
+                            "directReference": {
+                              "structField": {}
+                            },
+                            "rootReference": {}
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "project": {
+                      "input": {
+                        "read": {
+                          "baseSchema": {
+                            "names": [
+                              "n_nationkey",
+                              "n_name",
+                              "n_regionkey",
+                              "n_comment"
+                            ],
+                            "struct": {
+                              "types": [
+                                {
+                                  "i32": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "i32": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                },
+                                {
+                                  "string": {
+                                    "nullability": "NULLABILITY_NULLABLE"
+                                  }
+                                }
+                              ],
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          },
+                          "projection": {
+                            "select": {
+                              "structItems": [
+                                {}
+                              ]
+                            },
+                            "maintainSingularStruct": true
+                          },
+                          "namedTable": {
+                            "names": [
+                              "nation"
+                            ]
+                          }
+                        }
+                      },
+                      "expressions": [
+                        {
+                          "selection": {
+                            "directReference": {
+                              "structField": {}
+                            },
+                            "rootReference": {}
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "op": "SET_OP_UNION_ALL"
+              }
+            },
+            "sorts": [
+              {
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {}
+                    },
+                    "rootReference": {}
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_LAST"
+              }
+            ]
+          }
+        },
+        "names": [
+          "n_nationkey"
+        ]
+      }
+    }
+  ],
+  "version": {
+    "minorNumber": 53,
+    "producer": "DuckDB"
+  }
+}
