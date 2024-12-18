@@ -7,7 +7,7 @@ from pytest_snapshot.plugin import Snapshot
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.functional.common import substrait_producer_sql_test
 
-CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "functional"
+CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "testdata"
 FUNCTION_CONFIG_DIR = CONFIG_DIR / "function"
 TEST_CASE_PATHS = list(
     (path.relative_to(CONFIG_DIR),) for path in FUNCTION_CONFIG_DIR.rglob("*.json")

@@ -11,7 +11,7 @@ from substrait_consumer.functional.common import (
 )
 from substrait_consumer.functional.utils import load_json
 
-CONFIG_DIR = Path(__file__).parent.parent
+CONFIG_DIR = Path(__file__).parent.parent.parent / "testdata"
 TPCH_CONFIG_DIR = CONFIG_DIR / "integration" / "tpch"
 TEST_CASE_PATHS = list(
     (path.relative_to(CONFIG_DIR),) for path in TPCH_CONFIG_DIR.rglob("*.json")

@@ -9,7 +9,7 @@ from substrait_consumer.functional.common import substrait_consumer_sql_test
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
 
-CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "functional"
+CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "testdata"
 RELATION_CONFIG_DIR = CONFIG_DIR / "relation"
 TEST_CASE_PATHS = list(
     (path.relative_to(CONFIG_DIR),) for path in RELATION_CONFIG_DIR.rglob("*.json")
