@@ -1,0 +1,10 @@
+l_returnflag: string
+l_linestatus: string
+sum_qty: decimal128(38, 2)
+sum_base_price: decimal128(38, 2)
+sum_disc_price: decimal128(38, 4)
+sum_charge: decimal128(38, 6)
+avg_qty: double
+avg_price: double
+avg_disc: double
+count_order: int64

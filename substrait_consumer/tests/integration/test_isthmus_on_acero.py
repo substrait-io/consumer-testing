@@ -5,6 +5,7 @@ import pytest
 from pytest_snapshot.plugin import Snapshot
 
 from substrait_consumer.consumers.acero_consumer import AceroConsumer
+from substrait_consumer.functional.common import check_match
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 
@@ -16,6 +17,10 @@ TEST_CASE_PATHS = list(
     (path.relative_to(CONFIG_DIR),) for path in TPCH_CONFIG_DIR.rglob("*.json")
 )
 IDS = list((str(path[0]).removesuffix(".json") for path in TEST_CASE_PATHS))
+
+TPCH_SNAPSHOT_DIR = (
+    Path(__file__).parent.parent / "functional" / "integration" / "tpch_snapshots"
+)
 
 
 @pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
@@ -57,7 +62,7 @@ def test_isthmus_substrait_plan(
 
     tpch_num = int(test_name.split("_")[-1])
 
-    snapshot.snapshot_dir = snapshot.snapshot_dir.parent / f"test_tpch_sql_{tpch_num}"
+    snapshot.snapshot_dir = TPCH_SNAPSHOT_DIR / "integration_test_results"
 
     consumer = AceroConsumer()
     producer = DuckDBProducer()
@@ -65,7 +70,32 @@ def test_isthmus_substrait_plan(
     consumer.setup(db_con, local_files, named_tables)
     producer.setup(db_con, local_files, named_tables)
 
-    outcome_path = f"query_{tpch_num:02d}_outcome.txt"
+    outcome_path = f"q{tpch_num:02d}-isthmus-{consumer.name()}_outcome.txt"
+    data_path = f"q{tpch_num:02d}_result_data.txt"
+    schema_path = f"q{tpch_num:02d}_result_schema.txt"
+
+    # Calculate results to verify against by running the SQL query on DuckDB
+    try:
+        duckdb_result = producer.run_sql_query(sql_query)
+    except BaseException as e:
+        snapshot.assert_match(str(type(e)), outcome_path)
+        return
+
+    duckdb_result = duckdb_result.rename_columns(
+        list(map(str.lower, duckdb_result.column_names))
+    )
+    str_result_schema = str(duckdb_result.schema)
+    duckdb_result_data = []
+    for column in duckdb_result.columns:
+        duckdb_result_data.extend(column.data)
+        duckdb_result_data.extend([" "])
+    str_result_data = "\n".join(map(str, duckdb_result_data))
+
+    schema_match_result = check_match(snapshot, str_result_schema, schema_path)
+    data_match_result = check_match(snapshot, str_result_data, data_path)
+
+    assert schema_match_result
+    assert data_match_result
 
     # Load Isthmus plan from file.
     substrait_plan_path = (
@@ -86,20 +116,13 @@ def test_isthmus_substrait_plan(
         snapshot.assert_match(str(type(e)), outcome_path)
         return
 
-    # Calculate results to verify against by running the SQL query on DuckDB
-    try:
-        duckdb_sql_result_tb = producer.run_sql_query(sql_query)
-    except BaseException as e:
-        snapshot.assert_match(str(type(e)), outcome_path)
-        return
-
     col_names = [x.lower() for x in subtrait_query_result_tb.column_names]
-    exp_col_names = [x.lower() for x in duckdb_sql_result_tb.column_names]
+    exp_col_names = [x.lower() for x in duckdb_result.column_names]
 
     # Verify results between substrait plan query and sql running against
     # duckdb are equal.
     outcome = {
         "schema": col_names == exp_col_names,
-        "data": subtrait_query_result_tb == duckdb_sql_result_tb,
+        "data": subtrait_query_result_tb == duckdb_result,
     }
     snapshot.assert_match(str(outcome), outcome_path)

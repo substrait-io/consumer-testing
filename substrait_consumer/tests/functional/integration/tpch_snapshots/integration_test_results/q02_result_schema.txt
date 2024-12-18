@@ -1,0 +1,8 @@
+s_acctbal: decimal128(15, 2)
+s_name: string
+n_name: string
+p_partkey: int64
+p_mfgr: string
+s_address: string
+s_phone: string
+s_comment: string

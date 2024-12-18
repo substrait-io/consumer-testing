@@ -1,0 +1,360 @@
+9828.21
+9508.37
+9508.37
+9453.01
+9453.01
+9192.10
+9032.15
+8702.02
+8615.50
+8615.50
+8488.53
+8430.52
+8271.39
+8096.98
+7392.78
+7205.20
+6820.35
+6721.70
+6329.90
+6173.87
+5364.99
+5069.27
+4941.88
+4672.25
+4586.49
+4518.31
+4315.15
+3526.53
+3526.53
+3294.68
+2972.26
+2963.09
+2221.25
+1381.97
+906.07
+765.69
+727.89
+683.07
+167.56
+91.39
+-314.06
+-820.89
+-845.44
+-942.73
+ 
+Supplier#000000647
+Supplier#000000070
+Supplier#000000070
+Supplier#000000802
+Supplier#000000802
+Supplier#000000115
+Supplier#000000959
+Supplier#000000333
+Supplier#000000812
+Supplier#000000812
+Supplier#000000367
+Supplier#000000646
+Supplier#000000146
+Supplier#000000574
+Supplier#000000170
+Supplier#000000477
+Supplier#000000007
+Supplier#000000954
+Supplier#000000996
+Supplier#000000408
+Supplier#000000785
+Supplier#000000328
+Supplier#000000321
+Supplier#000000239
+Supplier#000000680
+Supplier#000000149
+Supplier#000000509
+Supplier#000000553
+Supplier#000000553
+Supplier#000000350
+Supplier#000000016
+Supplier#000000840
+Supplier#000000771
+Supplier#000000104
+Supplier#000000138
+Supplier#000000799
+Supplier#000000470
+Supplier#000000651
+Supplier#000000290
+Supplier#000000949
+Supplier#000000510
+Supplier#000000409
+Supplier#000000704
+Supplier#000000563
+ 
+UNITED KINGDOM
+FRANCE
+FRANCE
+ROMANIA
+ROMANIA
+UNITED KINGDOM
+GERMANY
+RUSSIA
+FRANCE
+FRANCE
+RUSSIA
+FRANCE
+RUSSIA
+RUSSIA
+UNITED KINGDOM
+GERMANY
+UNITED KINGDOM
+FRANCE
+GERMANY
+RUSSIA
+RUSSIA
+GERMANY
+ROMANIA
+RUSSIA
+RUSSIA
+FRANCE
+FRANCE
+FRANCE
+FRANCE
+GERMANY
+RUSSIA
+ROMANIA
+ROMANIA
+FRANCE
+ROMANIA
+RUSSIA
+ROMANIA
+RUSSIA
+FRANCE
+UNITED KINGDOM
+ROMANIA
+GERMANY
+ROMANIA
+GERMANY
+ 
+13120
+3563
+17268
+10021
+13275
+13325
+4958
+11810
+10551
+13811
+6854
+11384
+4637
+323
+7655
+10956
+13217
+4191
+10735
+18139
+13784
+16327
+7320
+12238
+5679
+18344
+18972
+8036
+17018
+4841
+1015
+3080
+13981
+18103
+8363
+11276
+6213
+4888
+2037
+9430
+17242
+2156
+9926
+5797
+ 
+Manufacturer#5
+Manufacturer#1
+Manufacturer#4
+Manufacturer#5
+Manufacturer#4
+Manufacturer#1
+Manufacturer#4
+Manufacturer#3
+Manufacturer#2
+Manufacturer#4
+Manufacturer#4
+Manufacturer#3
+Manufacturer#5
+Manufacturer#4
+Manufacturer#2
+Manufacturer#5
+Manufacturer#5
+Manufacturer#3
+Manufacturer#2
+Manufacturer#1
+Manufacturer#4
+Manufacturer#1
+Manufacturer#5
+Manufacturer#1
+Manufacturer#3
+Manufacturer#5
+Manufacturer#2
+Manufacturer#4
+Manufacturer#3
+Manufacturer#4
+Manufacturer#4
+Manufacturer#2
+Manufacturer#2
+Manufacturer#3
+Manufacturer#4
+Manufacturer#2
+Manufacturer#3
+Manufacturer#4
+Manufacturer#1
+Manufacturer#2
+Manufacturer#4
+Manufacturer#5
+Manufacturer#5
+Manufacturer#1
+ 
+vV6Teq1EvLlR
+jd4djZv0cc5KdnA0q9oOqvceaPUbNloOW
+jd4djZv0cc5KdnA0q9oOqvceaPUbNloOW
+1Uj23QWxQjj7EyeqHWqGWTbN
+1Uj23QWxQjj7EyeqHWqGWTbN
+EhrYy0MT5M1vfZ0V4skpifdp6pgFz5
+TK qrnjpDvd1Jc
+fQ5Lr4KvbNHI3WDMhkcI S6xYtgIi1k
+TAJWyNst8OGVPINgqtzwyyp002iYNDVub
+TAJWyNst8OGVPINgqtzwyyp002iYNDVub
+nr8wRQ a5LXXess
+j6szE80YCpLHJ4bZ7F37gUiGhk0WJ0,8h9y
+ApndKp ,Wu0 LNsoV0KldxyoIlY
+ZcSrzuRKYEGpcxmIsH,BrYBMwH0
+ayz3a18xDGrr3jtS
+6yQdgeVeAxJVtJTIYFNNWvQL
+ 0W7IPdkpWycUbQ9Adp6B
+cXcVBs6lsZbzfE14
+5uWNawcqv4IL8okyBL e
+BOC Zy0wh3rCGHDgV0NIGt2dEK
+5r5GjqBatnYAHaH5kB4IPcBEiglMJEnN4tUUG6k2
+9eEYWOr4kUZ
+CfDKlGVtMePjtCw
+4cZ,ZHKj hRKgYlgZ6UapQ7mrEOozeQMx7KhUCS
+7JwnLOmLhJ1aPMT61PSx9kcY77r,HmRUD314m
+C5t4zIcINBkgBWdMg6WtgMtE
+9lTN9T5VBg
+R0FI5DL3Poi
+R0FI5DL3Poi
+hilu5UXMCwFvJJ
+3HbVoWVsjn4fTfQGgYTsMaDvMINBIDXqeBwK
+J2s6iuBgJo03
+Gv1ri,V ARHE136eJF
+oOFWtl sAwYcbM9dWRPgKTS3Ebmn9Tcp3iz0F
+yyPBFrErKTaEu5L3CdNJP ak4ys9AbN,Aj8wPgv
+IvldT2pX7R el
+4OGPs qKpfQ6GNLIKhmbIE6e7fSMP8fmwi
+D4MGIq5Uz0,K
+VpG,Ul5yv1RgAK,,
+R06m0VD95FZLoBJHcCMyaZQHitqmhZrQZkZk5
+6E3aFs0w2SiImzMDSewWtzOwdpLz2
+gt362msTQ3AwtUVHgqP7Ryksk90dnpPNyn
+KawFpBPAADrVnKC,pLL9q3TSyHG9x
+aOT6ZP96J2 ,Xhn
+ 
+33-258-202-4782
+16-821-608-1166
+16-821-608-1166
+29-342-882-6463
+29-342-882-6463
+33-597-248-1220
+17-108-642-3106
+32-508-202-6136
+16-585-724-6633
+16-585-724-6633
+32-458-198-9557
+16-601-220-5489
+32-792-619-3155
+32-866-246-8752
+33-803-340-5398
+17-180-144-7991
+33-990-965-2201
+16-537-341-8517
+17-447-811-3282
+32-858-724-2950
+32-297-653-2203
+17-231-513-5721
+29-573-279-1406
+32-396-654-6826
+32-522-382-1620
+16-660-553-2456
+16-298-154-3365
+16-599-552-3755
+16-599-552-3755
+17-113-181-4017
+32-822-502-4215
+29-781-337-5584
+29-986-304-9006
+16-434-972-6922
+29-533-434-6776
+32-579-339-1495
+29-165-289-1523
+32-181-426-4490
+16-675-286-5102
+33-332-697-2768
+29-207-852-3454
+17-719-517-9836
+29-300-896-5991
+17-108-537-2691
+ 
+mong the carefully quiet accounts slee
+n instructions are about the ironic, ironic excuses. instructions cajol
+n instructions are about the ironic, ironic excuses. instructions cajol
+s according to the even deposits integrate express packages. express
+s according to the even deposits integrate express packages. express
+onic instructions. ironic, regular deposits haggle f
+nag across the slyly even pin
+ounts around the requests cajole furiously blithely even instructions. slyly
+ress ideas eat quickly. blithely express deposits was slyly. final, 
+ress ideas eat quickly. blithely express deposits was slyly. final, 
+ect. quickly pending deposits sleep carefully even, express dependencies.
+quickly slyly even deposits. quickly ironic theodolites sleep fluffily after the c
+slyly regular foxes. unusual accounts about the regular packages 
+boost according to the slyly final instructions. furiously ironic packages cajole furiously
+egular, even packages. pending, 
+ual accounts use quickly above the carefully quiet dolphins. packages nag closely. iro
+ke across the slyly ironic packages. carefully special pinto beans wake blithely. even deposits los
+mong the quickly express pinto b
+deas. bold dinos are. carefully reg
+ are carefully above the carefully final pinto beans. blithely express foxes ab
+se carefully after the bravely stealthy instru
+es according to the slyly ironic package
+ instructions boost carefu
+s wake fluffily slyly special foxes. ironic, bold
+e even pinto beans. blithely fluffy ideas cajole slyly around the bl
+silent platelets. ideas hinder carefully among the slyly regular deposits. slyly pending inst
+ep boldly ironic theodolites. special dependencies lose blithely. final, regular packages wake
+l foxes wake slyly even f
+l foxes wake slyly even f
+ronic ideas. blithely blithe accounts sleep blithely. regular requests boost carefully about the r
+platelets thrash against the slyly special req
+s sleep blithely unusual packages! even, bold accounts sleep slyly about the even
+lphins affix blithely along the carefully final ide
+s. blithely pending requests against the regular instructions cajole sometimes according to the qu
+deas haggle. final, regular packages wake. quiet packages cajole pinto beans
+ deposits: pending, unusual forges nag fluffily regular ideas
+ly silent accounts. foxes maintain blithely along the idly
+ve to are slyly ironic asymptot
+ carefully furiously stealthy accounts. bold acc
+sual requests. carefully regular requests bo
+lyly regular accounts. deposits 
+nal deposits doubt blithely regular packages. fr
+ous pearls boost carefully
+are blithely silent requests. quickly even packages use blit
+ 

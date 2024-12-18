@@ -1,0 +1,3 @@
+cntrycode: string
+numcust: int64
+totacctbal: decimal128(38, 2)

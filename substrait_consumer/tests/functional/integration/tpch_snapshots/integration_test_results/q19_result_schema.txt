@@ -1,0 +1,1 @@
+revenue: decimal128(38, 4)

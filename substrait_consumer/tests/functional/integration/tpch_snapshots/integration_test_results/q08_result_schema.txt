@@ -1,0 +1,2 @@
+o_year: int64
+mkt_share: double

@@ -1,0 +1,2 @@
+n_name: string
+revenue: decimal128(38, 4)
