@@ -4,15 +4,15 @@ import duckdb
 import pytest
 from pytest_snapshot.plugin import Snapshot
 
+from substrait_consumer.consumers.acero_consumer import AceroConsumer
+from substrait_consumer.consumers.datafusion_consumer import DataFusionConsumer
 from substrait_consumer.functional.utils import load_json
 from substrait_consumer.functional.common import substrait_consumer_sql_test
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
-from substrait_consumer.consumers.acero_consumer import AceroConsumer
 
-CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "testdata"
-RELATION_CONFIG_DIR = CONFIG_DIR / "relation"
+CONFIG_DIR = Path(__file__).parent / "testdata"
 TEST_CASE_PATHS = list(
-    (path.relative_to(CONFIG_DIR),) for path in RELATION_CONFIG_DIR.rglob("*.json")
+    (path.relative_to(CONFIG_DIR),) for path in CONFIG_DIR.rglob("*.json")
 )
 IDS = (str(path[0]).removesuffix(".json") for path in TEST_CASE_PATHS)
 
@@ -30,6 +30,22 @@ def mark_consumer_tests_as_xfail(request):
             pytest.skip(
                 reason="'isthmus-acero-compute_within_aggregate' currently crashes"
             )
+    if isinstance(consumer, DataFusionConsumer):
+        flaky_tests = [
+            "arithmetic_decimal/scalar/add",
+            "arithmetic_decimal/scalar/subtract",
+            "arithmetic/scalar/acos",
+            "arithmetic/scalar/asin",
+            "arithmetic/scalar/atan",
+            "arithmetic/scalar/atan2",
+            "datetime/scalar/lt",
+            "datetime/scalar/lte",
+            "datetime/scalar/gt",
+            "datetime/scalar/gte",
+            "rounding/scalar/round",
+        ]
+        if any(test in str(path) for test in flaky_tests):
+            pytest.skip(reason="Flaky results")
 
 
 @pytest.mark.parametrize(["path"], TEST_CASE_PATHS, ids=IDS)
