@@ -14,21 +14,7 @@ if TYPE_CHECKING:
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 
-
-FUNCTION_SNAPSHOT_DIR = (
-    Path(__file__).parent.parent / "tests" / "functional" / "extension_functions"
-)
-RELATION_SNAPSHOT_DIR = (
-    Path(__file__).parent.parent / "tests" / "functional" / "relations"
-)
-INTEGRATION_SNAPSHOT_DIR = (
-    Path(__file__).parent.parent / "tests" / "functional" / "integration"
-)
-SNAPSHOT_DIR = {
-    "function": FUNCTION_SNAPSHOT_DIR,
-    "relation": RELATION_SNAPSHOT_DIR,
-    "integration": INTEGRATION_SNAPSHOT_DIR,
-}
+SNAPSHOT_DIR = Path(__file__).parent.parent / "snapshots"
 
 
 def check_match(
@@ -130,9 +116,7 @@ def generate_snapshot_results(
     data_path = f"{name}_result_data.txt"
     schema_path = f"{name}_result_schema.txt"
 
-    snapshot.snapshot_dir = (
-        SNAPSHOT_DIR[category] / (group + "_snapshots") / (category + "_test_results")
-    )
+    snapshot.snapshot_dir = SNAPSHOT_DIR / "results" / category / group
 
     try:
         duckdb_result = producer.run_sql_query(sql_query[0])
@@ -194,16 +178,14 @@ def substrait_producer_ibis_test(category: str, group: str) -> None:
             assert name.startswith("test_") and name.endswith("_expr")
             name = name[len("test_") : -len("_expr")]
             outcome_path = f"{name}-ibis_outcome.txt"
-            plan_path = f"{name}_plan.json"
+            plan_path = f"{name}-ibis_plan.json"
+
+            snapshot.snapshot_dir = SNAPSHOT_DIR / "producer" / category / group
 
             record_property("category", category)
             record_property("group", group)
             record_property("name", name)
             record_property("producer", "ibis")
-
-            snapshot.snapshot_dir = (
-                SNAPSHOT_DIR[category] / (group + "_snapshots") / "IbisProducer"
-            )
 
             ibis_producer = IbisProducer()
             ibis_expr = test_fn(*args, **kwargs)
@@ -297,10 +279,9 @@ def substrait_producer_sql_test(
     record_property("producer", producer.name())
 
     outcome_path = f"{name}-{producer.name()}_outcome.txt"
-    plan_path = f"{name}_plan.json"
-    snapshot.snapshot_dir = (
-        SNAPSHOT_DIR[category] / (group + "_snapshots") / type(producer).__name__
-    )
+    plan_path = f"{name}-{producer.name()}_plan.json"
+
+    snapshot.snapshot_dir = SNAPSHOT_DIR / "producer" / category / group
 
     # Convert the SQL query to a Substrait query plan.
     try:
@@ -356,15 +337,14 @@ def substrait_consumer_sql_test(
     record_property("producer", producer.name())
     record_property("consumer", consumer.name())
 
-    snapshot.snapshot_dir = (
-        SNAPSHOT_DIR[category] / (group + "_snapshots") / (category + "_test_results")
-    )
-    snapshot_dir = SNAPSHOT_DIR[category]
+    snapshot.snapshot_dir = SNAPSHOT_DIR / "results" / category / group
+
     plan_path = (
-        snapshot_dir
-        / (group + "_snapshots")
-        / type(producer).__name__
-        / f"{name}_plan.json"
+        SNAPSHOT_DIR
+        / "producer"
+        / category
+        / group
+        / f"{name}-{producer.name()}_plan.json"
     )
     outcome_path = f"{name}-{producer.name()}-{consumer.name()}_outcome.txt"
     data_path = f"{name}_result_data.txt"
