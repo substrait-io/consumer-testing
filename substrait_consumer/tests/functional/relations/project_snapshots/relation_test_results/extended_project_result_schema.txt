@@ -1,2 +1,0 @@
-l_quantity: decimal128(15, 2)
-multi_price: decimal128(35, 2)

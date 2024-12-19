@@ -1,0 +1,1 @@
+(avg(o_totalprice) + max(o_totalprice)): double

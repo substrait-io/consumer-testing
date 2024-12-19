@@ -1,0 +1,1 @@
+(avg(o_totalprice) * 10): double
