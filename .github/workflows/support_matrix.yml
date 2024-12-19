@@ -56,8 +56,8 @@ jobs:
       run: |-
         pytest -v --tb=no \
             -m ${{ matrix.target }}_substrait_snapshot \
-            substrait_consumer/tests/functional/extension_functions/ \
-            substrait_consumer/functional/queries/ibis_expressions/ \
+            -k "function/ or ibis_expressions" \
+            substrait_consumer/ \
             --csv ${{ matrix.target }}r_pytest_output.csv --csv-delimiter ';' \
             --csv-columns 'id,status,properties_as_columns'
 
