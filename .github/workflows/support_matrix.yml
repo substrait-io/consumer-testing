@@ -63,7 +63,7 @@ jobs:
 
     - name: Parse results
       run: |-
-        python substrait_consumer/tests/functional/extension_functions/parse_${{ matrix.target }}r_pytest_output.py \
+        python scripts/parse_${{ matrix.target }}r_pytest_output.py \
             --input ${{ matrix.target }}r_pytest_output.csv \
             --output app/${{ matrix.target }}r_results.csv
 
