@@ -1,1 +1,0 @@
-count(distinct lineitem.l_extendedprice): int64

@@ -10,6 +10,7 @@ from substrait_consumer.functional.utils import load_json
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 
+SNAPSHOT_DIR = Path(__file__).parent / "snapshots"
 
 CONFIG_DIR = Path(__file__).parent / "testdata"
 FUNCTION_CONFIG_DIR = CONFIG_DIR / "function"
@@ -47,15 +48,11 @@ def test_function_name(
     named_tables = test_case["named_tables"]
     sql_query = test_case["sql_query"]
     path = str(path).split(".")[0].split("/")
-    group, test_name = path[1], path[-1]
+    category, group, name = path[0], path[1], path[-1]
+    test_name = f"{producer.name()}-{name}"
 
-    snapshot.snapshot_dir = (
-        Path(__file__).parent
-        / "snapshots"
-        / "test_substrait_function_names"
-        / f"test_{group}_function_names"
-        / f"{producer.name()}-{test_name}"
-    )
+    snapshot.snapshot_dir = SNAPSHOT_DIR / "function_names" / category / group
+
 
     if isinstance(producer, IbisProducer):
         pytest.skip("function names currently not tested for Ibis producer")

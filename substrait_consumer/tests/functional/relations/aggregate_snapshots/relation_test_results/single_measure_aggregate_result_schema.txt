@@ -1,1 +1,0 @@
-count(lineitem.l_partkey): int64

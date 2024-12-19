@@ -1,3 +1,0 @@
-l_orderkey: int64
-l_linenumber: int64
-expr$2: int64

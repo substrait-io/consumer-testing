@@ -1,3 +1,0 @@
-min(orders.o_totalprice): decimal128(15, 2)
-max(orders.o_totalprice): decimal128(15, 2)
-avg(orders.o_totalprice): double
