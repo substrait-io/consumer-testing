@@ -11,7 +11,7 @@ from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 
 
-CONFIG_DIR = Path(__file__).parent.parent.parent.parent / "testdata"
+CONFIG_DIR = Path(__file__).parent / "testdata"
 FUNCTION_CONFIG_DIR = CONFIG_DIR / "function"
 TEST_CASE_PATHS = list(
     (path.relative_to(CONFIG_DIR),) for path in FUNCTION_CONFIG_DIR.rglob("*.json")
