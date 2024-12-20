@@ -81,3 +81,6 @@ jobs:
     - name: Run Ibis expression tests
       if: ${{ matrix.producer == 'ibis' }}
       run: pytest -v substrait_consumer/ibis_expressions/
+
+    - name: Run adhoc tests
+      run: pytest -v substrait_consumer/adhoc --adhoc_producer=${{ matrix.producer }} --consumer=duckdb
