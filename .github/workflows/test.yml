@@ -80,4 +80,4 @@ jobs:
 
     - name: Run Ibis expression tests
       if: ${{ matrix.producer == 'ibis' }}
-      run: pytest substrait_consumer/functional/queries/ibis_expressions/
+      run: pytest -v substrait_consumer/ibis_expressions/
