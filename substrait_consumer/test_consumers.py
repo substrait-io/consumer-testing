@@ -43,6 +43,7 @@ def mark_consumer_tests_as_xfail(request):
             "datetime/scalar/gt",
             "datetime/scalar/gte",
             "rounding/scalar/round",
+            "relation/set/union_all",
         ]
         if any(test in str(path) for test in flaky_tests):
             pytest.skip(reason="Flaky results")

@@ -1,0 +1,3 @@
+min(o_totalprice): decimal128(15, 2)
+max(o_totalprice): decimal128(15, 2)
+avg(o_totalprice): double

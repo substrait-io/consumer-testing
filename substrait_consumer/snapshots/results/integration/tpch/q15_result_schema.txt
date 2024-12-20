@@ -1,0 +1,5 @@
+s_suppkey: int64
+s_name: string
+s_address: string
+s_phone: string
+total_revenue: decimal128(38, 4)
