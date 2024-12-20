@@ -4,8 +4,8 @@ from sys import platform
 
 import jpype
 
-REPO_DIR = Path(__file__).parent.parent
-isthmus_jars = Path.joinpath(REPO_DIR, "jars/*")
+ISTHMUS_JARS = Path(__file__).parent.parent.parent / "jars" / "*"
+
 
 the_java_home = "CONDA_PREFIX"
 if "JAVA_HOME" in os.environ:
@@ -23,7 +23,7 @@ if not os.path.isfile(jvm_path):
         if not jpype.isJVMStarted():
             jpype.startJVM(convertStrings=True, jvmpath=jvm_path)
 
-jpype.addClassPath(isthmus_jars)
+jpype.addClassPath(ISTHMUS_JARS)
 
 ArrayListClass = jpype.JClass("java.util.ArrayList")
 ListClass = jpype.JClass("java.util.List")
