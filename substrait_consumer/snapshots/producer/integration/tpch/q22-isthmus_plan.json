@@ -211,18 +211,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "13"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "13"
                                           }
                                         }
                                       }]
@@ -275,18 +265,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "31"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "31"
                                           }
                                         }
                                       }]
@@ -339,18 +319,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "23"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "23"
                                           }
                                         }
                                       }]
@@ -403,18 +373,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "29"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "29"
                                           }
                                         }
                                       }]
@@ -467,18 +427,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "30"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "30"
                                           }
                                         }
                                       }]
@@ -531,18 +481,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "18"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "18"
                                           }
                                         }
                                       }]
@@ -595,18 +535,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "17"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "17"
                                           }
                                         }
                                       }]
@@ -744,7 +674,7 @@
                                                                   "literal": {
                                                                     "decimal": {
                                                                       "value": "AAAAAAAAAAAAAAAAAAAAAA==",
-                                                                      "precision": 3,
+                                                                      "precision": 15,
                                                                       "scale": 2
                                                                     }
                                                                   }
@@ -808,18 +738,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "13"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "13"
                                                                         }
                                                                       }
                                                                     }]
@@ -872,18 +792,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "31"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "31"
                                                                         }
                                                                       }
                                                                     }]
@@ -936,18 +846,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "23"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "23"
                                                                         }
                                                                       }
                                                                     }]
@@ -1000,18 +900,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "29"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "29"
                                                                         }
                                                                       }
                                                                     }]
@@ -1064,18 +954,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "30"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "30"
                                                                         }
                                                                       }
                                                                     }]
@@ -1128,18 +1008,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "18"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "18"
                                                                         }
                                                                       }
                                                                     }]
@@ -1192,18 +1062,8 @@
                                                                       }
                                                                     }, {
                                                                       "value": {
-                                                                        "cast": {
-                                                                          "type": {
-                                                                            "string": {
-                                                                              "nullability": "NULLABILITY_REQUIRED"
-                                                                            }
-                                                                          },
-                                                                          "input": {
-                                                                            "literal": {
-                                                                              "fixedChar": "17"
-                                                                            }
-                                                                          },
-                                                                          "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                                                        "literal": {
+                                                                          "string": "17"
                                                                         }
                                                                       }
                                                                     }]

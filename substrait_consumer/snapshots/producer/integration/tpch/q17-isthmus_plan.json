@@ -347,14 +347,26 @@
                                 },
                                 "arguments": [{
                                   "value": {
-                                    "selection": {
-                                      "directReference": {
-                                        "structField": {
-                                          "field": 4
+                                    "cast": {
+                                      "type": {
+                                        "decimal": {
+                                          "scale": 3,
+                                          "precision": 17,
+                                          "nullability": "NULLABILITY_REQUIRED"
                                         }
                                       },
-                                      "rootReference": {
-                                      }
+                                      "input": {
+                                        "selection": {
+                                          "directReference": {
+                                            "structField": {
+                                              "field": 4
+                                            }
+                                          },
+                                          "rootReference": {
+                                          }
+                                        }
+                                      },
+                                      "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                                     }
                                   }
                                 }, {
@@ -653,7 +665,7 @@
               "functionReference": 6,
               "outputType": {
                 "decimal": {
-                  "scale": 5,
+                  "scale": 6,
                   "precision": 19,
                   "nullability": "NULLABILITY_NULLABLE"
                 }

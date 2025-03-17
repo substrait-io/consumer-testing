@@ -354,18 +354,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "SM CASE"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "SM CASE"
                                             }
                                           }
                                         }]
@@ -394,18 +384,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "SM BOX"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "SM BOX"
                                             }
                                           }
                                         }]
@@ -434,18 +414,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "SM PACK"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "SM PACK"
                                             }
                                           }
                                         }]
@@ -474,18 +444,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "SM PKG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "SM PKG"
                                             }
                                           }
                                         }]
@@ -517,20 +477,12 @@
                                     }
                                   }, {
                                     "value": {
-                                      "cast": {
-                                        "type": {
-                                          "decimal": {
-                                            "scale": 2,
-                                            "precision": 15,
-                                            "nullability": "NULLABILITY_REQUIRED"
-                                          }
-                                        },
-                                        "input": {
-                                          "literal": {
-                                            "i32": 1
-                                          }
-                                        },
-                                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                      "literal": {
+                                        "decimal": {
+                                          "value": "ZAAAAAAAAAAAAAAAAAAAAA==",
+                                          "precision": 15,
+                                          "scale": 2
+                                        }
                                       }
                                     }
                                   }]
@@ -687,18 +639,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "AIR"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "AIR"
                                             }
                                           }
                                         }]
@@ -727,18 +669,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "AIR REG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "AIR REG"
                                             }
                                           }
                                         }]
@@ -886,18 +818,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "MED BAG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "MED BAG"
                                             }
                                           }
                                         }]
@@ -926,18 +848,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "MED BOX"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "MED BOX"
                                             }
                                           }
                                         }]
@@ -966,18 +878,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "MED PKG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "MED PKG"
                                             }
                                           }
                                         }]
@@ -1006,18 +908,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "MED PACK"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "MED PACK"
                                             }
                                           }
                                         }]
@@ -1049,20 +941,12 @@
                                     }
                                   }, {
                                     "value": {
-                                      "cast": {
-                                        "type": {
-                                          "decimal": {
-                                            "scale": 2,
-                                            "precision": 15,
-                                            "nullability": "NULLABILITY_REQUIRED"
-                                          }
-                                        },
-                                        "input": {
-                                          "literal": {
-                                            "i32": 10
-                                          }
-                                        },
-                                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                      "literal": {
+                                        "decimal": {
+                                          "value": "6AMAAAAAAAAAAAAAAAAAAA==",
+                                          "precision": 15,
+                                          "scale": 2
+                                        }
                                       }
                                     }
                                   }]
@@ -1219,18 +1103,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "AIR"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "AIR"
                                             }
                                           }
                                         }]
@@ -1259,18 +1133,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "AIR REG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "AIR REG"
                                             }
                                           }
                                         }]
@@ -1418,18 +1282,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "LG CASE"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "LG CASE"
                                             }
                                           }
                                         }]
@@ -1458,18 +1312,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "LG BOX"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "LG BOX"
                                             }
                                           }
                                         }]
@@ -1498,18 +1342,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "LG PACK"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "LG PACK"
                                             }
                                           }
                                         }]
@@ -1538,18 +1372,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "LG PKG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "LG PKG"
                                             }
                                           }
                                         }]
@@ -1581,20 +1405,12 @@
                                     }
                                   }, {
                                     "value": {
-                                      "cast": {
-                                        "type": {
-                                          "decimal": {
-                                            "scale": 2,
-                                            "precision": 15,
-                                            "nullability": "NULLABILITY_REQUIRED"
-                                          }
-                                        },
-                                        "input": {
-                                          "literal": {
-                                            "i32": 20
-                                          }
-                                        },
-                                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                      "literal": {
+                                        "decimal": {
+                                          "value": "0AcAAAAAAAAAAAAAAAAAAA==",
+                                          "precision": 15,
+                                          "scale": 2
+                                        }
                                       }
                                     }
                                   }]
@@ -1751,18 +1567,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "AIR"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "AIR"
                                             }
                                           }
                                         }]
@@ -1791,18 +1597,8 @@
                                           }
                                         }, {
                                           "value": {
-                                            "cast": {
-                                              "type": {
-                                                "string": {
-                                                  "nullability": "NULLABILITY_REQUIRED"
-                                                }
-                                              },
-                                              "input": {
-                                                "literal": {
-                                                  "fixedChar": "AIR REG"
-                                                }
-                                              },
-                                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                            "literal": {
+                                              "string": "AIR REG"
                                             }
                                           }
                                         }]

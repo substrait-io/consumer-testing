@@ -349,20 +349,12 @@
                               }
                             }, {
                               "value": {
-                                "cast": {
-                                  "type": {
-                                    "decimal": {
-                                      "scale": 2,
-                                      "precision": 15,
-                                      "nullability": "NULLABILITY_REQUIRED"
-                                    }
-                                  },
-                                  "input": {
-                                    "literal": {
-                                      "i32": 24
-                                    }
-                                  },
-                                  "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                "literal": {
+                                  "decimal": {
+                                    "value": "YAkAAAAAAAAAAAAAAAAAAA==",
+                                    "precision": 15,
+                                    "scale": 2
+                                  }
                                 }
                               }
                             }]

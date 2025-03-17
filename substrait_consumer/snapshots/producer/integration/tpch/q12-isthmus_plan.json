@@ -309,18 +309,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "MAIL"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "MAIL"
                                           }
                                         }
                                       }]
@@ -349,18 +339,8 @@
                                         }
                                       }, {
                                         "value": {
-                                          "cast": {
-                                            "type": {
-                                              "string": {
-                                                "nullability": "NULLABILITY_REQUIRED"
-                                              }
-                                            },
-                                            "input": {
-                                              "literal": {
-                                                "fixedChar": "SHIP"
-                                              }
-                                            },
-                                            "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                          "literal": {
+                                            "string": "SHIP"
                                           }
                                         }
                                       }]
