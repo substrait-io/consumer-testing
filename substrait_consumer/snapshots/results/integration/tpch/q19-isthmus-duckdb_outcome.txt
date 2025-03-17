@@ -1,1 +1,1 @@
-<class 'duckdb.duckdb.InternalException'>
+{'schema': True, 'data': True}

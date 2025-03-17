@@ -1247,6 +1247,7 @@
                   "functionReference": 8,
                   "outputType": {
                     "decimal": {
+                      "scale": 6,
                       "precision": 19,
                       "nullability": "NULLABILITY_NULLABLE"
                     }
