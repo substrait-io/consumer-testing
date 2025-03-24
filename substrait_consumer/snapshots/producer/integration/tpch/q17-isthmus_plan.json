@@ -666,7 +666,7 @@
               "outputType": {
                 "decimal": {
                   "scale": 6,
-                  "precision": 19,
+                  "precision": 20,
                   "nullability": "NULLABILITY_NULLABLE"
                 }
               },
