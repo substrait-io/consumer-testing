@@ -339,7 +339,7 @@
                           "outputType": {
                             "decimal": {
                               "scale": 2,
-                              "precision": 19,
+                              "precision": 34,
                               "nullability": "NULLABILITY_REQUIRED"
                             }
                           },
@@ -360,7 +360,8 @@
                               "cast": {
                                 "type": {
                                   "decimal": {
-                                    "precision": 19,
+                                    "scale": 2,
+                                    "precision": 21,
                                     "nullability": "NULLABILITY_REQUIRED"
                                   }
                                 },
@@ -402,7 +403,7 @@
                       "outputType": {
                         "decimal": {
                           "scale": 2,
-                          "precision": 19,
+                          "precision": 34,
                           "nullability": "NULLABILITY_NULLABLE"
                         }
                       },
@@ -434,14 +435,26 @@
                   },
                   "arguments": [{
                     "value": {
-                      "selection": {
-                        "directReference": {
-                          "structField": {
-                            "field": 1
+                      "cast": {
+                        "type": {
+                          "decimal": {
+                            "scale": 6,
+                            "precision": 38,
+                            "nullability": "NULLABILITY_NULLABLE"
                           }
                         },
-                        "rootReference": {
-                        }
+                        "input": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {
+                                "field": 1
+                              }
+                            },
+                            "rootReference": {
+                            }
+                          }
+                        },
+                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                       }
                     }
                   }, {
@@ -449,8 +462,8 @@
                       "cast": {
                         "type": {
                           "decimal": {
-                            "scale": 2,
-                            "precision": 19,
+                            "scale": 6,
+                            "precision": 38,
                             "nullability": "NULLABILITY_NULLABLE"
                           }
                         },
@@ -741,7 +754,7 @@
                                               "outputType": {
                                                 "decimal": {
                                                   "scale": 2,
-                                                  "precision": 19,
+                                                  "precision": 34,
                                                   "nullability": "NULLABILITY_REQUIRED"
                                                 }
                                               },
@@ -762,7 +775,8 @@
                                                   "cast": {
                                                     "type": {
                                                       "decimal": {
-                                                        "precision": 19,
+                                                        "scale": 2,
+                                                        "precision": 21,
                                                         "nullability": "NULLABILITY_REQUIRED"
                                                       }
                                                     },
@@ -794,7 +808,7 @@
                                           "outputType": {
                                             "decimal": {
                                               "scale": 2,
-                                              "precision": 19,
+                                              "precision": 34,
                                               "nullability": "NULLABILITY_NULLABLE"
                                             }
                                           },
@@ -821,7 +835,7 @@
                                       "outputType": {
                                         "decimal": {
                                           "scale": 12,
-                                          "precision": 19,
+                                          "precision": 38,
                                           "nullability": "NULLABILITY_NULLABLE"
                                         }
                                       },
