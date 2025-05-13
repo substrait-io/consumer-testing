@@ -409,7 +409,7 @@
                                                       "type": {
                                                         "decimal": {
                                                           "scale": 3,
-                                                          "precision": 19,
+                                                          "precision": 22,
                                                           "nullability": "NULLABILITY_REQUIRED"
                                                         }
                                                       },
@@ -433,7 +433,7 @@
                                                       "type": {
                                                         "decimal": {
                                                           "scale": 3,
-                                                          "precision": 19,
+                                                          "precision": 22,
                                                           "nullability": "NULLABILITY_NULLABLE"
                                                         }
                                                       },
