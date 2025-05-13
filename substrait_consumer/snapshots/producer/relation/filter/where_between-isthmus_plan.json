@@ -164,18 +164,8 @@
                               }
                             }, {
                               "value": {
-                                "cast": {
-                                  "type": {
-                                    "i64": {
-                                      "nullability": "NULLABILITY_REQUIRED"
-                                    }
-                                  },
-                                  "input": {
-                                    "literal": {
-                                      "i32": 20
-                                    }
-                                  },
-                                  "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                "literal": {
+                                  "i64": "20"
                                 }
                               }
                             }]
@@ -203,18 +193,8 @@
                               }
                             }, {
                               "value": {
-                                "cast": {
-                                  "type": {
-                                    "i64": {
-                                      "nullability": "NULLABILITY_REQUIRED"
-                                    }
-                                  },
-                                  "input": {
-                                    "literal": {
-                                      "i32": 50
-                                    }
-                                  },
-                                  "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                                "literal": {
+                                  "i64": "50"
                                 }
                               }
                             }]

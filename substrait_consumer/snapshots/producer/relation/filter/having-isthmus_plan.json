@@ -195,18 +195,8 @@
                     }
                   }, {
                     "value": {
-                      "cast": {
-                        "type": {
-                          "i64": {
-                            "nullability": "NULLABILITY_REQUIRED"
-                          }
-                        },
-                        "input": {
-                          "literal": {
-                            "i32": 12100
-                          }
-                        },
-                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                      "literal": {
+                        "i64": "12100"
                       }
                     }
                   }]
