@@ -6,18 +6,19 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "avg:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "max:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
-      "functionAnchor": 2,
+      "functionAnchor": 3,
       "name": "add:dec_dec"
     }
   }],
@@ -116,6 +117,7 @@
               }],
               "measures": [{
                 "measure": {
+                  "functionReference": 1,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
@@ -140,7 +142,7 @@
                 }
               }, {
                 "measure": {
-                  "functionReference": 1,
+                  "functionReference": 2,
                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                   "outputType": {
                     "decimal": {
@@ -168,7 +170,7 @@
           },
           "expressions": [{
             "scalarFunction": {
-              "functionReference": 2,
+              "functionReference": 3,
               "outputType": {
                 "decimal": {
                   "scale": 2,

@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "gt:date_date"
     }
   }],
@@ -136,6 +137,7 @@
                 }
               }, {
                 "scalarFunction": {
+                  "functionReference": 1,
                   "outputType": {
                     "bool": {
                       "nullability": "NULLABILITY_REQUIRED"

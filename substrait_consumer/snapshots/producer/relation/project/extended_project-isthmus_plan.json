@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "multiply:dec_dec"
     }
   }],
@@ -120,6 +121,7 @@
             }
           }, {
             "scalarFunction": {
+              "functionReference": 1,
               "outputType": {
                 "decimal": {
                   "scale": 2,

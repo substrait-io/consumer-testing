@@ -15,54 +15,55 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "and:bool"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "equal:any_any"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
-      "functionAnchor": 2,
+      "functionAnchor": 3,
       "name": "gte:date_date"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
-      "functionAnchor": 3,
+      "functionAnchor": 4,
       "name": "lte:date_date"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
-      "functionAnchor": 4,
+      "functionAnchor": 5,
       "name": "extract:req_date"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
-      "functionAnchor": 5,
+      "functionAnchor": 6,
       "name": "multiply:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
-      "functionAnchor": 6,
+      "functionAnchor": 7,
       "name": "subtract:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
-      "functionAnchor": 7,
+      "functionAnchor": 8,
       "name": "sum:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
-      "functionAnchor": 8,
+      "functionAnchor": 9,
       "name": "divide:dec_dec"
     }
   }],
@@ -558,6 +559,7 @@
                           },
                           "condition": {
                             "scalarFunction": {
+                              "functionReference": 1,
                               "outputType": {
                                 "bool": {
                                   "nullability": "NULLABILITY_REQUIRED"
@@ -566,7 +568,7 @@
                               "arguments": [{
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -601,7 +603,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -637,7 +639,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -673,7 +675,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -709,7 +711,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -745,7 +747,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -781,7 +783,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -811,7 +813,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -847,7 +849,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 2,
+                                    "functionReference": 3,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -887,7 +889,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 3,
+                                    "functionReference": 4,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -927,7 +929,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -961,7 +963,7 @@
                       },
                       "expressions": [{
                         "scalarFunction": {
-                          "functionReference": 4,
+                          "functionReference": 5,
                           "outputType": {
                             "i64": {
                               "nullability": "NULLABILITY_REQUIRED"
@@ -988,7 +990,7 @@
                           "ifs": [{
                             "if": {
                               "scalarFunction": {
-                                "functionReference": 1,
+                                "functionReference": 2,
                                 "outputType": {
                                   "bool": {
                                     "nullability": "NULLABILITY_REQUIRED"
@@ -1017,7 +1019,7 @@
                             },
                             "then": {
                               "scalarFunction": {
-                                "functionReference": 5,
+                                "functionReference": 6,
                                 "outputType": {
                                   "decimal": {
                                     "scale": 4,
@@ -1040,7 +1042,7 @@
                                 }, {
                                   "value": {
                                     "scalarFunction": {
-                                      "functionReference": 6,
+                                      "functionReference": 7,
                                       "outputType": {
                                         "decimal": {
                                           "scale": 2,
@@ -1097,7 +1099,7 @@
                         }
                       }, {
                         "scalarFunction": {
-                          "functionReference": 5,
+                          "functionReference": 6,
                           "outputType": {
                             "decimal": {
                               "scale": 4,
@@ -1120,7 +1122,7 @@
                           }, {
                             "value": {
                               "scalarFunction": {
-                                "functionReference": 6,
+                                "functionReference": 7,
                                 "outputType": {
                                   "decimal": {
                                     "scale": 2,
@@ -1180,7 +1182,7 @@
                   }],
                   "measures": [{
                     "measure": {
-                      "functionReference": 7,
+                      "functionReference": 8,
                       "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                       "outputType": {
                         "decimal": {
@@ -1206,7 +1208,7 @@
                     }
                   }, {
                     "measure": {
-                      "functionReference": 7,
+                      "functionReference": 8,
                       "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                       "outputType": {
                         "decimal": {
@@ -1244,7 +1246,7 @@
                 }
               }, {
                 "scalarFunction": {
-                  "functionReference": 8,
+                  "functionReference": 9,
                   "outputType": {
                     "decimal": {
                       "scale": 6,

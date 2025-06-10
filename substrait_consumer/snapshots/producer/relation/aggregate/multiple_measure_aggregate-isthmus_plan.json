@@ -6,18 +6,19 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "min:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "max:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
-      "functionAnchor": 2,
+      "functionAnchor": 3,
       "name": "avg:dec"
     }
   }],
@@ -109,30 +110,6 @@
           }],
           "measures": [{
             "measure": {
-              "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
-              "outputType": {
-                "decimal": {
-                  "scale": 2,
-                  "precision": 15,
-                  "nullability": "NULLABILITY_NULLABLE"
-                }
-              },
-              "invocation": "AGGREGATION_INVOCATION_ALL",
-              "arguments": [{
-                "value": {
-                  "selection": {
-                    "directReference": {
-                      "structField": {
-                      }
-                    },
-                    "rootReference": {
-                    }
-                  }
-                }
-              }]
-            }
-          }, {
-            "measure": {
               "functionReference": 1,
               "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
               "outputType": {
@@ -159,6 +136,31 @@
           }, {
             "measure": {
               "functionReference": 2,
+              "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
+              "outputType": {
+                "decimal": {
+                  "scale": 2,
+                  "precision": 15,
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              },
+              "invocation": "AGGREGATION_INVOCATION_ALL",
+              "arguments": [{
+                "value": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                }
+              }]
+            }
+          }, {
+            "measure": {
+              "functionReference": 3,
               "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
               "outputType": {
                 "decimal": {

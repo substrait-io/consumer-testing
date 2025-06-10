@@ -12,30 +12,31 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "and:bool"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "equal:any_any"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
-      "functionAnchor": 2,
+      "functionAnchor": 3,
       "name": "multiply:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
-      "functionAnchor": 3,
+      "functionAnchor": 4,
       "name": "sum:dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
-      "functionAnchor": 4,
+      "functionAnchor": 5,
       "name": "gt:any_any"
     }
   }],
@@ -212,6 +213,7 @@
                           },
                           "condition": {
                             "scalarFunction": {
+                              "functionReference": 1,
                               "outputType": {
                                 "bool": {
                                   "nullability": "NULLABILITY_REQUIRED"
@@ -220,7 +222,7 @@
                               "arguments": [{
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -256,7 +258,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -292,7 +294,7 @@
                               }, {
                                 "value": {
                                   "scalarFunction": {
-                                    "functionReference": 1,
+                                    "functionReference": 2,
                                     "outputType": {
                                       "bool": {
                                         "nullability": "NULLABILITY_REQUIRED"
@@ -335,7 +337,7 @@
                         }
                       }, {
                         "scalarFunction": {
-                          "functionReference": 2,
+                          "functionReference": 3,
                           "outputType": {
                             "decimal": {
                               "scale": 2,
@@ -398,7 +400,7 @@
                   }],
                   "measures": [{
                     "measure": {
-                      "functionReference": 3,
+                      "functionReference": 4,
                       "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                       "outputType": {
                         "decimal": {
@@ -427,7 +429,7 @@
               },
               "condition": {
                 "scalarFunction": {
-                  "functionReference": 4,
+                  "functionReference": 5,
                   "outputType": {
                     "bool": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -636,6 +638,7 @@
                                               },
                                               "condition": {
                                                 "scalarFunction": {
+                                                  "functionReference": 1,
                                                   "outputType": {
                                                     "bool": {
                                                       "nullability": "NULLABILITY_REQUIRED"
@@ -644,7 +647,7 @@
                                                   "arguments": [{
                                                     "value": {
                                                       "scalarFunction": {
-                                                        "functionReference": 1,
+                                                        "functionReference": 2,
                                                         "outputType": {
                                                           "bool": {
                                                             "nullability": "NULLABILITY_REQUIRED"
@@ -680,7 +683,7 @@
                                                   }, {
                                                     "value": {
                                                       "scalarFunction": {
-                                                        "functionReference": 1,
+                                                        "functionReference": 2,
                                                         "outputType": {
                                                           "bool": {
                                                             "nullability": "NULLABILITY_REQUIRED"
@@ -716,7 +719,7 @@
                                                   }, {
                                                     "value": {
                                                       "scalarFunction": {
-                                                        "functionReference": 1,
+                                                        "functionReference": 2,
                                                         "outputType": {
                                                           "bool": {
                                                             "nullability": "NULLABILITY_REQUIRED"
@@ -750,7 +753,7 @@
                                           },
                                           "expressions": [{
                                             "scalarFunction": {
-                                              "functionReference": 2,
+                                              "functionReference": 3,
                                               "outputType": {
                                                 "decimal": {
                                                   "scale": 2,
@@ -803,7 +806,7 @@
                                       }],
                                       "measures": [{
                                         "measure": {
-                                          "functionReference": 3,
+                                          "functionReference": 4,
                                           "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                                           "outputType": {
                                             "decimal": {
@@ -831,7 +834,7 @@
                                   },
                                   "expressions": [{
                                     "scalarFunction": {
-                                      "functionReference": 2,
+                                      "functionReference": 3,
                                       "outputType": {
                                         "decimal": {
                                           "scale": 12,
