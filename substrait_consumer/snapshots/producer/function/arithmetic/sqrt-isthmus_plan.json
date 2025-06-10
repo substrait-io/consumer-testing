@@ -9,12 +9,13 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "round:fp64_i32"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "power:fp64_fp64"
     }
   }],
@@ -84,6 +85,7 @@
                 }
               }, {
                 "scalarFunction": {
+                  "functionReference": 1,
                   "outputType": {
                     "fp64": {
                       "nullability": "NULLABILITY_REQUIRED"
@@ -92,7 +94,7 @@
                   "arguments": [{
                     "value": {
                       "scalarFunction": {
-                        "functionReference": 1,
+                        "functionReference": 2,
                         "outputType": {
                           "fp64": {
                             "nullability": "NULLABILITY_REQUIRED"

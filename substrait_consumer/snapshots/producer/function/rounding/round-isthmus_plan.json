@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "round:fp64_i32"
     }
   }],
@@ -126,6 +127,7 @@
                 }
               }, {
                 "scalarFunction": {
+                  "functionReference": 1,
                   "outputType": {
                     "fp64": {
                       "nullability": "NULLABILITY_REQUIRED"

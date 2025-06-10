@@ -6,12 +6,13 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "multiply:dec_dec"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "avg:dec"
     }
   }],
@@ -88,6 +89,7 @@
               },
               "expressions": [{
                 "scalarFunction": {
+                  "functionReference": 1,
                   "outputType": {
                     "decimal": {
                       "scale": 2,
@@ -134,7 +136,7 @@
           }],
           "measures": [{
             "measure": {
-              "functionReference": 1,
+              "functionReference": 2,
               "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
               "outputType": {
                 "decimal": {

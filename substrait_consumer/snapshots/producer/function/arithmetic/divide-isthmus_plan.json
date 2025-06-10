@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "divide:i64_i64"
     }
   }],
@@ -75,6 +76,7 @@
                 }
               }, {
                 "scalarFunction": {
+                  "functionReference": 1,
                   "outputType": {
                     "i64": {
                       "nullability": "NULLABILITY_REQUIRED"

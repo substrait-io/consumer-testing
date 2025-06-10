@@ -9,12 +9,13 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "lte:any_any"
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
-      "functionAnchor": 1,
+      "functionAnchor": 2,
       "name": "avg:dec"
     }
   }],
@@ -91,6 +92,7 @@
               },
               "condition": {
                 "scalarFunction": {
+                  "functionReference": 1,
                   "outputType": {
                     "bool": {
                       "nullability": "NULLABILITY_NULLABLE"
@@ -198,7 +200,7 @@
                               }],
                               "measures": [{
                                 "measure": {
-                                  "functionReference": 1,
+                                  "functionReference": 2,
                                   "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
                                   "outputType": {
                                     "decimal": {

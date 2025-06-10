@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "lte:any_any"
     }
   }],
@@ -128,6 +129,7 @@
                       },
                       "condition": {
                         "scalarFunction": {
+                          "functionReference": 1,
                           "outputType": {
                             "bool": {
                               "nullability": "NULLABILITY_REQUIRED"

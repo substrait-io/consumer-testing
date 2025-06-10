@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "substring:str_i32_i32"
     }
   }],
@@ -64,6 +65,7 @@
             }
           }, {
             "scalarFunction": {
+              "functionReference": 1,
               "outputType": {
                 "string": {
                   "nullability": "NULLABILITY_REQUIRED"

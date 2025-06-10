@@ -6,6 +6,7 @@
   "extensions": [{
     "extensionFunction": {
       "extensionUriReference": 1,
+      "functionAnchor": 1,
       "name": "count:any"
     }
   }],
@@ -131,6 +132,7 @@
           }],
           "measures": [{
             "measure": {
+              "functionReference": 1,
               "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
               "outputType": {
                 "i64": {
