@@ -955,5 +955,9 @@
       },
       "names": ["NATION", "O_YEAR", "SUM_PROFIT"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

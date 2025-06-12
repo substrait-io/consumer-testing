@@ -98,5 +98,9 @@
       },
       "names": ["A", "ABS_A"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }
