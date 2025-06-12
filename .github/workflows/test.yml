@@ -82,7 +82,7 @@ jobs:
         cp substrait-java/isthmus/build/libs/*all.jar ./jars
 
     - name: Run tests for ${{ matrix.producer }} producer
-      run: pytest -v -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/
+      run: pytest -vs -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/
 
     - name: Run Ibis expression tests
       if: ${{ matrix.producer == 'ibis' }}
