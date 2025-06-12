@@ -43,6 +43,10 @@ jobs:
         submodules: recursive
         fetch-tags: true
 
+    - name: Fetch history and tags of submodules
+      # This is needed for `substrait-java` or one of its submodules to determine its version.
+      run: git submodule foreach 'git fetch --unshallow || true'
+
     - name: Install Python
       uses: actions/setup-python@v5
       with:
