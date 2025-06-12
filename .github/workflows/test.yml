@@ -62,6 +62,7 @@ jobs:
       if: ${{ matrix.producer == 'isthmus' }}
       uses: gradle/actions/setup-gradle@v4
       with:
+        cache-disabled: true
         gradle-version: 8.8
 
     - name: Build Isthmus
