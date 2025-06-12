@@ -67,7 +67,10 @@ jobs:
     - name: Build Isthmus
       if: ${{ matrix.producer == 'isthmus' }}
       working-directory: ./substrait-java/isthmus
-      run: ../gradlew shadowJar
+      run: |-
+        git submodule foreach --recursive 'git fetch --unshallow || true'
+        cd ../substrait; git describe --tags 
+        ../gradlew shadowJar
 
     - name: Copy Isthmus JARs
       if: ${{ matrix.producer == 'isthmus' }}
