@@ -287,6 +287,7 @@ def substrait_producer_sql_test(
     try:
         substrait_plan = producer.produce_substrait(sql_query, validate)
     except BaseException as e:
+        raise e
         record_property("outcome", str(type(e)))
         snapshot.assert_match(str(type(e)), outcome_path)
         return
@@ -358,6 +359,7 @@ def substrait_consumer_sql_test(
     try:
         actual_result = consumer.run_substrait_query(substrait_plan)
     except BaseException as e:
+        raise e
         record_property("outcome", str(type(e)))
         snapshot.assert_match(str(type(e)), outcome_path)
         return
