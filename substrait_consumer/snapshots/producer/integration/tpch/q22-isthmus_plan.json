@@ -1369,5 +1369,9 @@
       },
       "names": ["CNTRYCODE", "NUMCUST", "TOTACCTBAL"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

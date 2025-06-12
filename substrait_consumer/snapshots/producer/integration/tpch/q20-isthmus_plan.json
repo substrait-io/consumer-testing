@@ -945,5 +945,9 @@
       },
       "names": ["S_NAME", "S_ADDRESS"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

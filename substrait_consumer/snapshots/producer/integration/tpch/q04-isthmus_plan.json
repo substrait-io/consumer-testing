@@ -463,5 +463,9 @@
       },
       "names": ["O_ORDERPRIORITY", "ORDER_COUNT"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }
