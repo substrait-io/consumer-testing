@@ -183,5 +183,9 @@
       },
       "names": ["ASIN_TAX"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

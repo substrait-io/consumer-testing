@@ -110,5 +110,9 @@
       },
       "names": ["SUM_SUPPLYCOST"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

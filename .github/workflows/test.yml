@@ -41,6 +41,13 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
+        fetch-tags: true
+
+    - name: Fetch history and tags of submodules
+      # This is needed for `substrait-java` or one of its submodules to determine its version.
+      run: |-
+        git submodule foreach --recursive 'git fetch --unshallow || true'
+        cd substrait-java/substrait; git describe --tags
 
     - name: Install Python
       uses: actions/setup-python@v5
@@ -62,6 +69,7 @@ jobs:
       if: ${{ matrix.producer == 'isthmus' }}
       uses: gradle/actions/setup-gradle@v4
       with:
+        cache-disabled: true
         gradle-version: 8.8
 
     - name: Build Isthmus
@@ -76,7 +84,7 @@ jobs:
         cp substrait-java/isthmus/build/libs/*all.jar ./jars
 
     - name: Run tests for ${{ matrix.producer }} producer
-      run: pytest -v -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/
+      run: pytest -vs -m produce_substrait_snapshot --producer=${{ matrix.producer }} substrait_consumer/
 
     - name: Run Ibis expression tests
       if: ${{ matrix.producer == 'ibis' }}

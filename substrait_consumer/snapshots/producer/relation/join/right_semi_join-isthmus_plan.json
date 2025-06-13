@@ -209,5 +209,9 @@
       },
       "names": ["O_ORDERKEY", "O_CUSTKEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

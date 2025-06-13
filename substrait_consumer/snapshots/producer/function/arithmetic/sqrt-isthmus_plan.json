@@ -161,5 +161,9 @@
       },
       "names": ["PS_PARTKEY", "SQRT_KEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

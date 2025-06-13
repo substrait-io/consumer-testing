@@ -82,6 +82,9 @@ class IsthmusProducer(SQLProducer):
 
         from . import isthmus_java as java
 
+        version = java.VersionClass.class_.getPackage().getSpecificationVersion()
+        print("JPype version:", version)
+
         sql_to_substrait = java.SqlToSubstraitClass()
         java_sql_string = jpype.java.lang.String(sql_string)
         plan = sql_to_substrait.execute(java_sql_string, schema_list)

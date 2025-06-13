@@ -293,5 +293,9 @@
       },
       "names": ["C1KEY", "C1NAME", "C1NATIONAKEY", "C2KEY", "C2NAME", "C2NATIONAKEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

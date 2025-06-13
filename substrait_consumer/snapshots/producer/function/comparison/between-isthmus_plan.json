@@ -180,5 +180,9 @@
       },
       "names": ["A"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

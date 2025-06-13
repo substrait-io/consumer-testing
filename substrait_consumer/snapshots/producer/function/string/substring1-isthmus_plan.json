@@ -102,5 +102,9 @@
       },
       "names": ["N_NAME", "SUBSTR_NAME"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }
