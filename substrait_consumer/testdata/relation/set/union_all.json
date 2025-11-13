@@ -8,7 +8,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT C_NATIONKEY FROM '{customer}' UNION ALL SELECT N_NATIONKEY FROM '{nation}'"
     },
