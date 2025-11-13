@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT COUNT(L_PARTKEY) FROM '{lineitem}'"
     },

@@ -1,0 +1,377 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_aggregate_generic.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 1,
+      "name": "count:any",
+      "extensionUrnReference": 1
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "sort": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "project": {
+              "common": {
+                "emit": {
+                  "outputMapping": [4, 5, 6]
+                },
+                "hint": {
+                  "outputNames": ["L_ORDERKEY", "L_LINENUMBER", "count(1)"]
+                }
+              },
+              "input": {
+                "aggregate": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "input": {
+                    "expand": {
+                      "common": {
+                        "direct": {
+                        },
+                        "hint": {
+                          "outputNames": ["L_ORDERKEY", "L_LINENUMBER", "spark_grouping_id"]
+                        }
+                      },
+                      "input": {
+                        "project": {
+                          "common": {
+                            "emit": {
+                              "outputMapping": [16, 17]
+                            },
+                            "hint": {
+                              "outputNames": ["L_ORDERKEY", "L_LINENUMBER"]
+                            }
+                          },
+                          "input": {
+                            "read": {
+                              "common": {
+                                "direct": {
+                                }
+                              },
+                              "baseSchema": {
+                                "names": ["l_orderkey", "l_partkey", "l_suppkey", "l_linenumber", "l_quantity", "l_extendedprice", "l_discount", "l_tax", "l_returnflag", "l_linestatus", "l_shipdate", "l_commitdate", "l_receiptdate", "l_shipinstruct", "l_shipmode", "l_comment"],
+                                "struct": {
+                                  "types": [{
+                                    "i64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "i64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "i64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "i64": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "decimal": {
+                                      "scale": 2,
+                                      "precision": 15,
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "decimal": {
+                                      "scale": 2,
+                                      "precision": 15,
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "decimal": {
+                                      "scale": 2,
+                                      "precision": 15,
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "decimal": {
+                                      "scale": 2,
+                                      "precision": 15,
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "string": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "string": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "date": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "date": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "date": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "string": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "string": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }, {
+                                    "string": {
+                                      "nullability": "NULLABILITY_NULLABLE"
+                                    }
+                                  }],
+                                  "nullability": "NULLABILITY_REQUIRED"
+                                }
+                              },
+                              "localFiles": {
+                                "items": [{
+                                  "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/lineitem_small.parquet",
+                                  "length": "2758",
+                                  "parquet": {
+                                  }
+                                }]
+                              }
+                            }
+                          },
+                          "expressions": [{
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }, {
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                  "field": 3
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }]
+                        }
+                      },
+                      "fields": [{
+                        "switchingField": {
+                          "duplicates": [{
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }, {
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }, {
+                            "literal": {
+                              "null": {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            }
+                          }]
+                        }
+                      }, {
+                        "switchingField": {
+                          "duplicates": [{
+                            "selection": {
+                              "directReference": {
+                                "structField": {
+                                  "field": 1
+                                }
+                              },
+                              "rootReference": {
+                              }
+                            }
+                          }, {
+                            "literal": {
+                              "null": {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            }
+                          }, {
+                            "literal": {
+                              "null": {
+                                "i64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              }
+                            }
+                          }]
+                        }
+                      }, {
+                        "switchingField": {
+                          "duplicates": [{
+                            "literal": {
+                              "i64": "0"
+                            }
+                          }, {
+                            "literal": {
+                              "i64": "1"
+                            }
+                          }, {
+                            "literal": {
+                              "i64": "3"
+                            }
+                          }]
+                        }
+                      }]
+                    }
+                  },
+                  "groupings": [{
+                    "groupingExpressions": [{
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }, {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 1
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }, {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                            "field": 2
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }]
+                  }],
+                  "measures": [{
+                    "measure": {
+                      "functionReference": 1,
+                      "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
+                      "outputType": {
+                        "i64": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      },
+                      "invocation": "AGGREGATION_INVOCATION_ALL",
+                      "arguments": [{
+                        "value": {
+                          "literal": {
+                            "i32": 1
+                          }
+                        }
+                      }]
+                    }
+                  }]
+                }
+              },
+              "expressions": [{
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 3
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }]
+            }
+          },
+          "sorts": [{
+            "expr": {
+              "selection": {
+                "directReference": {
+                  "structField": {
+                  }
+                },
+                "rootReference": {
+                }
+              }
+            },
+            "direction": "SORT_DIRECTION_ASC_NULLS_FIRST"
+          }, {
+            "expr": {
+              "selection": {
+                "directReference": {
+                  "structField": {
+                    "field": 1
+                  }
+                },
+                "rootReference": {
+                }
+              }
+            },
+            "direction": "SORT_DIRECTION_ASC_NULLS_FIRST"
+          }]
+        }
+      },
+      "names": ["L_ORDERKEY", "L_LINENUMBER", "count(1)"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_aggregate_generic"
+  }]
+}

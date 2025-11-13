@@ -11,7 +11,8 @@
     "sql_query": {
         "producers": [
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query_path": "q05.sql"
     },

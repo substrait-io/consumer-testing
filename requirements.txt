@@ -17,6 +17,7 @@ parsy==2.1
 pluggy==1.5.0
 protobuf==5.28.3
 pyarrow==18.1.0
+pyspark==3.5.5
 pytest==8.3.3
 pytest-csv==3.0.0
 pytest-snapshot==0.9.0

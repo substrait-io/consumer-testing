@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT SUM(L_EXTENDEDPRICE), L_LINENUMBER, L_ORDERKEY FROM '{lineitem}' GROUP BY GROUPING SETS ( (L_LINENUMBER), (L_ORDERKEY) ) ORDER BY L_LINENUMBER"
     },
