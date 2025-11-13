@@ -8,7 +8,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT o.O_ORDERKEY, o.O_CUSTKEY FROM '{orders}' o WHERE EXISTS ( SELECT 1 FROM '{customer}' c WHERE c.C_CUSTKEY = o.O_CUSTKEY );"
     },
