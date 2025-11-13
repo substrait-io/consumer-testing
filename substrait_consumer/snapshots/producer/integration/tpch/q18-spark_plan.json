@@ -434,7 +434,7 @@
                                                           "outputMapping": [2, 3]
                                                         },
                                                         "hint": {
-                                                          "outputNames": ["l_orderkey", "sum(l_quantity#2038)"]
+                                                          "outputNames": ["l_orderkey", "sum(l_quantity#2196)"]
                                                         }
                                                       },
                                                       "input": {
@@ -1028,7 +1028,7 @@
                                                   "outputMapping": [2, 3]
                                                 },
                                                 "hint": {
-                                                  "outputNames": ["l_orderkey", "sum(l_quantity#2038)"]
+                                                  "outputNames": ["l_orderkey", "sum(l_quantity#2196)"]
                                                 }
                                               },
                                               "input": {

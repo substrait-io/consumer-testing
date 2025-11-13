@@ -8,7 +8,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT C_CUSTKEY, (SELECT SUM(O_TOTALPRICE) FROM '{orders}' WHERE C_CUSTKEY = O_CUSTKEY) AS total_price FROM '{customer}'"
     },

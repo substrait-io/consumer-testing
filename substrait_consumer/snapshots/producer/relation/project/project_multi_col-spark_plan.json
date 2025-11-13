@@ -1,0 +1,139 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [16, 17]
+            },
+            "hint": {
+              "outputNames": ["L_DISCOUNT", "L_TAX"]
+            }
+          },
+          "input": {
+            "read": {
+              "common": {
+                "direct": {
+                }
+              },
+              "baseSchema": {
+                "names": ["l_orderkey", "l_partkey", "l_suppkey", "l_linenumber", "l_quantity", "l_extendedprice", "l_discount", "l_tax", "l_returnflag", "l_linestatus", "l_shipdate", "l_commitdate", "l_receiptdate", "l_shipinstruct", "l_shipmode", "l_comment"],
+                "struct": {
+                  "types": [{
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "i64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 15,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 15,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 15,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "decimal": {
+                      "scale": 2,
+                      "precision": 15,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "date": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "date": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "date": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  }],
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "localFiles": {
+                "items": [{
+                  "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/lineitem_small.parquet",
+                  "length": "2758",
+                  "parquet": {
+                  }
+                }]
+              }
+            }
+          },
+          "expressions": [{
+            "selection": {
+              "directReference": {
+                "structField": {
+                  "field": 6
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }, {
+            "selection": {
+              "directReference": {
+                "structField": {
+                  "field": 7
+                }
+              },
+              "rootReference": {
+              }
+            }
+          }]
+        }
+      },
+      "names": ["L_DISCOUNT", "L_TAX"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  }
+}
