@@ -7,7 +7,8 @@
         "producers": [
             "datafusion",
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT count(PS_SUPPLYCOST) AS COUNT_SUPPLYCOST FROM '{partsupp}';"
     },

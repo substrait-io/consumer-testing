@@ -7,7 +7,8 @@
         "producers": [
             "datafusion",
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT PS_PARTKEY, PS_PARTKEY / 10 AS DIVIDE_KEY FROM '{partsupp}' LIMIT 10;"
     },

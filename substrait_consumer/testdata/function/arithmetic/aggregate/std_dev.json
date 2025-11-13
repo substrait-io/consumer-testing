@@ -5,7 +5,8 @@
     },
     "sql_query": {
         "producers": [
-            "duckdb"
+            "duckdb",
+            "spark"
         ],
         "query": "SELECT round(stddev(PS_SUPPLYCOST), 2) AS STDDEV_SUPPLYCOST FROM '{partsupp}';"
     },
