@@ -7,7 +7,8 @@
         "producers": [
             "datafusion",
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT round(cos(CAST(ps_supplycost AS DOUBLE)), 2) AS COS_SUPPLY FROM '{partsupp}' LIMIT 10;"
     },

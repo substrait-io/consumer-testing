@@ -8,7 +8,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT c.C_CUSTKEY, c.C_NAME, o.O_ORDERKEY FROM '{customer}' c INNER JOIN '{orders}' o ON c.C_CUSTKEY = o.O_CUSTKEY;"
     },

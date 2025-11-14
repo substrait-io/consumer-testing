@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT L_ORDERKEY FROM '{lineitem}' WHERE L_ORDERKEY IN (1, 2, 3)"
     },

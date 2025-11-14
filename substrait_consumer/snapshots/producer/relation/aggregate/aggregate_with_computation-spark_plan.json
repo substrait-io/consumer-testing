@@ -1,0 +1,199 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_arithmetic_decimal.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 1,
+      "name": "avg:dec",
+      "extensionUrnReference": 1
+    }
+  }, {
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 2,
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 1
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "project": {
+          "common": {
+            "emit": {
+              "outputMapping": [1]
+            },
+            "hint": {
+              "outputNames": ["(avg(O_TOTALPRICE) * 10)"]
+            }
+          },
+          "input": {
+            "aggregate": {
+              "common": {
+                "direct": {
+                }
+              },
+              "input": {
+                "project": {
+                  "common": {
+                    "emit": {
+                      "outputMapping": [9]
+                    },
+                    "hint": {
+                      "outputNames": ["o_totalprice"]
+                    }
+                  },
+                  "input": {
+                    "read": {
+                      "common": {
+                        "direct": {
+                        }
+                      },
+                      "baseSchema": {
+                        "names": ["o_orderkey", "o_custkey", "o_orderstatus", "o_totalprice", "o_orderdate", "o_orderpriority", "o_clerk", "o_shippriority", "o_comment"],
+                        "struct": {
+                          "types": [{
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "date": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "i32": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }],
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      },
+                      "localFiles": {
+                        "items": [{
+                          "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/orders_small.parquet",
+                          "length": "1385",
+                          "parquet": {
+                          }
+                        }]
+                      }
+                    }
+                  },
+                  "expressions": [{
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 3
+                        }
+                      },
+                      "rootReference": {
+                      }
+                    }
+                  }]
+                }
+              },
+              "groupings": [{
+              }],
+              "measures": [{
+                "measure": {
+                  "functionReference": 1,
+                  "phase": "AGGREGATION_PHASE_INITIAL_TO_RESULT",
+                  "outputType": {
+                    "decimal": {
+                      "scale": 6,
+                      "precision": 19,
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "invocation": "AGGREGATION_INVOCATION_ALL",
+                  "arguments": [{
+                    "value": {
+                      "selection": {
+                        "directReference": {
+                          "structField": {
+                          }
+                        },
+                        "rootReference": {
+                        }
+                      }
+                    }
+                  }]
+                }
+              }]
+            }
+          },
+          "expressions": [{
+            "scalarFunction": {
+              "functionReference": 2,
+              "outputType": {
+                "decimal": {
+                  "scale": 6,
+                  "precision": 22,
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              },
+              "arguments": [{
+                "value": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                }
+              }, {
+                "value": {
+                  "literal": {
+                    "decimal": {
+                      "value": "CgAAAAAAAAAAAAAAAAAAAA==",
+                      "precision": 2
+                    }
+                  }
+                }
+              }]
+            }
+          }]
+        }
+      },
+      "names": ["(avg(O_TOTALPRICE) * 10)"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }]
+}

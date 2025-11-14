@@ -1,0 +1,141 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_arithmetic.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 1,
+      "name": "divide:fp64_fp64",
+      "extensionUrnReference": 1
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "fetch": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "project": {
+              "common": {
+                "emit": {
+                  "outputMapping": [5, 6]
+                },
+                "hint": {
+                  "outputNames": ["PS_PARTKEY", "DIVIDE_KEY"]
+                }
+              },
+              "input": {
+                "read": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "baseSchema": {
+                    "names": ["ps_partkey", "ps_suppkey", "ps_availqty", "ps_supplycost", "ps_comment"],
+                    "struct": {
+                      "types": [{
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "localFiles": {
+                    "items": [{
+                      "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/partsupp.parquet",
+                      "length": "4367655",
+                      "parquet": {
+                      }
+                    }]
+                  }
+                }
+              },
+              "expressions": [{
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "outputType": {
+                    "fp64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "cast": {
+                        "type": {
+                          "fp64": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "input": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {
+                              }
+                            },
+                            "rootReference": {
+                            }
+                          }
+                        },
+                        "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                      }
+                    }
+                  }, {
+                    "value": {
+                      "literal": {
+                        "fp64": 10.0
+                      }
+                    }
+                  }]
+                }
+              }]
+            }
+          },
+          "offset": "0",
+          "count": "10"
+        }
+      },
+      "names": ["PS_PARTKEY", "DIVIDE_KEY"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_arithmetic"
+  }]
+}

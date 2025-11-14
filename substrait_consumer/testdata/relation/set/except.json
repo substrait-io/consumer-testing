@@ -8,7 +8,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT o_totalprice FROM '{orders}' EXCEPT SELECT c_acctbal FROM '{customer}'"
     },

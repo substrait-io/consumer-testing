@@ -6,7 +6,8 @@
     "sql_query": {
         "producers": [
             "datafusion",
-            "duckdb"
+            "duckdb",
+            "spark"
         ],
         "query": "SELECT PS_PARTKEY, power(PS_PARTKEY, 2) AS POWER_KEY FROM '{partsupp}' LIMIT 10;"
     },

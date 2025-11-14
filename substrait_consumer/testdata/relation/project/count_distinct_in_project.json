@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT COUNT(DISTINCT L_EXTENDEDPRICE) FROM '{lineitem}'"
     },

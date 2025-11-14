@@ -6,7 +6,8 @@
     "sql_query": {
         "producers": [
             "datafusion",
-            "duckdb"
+            "duckdb",
+            "spark"
         ],
         "query": "SELECT round(avg(PS_SUPPLYCOST), 2) AS AVG_SUPPLYCOST FROM '{partsupp}';"
     },

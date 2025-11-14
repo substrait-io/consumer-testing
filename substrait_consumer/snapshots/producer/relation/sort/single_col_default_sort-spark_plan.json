@@ -1,0 +1,110 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "fetch": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "sort": {
+              "common": {
+                "direct": {
+                }
+              },
+              "input": {
+                "project": {
+                  "common": {
+                    "emit": {
+                      "outputMapping": [5]
+                    },
+                    "hint": {
+                      "outputNames": ["PS_AVAILQTY"]
+                    }
+                  },
+                  "input": {
+                    "read": {
+                      "common": {
+                        "direct": {
+                        }
+                      },
+                      "baseSchema": {
+                        "names": ["ps_partkey", "ps_suppkey", "ps_availqty", "ps_supplycost", "ps_comment"],
+                        "struct": {
+                          "types": [{
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "i64": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_NULLABLE"
+                            }
+                          }],
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      },
+                      "localFiles": {
+                        "items": [{
+                          "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/partsupp.parquet",
+                          "length": "4367655",
+                          "parquet": {
+                          }
+                        }]
+                      }
+                    }
+                  },
+                  "expressions": [{
+                    "selection": {
+                      "directReference": {
+                        "structField": {
+                          "field": 2
+                        }
+                      },
+                      "rootReference": {
+                      }
+                    }
+                  }]
+                }
+              },
+              "sorts": [{
+                "expr": {
+                  "selection": {
+                    "directReference": {
+                      "structField": {
+                      }
+                    },
+                    "rootReference": {
+                    }
+                  }
+                },
+                "direction": "SORT_DIRECTION_ASC_NULLS_FIRST"
+              }]
+            }
+          },
+          "offset": "0",
+          "count": "10"
+        }
+      },
+      "names": ["PS_AVAILQTY"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  }
+}

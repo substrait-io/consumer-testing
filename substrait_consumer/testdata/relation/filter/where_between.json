@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT L_ORDERKEY FROM '{lineitem}' WHERE L_ORDERKEY BETWEEN 20 AND 50 LIMIT 20;"
     },

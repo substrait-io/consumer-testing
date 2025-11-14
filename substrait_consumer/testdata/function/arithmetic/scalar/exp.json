@@ -7,7 +7,8 @@
         "producers": [
             "datafusion",
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT PS_PARTKEY, round(exp(CAST(PS_PARTKEY AS DOUBLE)), 2) AS EXP_KEY FROM '{partsupp}' LIMIT 10;"
     },

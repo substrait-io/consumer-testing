@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT L_QUANTITY, L_EXTENDEDPRICE*10 AS MULTI_PRICE FROM '{lineitem}'"
     },

@@ -1,0 +1,208 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 2,
+    "uri": "/functions_arithmetic.yaml"
+  }, {
+    "extensionUriAnchor": 1,
+    "uri": "/functions_rounding.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 1,
+      "name": "round:fp64_i32",
+      "extensionUrnReference": 1
+    }
+  }, {
+    "extensionFunction": {
+      "extensionUriReference": 2,
+      "functionAnchor": 2,
+      "name": "acos:fp64",
+      "extensionUrnReference": 2
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "fetch": {
+          "common": {
+            "direct": {
+            }
+          },
+          "input": {
+            "project": {
+              "common": {
+                "emit": {
+                  "outputMapping": [16]
+                },
+                "hint": {
+                  "outputNames": ["ACOS_TAX"]
+                }
+              },
+              "input": {
+                "read": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "baseSchema": {
+                    "names": ["l_orderkey", "l_partkey", "l_suppkey", "l_linenumber", "l_quantity", "l_extendedprice", "l_discount", "l_tax", "l_returnflag", "l_linestatus", "l_shipdate", "l_commitdate", "l_receiptdate", "l_shipinstruct", "l_shipmode", "l_comment"],
+                    "struct": {
+                      "types": [{
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "i64": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "decimal": {
+                          "scale": 2,
+                          "precision": 15,
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "date": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "date": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "date": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }, {
+                        "string": {
+                          "nullability": "NULLABILITY_NULLABLE"
+                        }
+                      }],
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  },
+                  "localFiles": {
+                    "items": [{
+                      "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/lineitem.parquet",
+                      "length": "26368539",
+                      "parquet": {
+                      }
+                    }]
+                  }
+                }
+              },
+              "expressions": [{
+                "scalarFunction": {
+                  "functionReference": 1,
+                  "outputType": {
+                    "fp64": {
+                      "nullability": "NULLABILITY_NULLABLE"
+                    }
+                  },
+                  "arguments": [{
+                    "value": {
+                      "scalarFunction": {
+                        "functionReference": 2,
+                        "outputType": {
+                          "fp64": {
+                            "nullability": "NULLABILITY_NULLABLE"
+                          }
+                        },
+                        "arguments": [{
+                          "value": {
+                            "cast": {
+                              "type": {
+                                "fp64": {
+                                  "nullability": "NULLABILITY_NULLABLE"
+                                }
+                              },
+                              "input": {
+                                "selection": {
+                                  "directReference": {
+                                    "structField": {
+                                      "field": 7
+                                    }
+                                  },
+                                  "rootReference": {
+                                  }
+                                }
+                              },
+                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
+                            }
+                          }
+                        }]
+                      }
+                    }
+                  }, {
+                    "value": {
+                      "literal": {
+                        "i32": 2
+                      }
+                    }
+                  }]
+                }
+              }]
+            }
+          },
+          "offset": "0",
+          "count": "10"
+        }
+      },
+      "names": ["ACOS_TAX"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_rounding"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_arithmetic"
+  }]
+}

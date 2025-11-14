@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT PS_SUPPLYCOST, PS_AVAILQTY FROM '{partsupp}' ORDER BY PS_SUPPLYCOST DESC, PS_AVAILQTY ASC LIMIT 10;"
     },

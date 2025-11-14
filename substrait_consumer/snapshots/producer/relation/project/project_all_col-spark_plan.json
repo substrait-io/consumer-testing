@@ -1,0 +1,46 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "read": {
+          "common": {
+            "direct": {
+            }
+          },
+          "baseSchema": {
+            "names": ["r_regionkey", "r_name", "r_comment"],
+            "struct": {
+              "types": [{
+                "i32": {
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_NULLABLE"
+                }
+              }],
+              "nullability": "NULLABILITY_REQUIRED"
+            }
+          },
+          "localFiles": {
+            "items": [{
+              "uriFile": "file:///tmp/substrait-io/consumer-testing/substrait_consumer/data/tpch_parquet/region_small.parquet",
+              "length": "1058",
+              "parquet": {
+              }
+            }]
+          }
+        }
+      },
+      "names": ["r_regionkey", "r_name", "r_comment"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "substrait-spark"
+  }
+}

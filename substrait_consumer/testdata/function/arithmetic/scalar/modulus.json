@@ -6,7 +6,8 @@
     "sql_query": {
         "producers": [
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT PS_PARTKEY, mod(PS_PARTKEY, 10) AS MODULUS_KEY FROM '{partsupp}' LIMIT 10;"
     },

@@ -12,6 +12,7 @@ from substrait_consumer.producers.datafusion_producer import DataFusionProducer
 from substrait_consumer.producers.duckdb_producer import DuckDBProducer
 from substrait_consumer.producers.ibis_producer import IbisProducer
 from substrait_consumer.producers.isthmus_producer import IsthmusProducer
+from substrait_consumer.producers.spark_producer import SparkProducer
 
 
 @pytest.fixture
@@ -105,7 +106,7 @@ def saveplan(request):
 
 PRODUCERS = {
     cls.name(): cls
-    for cls in [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer]
+    for cls in [DataFusionProducer, DuckDBProducer, IbisProducer, IsthmusProducer, SparkProducer]
 }
 CONSUMERS = {
     cls.name(): cls for cls in [AceroConsumer, DataFusionConsumer, DuckDBConsumer]

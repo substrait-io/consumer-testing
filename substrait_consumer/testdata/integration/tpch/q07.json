@@ -10,7 +10,8 @@
     "sql_query": {
         "producers": [
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query_path": "q07.sql"
     },

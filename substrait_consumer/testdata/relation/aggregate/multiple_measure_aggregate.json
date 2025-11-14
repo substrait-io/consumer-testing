@@ -7,7 +7,8 @@
         "producers": [
             "duckdb",
             "datafusion",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT MIN(O_TOTALPRICE), MAX(O_TOTALPRICE), AVG(O_TOTALPRICE) FROM '{orders}'"
     },

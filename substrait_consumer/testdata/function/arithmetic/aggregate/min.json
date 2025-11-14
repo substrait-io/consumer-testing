@@ -7,7 +7,8 @@
         "producers": [
             "datafusion",
             "duckdb",
-            "isthmus"
+            "isthmus",
+            "spark"
         ],
         "query": "SELECT min(PS_SUPPLYCOST) AS MIN_SUPPLYCOST FROM '{partsupp}';"
     },
