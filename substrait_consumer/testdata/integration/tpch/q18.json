@@ -8,8 +8,7 @@
     "sql_query": {
         "producers": [
             "duckdb",
-            "isthmus",
-            "spark"
+            "isthmus"
         ],
         "query_path": "q18.sql"
     },
