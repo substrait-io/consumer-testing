@@ -7,13 +7,15 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "multiply:dec_dec"
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 2,
-      "name": "avg:dec"
+      "name": "avg:dec",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -164,5 +166,13 @@
       },
       "names": ["EXPR$0"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
   }]
 }

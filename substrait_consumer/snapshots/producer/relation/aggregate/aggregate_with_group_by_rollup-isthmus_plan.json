@@ -7,7 +7,8 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "count:"
+      "name": "count:",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -21,7 +22,8 @@
           "input": {
             "aggregate": {
               "common": {
-                "direct": {
+                "emit": {
+                  "outputMapping": [0, 1, 2]
                 }
               },
               "input": {
@@ -221,5 +223,13 @@
       },
       "names": ["L_ORDERKEY", "L_LINENUMBER", "EXPR$2"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_aggregate_generic"
   }]
 }

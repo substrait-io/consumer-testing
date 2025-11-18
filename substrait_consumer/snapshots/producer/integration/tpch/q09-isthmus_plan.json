@@ -19,43 +19,50 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 3,
-      "name": "like:str_str"
+      "name": "like:str_str",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 4,
-      "name": "extract:req_date"
+      "name": "extract:req_date",
+      "extensionUrnReference": 4
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 5,
       "functionAnchor": 5,
-      "name": "subtract:dec_dec"
+      "name": "subtract:dec_dec",
+      "extensionUrnReference": 5
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 5,
       "functionAnchor": 6,
-      "name": "multiply:dec_dec"
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 5
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 5,
       "functionAnchor": 7,
-      "name": "sum:dec"
+      "name": "sum:dec",
+      "extensionUrnReference": 5
     }
   }],
   "relations": [{
@@ -955,5 +962,25 @@
       },
       "names": ["NATION", "O_YEAR", "SUM_PROFIT"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 5,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 4,
+    "urn": "extension:io.substrait:functions_datetime"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
+  }, {
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_string"
   }]
 }

@@ -7,7 +7,8 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "like:str_str"
+      "name": "like:str_str",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -115,5 +116,13 @@
       },
       "names": ["N_NAME"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_string"
   }]
 }
