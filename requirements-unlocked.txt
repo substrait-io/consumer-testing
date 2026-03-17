@@ -1,4 +1,4 @@
-datafusion==40.1.0
+datafusion==52.3.0
 duckdb
 filelock
 ibis-framework
