@@ -1,7 +1,7 @@
 from pathlib import Path
 import substrait_validator as sv
 from .producer import SQLProducer
-import substrait.gen.proto.plan_pb2 as plan_pb2
+import substrait.plan_pb2 as plan_pb2
 from datafusion import SessionContext
 from datafusion import substrait as ss
 from google.protobuf.json_format import MessageToJson

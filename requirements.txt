@@ -15,7 +15,7 @@ packaging==24.2
 pandas==2.2.3
 parsy==2.1
 pluggy==1.5.0
-protobuf==5.28.3
+protobuf==5.29.6
 pyarrow==18.1.0
 pytest==8.3.3
 pytest-csv==3.0.0
@@ -26,7 +26,7 @@ pytz==2024.2
 PyYAML==6.0.2
 six==1.16.0
 sqlglot==25.20.2
-substrait==0.23.0
+substrait==0.28.0
 substrait-validator==0.1.1
 toolz==0.12.1
 typing_extensions==4.12.2

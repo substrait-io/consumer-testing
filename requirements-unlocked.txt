@@ -5,7 +5,7 @@ ibis-framework
 ibis-substrait
 JPype1
 pandas
-protobuf==5.28.3
+protobuf==5.29.6
 pyarrow
 pytest
 pytest-csv

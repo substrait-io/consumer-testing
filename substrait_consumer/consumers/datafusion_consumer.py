@@ -6,7 +6,7 @@ import pyarrow as pa
 from datafusion import SessionContext
 from datafusion import substrait as ds
 from google.protobuf.json_format import Parse
-from substrait.gen.proto.plan_pb2 import Plan
+from substrait.plan_pb2 import Plan
 
 from .consumer import COLUMN_A, COLUMN_B, COLUMN_C, COLUMN_D, Consumer
 
