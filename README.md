@@ -7,12 +7,11 @@ Table of Contents
 * [Setup](#Setup)
 * [How to Run Tests](#How-to-Run-Tests)
 * [TPCH Tests](#TPCH-Tests)
-  * [Test Case Args](#Test-Case-Args)
+  * [Test Data](#Test-Data)
   * [Substrait Plans](#Substrait-Plans)
   * [SQL Queries](#SQL-Queries)
-* [Function Tests](#Substrait-Function-Tests)
+* [Function Tests](#Function-Tests)
   * [Test Case Args](#Test-Case-Args)
-  * [SQL Queries](#SQL-Queries)
   * [Ibis Expressions](#Ibis-Expressions)
   * [Updating Snapshots](#Updating-Snapshots)
     * [Substrait Plan Snapshots](#Substrait-Plan-Snapshots)
@@ -21,6 +20,7 @@ Table of Contents
   * [How to Use](#How-to-Use)
 * [How to Add Producers](#How-to-Add-Producers)
 * [How to Add Consumers](#How-to-Add-Consumers)
+* [How to Update Producers/Consumers/Dependencies](#How-to-Update-ProducersConsumersDependencies)
 
 
 # Overview
@@ -50,9 +50,9 @@ all times. To understand the level of conformance of producers and consumers,
 the [support matrix](SUPPORT_MATRIX.md) is used instead.
 
 # Setup
-Create and activate your conda environment with python3.9:
+Create and activate your conda environment with python3.12:
 ```commandline
-conda create -y -n substrait_consumer_testing -c conda-forge python=3.9 openjdk
+conda create -y -n substrait_consumer_testing -c conda-forge python=3.12 openjdk
 conda activate substrait_consumer_testing
 ```
 *Note: Java is used by Jpype to access the Isthmus producer.  
@@ -80,73 +80,46 @@ python3 setup.py develop
 ```
 
 # How to Run Tests
-TPCH tests are located in the `substrait_consumer/tests/integration` folder and substrait function tests
-are located in the `substrait_consumer/tests/functional` folder.
+TPCH integration test data is located in `substrait_consumer/testdata/integration` and function
+test data is located in `substrait_consumer/testdata/function`.
 
-Tests are run with pytest.
+Tests are run with pytest from the project root directory.
 
-TPCH Tests:
+Producer Tests (generate Substrait plans):
 ```commandline
-cd substrait_consumer/tests/integration/
-pytest test_acero_tpch.py
+# Run all producer tests:
+pytest -v -m produce_substrait_snapshot substrait_consumer/
+
+# Run producer tests for a specific producer:
+pytest -v -m produce_substrait_snapshot --producer=datafusion substrait_consumer/
 ```
 
-Function Tests:
+Consumer Tests (execute Substrait plans):
 ```commandline
-cd substrait_consumer/tests/functional/
+# Run all consumer tests:
+pytest -v -m consume_substrait_snapshot substrait_consumer/
 
-# Run all function tests:
-pytest extension_functions
-
-# Run a single function test:
-pytest extension_functions/test_arithmetic_functions.py
+# Run consumer tests for a specific consumer:
+pytest -v -m consume_substrait_snapshot --consumer=datafusion substrait_consumer/
 ```
 
 # TPCH Tests
-TPCH test files are located in the `substrait_consumer/tests/integration` folder.
+TPCH test data is located in the `substrait_consumer/testdata/integration` folder, which contains
+SQL queries and Substrait plans in `substrait_consumer/testdata/integration/tpch`.
 
+## Test Data
+Each TPCH query has a `.sql` file and a corresponding `.json` Substrait plan file in
+`substrait_consumer/testdata/integration/tpch/`.
 
-## Test Case Args
-Test case arguments are located in `substrait_consumer/tests/integration/queries/tpch_test_cases.py`.  They specify 
-the parquet files, the SQL query, and substrait query plan that will be used for the test cases.
-
-query_1.py
-```python
-TPCH_QUERY_TESTS = (
-    {
-        "test_name": "test_tpch_sql_1",
-        "local_files": {},
-        "named_tables": {"lineitem": "lineitem.parquet"},
-        "sql_query": get_sql("q1.sql"),
-        "substrait_query": get_substrait_plan("query_01_plan.json"),
-    },
-    {
-        "test_name": "test_tpch_sql_2",
-        "local_files": {},
-        "named_tables": {
-            "part": "part.parquet",
-            "supplier": "supplier.parquet",
-            "partsupp": "partsupp.parquet",
-            "nation": "nation.parquet",
-            "region": "region.parquet",
-            "partsupp": "partsupp.parquet",
-            "supplier": "supplier.parquet",
-            "nation": "nation.parquet",
-            "region": "region.parquet",
-        },
-        "sql_query": get_sql("q2.sql"),
-        "substrait_query": get_substrait_plan("query_02_plan.json"),
-    },
-)
-```
 ## Substrait Plans
-Substrait query plans are located in `substrait_consumer/tests/integration/queries/tpch_substrait_plans`.
+Substrait query plans used for integration testing are located in
+`substrait_consumer/testdata/integration/queries/tpch_substrait_plans`.
 
 ## SQL Queries
-SQL queries are located in `substrait_consumer/tests/integration/queries/tpch_sql`.
+SQL queries are embedded alongside their plans in `substrait_consumer/testdata/integration/tpch/`.
 
 The SQL queries have named placeholders (`'{customer}'`) where the table names or file paths will be inserted.
-Table names are determined based on the `"named_tables"` and `"local_files"` in the test case args file.
+Table names are determined based on the `"named_tables"` and `"local_files"` in the test case file.
 
 # Function Tests
 The substrait function tests aim to test the functions available in Substrait.  This is done
@@ -162,51 +135,40 @@ results are saved as a snapshot to be used for verification.
 
 If there is a mismatch between results and a saved snapshot, the result will be considered incorrect.
 
-Substrait function test files are located in the `substrait_consumer/functional/extension_functions` folder.
+Substrait function test data is located in the `substrait_consumer/testdata/function` folder, organized
+by function group (e.g., `arithmetic`, `boolean`, `comparison`, `string`).
 
 
 ## Test Case Args
-Test case arguments located in `substrait_consumer/functional/queries/{*_tests}.py`.  They specify 
-the parquet files, an SQL query, and an ibis expression.
+Test case arguments are defined as JSON files in `substrait_consumer/testdata/function/{group}/{type}/`
+(e.g., `substrait_consumer/testdata/function/arithmetic/scalar/add.json`). They specify
+the parquet files, an SQL query, and which producers can generate the plan.
 
 The tests also take in the consumer and producer as test input via the producer/consumer test fixtures,
 which are defined in `substrait_consumer/conftest.py`.  The fixtures allow the tests to cycle through all combinations
 of producers and consumers.
 
-arithmetic_tests.py
-```python
-SCALAR_FUNCTIONS = (
-    {
-        "test_name": "add",
-        "local_files": {},
-        "named_tables": {"partsupp": "partsupp.parquet"},
-        "sql_query": SQL_SCALAR["add"],
+Example: `substrait_consumer/testdata/function/arithmetic/scalar/add.json`
+```json
+{
+    "local_files": {},
+    "named_tables": {
+        "partsupp": "partsupp.parquet"
     },
-```
-
-## SQL Queries
-The SQL queries are located in `substrait_consumer/functional/queries/sql`.
-arithmetic_functions_sql.py
-```python
-SQL_SCALAR = {
-    "add":
-        """
-        SELECT PS_PARTKEY, PS_SUPPKEY, add(PS_PARTKEY, PS_SUPPKEY) AS ADD_KEY
-        FROM '{partsupp}';
-        """,
+    "sql_query": {
+        "producers": ["datafusion", "duckdb", "isthmus"],
+        "query": "SELECT PS_PARTKEY, PS_SUPPKEY, PS_PARTKEY + PS_SUPPKEY AS ADD_KEY FROM '{partsupp}' LIMIT 10;"
+    },
+    "test_name": "add"
+}
 ```
 
 ## Ibis Expressions
-The Ibis expressions are located in `substrait_consumer/functional/queries/ibis_expressions`.
-arithmetic_functions_expr.py
-```python
-def add_expr(partsupp, lineitem, t):
-    new_col = (partsupp.ps_partkey + partsupp.ps_suppkey).name("ADD_KEY")
-    return partsupp[partsupp.ps_partkey, partsupp.ps_suppkey, new_col]
-
-IBIS_SCALAR = {
-    "add": add_expr,
-}
+The Ibis expression tests are located in `substrait_consumer/ibis_expressions/`.
+```commandline
+ls substrait_consumer/ibis_expressions/
+test_arithmetic_functions_expr.py  test_comparison_functions_expr.py  test_string_functions_expr.py
+test_boolean_functions_expr.py     test_logarithmic_functions_expr.py test_rounding_functions_expr.py
 ```
 
 ## Updating Snapshots
@@ -222,16 +184,15 @@ diverging answer *will* lead to test failure). When updating snapshots we,
 thus, need to be conscious about which of the two snapshots we update.
 
 ### Substrait Plan Snapshots
-Each producer has its own set of substrait plan snapshots that are stored in the `*_snapshots`
-directory under `substrait_consumer/tests/functional/extension_functions/`
+Producer-generated Substrait plan snapshots are stored in:
+```
+substrait_consumer/snapshots/producer/{category}/{group}/
+```
+For example:
 ```commandline
-cd substrait_consumer/tests/functional/extension_functions/boolean_snapshots
-ls
-DuckDBProducer		IbisProducer		IsthmusProducer
-cd DuckDBProducer
-and-duckdb_outcome.txt       bool_and_plan.json          not-duckdb_outcome.txt  or_plan.json
-and_plan.json                bool_or-duckdb_outcome.txt  not_plan.json           xor-duckdb_outcome.txt
-bool_and-duckdb_outcome.txt  bool_or_plan.json           or-duckdb_outcome.txt   xor_plan.json
+ls substrait_consumer/snapshots/producer/function/arithmetic/
+abs_plan.json             add-datafusion_plan.json  add-duckdb_plan.json
+abs-datafusion_plan.json  add-isthmus_plan.json     ...
 ```
 
 Substrait plan snapshots are used to verify that producers are able to generate substrait plans.
@@ -239,13 +200,11 @@ These tests are marked with the `produce_substrait_snapshot` pytest marker.
 
 Snapshots can be updated with the following command:
 ```commandline
-cd substrait_consumer/tests/functional/extension_functions
-pytest -m produce_substrait_snapshot --snapshot-update
+pytest -m produce_substrait_snapshot --snapshot-update substrait_consumer/
 ```
-You can update the snapshots from a single producer with the `--producer` option as well as
-for a single test by specifying the test file:
+You can update the snapshots from a single producer with the `--producer` option:
 ```commandline
-pytest -m produce_substrait_snapshot --producer isthmus --snapshot-update test_arithmetic_functions.py
+pytest -m produce_substrait_snapshot --producer=isthmus --snapshot-update substrait_consumer/
 ```
 Note that this updates *both* snapshots, the one with the expected behavior and
 the one recording whether or not the system behaved that way. After updating
@@ -253,62 +212,58 @@ the snapshots, be sure that the new snapshots correspond to what you want and
 manually intervene if necessary.
 
 ### Results Snapshots
-Results Snapshots are generated by running the SQL query corresponding to the function under
-test against DuckDB.  Those tests are marked with the `generate_function_snapshots` pytest
-marker.
+Consumer result snapshots are stored in:
+```
+substrait_consumer/snapshots/results/{category}/{group}/
+```
+For example:
 ```commandline
-cd substrait_consumer/tests/functional/extension_functions
-pytest -m generate_function_snapshots --snapshot-update test_arithmetic_functions.py
+ls substrait_consumer/snapshots/results/function/arithmetic/
+add_result_data.txt
+add_result_schema.txt
+add-datafusion-acero_outcome.txt
+add-datafusion-datafusion_outcome.txt
+add-datafusion-duckdb_outcome.txt
+...
 ```
 
-Results snapshots are saved in the `function_test_results` under each
-function grouping snapshots folder.
+Result snapshots can be updated with:
 ```commandline
-cd substrait_consumer/tests/functional/extension_functions/boolean_snapshots/function_test_results
-ls
-and-datafusion-acero_outcome.txt       and-duckdb-acero_outcome.txt   and-ibis-acero_outcome.txt     and_outcome.txt
-and-datafusion-datafusion_outcome.txt  and-duckdb-duckdb_outcome.txt  and-isthmus-acero_outcome.txt  and_result.txt
-...
+pytest -m consume_substrait_snapshot --snapshot-update substrait_consumer/
 ```
 
 
 # Generating Substrait from Adhoc SQL/Ibis
 The CLI tool for generating substrait plans from adhoc SQL queries and Ibis expression
-is located in the `substrait_consumer/tests/adhoc` directory.  The SQL queries should be 
+is located in the `substrait_consumer/adhoc` directory.  The SQL queries should be 
 written using the same TPCH data used in the integration tests.  This tool will generate 
 the substrait plans for each supported producer and run that plan against all supported consumers.
 
 ## How to Use
-If you are testing out an SQL query, copy your SQL query into `substrait_consumer/tests/adhoc/query.sql`
+If you are testing out an SQL query, copy your SQL query into `substrait_consumer/adhoc/query.sql`
 and run the following command (make sure to specify a producer that can convert SQL to Substrait):
 ```commandline
-cd substrait_consumer/tests/adhoc
-pytest --adhoc_producer=isthmus test_adhoc_expression.py
+pytest --adhoc_producer=isthmus substrait_consumer/adhoc/test_adhoc_producer.py
 ```
 
 If you are testing out an Ibis expression, copy your Ibis expression into 
-`substrait_consumer/tests/adhoc/ibis_expr.py` and run the following command:
+`substrait_consumer/adhoc/ibis_expr.py` and run the following command:
 ```commandline
-cd substrait_consumer/tests/adhoc
-pytest --adhoc_producer=ibis test_adhoc_expression.py
+pytest --adhoc_producer=ibis substrait_consumer/adhoc/test_adhoc_producer.py
 ```
 *Note: If you're using the IbisProducer, make sure you do not edit the function name and arguments
 already in line 2 of `ibis_expr.py`.  The test is expecting the specific name and arguments.
 
 You can save the produced substrait plans with the `--saveplan` option.
 ```commandline
-pytest --saveplan True --adhoc_producer=isthmus test_adhoc_expression.py
+pytest --saveplan True --adhoc_producer=isthmus substrait_consumer/adhoc/test_adhoc_producer.py
 ```
 Plans will be saved as {producer_name}_substrait.json
-```commandline
-ls *.json
-IsthmusProducer_substrait.json
-```
 
 If you want to run the tests using specific producer/consumer pairs, you can use 
 the both the `--adhoc_producer` and `--consumer` options.
 ```commandline
-pytest --adhoc_producer=isthmus --consumer=acero test_adhoc_expression.py
+pytest --adhoc_producer=isthmus --consumer=duckdb substrait_consumer/adhoc --consumer=duckdb
 ```
 
 
@@ -325,7 +280,7 @@ to the PRODUCERS list in `substrait_consumer/conftest.py`.
 # How to Add Consumers
 Consumers should be added to the `substrait_consumer/consumers` folder and provide 
 methods on how to run the substrait query plan against that consumer.  Look at 
-`substrait_consumer/producers/duckdb_consumer.py` for an example implementation.
+`substrait_consumer/consumers/duckdb_consumer.py` for an example implementation.
 
 In order for the test to use the new consumer, the consumer class name should also be added
 to the CONSUMERS list in `substrait_consumer/conftest.py`.
