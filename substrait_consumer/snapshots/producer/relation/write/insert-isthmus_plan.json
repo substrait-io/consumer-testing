@@ -1,0 +1,81 @@
+{
+  "relations": [{
+    "root": {
+      "input": {
+        "write": {
+          "namedTable": {
+            "names": ["REGION"]
+          },
+          "tableSchema": {
+            "names": ["R_REGIONKEY", "R_NAME", "R_COMMENT"],
+            "struct": {
+              "types": [{
+                "i32": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }],
+              "nullability": "NULLABILITY_REQUIRED"
+            }
+          },
+          "op": "WRITE_OP_INSERT",
+          "input": {
+            "read": {
+              "common": {
+                "direct": {
+                }
+              },
+              "baseSchema": {
+                "names": ["R_REGIONKEY", "R_NAME", "R_COMMENT"],
+                "struct": {
+                  "types": [{
+                    "i32": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }, {
+                    "string": {
+                      "nullability": "NULLABILITY_REQUIRED"
+                    }
+                  }],
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              },
+              "virtualTable": {
+                "values": [{
+                  "fields": [{
+                    "i32": 99999
+                  }, {
+                    "fixedChar": "region_name"
+                  }, {
+                    "fixedChar": "region comment"
+                  }]
+                }]
+              }
+            }
+          },
+          "output": "OUTPUT_MODE_MODIFIED_RECORDS",
+          "common": {
+            "direct": {
+            }
+          }
+        }
+      },
+      "names": ["R_REGIONKEY", "R_NAME", "R_COMMENT"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  }
+}

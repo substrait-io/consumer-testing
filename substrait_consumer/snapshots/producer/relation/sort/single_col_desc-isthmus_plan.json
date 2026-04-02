@@ -94,5 +94,9 @@
       },
       "names": ["PS_SUPPLYCOST"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  }
 }
