@@ -230,5 +230,9 @@
       },
       "names": ["C_CUSTKEY", "C_NAME"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

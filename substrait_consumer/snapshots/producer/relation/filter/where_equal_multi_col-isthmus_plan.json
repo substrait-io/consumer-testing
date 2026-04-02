@@ -208,5 +208,9 @@
       },
       "names": ["L_DISCOUNT", "L_TAX"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

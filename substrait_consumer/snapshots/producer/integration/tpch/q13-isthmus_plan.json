@@ -457,5 +457,9 @@
       },
       "names": ["C_COUNT", "CUSTDIST"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

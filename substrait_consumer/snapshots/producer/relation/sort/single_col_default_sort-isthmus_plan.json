@@ -94,5 +94,9 @@
       },
       "names": ["PS_AVAILQTY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

@@ -136,5 +136,9 @@
       },
       "names": ["C_NATIONKEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

@@ -870,5 +870,9 @@
       },
       "names": ["P_BRAND", "P_TYPE", "P_SIZE", "SUPPLIER_CNT"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

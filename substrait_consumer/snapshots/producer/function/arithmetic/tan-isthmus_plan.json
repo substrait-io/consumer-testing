@@ -133,5 +133,9 @@
       },
       "names": ["TAN_SUPPLY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

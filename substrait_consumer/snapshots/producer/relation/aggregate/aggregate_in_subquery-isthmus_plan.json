@@ -249,5 +249,9 @@
       },
       "names": ["O_TOTALPRICE"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

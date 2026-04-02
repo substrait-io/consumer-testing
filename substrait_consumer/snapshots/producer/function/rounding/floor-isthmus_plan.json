@@ -116,5 +116,9 @@
       },
       "names": ["PS_SUPPLYCOST", "FLOOR_SUPPLYCOST"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }
