@@ -15,7 +15,7 @@ packaging==24.2
 pandas==2.2.3
 parsy==2.1
 pluggy==1.5.0
-protobuf==5.28.3
+protobuf==5.29.6
 pyarrow==23.0.1
 pytest==8.3.3
 pytest-csv==3.0.0
