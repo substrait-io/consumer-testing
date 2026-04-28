@@ -88,5 +88,9 @@
       },
       "names": ["O_ORDERKEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

@@ -133,5 +133,9 @@
       },
       "names": ["COS_SUPPLY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

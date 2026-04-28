@@ -1051,5 +1051,9 @@
       },
       "names": ["S_NAME", "NUMWAIT"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

@@ -72,5 +72,9 @@
       },
       "names": ["R_REGIONKEY", "R_NAME", "R_COMMENT"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

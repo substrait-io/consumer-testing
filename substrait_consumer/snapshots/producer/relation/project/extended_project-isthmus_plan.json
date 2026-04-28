@@ -166,5 +166,9 @@
       },
       "names": ["L_QUANTITY", "MULTI_PRICE"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

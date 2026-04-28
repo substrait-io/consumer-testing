@@ -133,5 +133,9 @@
       },
       "names": ["L_LINESTATUS"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

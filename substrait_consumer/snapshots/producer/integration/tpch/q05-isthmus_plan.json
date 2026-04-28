@@ -910,5 +910,9 @@
       },
       "names": ["N_NAME", "REVENUE"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

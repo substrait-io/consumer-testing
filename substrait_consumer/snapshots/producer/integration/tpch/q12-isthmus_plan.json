@@ -773,5 +773,9 @@
       },
       "names": ["L_SHIPMODE", "HIGH_LINE_COUNT", "LOW_LINE_COUNT"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

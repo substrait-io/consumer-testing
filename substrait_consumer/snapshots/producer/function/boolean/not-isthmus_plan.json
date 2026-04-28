@@ -57,5 +57,9 @@
       },
       "names": ["C"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

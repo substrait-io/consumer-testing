@@ -120,5 +120,9 @@
       },
       "names": ["PS_PARTKEY", "MODULUS_KEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

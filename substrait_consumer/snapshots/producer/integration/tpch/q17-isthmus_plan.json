@@ -700,5 +700,9 @@
       },
       "names": ["AVG_YEARLY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

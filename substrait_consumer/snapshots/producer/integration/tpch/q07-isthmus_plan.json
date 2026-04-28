@@ -1095,5 +1095,9 @@
       },
       "names": ["SUPP_NATION", "CUST_NATION", "L_YEAR", "REVENUE"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

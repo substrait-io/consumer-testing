@@ -438,5 +438,9 @@
       },
       "names": ["REVENUE"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

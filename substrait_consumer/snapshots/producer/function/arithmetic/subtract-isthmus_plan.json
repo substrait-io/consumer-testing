@@ -126,5 +126,9 @@
       },
       "names": ["PS_PARTKEY", "PS_SUPPKEY", "SUBTRACT_KEY"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }

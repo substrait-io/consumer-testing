@@ -1300,5 +1300,9 @@
       },
       "names": ["O_YEAR", "MKT_SHARE"]
     }
-  }]
+  }],
+  "version": {
+    "minorNumber": 69,
+    "producer": "isthmus"
+  }
 }
