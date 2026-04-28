@@ -7,19 +7,22 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "avg:dec"
+      "name": "avg:dec",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 2,
-      "name": "max:dec"
+      "name": "max:dec",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 3,
-      "name": "add:dec_dec"
+      "name": "add:dec_dec",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -208,5 +211,13 @@
       },
       "names": ["EXPR$0"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
   }]
 }

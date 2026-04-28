@@ -13,6 +13,14 @@ TEST_CASE_PATHS = list(
 )
 IDS = list(str(path[0]).removesuffix(".json") for path in TEST_CASE_PATHS)
 
+# The following is required to prevent segfault during isthmus processing.
+# See https://jpype.readthedocs.io/en/latest/userguide.html#errors-reported-by-python-fault-handler
+try:
+    import faulthandler
+    faulthandler.enable()
+    faulthandler.disable()
+except:
+    pass
 
 @pytest.fixture
 def mark_producer_tests_as_xfail(request):

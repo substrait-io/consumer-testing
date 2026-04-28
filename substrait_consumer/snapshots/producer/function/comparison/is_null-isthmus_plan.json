@@ -7,7 +7,8 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "is_null:any"
+      "name": "is_null:any",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -97,5 +98,13 @@
       },
       "names": ["A"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_comparison"
   }]
 }

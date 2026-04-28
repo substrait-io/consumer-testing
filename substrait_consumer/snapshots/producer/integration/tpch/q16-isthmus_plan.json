@@ -16,43 +16,50 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "not_equal:any_any"
+      "name": "not_equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 4,
-      "name": "not:bool"
+      "name": "not:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 5,
-      "name": "like:str_str"
+      "name": "like:str_str",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 6,
-      "name": "or:bool"
+      "name": "or:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 7,
-      "name": "count:any"
+      "name": "count:any",
+      "extensionUrnReference": 4
     }
   }],
   "relations": [{
@@ -870,5 +877,22 @@
       },
       "names": ["P_BRAND", "P_TYPE", "P_SIZE", "SUPPLIER_CNT"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
+  }, {
+    "extensionUrnAnchor": 4,
+    "urn": "extension:io.substrait:functions_aggregate_generic"
+  }, {
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_string"
   }]
 }

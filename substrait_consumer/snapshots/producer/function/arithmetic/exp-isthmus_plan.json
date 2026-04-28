@@ -10,13 +10,15 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "round:fp64_i32"
+      "name": "round:fp64_i32",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "exp:fp64"
+      "name": "exp:fp64",
+      "extensionUrnReference": 2
     }
   }],
   "relations": [{
@@ -141,5 +143,16 @@
       },
       "names": ["PS_PARTKEY", "EXP_KEY"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_rounding"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_arithmetic"
   }]
 }

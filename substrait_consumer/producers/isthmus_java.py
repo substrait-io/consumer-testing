@@ -25,6 +25,5 @@ if not os.path.isfile(jvm_path):
 
 jpype.addClassPath(ISTHMUS_JARS)
 
-ArrayListClass = jpype.JClass("java.util.ArrayList")
-ListClass = jpype.JClass("java.util.List")
 SqlToSubstraitClass = jpype.JClass("io.substrait.isthmus.SqlToSubstrait")
+SubstraitCreateStatementParser = jpype.JClass("io.substrait.isthmus.sql.SubstraitCreateStatementParser")

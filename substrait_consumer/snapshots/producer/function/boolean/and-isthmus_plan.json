@@ -10,19 +10,22 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "lt:any_any"
+      "name": "lt:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }],
   "relations": [{
@@ -170,5 +173,16 @@
       },
       "names": ["A", "B"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
   }]
 }

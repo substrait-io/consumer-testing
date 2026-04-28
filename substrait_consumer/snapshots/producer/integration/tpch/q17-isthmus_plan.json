@@ -13,43 +13,50 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "lt:any_any"
+      "name": "lt:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 4,
-      "name": "avg:dec"
+      "name": "avg:dec",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 5,
-      "name": "multiply:dec_dec"
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 6,
-      "name": "sum:dec"
+      "name": "sum:dec",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 7,
-      "name": "divide:dec_dec"
+      "name": "divide:dec_dec",
+      "extensionUrnReference": 3
     }
   }],
   "relations": [{
@@ -700,5 +707,19 @@
       },
       "names": ["AVG_YEARLY"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
   }]
 }

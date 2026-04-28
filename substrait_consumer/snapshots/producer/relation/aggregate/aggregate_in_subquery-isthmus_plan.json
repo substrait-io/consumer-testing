@@ -10,13 +10,15 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "lte:any_any"
+      "name": "lte:any_any",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "avg:dec"
+      "name": "avg:dec",
+      "extensionUrnReference": 2
     }
   }],
   "relations": [{
@@ -249,5 +251,16 @@
       },
       "names": ["O_TOTALPRICE"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_comparison"
   }]
 }

@@ -16,43 +16,50 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 3,
-      "name": "lt:date_date"
+      "name": "lt:date_date",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 4,
-      "name": "gt:date_date"
+      "name": "gt:date_date",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 5,
-      "name": "multiply:dec_dec"
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 4
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 6,
-      "name": "subtract:dec_dec"
+      "name": "subtract:dec_dec",
+      "extensionUrnReference": 4
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 7,
-      "name": "sum:dec"
+      "name": "sum:dec",
+      "extensionUrnReference": 4
     }
   }],
   "relations": [{
@@ -742,5 +749,22 @@
       },
       "names": ["L_ORDERKEY", "REVENUE", "O_ORDERDATE", "O_SHIPPRIORITY"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 4,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_datetime"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
   }]
 }

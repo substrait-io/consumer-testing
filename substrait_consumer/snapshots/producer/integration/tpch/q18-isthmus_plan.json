@@ -13,25 +13,29 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "sum:dec"
+      "name": "sum:dec",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 3,
-      "name": "gt:any_any"
+      "name": "gt:any_any",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 4,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 3
     }
   }],
   "relations": [{
@@ -787,5 +791,19 @@
       },
       "names": ["C_NAME", "C_CUSTKEY", "O_ORDERKEY", "O_ORDERDATE", "O_TOTALPRICE", "EXPR$5"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
   }]
 }

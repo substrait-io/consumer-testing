@@ -16,55 +16,64 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "or:bool"
+      "name": "or:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 2,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 4,
-      "name": "gte:any_any"
+      "name": "gte:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 5,
-      "name": "lte:any_any"
+      "name": "lte:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 6,
-      "name": "add:i32_i32"
+      "name": "add:i32_i32",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 7,
-      "name": "multiply:dec_dec"
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 4
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 8,
-      "name": "subtract:dec_dec"
+      "name": "subtract:dec_dec",
+      "extensionUrnReference": 4
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 9,
-      "name": "sum:dec"
+      "name": "sum:dec",
+      "extensionUrnReference": 4
     }
   }],
   "relations": [{
@@ -1756,5 +1765,22 @@
       },
       "names": ["REVENUE"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 4,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
+  }, {
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_arithmetic"
   }]
 }

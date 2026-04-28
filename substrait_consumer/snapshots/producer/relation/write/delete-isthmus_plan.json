@@ -1,0 +1,258 @@
+{
+  "extensionUris": [{
+    "extensionUriAnchor": 1,
+    "uri": "/functions_comparison.yaml"
+  }],
+  "extensions": [{
+    "extensionFunction": {
+      "extensionUriReference": 1,
+      "functionAnchor": 1,
+      "name": "equal:any_any",
+      "extensionUrnReference": 1
+    }
+  }],
+  "relations": [{
+    "root": {
+      "input": {
+        "write": {
+          "namedTable": {
+            "names": ["CUSTOMER"]
+          },
+          "tableSchema": {
+            "names": ["C_CUSTKEY", "C_NAME", "C_ADDRESS", "C_NATIONKEY", "C_PHONE", "C_ACCTBAL", "C_MKTSEGMENT", "C_COMMENT"],
+            "struct": {
+              "types": [{
+                "i64": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "i32": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "decimal": {
+                  "scale": 2,
+                  "precision": 15,
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }, {
+                "string": {
+                  "nullability": "NULLABILITY_REQUIRED"
+                }
+              }],
+              "nullability": "NULLABILITY_REQUIRED"
+            }
+          },
+          "op": "WRITE_OP_DELETE",
+          "input": {
+            "project": {
+              "common": {
+                "emit": {
+                  "outputMapping": [8, 9, 10, 11, 12, 13, 14, 15]
+                }
+              },
+              "input": {
+                "filter": {
+                  "common": {
+                    "direct": {
+                    }
+                  },
+                  "input": {
+                    "read": {
+                      "common": {
+                        "direct": {
+                        }
+                      },
+                      "baseSchema": {
+                        "names": ["C_CUSTKEY", "C_NAME", "C_ADDRESS", "C_NATIONKEY", "C_PHONE", "C_ACCTBAL", "C_MKTSEGMENT", "C_COMMENT"],
+                        "struct": {
+                          "types": [{
+                            "i64": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "i32": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "decimal": {
+                              "scale": 2,
+                              "precision": 15,
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }, {
+                            "string": {
+                              "nullability": "NULLABILITY_REQUIRED"
+                            }
+                          }],
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      },
+                      "namedTable": {
+                        "names": ["CUSTOMER"]
+                      }
+                    }
+                  },
+                  "condition": {
+                    "scalarFunction": {
+                      "functionReference": 1,
+                      "outputType": {
+                        "bool": {
+                          "nullability": "NULLABILITY_REQUIRED"
+                        }
+                      },
+                      "arguments": [{
+                        "value": {
+                          "selection": {
+                            "directReference": {
+                              "structField": {
+                              }
+                            },
+                            "rootReference": {
+                            }
+                          }
+                        }
+                      }, {
+                        "value": {
+                          "literal": {
+                            "i64": "1"
+                          }
+                        }
+                      }]
+                    }
+                  }
+                }
+              },
+              "expressions": [{
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 1
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 2
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 3
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 4
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 5
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 6
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }, {
+                "selection": {
+                  "directReference": {
+                    "structField": {
+                      "field": 7
+                    }
+                  },
+                  "rootReference": {
+                  }
+                }
+              }]
+            }
+          },
+          "output": "OUTPUT_MODE_MODIFIED_RECORDS",
+          "common": {
+            "direct": {
+            }
+          }
+        }
+      },
+      "names": ["C_CUSTKEY", "C_NAME", "C_ADDRESS", "C_NATIONKEY", "C_PHONE", "C_ACCTBAL", "C_MKTSEGMENT", "C_COMMENT"]
+    }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_comparison"
+  }]
+}

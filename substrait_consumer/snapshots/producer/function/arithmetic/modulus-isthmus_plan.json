@@ -7,7 +7,8 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "modulus:i64_i64"
+      "name": "modulus:i64_i64",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -120,5 +121,13 @@
       },
       "names": ["PS_PARTKEY", "MODULUS_KEY"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_arithmetic"
   }]
 }

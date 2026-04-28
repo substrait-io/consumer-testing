@@ -16,43 +16,50 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "and:bool"
+      "name": "and:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "equal:any_any"
+      "name": "equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 3,
-      "name": "or:bool"
+      "name": "or:bool",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 4,
-      "name": "lt:date_date"
+      "name": "lt:date_date",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 5,
-      "name": "gte:date_date"
+      "name": "gte:date_date",
+      "extensionUrnReference": 3
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 6,
-      "name": "not_equal:any_any"
+      "name": "not_equal:any_any",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 4,
       "functionAnchor": 7,
-      "name": "sum:i32"
+      "name": "sum:i32",
+      "extensionUrnReference": 4
     }
   }],
   "relations": [{
@@ -773,5 +780,22 @@
       },
       "names": ["L_SHIPMODE", "HIGH_LINE_COUNT", "LOW_LINE_COUNT"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_comparison"
+  }, {
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_datetime"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_boolean"
+  }, {
+    "extensionUrnAnchor": 4,
+    "urn": "extension:io.substrait:functions_arithmetic"
   }]
 }

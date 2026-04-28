@@ -7,7 +7,8 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "gte:any_any"
+      "name": "gte:any_any",
+      "extensionUrnReference": 1
     }
   }],
   "relations": [{
@@ -221,5 +222,13 @@
       },
       "names": ["L_DISCOUNT", "L_TAX"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_comparison"
   }]
 }

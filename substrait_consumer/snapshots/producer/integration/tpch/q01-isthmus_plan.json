@@ -13,49 +13,57 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "lte:date_date"
+      "name": "lte:date_date",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 2,
-      "name": "subtract:date_iday"
+      "name": "subtract:date_iday",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 3,
-      "name": "multiply:dec_dec"
+      "name": "multiply:dec_dec",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 4,
-      "name": "subtract:dec_dec"
+      "name": "subtract:dec_dec",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 5,
-      "name": "add:dec_dec"
+      "name": "add:dec_dec",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 6,
-      "name": "sum:dec"
+      "name": "sum:dec",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 7,
-      "name": "avg:dec"
+      "name": "avg:dec",
+      "extensionUrnReference": 2
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 3,
       "functionAnchor": 8,
-      "name": "count:"
+      "name": "count:",
+      "extensionUrnReference": 3
     }
   }],
   "relations": [{
@@ -722,5 +730,19 @@
       },
       "names": ["L_RETURNFLAG", "L_LINESTATUS", "SUM_QTY", "SUM_BASE_PRICE", "SUM_DISC_PRICE", "SUM_CHARGE", "AVG_QTY", "AVG_PRICE", "AVG_DISC", "COUNT_ORDER"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_arithmetic_decimal"
+  }, {
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_datetime"
+  }, {
+    "extensionUrnAnchor": 3,
+    "urn": "extension:io.substrait:functions_aggregate_generic"
   }]
 }

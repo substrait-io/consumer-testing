@@ -10,13 +10,15 @@
     "extensionFunction": {
       "extensionUriReference": 1,
       "functionAnchor": 1,
-      "name": "round:fp64_i32"
+      "name": "round:fp64_i32",
+      "extensionUrnReference": 1
     }
   }, {
     "extensionFunction": {
       "extensionUriReference": 2,
       "functionAnchor": 2,
-      "name": "power:fp64_fp64"
+      "name": "sqrt:fp64",
+      "extensionUrnReference": 2
     }
   }],
   "relations": [{
@@ -121,26 +123,6 @@
                               "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
                             }
                           }
-                        }, {
-                          "value": {
-                            "cast": {
-                              "type": {
-                                "fp64": {
-                                  "nullability": "NULLABILITY_REQUIRED"
-                                }
-                              },
-                              "input": {
-                                "literal": {
-                                  "decimal": {
-                                    "value": "BQAAAAAAAAAAAAAAAAAAAA==",
-                                    "precision": 2,
-                                    "scale": 1
-                                  }
-                                }
-                              },
-                              "failureBehavior": "FAILURE_BEHAVIOR_THROW_EXCEPTION"
-                            }
-                          }
                         }]
                       }
                     }
@@ -161,5 +143,16 @@
       },
       "names": ["PS_PARTKEY", "SQRT_KEY"]
     }
+  }],
+  "version": {
+    "minorNumber": 77,
+    "producer": "isthmus"
+  },
+  "extensionUrns": [{
+    "extensionUrnAnchor": 1,
+    "urn": "extension:io.substrait:functions_rounding"
+  }, {
+    "extensionUrnAnchor": 2,
+    "urn": "extension:io.substrait:functions_arithmetic"
   }]
 }
